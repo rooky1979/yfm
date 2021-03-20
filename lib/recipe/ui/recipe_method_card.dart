@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+//test comment
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
   //snapshot of the database
