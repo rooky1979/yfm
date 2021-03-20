@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "437052032299",
+    "project_id": "youth-food-movement",
+    "storage_bucket": "youth-food-movement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437052032299:android:59536d1a8fed7016a7316e",
+        "android_client_info": {
+          "package_name": "com.example.youth_food_movement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437052032299-mntql0l1ckj24tqi9ggoqksbtnd7c2i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi3DAEGLJMb4cWROLzHCzxQoM_DAUOcNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437052032299-mntql0l1ckj24tqi9ggoqksbtnd7c2i7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437052032299-0reaj2joki3ka7d3v7klug2742acq9ai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.youthFoodMovement"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
