@@ -1,6 +1,7 @@
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 
 
 void main() async {
@@ -18,6 +19,6 @@ void main() async {
                 fontSize: 25,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)) */),
-    home: IngredientsPage(),
+    home: TestHomepage(),
   ));
 }
