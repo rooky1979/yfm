@@ -7,6 +7,7 @@ import 'recipe_info_card.dart';
 class IngredientsPage extends StatelessWidget {
   var firestoreDb =
       FirebaseFirestore.instance.collection('ingredients').snapshots();
+      
   @override
   Widget build(BuildContext context) {
     return Scaffold(
