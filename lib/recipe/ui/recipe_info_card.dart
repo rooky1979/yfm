@@ -37,7 +37,7 @@ class RecipeInformationCard extends StatelessWidget {
                       indent: 10,
                       endIndent: 10,
                       color: Colors.redAccent,
-                    ),
+                    ),_++
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
