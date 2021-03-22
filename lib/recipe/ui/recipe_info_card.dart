@@ -37,7 +37,7 @@ class RecipeInformationCard extends StatelessWidget {
                       indent: 10,
                       endIndent: 10,
                       color: Colors.redAccent,
-                    ),_++
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -373,16 +373,4 @@ class RecipeInformationCard extends StatelessWidget {
     }
     return string;
   }
-}
-
-//helper method to print arrays in a list form
-String _printArrayList(var snapshotData) {
-  String string = '';
-
-  for (int i = 0; i < snapshotData.length; ++i) {
-    string += '- ';
-    string += snapshotData[i];
-    string += '\n';
-  }
-  return string;
 }
