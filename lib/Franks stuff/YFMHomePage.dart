@@ -1,7 +1,6 @@
 import 'package:youth_food_movement/Franks%20stuff/Category1.dart';
 import 'package:youth_food_movement/Franks%20stuff/Category2.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
@@ -40,11 +39,15 @@ class _HomeState extends State<YFMHomePage> {
                   child: Row(
                     children: <Widget>[
                       IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {})
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RecipeControlsPage()),
+                          );
+                        },
+                        icon: Icon(Icons.search),
+                      ),
                     ],
                   ),
                 )
@@ -52,14 +55,15 @@ class _HomeState extends State<YFMHomePage> {
             )),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.account_circle),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SecondRoute()),
+                MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
-          )
+            icon: Icon(Icons.account_circle),
+          ),
+
         ],
       ),
       body: ListView(

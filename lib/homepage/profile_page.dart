@@ -7,7 +7,7 @@ Widget build(BuildContext context) {
   return Center();
 }
 
-class SecondRoute extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class SecondRoute extends StatelessWidget {
                 width: 300.0,
                 height: 100.0,
                 decoration: new BoxDecoration(),
-                child: new Text('Some other stuff?'),
+                child: new Text('About me box'),
               ),
             ),
             Card(
@@ -44,7 +44,7 @@ class SecondRoute extends StatelessWidget {
                 width: 300.0,
                 height: 100.0,
                 decoration: new BoxDecoration(),
-                child: new Text('and more stuff'),
+                child: new Text('Dietry requirements'),
               ),
             ),
             ElevatedButton(
