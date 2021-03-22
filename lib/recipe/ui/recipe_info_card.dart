@@ -37,7 +37,7 @@ class RecipeInformationCard extends StatelessWidget {
                       indent: 10,
                       endIndent: 10,
                       color: Colors.redAccent,
-                    ),_++
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -278,12 +278,12 @@ class RecipeInformationCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Divider(
-                    height: 10,
-                    thickness: 3,
-                    indent: 10,
-                    endIndent: 10,
-                    color: Colors.redAccent,
-                  ),
+              height: 10,
+              thickness: 3,
+              indent: 10,
+              endIndent: 10,
+              color: Colors.redAccent,
+            ),
             Padding(
               //widget for the recipe info title
               padding: const EdgeInsets.all(3.0),
@@ -292,8 +292,8 @@ class RecipeInformationCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text('Ingredients:',
-                        style:
-                            TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
