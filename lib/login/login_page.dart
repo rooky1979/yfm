@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/homepage/placeholder_homepage.dart';
 import 'package:youth_food_movement/login/register_page.dart';
-import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
+//import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -15,9 +15,9 @@ class LoginPage extends StatelessWidget {
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
-        
         StreamProvider(
-          create: (context) => context.read<AuthenticationService>().authStateChanges,
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChanges,
         )
       ],
       child: MaterialApp(
@@ -29,13 +29,15 @@ class LoginPage extends StatelessWidget {
 }
 
 class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({Key key,}) : super(key: key);
+  const AuthenticationWrapper({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
 
-    if(firebaseUser != null){
+    if (firebaseUser != null) {
       return HomePage();
     }
     return LogIn();
@@ -87,9 +89,9 @@ class _LogInState extends State<LogIn> {
               ElevatedButton(
                 onPressed: () {
                   context.read<AuthenticationService>().signIn(
-                    email: emailInputController.text.trim(),
-                    password: passwordInputController.text.trim(),
-                  );
+                        email: emailInputController.text.trim(),
+                        password: passwordInputController.text.trim(),
+                      );
                 },
                 child: Text("Login"),
               ),
