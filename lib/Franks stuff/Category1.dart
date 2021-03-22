@@ -8,8 +8,7 @@ class Category1 extends StatelessWidget {
   List<_Category1Photo> _category1() {
     return [
       _Category1Photo(
-          imageURL:
-              'https://www.google.com/search?q=food&rlz=1C1CHZN_zh-CNNZ929NZ929&sxsrf=ALeKk02XwDiigE-2iHg-sZYjUwY-chVs2w:1615704996390&source=lnms&tbm=isch&biw=1368&bih=770#imgrc=sPBhlA8_u01kFM',
+          imageURL: 'gs://youth-food-movement.appspot.com/prawnpasta.jpg',
           title: 'food',
           subtitle: 'owner',
           recipe: 'Category1'),
