@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             child: const SizedBox(
               width: 300,
               height: 100,
-              child: Text('Take me to snurch'),
+              child: Text('Sample Text 1'),
             ),
           ),
           InkWell(
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
             child: const SizedBox(
               width: 300,
               height: 100,
-              child: Text('I\'ll worship like a dog'),
+              child: Text('Sample text 2'),
             ),
           ),
           InkWell(
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
             child: const SizedBox(
               width: 300,
               height: 100,
-              child: Text('at the shrine of your lies'),
+              child: Text('Sample text 3'),
             ),
           ),
         ]),
