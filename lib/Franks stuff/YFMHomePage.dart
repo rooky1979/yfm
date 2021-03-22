@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 
 class YFMHomePage extends StatefulWidget {
   _HomeState createState() => _HomeState();
@@ -52,7 +53,12 @@ class _HomeState extends State<YFMHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.account_circle),
-            onPressed: () => debugPrint("account icon"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecondRoute()),
+              );
+            },
           )
         ],
       ),
