@@ -5,11 +5,12 @@ class InformationSubmission extends StatefulWidget {
   @override
   _InformationSubmissionState createState() => _InformationSubmissionState();
 }
-
+//form for the recipe name, servings, preptime, allergies, category and proteins
 class _InformationSubmissionState extends State<InformationSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appbar with title and back arrow
       appBar: AppBar(
         backgroundColor: Colors.red,
         leading: IconButton(
@@ -28,6 +29,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               fontSize: 25,
             )),
       ),
+      //container for the recipe title text field
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -53,6 +55,17 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               ),
             ),
           ),
+          //number picker for the user to enter the number of servings
+
+          //preptime selectors
+
+          //allergies
+
+          //category
+
+          //proteins
+
+          //cancel and next buttons
         ]),
       ),
     );
