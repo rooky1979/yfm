@@ -56,95 +56,8 @@ class _CommentState extends State<Comment> {
                 ),
                 Row(
                   //edit button to edit the comments
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.edit,
-                          size: 15,
-                        ),
-                        onPressed: () async {
-                          // await showDialog(
-                          // context: context,
-                          // child: AlertDialog(
-                          //   //editible text form
-                          //   contentPadding: EdgeInsets.all(10),
-                          //   content: Column(
-                          //     children: [
-                          //       Text('Update Your Comment!'),
-                          //       Expanded(
-                          //         child: TextField(
-                          //           autofocus: true,
-                          //           autocorrect: true,
-                          //           decoration: InputDecoration(
-                          //               labelText: 'Your Name*'),
-                          //           controller: nameInputController,
-                          //         ),
-                          //       ),
-                          //       Expanded(
-                          //           child: TextField(
-                          //         autofocus: true,
-                          //         autocorrect: true,
-                          //         decoration:
-                          //             InputDecoration(labelText: 'Title'),
-                          //         controller: titleInputController,
-                          //       )),
-                          //       Expanded(
-                          //           child: TextField(
-                          //         autofocus: true,
-                          //         autocorrect: true,
-                          //         decoration: InputDecoration(
-                          //             labelText: 'Description'),
-                          //         controller: descriptionInputController,
-                          //       )),
-                          //     ],
-                          //   ),
-                          //   actions: [
-                          //     FlatButton(
-                          //         //cancel button which clears the text fields too
-                          //         onPressed: () {
-                          //           nameInputController.clear();
-                          //           titleInputController.clear();
-                          //           descriptionInputController.clear();
-
-                          //           Navigator.pop(context);
-                          //         },
-                          //         child: Text('Cancel')),
-                          //     FlatButton(
-                          //         //update button to save the text updates
-                          //         onPressed: () {
-                          //           if (nameInputController
-                          //                   .text.isNotEmpty &&
-                          //               titleInputController
-                          //                   .text.isNotEmpty &&
-                          //               descriptionInputController
-                          //                   .text.isNotEmpty) {
-                          //             FirebaseFirestore.instance
-                          //                 .collection('board')
-                          //                 .doc(docID)
-                          //                 .update({
-                          //               'username':
-                          //                   nameInputController.text,
-                          //               'title': titleInputController.text,
-                          //               'description':
-                          //                   descriptionInputController.text,
-                          //               'timestamp': new DateTime.now()
-                          //             }).then((response) {
-                          //               //print(response.id);
-                          //               Navigator.pop(context);
-                          //               nameInputController.clear();
-                          //               titleInputController.clear();
-                          //               descriptionInputController.clear();
-                          //             }).catchError(
-                          //                     (onError) => print(onError));
-                          //           }
-                          //         },
-                          //         child: Text('Update'))
-                          //   ],
-                          // ));
-                        }),
-                    _checkUser(docID, widget.index, user)
-                  ],
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [_checkUser(docID, widget.index, user)],
                 )
               ],
             ),
@@ -171,18 +84,110 @@ class _CommentState extends State<Comment> {
     if (widget.snapshot.docs[widget.index]['user'] == user) {
       // if (user == user)
 
-      return (IconButton(
+      return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
 
-          //delete the comment from the database
-          icon: Icon(
-            FontAwesomeIcons.trashAlt,
-            size: 30,
-          ),
-          onPressed: () async {
-            var collectionReference =
-                FirebaseFirestore.instance.collection('board');
-            collectionReference.doc(docId).delete();
-          }));
+                //delete the comment from the database
+                icon: Icon(
+                  FontAwesomeIcons.trashAlt,
+                  size: 25,
+                ),
+                onPressed: () async {
+                  var collectionReference =
+                      FirebaseFirestore.instance.collection('board');
+                  collectionReference.doc(docId).delete();
+                }),
+            IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.edit,
+                  size: 25,
+                ),
+                onPressed: () async {
+                  // await showDialog(
+                  // context: context,
+                  // child: AlertDialog(
+                  //   //editible text form
+                  //   contentPadding: EdgeInsets.all(10),
+                  //   content: Column(
+                  //     children: [
+                  //       Text('Update Your Comment!'),
+                  //       Expanded(
+                  //         child: TextField(
+                  //           autofocus: true,
+                  //           autocorrect: true,
+                  //           decoration: InputDecoration(
+                  //               labelText: 'Your Name*'),
+                  //           controller: nameInputController,
+                  //         ),
+                  //       ),
+                  //       Expanded(
+                  //           child: TextField(
+                  //         autofocus: true,
+                  //         autocorrect: true,
+                  //         decoration:
+                  //             InputDecoration(labelText: 'Title'),
+                  //         controller: titleInputController,
+                  //       )),
+                  //       Expanded(
+                  //           child: TextField(
+                  //         autofocus: true,
+                  //         autocorrect: true,
+                  //         decoration: InputDecoration(
+                  //             labelText: 'Description'),
+                  //         controller: descriptionInputController,
+                  //       )),
+                  //     ],
+                  //   ),
+                  //   actions: [
+                  //     FlatButton(
+                  //         //cancel button which clears the text fields too
+                  //         onPressed: () {
+                  //           nameInputController.clear();
+                  //           titleInputController.clear();
+                  //           descriptionInputController.clear();
+
+                  //           Navigator.pop(context);
+                  //         },
+                  //         child: Text('Cancel')),
+                  //     FlatButton(
+                  //         //update button to save the text updates
+                  //         onPressed: () {
+                  //           if (nameInputController
+                  //                   .text.isNotEmpty &&
+                  //               titleInputController
+                  //                   .text.isNotEmpty &&
+                  //               descriptionInputController
+                  //                   .text.isNotEmpty) {
+                  //             FirebaseFirestore.instance
+                  //                 .collection('board')
+                  //                 .doc(docID)
+                  //                 .update({
+                  //               'username':
+                  //                   nameInputController.text,
+                  //               'title': titleInputController.text,
+                  //               'description':
+                  //                   descriptionInputController.text,
+                  //               'timestamp': new DateTime.now()
+                  //             }).then((response) {
+                  //               //print(response.id);
+                  //               Navigator.pop(context);
+                  //               nameInputController.clear();
+                  //               titleInputController.clear();
+                  //               descriptionInputController.clear();
+                  //             }).catchError(
+                  //                     (onError) => print(onError));
+                  //           }
+                  //         },
+                  //         child: Text('Update'))
+                  //   ],
+                  // ));
+                }),
+          ],
+        ),
+      );
     } else {
       return (Container());
     }
