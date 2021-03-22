@@ -41,7 +41,7 @@ class MethodCard extends StatelessWidget {
           color: Colors.redAccent,
         ),
         SingleChildScrollView(
-                  child: ListView.builder(
+          child: ListView.builder(
               //scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: methodList.length,
@@ -54,7 +54,8 @@ class MethodCard extends StatelessWidget {
                           child: Text(
                             (index + 1).toString(),
                             style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           )),
                       title: Text(methodList[index].toString(),
                           style: TextStyle(
