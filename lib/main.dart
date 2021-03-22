@@ -5,7 +5,7 @@ import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 
 import 'login/login_page.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(new MaterialApp(
@@ -22,5 +22,5 @@ void main() async {
                 fontWeight: FontWeight.bold)) */
     ),
     home: LoginPage(),
- ));
+  ));
 }

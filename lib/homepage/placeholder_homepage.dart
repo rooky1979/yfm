@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SecondRoute()),
+                MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
             icon: Icon(Icons.account_circle),
