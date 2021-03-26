@@ -1,4 +1,3 @@
-
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -49,9 +48,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () {
                   context.read<AuthenticationService>().signUp(
-                    email: emailInputController.text.trim(),
-                    password: passwordInputController.text.trim(),
-                  );
+                        email: emailInputController.text.trim(),
+                        password: passwordInputController.text.trim(),
+                      );
                 },
                 child: Text("Register"),
               ),
