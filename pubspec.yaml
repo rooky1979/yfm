@@ -31,7 +31,8 @@ dependencies:
   font_awesome_flutter: ^8.11.0
   google_maps_flutter: ^0.5.21+15
   intl: ^0.16.1
-  numberpicker: ^2.0.1
+  flutter_touch_spin: ^1.0.1
+  multiselect_formfield: ^0.1.6
 
 dev_dependencies:
   firebase_storage: any
