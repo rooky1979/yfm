@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -129,11 +130,10 @@ class RecipeButtons extends StatelessWidget {
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.pop(context),
-                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage()))
+                                    IngredientsPage())
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -164,7 +164,7 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Method()))
+                                    CommentBoard()))
                       })
             ],
           ),
