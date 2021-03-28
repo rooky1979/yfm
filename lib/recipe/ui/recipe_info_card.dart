@@ -374,15 +374,3 @@ class RecipeInformationCard extends StatelessWidget {
     return string;
   }
 }
-
-//helper method to print arrays in a list form
-String _printArrayList(var snapshotData) {
-  String string = '';
-
-  for (int i = 0; i < snapshotData.length; ++i) {
-    string += '- ';
-    string += snapshotData[i];
-    string += '\n';
-  }
-  return string;
-}
