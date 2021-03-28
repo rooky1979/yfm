@@ -376,6 +376,7 @@ class RecipeInformationCard extends StatelessWidget {
 }
 
 //helper method to print arrays in a list form
+// ignore: unused_element
 String _printArrayList(var snapshotData) {
   String string = '';
 

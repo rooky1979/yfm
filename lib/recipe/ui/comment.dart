@@ -67,6 +67,7 @@ class _CommentState extends State<Comment> {
     );
   }
 
+  // ignore: unused_element
   Future _getCommentImage(String docId, int id) async {
     //FirebaseFirestore.instance.collection('board');
 

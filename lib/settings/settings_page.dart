@@ -27,7 +27,7 @@ class SettingPage extends StatelessWidget {
                   child: TextFormField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Search Recipe",
+                      hintText: "Settings Page",
                       hintStyle: TextStyle(color: Colors.white),
                       icon: Icon(Icons.list, color: Colors.white),
                     ),

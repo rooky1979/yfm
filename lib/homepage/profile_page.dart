@@ -1,6 +1,6 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:youth_food_movement/Submission/submission_temp.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/settings/settings_page.dart';
@@ -68,86 +68,59 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Center(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
             Card(
               child: Container(
-                width: 100.0,
-                height: 100.0,
+                width: 125.0,
+                height: 125.0,
                 decoration: new BoxDecoration(),
                 child: new Text('THIS IS THE PROFILE PAGE'),
               ),
             ),
-            Card(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                      flex: 0,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Search Recipe",
-                                hintStyle: TextStyle(color: Colors.white),
-                                icon: Icon(Icons.list, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 0,
-                            child: Row(
-                              children: <Widget>[
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RecipeControlsPage()),
-                                    );
-                                  },
-                                  icon: Icon(Icons.search),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RecipeControlsPage()),
-                                    );
-                                  },
-                                  icon: Icon(Icons.search),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RecipeControlsPage()),
-                                    );
-                                  },
-                                  icon: Icon(Icons.search),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )),
-                ],
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Return to Homepage'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SettingPage()),
+                      );
+                    },
+                    icon: Icon(Icons.settings),
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          ;
+                        },
+                        icon: Icon(Icons.public),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SubmissionPage()),
+                          );
+                        },
+                        icon: Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
             ElevatedButton(
                 onPressed: () {

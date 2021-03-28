@@ -62,7 +62,7 @@ class _HomeState extends State<YFMHomePage> {
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
-              icon: Icon(Icons.search_off)),
+              icon: Icon(Icons.settings)),
         ],
       ),
       body: ListView(
