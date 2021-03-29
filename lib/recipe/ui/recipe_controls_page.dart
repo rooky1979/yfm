@@ -123,17 +123,18 @@ class RecipeButtons extends StatelessWidget {
                   fillColor: Colors.white,
                   shape: CircleBorder(),
                   child: Icon(
-                    FontAwesomeIcons.pepperHot,
+                    FontAwesomeIcons.leaf,
                     size: 40,
                     color: Colors.red,
                   ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.pop(context),
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage())
+                                    IngredientsPage()))
                       }),
               RawMaterialButton(
                   // recipe method button

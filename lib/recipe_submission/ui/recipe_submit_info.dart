@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:multiselect_formfield/multiselect_formfield.dart';
+//import 'package:flutter_multiselect/flutter_multiselect.dart';
 
 class InformationSubmission extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   //value used for dropdown selection in difficulty selection
   int _difficultyValue;
 
-  int _myActivities;
+  //int _myActivities;
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +251,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
             //allergies
             Padding(
               padding: const EdgeInsets.all(13.0),
-              child: MultiSelectFormField(
+              /*      child: MultiSelectFormField(
                 autovalidate: false,
                 fillColor: Colors.red[400],
                 chipBackGroundColor: Colors.white,
@@ -315,7 +315,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     _myActivities = value;
                   });
                 },
-              ),
+              ),*/
             ),
             //category
 

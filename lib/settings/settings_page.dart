@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
@@ -73,7 +74,9 @@ class SettingPage extends StatelessWidget {
                 width: 100.0,
                 height: 100.0,
                 decoration: new BoxDecoration(),
-                child: new Text('Profile Picture!'),
+                child: Icon(FontAwesomeIcons.plusCircle, //comments button
+                    size: 40,
+                    color: Colors.red),
               ),
             ),
             Card(
@@ -101,6 +104,13 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      return Colors.red;
+                    },
+                  ),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                   context.read<AuthenticationService>().signOut();

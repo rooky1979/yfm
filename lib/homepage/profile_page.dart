@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/Submission/submission_temp.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
+import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:youth_food_movement/settings/settings_page.dart';
 
 @override
@@ -14,121 +15,94 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Container(
-            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.zero)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search Recipe",
-                      hintStyle: TextStyle(color: Colors.white),
-                      icon: Icon(Icons.list, color: Colors.white),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 0,
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RecipeControlsPage()),
-                          );
-                        },
-                        icon: Icon(Icons.search),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingPage()),
-              );
-            },
-            icon: Icon(Icons.settings),
-          ),
-        ],
-      ),
       body: Center(
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
             Card(
-              child: Container(
-                width: 125.0,
-                height: 125.0,
-                decoration: new BoxDecoration(),
-                child: new Text('THIS IS THE PROFILE PAGE'),
-              ),
+              child: Icon(FontAwesomeIcons.userGraduate, //comments button
+                  size: 120,
+                  color: Colors.red),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SettingPage()),
-                      );
-                    },
-                    icon: Icon(Icons.settings),
+            ProfileButtons(),
+          ])),
+    );
+  }
+}
+
+class ProfileButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
+      child: Container(
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
+        height: 90,
+        //color: Colors.red[400],
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.red[400],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              RawMaterialButton(
+                  padding: EdgeInsets.all(10), //ingredients button
+                  fillColor: Colors.white,
+                  shape: CircleBorder(),
+                  child: Icon(
+                    FontAwesomeIcons.cogs,
+                    size: 40,
+                    color: Colors.red,
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          ;
-                        },
-                        icon: Icon(Icons.public),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
+                  onPressed: () => {
+                        //pops any page currently loaded off the stack and pushes the required page onto the stack
+                        Navigator.pop(context),
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SubmissionPage()),
-                          );
-                        },
-                        icon: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  context.read<AuthenticationService>().signOut();
-                },
-                child: Text("Sign Out")),
-          ])),
+                                builder: (BuildContext context) =>
+                                    SettingPage()))
+                      }),
+              RawMaterialButton(
+                  // recipe method button
+                  padding: EdgeInsets.all(10),
+                  fillColor: Colors.white,
+                  shape: CircleBorder(),
+                  child:
+                      Icon(FontAwesomeIcons.globe, size: 40, color: Colors.red),
+                  onPressed: () => {
+                        //pops any page currently loaded off the stack and pushes the required page onto the stack
+                        Navigator.pop(context),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    InformationSubmission()))
+                      }),
+              RawMaterialButton(
+                  padding: EdgeInsets.all(11),
+                  fillColor: Colors.white,
+                  shape: CircleBorder(),
+                  child: Icon(FontAwesomeIcons.plusCircle, //comments button
+                      size: 40,
+                      color: Colors.red),
+                  onPressed: () => {
+                        //pops any page currently loaded off the stack and pushes the required page onto the stack
+                        Navigator.pop(context),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    InformationSubmission()))
+                      })
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
