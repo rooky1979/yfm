@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
+import 'package:youth_food_movement/settings/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,20 +40,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   flex: 0,
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RecipeControlsPage()),
-                          );
-                        },
-                        icon: Icon(Icons.search),
-                      ),
-                    ],
-                  ),
+                  child: Row(),
                 )
               ],
             )),
@@ -81,7 +71,8 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text('category ${categoryIndex + 1}'),
                     ),
-                    Container(
+                    //Code for adding picture into category card
+                    /*Container(
                       child: FutureBuilder(
                           future: _getImageURL(),
                           builder: (context, snapshot) {
@@ -93,18 +84,11 @@ class _HomePageState extends State<HomePage> {
                                   fit: BoxFit.cover,
                                 ),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                    return GestureDetector(
-                                      child: Center(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      onTap: () => Navigator.pop(context),
-                                    );
-                                  }));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              RecipeControlsPage()));
                                 },
                               );
                             } else {
@@ -114,8 +98,11 @@ class _HomePageState extends State<HomePage> {
                               ));
                             }
                           }),
-                    )
-                    /*Container(
+                    )*/
+
+                    //Code for multiple cards in category
+
+                    Container(
                       height: 180.0,
                       child: PageView.builder(
                         itemCount: 4,
@@ -126,48 +113,43 @@ class _HomePageState extends State<HomePage> {
                             (cardIndex) => GestureDetector(
                               onTap: () {},
                               child: Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 32.0) /
-                                        2,
-                                height: 200.0,
-                                margin: EdgeInsets.all(8.0),
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  // this place where your firebase pictures going
-                                  image: DecorationImage(
-                                      //   FutureBuilder(builder: (context,snapshot){
-                                      //     if(snapshot.hasData){
-                                      //       return GestureDetector(
-                                      //         child: Image.network(
-                                      //           snapshot.data,
-                                      //           fit: BoxFit.cover,
-                                      //         ),
-                                      //         onTap: ()=> {},
-                                      //       );
-                                      //     }
-                                      //   },
-                                      // )
-                                      // image: NetworkImage(
-                                      //   '${_getImageURL()}'
-                                      // )
-                                      image: NetworkImage(
-                                          'gs://youth-food-movement.appspot.com/prawnpasta.jpg'), // url your pictures
-                                      fit: BoxFit.cover),
-                                  // color: Colors.primaries[Random()
-                                  //     .nextInt(Colors.primaries.length)],
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  //image: null,
-                                ),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: FavoriteButton(),
-                                ),
-                              ),
+                                  width: (MediaQuery.of(context).size.width -
+                                          32.0) /
+                                      2,
+                                  height: 200.0,
+                                  margin: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FutureBuilder(
+                                      future: _getImageURL(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          //return the image and make it cover the container
+                                          return GestureDetector(
+                                            child: Image.network(
+                                              snapshot.data,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          RecipeControlsPage()));
+                                            },
+                                          );
+                                        } else {
+                                          return Container(
+                                              child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ));
+                                        }
+                                      })),
                             ),
                           ),
                         ),
                       ),
-                    ),*/
+                    ),
                   ],
                 ),
               ),

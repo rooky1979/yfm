@@ -17,33 +17,15 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
     //main page setup
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          leading: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.arrowLeft,
-                size: 25,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          title: Text('Prawn Pasta',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              )),
-        ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              RecipeThumbnail(),
-              RecipeButtons(),
-            ],
-          ),
-        ));
+      padding: const EdgeInsets.only(top: 25),
+      child: Column(
+        children: [
+          RecipeThumbnail(),
+          RecipeButtons(),
+        ],
+      ),
+    ));
   }
 }
 
@@ -96,6 +78,15 @@ class RecipeThumbnail extends StatelessWidget {
                 }
               }),
         ),
+        IconButton(
+            icon: Icon(
+              FontAwesomeIcons.arrowLeft,
+              size: 30,
+              color: Colors.red,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            })
       ],
     );
   }

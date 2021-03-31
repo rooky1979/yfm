@@ -57,7 +57,6 @@ class ProfileButtons extends StatelessWidget {
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
         height: 90,
-        //color: Colors.red[400],
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.red[400],
