@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'login/login_page.dart';
+import 'login/search/search.dart';
 
 
 Future<void> main() async {
@@ -20,6 +21,7 @@ Future<void> main() async {
                 fontSize: 25,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)) */),
-    home: LoginPage(),
-  ));
+    home: Search(),
+  ),
+  );
 }
