@@ -53,59 +53,77 @@ class _CommentState extends State<Comment> {
                         style: const TextStyle(
                             fontSize: 17.0, color: Colors.black)),
                     leading: Icon(Icons.account_circle_rounded, size: 50)),
-                Row(children: [
-                  IconButton(
-                      onPressed: () async {
-                        setState(() {
-                          if (!(likedUsers.contains(user))) {
-                            debugPrint("before liked" + clickedLike.toString());
-                            likeColor = Colors.blue;
-                            numLikes++;
-                            FirebaseFirestore.instance
-                                .collection('board')
-                                .doc(docID)
-                                .update({'likes': numLikes});
-                            clickedLike = !clickedLike;
-
-                            FirebaseFirestore.instance
-                                .collection('board')
-                                .doc(docID)
-                                .update({
-                              'likedUsers': FieldValue.arrayUnion(list)
-                            });
-                            debugPrint("after liked" + clickedLike.toString());
-                          } else {
-                            numLikes--;
-                            debugPrint(
-                                "before dislike" + clickedLike.toString());
-                            FirebaseFirestore.instance
-                                .collection('board')
-                                .doc(docID)
-                                .update({'likes': numLikes});
-                            clickedLike = !clickedLike;
-                            //debugPrint("after change");
-                            FirebaseFirestore.instance
-                                .collection('board')
-                                .doc(docID)
-                                .update({
-                              'likedUsers': FieldValue.arrayRemove(list)
-                            });
-                            debugPrint(
-                                "after dislike" + clickedLike.toString());
-                          }
-                        });
-                      },
-                      icon: Icon(Icons.thumb_up,
-                          color: clickedLike ? Colors.blue : Colors.black)
-                      //color: Colors.blue,
-                      ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
-                    padding: const EdgeInsets.only(
-                        top: 10, left: 3, right: 20, bottom: 10),
-                    //edit button to edit the comments
-                    child: Text(numLikes.toString()),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(width: 2)),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          top: 5, left: 10, right: 10, bottom: 5),
+                      child: Row(
+                        children: [
+                          IconButton(
+                              onPressed: () async {
+                                setState(() {
+                                  if (!(likedUsers.contains(user))) {
+                                    debugPrint("before liked" +
+                                        clickedLike.toString());
+                                    likeColor = Colors.blue;
+                                    numLikes++;
+                                    FirebaseFirestore.instance
+                                        .collection('board')
+                                        .doc(docID)
+                                        .update({'likes': numLikes});
+                                    clickedLike = !clickedLike;
+
+                                    FirebaseFirestore.instance
+                                        .collection('board')
+                                        .doc(docID)
+                                        .update({
+                                      'likedUsers': FieldValue.arrayUnion(list)
+                                    });
+                                    debugPrint(
+                                        "after liked" + clickedLike.toString());
+                                  } else {
+                                    numLikes--;
+                                    debugPrint("before dislike" +
+                                        clickedLike.toString());
+                                    FirebaseFirestore.instance
+                                        .collection('board')
+                                        .doc(docID)
+                                        .update({'likes': numLikes});
+                                    clickedLike = !clickedLike;
+                                    //debugPrint("after change");
+                                    FirebaseFirestore.instance
+                                        .collection('board')
+                                        .doc(docID)
+                                        .update({
+                                      'likedUsers': FieldValue.arrayRemove(list)
+                                    });
+                                    debugPrint("after dislike" +
+                                        clickedLike.toString());
+                                  }
+                                });
+                              },
+                              icon: Icon(Icons.thumb_up,
+                                  color:
+                                      clickedLike ? Colors.blue : Colors.black)
+                              //color: Colors.blue,
+                              ),
+                          Container(
+                            padding: const EdgeInsets.only(
+                                top: 10, left: 3, right: 2, bottom: 10),
+                            //edit button to edit the comments
+                            child: Text(numLikes.toString(),
+                                style: const TextStyle(
+                                    fontSize: 17.0, color: Colors.black)),
+                          ),
+                          _checkUser(docID, widget.index, user, 100, likeColor),
+                        ],
+                      ),
+                    ),
                   ),
-                  _checkUser(docID, widget.index, user, 100, likeColor),
                 ]),
                 Container(
                   padding: const EdgeInsets.only(
@@ -166,9 +184,6 @@ class _CommentState extends State<Comment> {
           //   ),
           // ),
           Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(width: 2)),
             child: Row(
               children: [
                 IconButton(
