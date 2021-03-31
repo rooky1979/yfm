@@ -229,7 +229,9 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           'imgAttached': imgAttached,
                           'description': descriptionInputController.text,
                           'timestamp': new DateTime.now(),
-                          'image_url': url
+                          'image_url': url,
+                          'likes': 0,
+                          'likedUsers': [],
                         }).then((response) {
                           print(response.id);
                           if (imgAttached == "true") {
