@@ -9,6 +9,7 @@ class DataController extends GetxController {
     return snapshot.docs;
   }
 
+  // ignore: non_constant_identifier_names
   Future QueryData(String queryString) async {
     return FirebaseFirestore.instance
         .collection('Users')

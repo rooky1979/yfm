@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/Search (john)/data_controller.dart';
 import 'package:youth_food_movement/homepage/HomePage.dart';
@@ -22,6 +20,7 @@ class _SearchState extends State<Search> {
     Widget searchedData() {
       return ListView.builder(
         itemCount: snapshotData.docs.length,
+        // ignore: non_constant_identifier_names
         itemBuilder: (BuildContext, int index) {
           return GestureDetector(
             onTap: () {

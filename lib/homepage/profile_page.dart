@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:youth_food_movement/login/authentication_service.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:youth_food_movement/settings/settings_page.dart';
 
