@@ -15,6 +15,24 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        leading: IconButton(
+            icon: Icon(
+              FontAwesomeIcons.arrowLeft,
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Text('Profile Navigation Page',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            )),
+      ),
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,7 +78,6 @@ class ProfileButtons extends StatelessWidget {
                   ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -76,12 +93,11 @@ class ProfileButtons extends StatelessWidget {
                       Icon(FontAwesomeIcons.globe, size: 40, color: Colors.red),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    InformationSubmission()))
+                                    InformationSubmission(null)))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
@@ -92,12 +108,11 @@ class ProfileButtons extends StatelessWidget {
                       color: Colors.red),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    InformationSubmission()))
+                                    InformationSubmission(null)))
                       })
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:youth_food_movement/login/user_info.dart';
 
 import 'authentication_service.dart';
 
@@ -47,6 +48,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => UserInfo()));
                   context.read<AuthenticationService>().signUp(
                         email: emailInputController.text.trim(),
                         password: passwordInputController.text.trim(),

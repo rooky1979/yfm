@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 @override
 Widget build(BuildContext context) {
@@ -10,113 +10,47 @@ Widget build(BuildContext context) {
 }
 
 class SettingPage extends StatelessWidget {
+  // ignore: unused_field
+  final FirebaseAuth _firbaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Container(
-            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.zero)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Settings Page",
-                      hintStyle: TextStyle(color: Colors.white),
-                      icon: Icon(Icons.list, color: Colors.white),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 0,
-                  child: Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RecipeControlsPage()),
-                          );
-                        },
-                        icon: Icon(Icons.search),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingPage()),
-              );
-            },
-            icon: Icon(Icons.time_to_leave),
-          ),
-        ],
-      ),
       body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-            Card(
-              child: Container(
-                width: 100.0,
-                height: 100.0,
-                decoration: new BoxDecoration(),
-                child: Icon(FontAwesomeIcons.plusCircle, //comments button
-                    size: 40,
-                    color: Colors.red),
-              ),
-            ),
-            Card(
-              child: Container(
-                width: 300.0,
-                height: 100.0,
-                decoration: new BoxDecoration(),
-                child: new Text('Profile Description!'),
-              ),
-            ),
-            Card(
-              child: Container(
-                width: 300.0,
-                height: 100.0,
-                decoration: new BoxDecoration(),
-                child: new Text('About me box'),
-              ),
-            ),
-            Card(
-              child: Container(
-                width: 300.0,
-                height: 100.0,
-                decoration: new BoxDecoration(),
-                child: new Text('Dietry requirements'),
-              ),
-            ),
-            ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      return Colors.red;
-                    },
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  context.read<AuthenticationService>().signOut();
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Card(
+          child: Container(
+            width: 200.0,
+            height: 200.0,
+            decoration: new BoxDecoration(),
+            child: Icon(FontAwesomeIcons.plusCircle, //comments button
+                size: 40,
+                color: Colors.red),
+          ),
+        ),
+        Card(
+          child: new Text('UserName'),
+        ),
+        Card(
+          child: new Text('City'),
+        ),
+        Card(
+          child: new Text('Birthday'),
+        ),
+        ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  return Colors.red;
                 },
-                child: Text("Sign Out")),
-          ])),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+              context.read<AuthenticationService>().signOut();
+            },
+            child: Text("Sign Out")),
+      ])),
     );
   }
 }

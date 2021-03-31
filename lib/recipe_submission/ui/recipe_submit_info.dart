@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:flutter_multiselect/flutter_multiselect.dart';
 
 class InformationSubmission extends StatefulWidget {
+  InformationSubmission(String s);
+
   @override
   _InformationSubmissionState createState() => _InformationSubmissionState();
 }

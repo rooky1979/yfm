@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/homepage/YFMHomePage.dart';
+import 'package:youth_food_movement/homepage/HomePage.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/register_page.dart';
@@ -39,7 +39,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
-      return YFMHomePage();
+      return HomePage();
     }
     return LogIn();
   }
@@ -90,10 +90,10 @@ class _LogInState extends State<LogIn> {
               ElevatedButton(
                 onPressed: () {
                   context.read<AuthenticationService>().signIn(
-                        email: "test@gmail.com",
-                        password: "test123",
-                        // email: emailInputController.text.trim(),
-                        //password: passwordInputController.text.trim(),
+                        //                    email: "test@gmail.com",
+                        //                    password: "test123",
+                        email: emailInputController.text.trim(),
+                        password: passwordInputController.text.trim(),
                       );
                 },
                 child: Text("Login"),
