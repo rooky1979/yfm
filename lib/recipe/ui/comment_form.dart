@@ -39,7 +39,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _imgfile = File(imgfile.path);
-      debugPrint(_imgfile.path.toString());
+      //debugPrint(_imgfile.path.toString());
       imgAttached = "true";
     });
     Navigator.of(context).pop();
@@ -49,7 +49,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
       _imgfile = File(imgfile.path);
-      debugPrint(_imgfile.path.toString());
+      // debugPrint(_imgfile.path.toString());
     });
     Navigator.of(context).pop();
   }
@@ -222,6 +222,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 IconButton(
                     //button to save the comment to the database
                     onPressed: () {
+                      print(imgAttached);
                       if (descriptionInputController.text.isNotEmpty) {
                         FirebaseFirestore.instance.collection('board').add({
                           'user': "Temp Name 2",
