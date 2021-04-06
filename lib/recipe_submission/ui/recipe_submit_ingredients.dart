@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_method.dart';
 
 class IngredientsSubmission extends StatefulWidget {
   @override
@@ -23,21 +24,30 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
     endIndent: 20,
     color: Colors.black,
   );
+//snackbar if any of the fields are empty and the user tries to add ingredients
+//or if the user tries to go to the next page with nothing submitted
+  var snackbar = SnackBar(
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.blue[600],
+      content: Text("Please fill out all fields before proceeding",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          )));
   //text controller for the textfield
   TextEditingController ingredientController;
   TextEditingController amountController;
+  //string to hold the measurement unit
+  String unit = '';
+  //list to hold ingredient strings
+  List ingredients = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     ingredientController = TextEditingController();
     amountController = TextEditingController();
   }
-
-  //string to hold the unit
-  String unit = '';
-  //list to hold ingredient strings
-  List ingredients = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,10 +126,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       textAlign: TextAlign.start,
                       keyboardType: TextInputType
                           .number, //only shows a numerical keyboard
-                      inputFormatters: <TextInputFormatter>[
+                      /* inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter
                             .digitsOnly //enables digits only for entry
-                      ],
+                      ], */
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -217,8 +227,11 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          ingredients
-                              .removeLast(); //remove last ingredient from the list
+                          setState(() {});
+                          if (ingredients.isNotEmpty) {
+                            ingredients.removeLast();
+                          } else {} //remove last ingredient from the list
+                          //if list is empty, do nothing
                         },
                       ),
                     ),
@@ -237,14 +250,25 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          setState(() {});
-                          ingredients.add(amountController.text +
-                              ' ' +
-                              unit +
-                              ' ' +
-                              ingredientController.text);
-                          amountController.clear();
-                          ingredientController.clear();
+                          if (ingredientController.text.isEmpty ||
+                              amountController.text.isEmpty ||
+                              _measurementValue == null) {
+                            //snackbar shown if any of the fields are empty
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } else {
+                            //if not empty, add to the list
+                            //add to the DB here as well
+                            setState(() {});
+                            ingredients.add(amountController.text +
+                                ' ' +
+                                unit +
+                                ' ' +
+                                ingredientController.text);
+                            amountController.clear();
+                            ingredientController.clear();
+                            _measurementValue = null;
+                          }
                         },
                       ),
                     ),
@@ -299,12 +323,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                   ],
                 ),
               ),
-            ],
-          )),
-    );
-  }
-}
-/*               divider,
+              divider,
+              //cancel and done buttons to move to next page or go to previous page
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -314,9 +334,12 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.grey),
-                        child: Text('Cancel',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -329,14 +352,33 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.black),
-                        child: Text('Done',
-                        style: TextStyle(fontWeight: FontWeight.bold),),
+                        style:
+                            ElevatedButton.styleFrom(primary: Colors.red),
+                        child: Text(
+                          'Done',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
                         onPressed: () {
-                          // Respond to button press
+                          if (ingredients.isEmpty) {
+                            //snackbar shown if any of the fields are empty
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MethodSubmission()));
+                          }
                         },
                       ),
                     ),
                   )
                 ],
-              ), */
+              ),
+            ],
+          )),
+    );
+  }
+}

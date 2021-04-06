@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
-
+//ERROR HANDLING TO BE ADDED
 class InformationSubmission extends StatefulWidget {
   @override
   _InformationSubmissionState createState() => _InformationSubmissionState();
