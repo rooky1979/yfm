@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_success.dart';
 
 class ImageSubmission extends StatefulWidget {
   @override
@@ -10,8 +11,8 @@ class ImageSubmission extends StatefulWidget {
 
 class _ImageSubmissionState extends State<ImageSubmission> {
   // Image Picker
-  File _image; // Used only if you need a single picture
-
+  File _image;
+//method to get the image
   Future getImage(bool gallery) async {
     ImagePicker picker = ImagePicker();
     PickedFile pickedFile;
@@ -27,15 +28,26 @@ class _ImageSubmissionState extends State<ImageSubmission> {
         source: ImageSource.camera,
       );
     }
-
+//set the state of the container
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path); // Use if you only need a single picture
+        _image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
     });
   }
+
+//snackbar for if no image is selected
+  var snackbar = SnackBar(
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.blue[600],
+      content: Text("Please select an image",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          )));
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +79,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    //button to pick image from gallery
                     Column(
                       children: [
                         RawMaterialButton(
@@ -91,6 +104,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                         ),
                       ],
                     ),
+                    //button to open and use the camera
                     Column(
                       children: [
                         RawMaterialButton(
@@ -118,7 +132,94 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                   ],
                 ),
               ),
-              //Container(child: Image.file(_image))
+              //buttons to cancel the submission and finish
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        child: Text(
+                          'Finish',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          if (_image == null) {
+                            //snackbar shown if any of the fields are empty
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SuccessSubmission()));
+                          }
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Recipe image preview:',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 2.5,
+                    child: _image == null
+                        ? Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Center(
+                                child: Text(
+                              'No Image Selected',
+                              textAlign: TextAlign.center,
+                            )),
+                          )
+                        : Image.file(_image),
+                  ),
+                ),
+              ),
             ],
           )),
     );

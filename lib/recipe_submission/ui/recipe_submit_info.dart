@@ -16,8 +16,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   var _categoryValue;
   var _difficultyValue;
   //value used for the checkbox
-  var _myActivities;
-  //allergies affects list for the checkbox
+  List _allergies;
+  List _proteins;
+  //allergies affected list for the checkbox
   List<dynamic> _allergiesList = [
     {
       "display": "None",
@@ -67,7 +68,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "value": "Vegan",
     }
   ];
-
+//list for the proteins
   List<dynamic> _proteinList = [
     {
       "display": "Beef",
@@ -102,6 +103,32 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "value": "Eggs",
     },
   ];
+    //text controllers for the textfields
+  TextEditingController recipeNameController;
+  TextEditingController servingsController;
+  TextEditingController hoursController;
+  TextEditingController minutesController;
+
+  //snackbar if any of the fields are empty and the user tries to add ingredients
+//or if the user tries to go to the next page with nothing submitted
+  var snackbar = SnackBar(
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.blue[600],
+      content: Text("Please fill out all fields before proceeding",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          )));
+
+  @override
+  void initState() {
+    super.initState();
+    recipeNameController = TextEditingController();
+    servingsController = TextEditingController();
+    hoursController = TextEditingController();
+    minutesController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +180,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 //text field to enter the name of the recipe
                 child: TextField(
                   //need to send to DB refer to comment section
+                  controller: recipeNameController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white,
@@ -222,6 +250,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               Padding(
                 padding: const EdgeInsets.all(13.0),
                 child: TextField(
+                  controller: servingsController,
                   textAlign: TextAlign.start,
                   keyboardType:
                       TextInputType.number, //only shows a numerical keyboard
@@ -272,6 +301,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     child: Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: TextField(
+                        controller: hoursController,
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType
                             .number, //only shows a numerical keyboard
@@ -306,6 +336,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     child: Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: TextField(
+                        controller: minutesController,
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType
                             .number, //only shows a numerical keyboard
@@ -340,8 +371,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               //allergies
               Padding(
                   padding: const EdgeInsets.all(13.0),
-                  child: _checkList(
-                      'Allergies affected', _allergiesList, whiteText)),
+                  child: _allergiesCheckList(
+                      'Allergies affected', _allergiesList, whiteText,)),
               divider,
               //category (vegan, vegetarian or non-vegetarian)
               Padding(
@@ -390,7 +421,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               //proteins
               Padding(
                   padding: const EdgeInsets.all(13.0),
-                  child: _checkList('Protein:', _proteinList, whiteText)),
+                  child: _proteinsCheckList('Protein:', _proteinList, whiteText,)),
               divider,
               //cancel and next buttons
               Row(
@@ -421,11 +452,26 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         child: Text('Next',
                         style: TextStyle(fontWeight: FontWeight.bold),),
                         onPressed: () {
-                          Navigator.push(
+                          if (recipeNameController.text.isEmpty ||
+                              servingsController.text.isEmpty ||
+                              hoursController.text.isEmpty ||
+                              minutesController.text.isEmpty ||
+                              _difficultyValue == null ||
+                              _categoryValue == null ||
+                              _allergies == null ||
+                              _proteins == null) {
+                            //snackbar shown if any of the fields are empty
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } else {
+                            //if not empty, add to the list
+                            //add to the DB here as well
+                            Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     IngredientsSubmission()));
+                          }
                         },
                       ),
                     ),
@@ -440,7 +486,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   }
 
 //helper method for the checkboxes
-  Widget _checkList(String title, List checklistOptions, var textStyle) {
+  Widget _allergiesCheckList(String title, List checklistOptions, var textStyle,) {
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -463,11 +509,44 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         'Please choose one or more',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      initialValue: _myActivities,
+      initialValue: _allergies,
       onSaved: (value) {
         if (value == null) return;
         setState(() {
-          _myActivities = value;
+          _allergies = value;
+        });
+      },
+    );
+  }
+  //helper method for the checkboxes
+  Widget _proteinsCheckList(String title, List checklistOptions, var textStyle,) {
+    return MultiSelectFormField(
+      autovalidate: false,
+      fillColor: Colors.red[400],
+      chipBackGroundColor: Colors.white,
+      chipLabelStyle: TextStyle(color: Colors.red),
+      checkBoxActiveColor: Colors.red,
+      checkBoxCheckColor: Colors.white,
+      dialogShapeBorder:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      title: Text(
+        title,
+        style: textStyle,
+      ),
+      dataSource: checklistOptions,
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL', //clear checklist
+      hintWidget: Text(
+        'Please choose one or more',
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+      ),
+      initialValue: _proteins,
+      onSaved: (value) {
+        if (value == null) return;
+        setState(() {
+          _proteins = value;
         });
       },
     );
