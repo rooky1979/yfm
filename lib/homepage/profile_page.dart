@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/bookmark/bookmarks.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:youth_food_movement/homepage/settings_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'bookmarks.dart';
 
 @override
 Widget build(BuildContext context) {
@@ -103,7 +103,8 @@ class ProfileButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => BookMark()))
+                                builder: (BuildContext context) =>
+                                    BookmarkedRecipeThumbnail()))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),

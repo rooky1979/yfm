@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:youth_food_movement/homepage/bookmarks.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -81,7 +81,37 @@ class _HomePageState extends State<HomePage> {
                           height: 200.0,
                           margin: EdgeInsets.all(8.0),
                           padding: EdgeInsets.all(8.0),
-                          child: BookmarkedRecipeThumbnail(),
+                          child: Card(
+                            child: FutureBuilder(
+                              future: _getImageURL(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  //return the image and make it cover the container
+                                  return GestureDetector(
+                                    child: Image.network(
+                                      snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              RecipeControlsPage(),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Container(
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -94,28 +124,10 @@ class _HomePageState extends State<HomePage> {
       )),
     );
   }
-}
 
-class FavoriteButton extends StatefulWidget {
-  @override
-  _FavoriteButtonState createState() => _FavoriteButtonState();
-}
-
-class _FavoriteButtonState extends State<FavoriteButton> {
-  bool _isFavorite = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        Icons.favorite,
-        color: _isFavorite ? Colors.black : Colors.red,
-      ),
-      onPressed: () {
-        setState(() {
-          _isFavorite = !_isFavorite;
-        });
-      },
-    );
+  Future _getImageURL() async {
+    //ref string will change so the parameter will be the jpg ID (maybe)
+    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+    return downloadURL;
   }
 }

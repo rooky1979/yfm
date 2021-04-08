@@ -3,12 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 //test comment
 //card layout to display the recipe method
-class MethodCard extends StatelessWidget {
+class BookmarkedCard extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
   final int index;
 
-  const MethodCard({Key key, this.snapshot, this.index}) : super(key: key);
+  const BookmarkedCard({Key key, this.snapshot, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
