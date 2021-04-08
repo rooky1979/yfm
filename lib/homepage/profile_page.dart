@@ -37,9 +37,9 @@ class ProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
             Card(
-              child: Icon(FontAwesomeIcons.userGraduate, //comments button
-                  size: 120,
-                  color: Colors.red),
+              //a temp holder for the users icon.
+              child: Icon(FontAwesomeIcons.userGraduate,
+                  size: 120, color: Colors.red),
             ),
             ProfileButtons(),
           ])),
@@ -47,6 +47,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+//this class creates 4 raw material buttons to navigate to the multiple areas of the app
 class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class ProfileButtons extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               RawMaterialButton(
-                  padding: EdgeInsets.all(10), //ingredients button
+                  padding: EdgeInsets.all(10),
                   fillColor: Colors.white,
                   shape: CircleBorder(),
                   child: Icon(
@@ -75,7 +76,6 @@ class ProfileButtons extends StatelessWidget {
                     color: Colors.red,
                   ),
                   onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -83,7 +83,6 @@ class ProfileButtons extends StatelessWidget {
                                     SettingPage()))
                       }),
               RawMaterialButton(
-                // recipe method button
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
                 shape: CircleBorder(),
@@ -92,14 +91,12 @@ class ProfileButtons extends StatelessWidget {
                 onPressed: _launchURL,
               ),
               RawMaterialButton(
-                  // recipe method button
                   padding: EdgeInsets.all(10),
                   fillColor: Colors.white,
                   shape: CircleBorder(),
                   child: Icon(FontAwesomeIcons.solidBookmark,
                       size: 40, color: Colors.red),
                   onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -110,11 +107,9 @@ class ProfileButtons extends StatelessWidget {
                   padding: EdgeInsets.all(11),
                   fillColor: Colors.white,
                   shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.plusCircle, //comments button
-                      size: 40,
-                      color: Colors.red),
+                  child: Icon(FontAwesomeIcons.plusCircle,
+                      size: 40, color: Colors.red),
                   onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -129,6 +124,7 @@ class ProfileButtons extends StatelessWidget {
   }
 }
 
+//this code allows the user to access the just cook about us page.
 _launchURL() async {
   const url = 'http://justcook.co.nz/about-us';
   if (await canLaunch(url)) {

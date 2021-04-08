@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+//a temp page to hold the user information and to display all the information
+//related to the user that they may want to see/edit
+
 @override
 Widget build(BuildContext context) {
   return Center();

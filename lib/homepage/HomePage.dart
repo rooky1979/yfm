@@ -52,6 +52,8 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.settings)),
         ],
       ),
+      //this area will create a lister of catergories that currently only displays one
+      //recipe
       body: SafeArea(
           child: Container(
         alignment: Alignment.bottomRight,
@@ -86,7 +88,8 @@ class _HomePageState extends State<HomePage> {
                               future: _getImageURL(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
-                                  //return the image and make it cover the container
+                                  //this creates the pictures to be clickable
+                                  //and will take the user to the recipe page
                                   return GestureDetector(
                                     child: Image.network(
                                       snapshot.data,

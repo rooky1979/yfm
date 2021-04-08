@@ -3,6 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'bookmarked_recipe_control.dart';
 
+//This page is the display page for the recipes a user has favourited. it currently displays
+//the methods for 1 recipe which will be edited later on
+
 // ignore: must_be_immutable
 class BookmarkedRecipeThumbnail extends StatelessWidget {
   var firestoreDbMethod =

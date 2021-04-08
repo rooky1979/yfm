@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//test comment
+//This page is a temp placeholder for retrieving and displaying a users bookmarked recipies.
+//there is currently dummy code being used as a place holder that will be simmilar to what will
+//eventually be required to create a list of clickable images of the recipes.
 //card layout to display the recipe method
 class BookmarkedCard extends StatelessWidget {
   //snapshot of the database
