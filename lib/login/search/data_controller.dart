@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class DataController extends GetxController {
@@ -8,9 +9,21 @@ class DataController extends GetxController {
     return snapshot.docs;
   }
 
-  Future QueryData(String queryString) async {
+  Future UidQueryData(String queryString) async {
+    // debugPrint(FirebaseFirestore.instance.collection('Users')
+    //     .where('uid', isGreaterThanOrEqualTo: queryString)
+    //     .get().toString());
     return FirebaseFirestore.instance.collection('Users')
-        .where('uid', isGreaterThanOrEqualTo: queryString)
+        .where('uid', isEqualTo: queryString)
+        .get();
+  }
+
+  Future UsernameQueryData(String queryString) async {
+    // debugPrint(FirebaseFirestore.instance.collection('Users')
+    //     .where('uid', isGreaterThanOrEqualTo: queryString)
+    //     .get().toString());
+    return FirebaseFirestore.instance.collection('Users')
+        .where('Username', isEqualTo: queryString)
         .get();
   }
 }

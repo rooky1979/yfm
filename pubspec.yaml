@@ -39,6 +39,7 @@ dev_dependencies:
   firebase_auth: ^1.0.1
   provider: ^4.1.0
   cloud_firestore: any
+  multiselect_formfield: ^0.1.6
   flutter_test:
     sdk: flutter
 

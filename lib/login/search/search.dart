@@ -24,15 +24,17 @@ class _SearchState extends State<Search> {
         itemCount: snapshotData.docs.length,
         itemBuilder: (BuildContext, int index) {
           return GestureDetector(
+            //not working rn
             onTap: () {
               Get.to(PlaceholderHomePage(),
                   transition: Transition.downToUp,
-                  arguments: snapshotData.docs[index]);
+                  arguments: snapshotData.docs[index]
+              );
             },
             child: ListTile(
               // leading: CircleAvatar(
               //   backgroundImage:
-              //       NetworkImage(snapshotData.docs[index].data()['image']),
+              //       NetworkImage(snapshotData.docs[index].data()['Image']),
               // ),
               title: Text(snapshotData.docs[index].data()['Username'],
                   style: TextStyle(
@@ -66,7 +68,7 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.QueryData(searchController.text).then((value) {
+                      val.UidQueryData(searchController.text).then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;

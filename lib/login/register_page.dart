@@ -53,6 +53,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     email: emailInputController.text.trim(),
                     password: passwordInputController.text.trim(),
                   );
+                  final snackBar = SnackBar(
+                    content: Text('Register Completed'),
+                    duration: Duration(milliseconds: 1000),
+                    backgroundColor: Colors.green,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LogIn()),
@@ -62,6 +68,12 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  final snackBar = SnackBar(
+                    content: Text('Register Cancelled'),
+                    duration: Duration(milliseconds: 1000),
+                    backgroundColor: Colors.red,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LogIn()),
