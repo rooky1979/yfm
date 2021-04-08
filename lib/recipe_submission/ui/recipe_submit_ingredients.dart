@@ -48,6 +48,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
     ingredientController = TextEditingController();
     amountController = TextEditingController();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -355,8 +356,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(primary: Colors.red),
                         child: Text(
                           'Done',
                           style: TextStyle(

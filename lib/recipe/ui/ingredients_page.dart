@@ -7,7 +7,7 @@ import 'recipe_info_card.dart';
 class IngredientsPage extends StatelessWidget {
   var firestoreDb =
       FirebaseFirestore.instance.collection('ingredients').snapshots();
-      
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +26,12 @@ class IngredientsPage extends StatelessWidget {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: 1,//snapshot.data.docs.length,
+                      itemCount: 1, //snapshot.data.docs.length,
                       itemBuilder: (context, int index) {
                         return RecipeInformationCard(
                           snapshot: snapshot.data,
-                          index: 0,//this changes depending on what recipe is selected
+                          index:
+                              0, //this changes depending on what recipe is selected
                         );
                       }),
                 );

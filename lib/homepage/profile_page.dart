@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
-import 'package:youth_food_movement/settings/settings_page.dart';
+import 'package:youth_food_movement/homepage/settings_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'bookmarks.dart';
 
@@ -118,8 +118,8 @@ class ProfileButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    InformationSubmission(null)))
-                      })
+                                    InformationSubmission()))
+                      }),
             ],
           ),
         ),

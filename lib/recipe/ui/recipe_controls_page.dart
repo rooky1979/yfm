@@ -86,7 +86,7 @@ class RecipeThumbnail extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.pop(context);
-            })
+            }),
       ],
     );
   }
@@ -167,11 +167,39 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CommentBoard()))
-                      })
+                      }),
+              Bookybok(),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class Bookybok extends StatefulWidget {
+  @override
+  _BookybokState createState() => _BookybokState();
+}
+
+class _BookybokState extends State<Bookybok> {
+  bool _isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+        padding: EdgeInsets.all(11),
+        fillColor: Colors.white,
+        shape: CircleBorder(),
+        child: Icon(
+          FontAwesomeIcons.solidBookmark, //comments button
+          size: 40,
+          color: _isFavorite ? Colors.red : Colors.black,
+        ),
+        onPressed: () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
   }
 }

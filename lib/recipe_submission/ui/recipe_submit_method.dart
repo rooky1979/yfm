@@ -9,6 +9,7 @@ class MethodSubmission extends StatefulWidget {
 
 class _MethodSubmissionState extends State<MethodSubmission> {
   //value used for measurement selection
+  // ignore: unused_field
   var _measurementValue;
   //refactored textstyle used buttons/textfields
   var whiteText =

@@ -2,10 +2,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookMark extends StatefulWidget {
@@ -42,38 +38,11 @@ class _BookMarkState extends State<BookMark> {
               )),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              RecipeThumbnail(),
-              StreamBuilder(
-                  stream: firestoreDbMethod,
-                  builder: (
-                    context,
-                    snapshot,
-                  ) {
-                    if (!snapshot.hasData) return CircularProgressIndicator();
-                    return Expanded(
-                      child: ListView.builder(
-                          itemCount: 1, //snapshot.data.docs.length,
-                          itemBuilder: (context, int index) {
-                            return MethodCard(
-                              snapshot: snapshot.data,
-                              index:
-                                  0, //changes depending on what recipe is selected
-                            );
-                          }),
-                    );
-                  }),
-            ],
-          ),
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(children: [
+            BookmarkedRecipeThumbnail(),
+          ]),
         ));
-  }
-
-  Future _getImageURL() async {
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
-    return downloadURL;
   }
 }
 
@@ -98,5 +67,61 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         });
       },
     );
+  }
+}
+
+class BookmarkedRecipeThumbnail extends StatelessWidget {
+  //wrap it in inkwell?
+//declare and instantiate the firebase storage bucket
+  final FirebaseStorage storage = FirebaseStorage.instanceFor(
+      bucket: 'gs://youth-food-movement.appspot.com');
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.25,
+          //get the image URL
+          child: FutureBuilder(
+              future: _getImageURL(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  //return the image and make it cover the container
+                  return GestureDetector(
+                    child: Image.network(
+                      snapshot.data,
+                      fit: BoxFit.cover,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              RecipeControlsPage(),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Container(
+                      child: Center(
+                    child: CircularProgressIndicator(),
+                  ));
+                }
+              }),
+        ),
+        FavoriteButton()
+      ],
+    );
+  }
+
+//method to get the image URL
+  Future _getImageURL() async {
+    //ref string will change so the parameter will be the jpg ID (maybe)
+    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+    return downloadURL;
   }
 }
