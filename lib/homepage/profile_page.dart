@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:youth_food_movement/settings/settings_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'bookmarks.dart';
 
 @override
 Widget build(BuildContext context) {
@@ -90,6 +91,20 @@ class ProfileButtons extends StatelessWidget {
                     Icon(FontAwesomeIcons.globe, size: 40, color: Colors.red),
                 onPressed: _launchURL,
               ),
+              RawMaterialButton(
+                  // recipe method button
+                  padding: EdgeInsets.all(10),
+                  fillColor: Colors.white,
+                  shape: CircleBorder(),
+                  child: Icon(FontAwesomeIcons.solidBookmark,
+                      size: 40, color: Colors.red),
+                  onPressed: () => {
+                        //pops any page currently loaded off the stack and pushes the required page onto the stack
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => BookMark()))
+                      }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
                   fillColor: Colors.white,
