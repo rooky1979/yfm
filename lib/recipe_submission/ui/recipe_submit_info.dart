@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
-//ERROR HANDLING TO BE ADDED
+import 'dart:convert';
+
 class InformationSubmission extends StatefulWidget {
   @override
   _InformationSubmissionState createState() => _InformationSubmissionState();
@@ -12,12 +14,7 @@ class InformationSubmission extends StatefulWidget {
 
 //form for the recipe name, servings, preptime, allergies, category and proteins
 class _InformationSubmissionState extends State<InformationSubmission> {
-  //value used for dropdown selection in dropdown menus
-  var _categoryValue;
-  var _difficultyValue;
-  //value used for the checkbox
-  List _allergies;
-  List _proteins;
+
   //allergies affected list for the checkbox
   List<dynamic> _allergiesList = [
     {
@@ -103,11 +100,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "value": "Eggs",
     },
   ];
-    //text controllers for the textfields
-  TextEditingController recipeNameController;
-  TextEditingController servingsController;
-  TextEditingController hoursController;
-  TextEditingController minutesController;
 
   //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -124,10 +116,11 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   @override
   void initState() {
     super.initState();
-    recipeNameController = TextEditingController();
-    servingsController = TextEditingController();
-    hoursController = TextEditingController();
-    minutesController = TextEditingController();
+    DBControl.recipeNameController = TextEditingController();
+    DBControl.servingsController = TextEditingController();
+    DBControl.hoursController = TextEditingController();
+    DBControl.minutesController = TextEditingController();
+    DBControl.descriptionController = TextEditingController();
   }
 
   @override
@@ -170,7 +163,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       body: SingleChildScrollView(
         //makes the view scrollable
         child: FittedBox(
-          /*  */
           child: Container(
             width: MediaQuery.of(context).size.width,
             //column to hold the all the user options
@@ -180,7 +172,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 //text field to enter the name of the recipe
                 child: TextField(
                   //need to send to DB refer to comment section
-                  controller: recipeNameController,
+                  controller: DBControl.recipeNameController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white,
@@ -188,6 +180,33 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
                     labelText: 'What is the name of your recipe?',
+                    labelStyle: whiteText,
+                    fillColor: Colors.red[400],
+                    filled: true,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.greenAccent, width: 3.0),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 3.0),
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
+                ),
+              ),
+              divider,
+              Padding(
+                padding: const EdgeInsets.all(13.0),
+                //text field to enter the name of the recipe
+                child: TextField(
+                  //need to send to DB refer to comment section
+                  controller: DBControl.descriptionController,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                    labelText: 'Enter a description of the finished dish',
                     labelStyle: whiteText,
                     fillColor: Colors.red[400],
                     filled: true,
@@ -225,7 +244,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       ),
                       //dropdown menu labels
                       dropdownColor: Colors.red[300],
-                      value: _difficultyValue,
+                      value: DBControl.difficultyValue,
                       items: ["Easy", "Intermediate", "Hard"]
                           .map((label) => DropdownMenuItem(
                                 child: Center(
@@ -239,7 +258,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               ))
                           .toList(),
                       onChanged: (value) {
-                        setState(() => _difficultyValue = value);
+                        setState(() => DBControl.difficultyValue = value);
                       },
                     ),
                   ),
@@ -250,7 +269,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               Padding(
                 padding: const EdgeInsets.all(13.0),
                 child: TextField(
-                  controller: servingsController,
+                  controller: DBControl.servingsController,
                   textAlign: TextAlign.start,
                   keyboardType:
                       TextInputType.number, //only shows a numerical keyboard
@@ -301,7 +320,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     child: Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: TextField(
-                        controller: hoursController,
+                        controller: DBControl.hoursController,
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType
                             .number, //only shows a numerical keyboard
@@ -336,7 +355,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     child: Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: TextField(
-                        controller: minutesController,
+                        controller: DBControl.minutesController,
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType
                             .number, //only shows a numerical keyboard
@@ -366,13 +385,16 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                   ),
                 ],
-              ),
+              ), 
               divider,
               //allergies
               Padding(
                   padding: const EdgeInsets.all(13.0),
                   child: _allergiesCheckList(
-                      'Allergies affected', _allergiesList, whiteText,)),
+                    'Allergies affected',
+                    _allergiesList,
+                    whiteText,
+                  )),
               divider,
               //category (vegan, vegetarian or non-vegetarian)
               Padding(
@@ -397,7 +419,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       ),
                       //dropdown menu labels
                       dropdownColor: Colors.red[300],
-                      value: _categoryValue,
+                      value: DBControl.categoryValue,
                       items: ["Vegan", "Vegetarian", "Non-Vegetarian"]
                           .map((label) => DropdownMenuItem(
                                 child: Center(
@@ -411,7 +433,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               ))
                           .toList(),
                       onChanged: (value) {
-                        setState(() => _categoryValue = value);
+                        setState(() => DBControl.categoryValue = value);
                       },
                     ),
                   ),
@@ -421,7 +443,11 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               //proteins
               Padding(
                   padding: const EdgeInsets.all(13.0),
-                  child: _proteinsCheckList('Protein:', _proteinList, whiteText,)),
+                  child: _proteinsCheckList(
+                    'Protein:',
+                    _proteinList,
+                    whiteText,
+                  )),
               divider,
               //cancel and next buttons
               Row(
@@ -433,10 +459,16 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       width: 100,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red[50]),
-                        child: Text('Cancel',
-                        style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+                        style:
+                            ElevatedButton.styleFrom(primary: Colors.red[50]),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
                         onPressed: () {
+                          //take user back to profile page?
+                          DBControl.clearDBVariables();
                           Navigator.pop(context);
                         },
                       ),
@@ -449,28 +481,32 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.red),
-                        child: Text('Next',
-                        style: TextStyle(fontWeight: FontWeight.bold),),
+                        child: Text(
+                          'Done',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         onPressed: () {
-                          if (recipeNameController.text.isEmpty ||
-                              servingsController.text.isEmpty ||
-                              hoursController.text.isEmpty ||
-                              minutesController.text.isEmpty ||
-                              _difficultyValue == null ||
-                              _categoryValue == null ||
-                              _allergies == null ||
-                              _proteins == null) {
+                          if (DBControl.recipeNameController.text.isEmpty ||
+                              DBControl.servingsController.text.isEmpty ||
+                              DBControl.descriptionController.text.isEmpty ||
+                              DBControl.hoursController.text.isEmpty ||
+                              DBControl.minutesController.text.isEmpty ||
+                              DBControl.difficultyValue == null ||
+                              DBControl.categoryValue == null ||
+                              DBControl.allergies == null ||
+                              DBControl.proteins == null) {
                             //snackbar shown if any of the fields are empty
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
                             //if not empty, add to the list
-                            //add to the DB here as well
+                            _setPrepTime(DBControl.hoursController.text, DBControl.minutesController.text);
+                            Navigator.pop(context);
                             Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    IngredientsSubmission()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        IngredientsSubmission()));
                           }
                         },
                       ),
@@ -485,8 +521,12 @@ class _InformationSubmissionState extends State<InformationSubmission> {
     );
   }
 
-//helper method for the checkboxes
-  Widget _allergiesCheckList(String title, List checklistOptions, var textStyle,) {
+  //helper method for the allergies checkboxes
+  Widget _allergiesCheckList(
+    String title,
+    List checklistOptions,
+    var textStyle,
+  ) {
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -509,17 +549,22 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         'Please choose one or more',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      initialValue: _allergies,
+      initialValue: DBControl.allergies,
       onSaved: (value) {
         if (value == null) return;
         setState(() {
-          _allergies = value;
+          DBControl.allergies = value;
         });
       },
     );
   }
-  //helper method for the checkboxes
-  Widget _proteinsCheckList(String title, List checklistOptions, var textStyle,) {
+
+  //helper method for the protein checkboxes
+  Widget _proteinsCheckList(
+    String title,
+    List checklistOptions,
+    var textStyle,
+  ) {
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -542,13 +587,22 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         'Please choose one or more',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      initialValue: _proteins,
+      initialValue: DBControl.proteins,
       onSaved: (value) {
         if (value == null) return;
         setState(() {
-          _proteins = value;
+          DBControl.proteins = value;
         });
       },
     );
+  }
+
+  _setPrepTime(String hoursText, String minutesText) {
+
+    int hours = int.parse(hoursText) * 60;
+    int minutes = int.parse(minutesText);
+    DBControl.prepTime = hours + minutes;
+    print(DBControl.prepTime);
+
   }
 }
