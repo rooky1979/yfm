@@ -6,21 +6,21 @@ import 'package:firebase_storage/firebase_storage.dart';
 class DBControl {
   //recipe_info
   //value used for dropdown selection in dropdown menus
-  static var categoryValue; //
+  static var categoryValue; 
   static var difficultyValue;
   //value used for the checkboxes
-  static List allergies; //
-  static List proteins; //
+  static List allergies; 
+  static List proteins; 
   //text controllers for the textfields
-  static TextEditingController recipeNameController; //
-  static TextEditingController servingsController; //
+  static TextEditingController recipeNameController; 
+  static TextEditingController servingsController; 
   static TextEditingController hoursController;
   static TextEditingController minutesController;
-  static TextEditingController descriptionController; //
+  static TextEditingController descriptionController; 
   static int prepTime;
 
   //list to hold ingredient strings
-  static List ingredients = []; //
+  static List ingredients = []; 
 
   //recipe_method
   //list to hold ingredient strings
@@ -55,6 +55,23 @@ class DBControl {
       "title": recipeNameController.text
     });
     await recipeDocRef.collection("method").add({"method": methodSteps});
+  }
+  //method to clear the controllers and variables if a user clicks on cancel at anytime
+  static void clearDBVariables(){
+
+    categoryValue == null; 
+    difficultyValue == null;
+    allergies.clear(); 
+    proteins.clear();
+    recipeNameController.clear(); 
+    servingsController.clear(); 
+    hoursController.clear();
+    minutesController.clear();
+    descriptionController.clear(); 
+    prepTime = null;
+    ingredients.clear();
+    methodSteps.clear();
+    image = null;
   }
 
 }

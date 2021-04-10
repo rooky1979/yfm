@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_method.dart';
 
 class IngredientsSubmission extends StatefulWidget {
@@ -41,16 +42,18 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
   //string to hold the measurement unit
   String unit = '';
   //list to hold ingredient strings
-  List ingredients = [];
+  //List ingredients = [];
   @override
   void initState() {
     super.initState();
     ingredientController = TextEditingController();
     amountController = TextEditingController();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -231,8 +234,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         ),
                         onPressed: () {
                           setState(() {});
-                          if (ingredients.isNotEmpty) {
-                            ingredients.removeLast();
+                          if (DBControl.ingredients.isNotEmpty) {
+                            DBControl.ingredients.removeLast();
                           } else {} //remove last ingredient from the list
                           //if list is empty, do nothing
                         },
@@ -263,7 +266,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             //if not empty, add to the list
                             //add to the DB here as well
                             setState(() {});
-                            ingredients.add(amountController.text +
+                            DBControl.ingredients.add(amountController.text +
                                 ' ' +
                                 unit +
                                 ' ' +
@@ -298,7 +301,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       child: ListView.builder(
                           //physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: ingredients.length,
+                          itemCount: DBControl.ingredients.length,
                           itemBuilder: (context, int index) {
                             return Column(
                               children: [
@@ -307,7 +310,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                     backgroundColor: Colors.red,
                                     radius: 10,
                                   ),
-                                  title: Text(ingredients[index].toString(),
+                                  title: Text(
+                                      DBControl.ingredients[index].toString(),
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
@@ -344,6 +348,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
+                          //clears the controllers and variables
+                          amountController.clear();
+                          ingredientController.clear();
+                          _measurementValue = null;
                           Navigator.pop(context);
                         },
                       ),
@@ -355,19 +363,19 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(primary: Colors.red),
                         child: Text(
                           'Done',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          if (ingredients.isEmpty) {
+                          if (DBControl.ingredients.isEmpty) {
                             //snackbar shown if any of the fields are empty
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
+                            Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
