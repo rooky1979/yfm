@@ -11,8 +11,7 @@ class ImageSubmission extends StatefulWidget {
 }
 
 class _ImageSubmissionState extends State<ImageSubmission> {
-  // Image Picker
-  File _image;
+
 //method to get the image
   Future getImage(bool gallery) async {
     ImagePicker picker = ImagePicker();
@@ -32,7 +31,8 @@ class _ImageSubmissionState extends State<ImageSubmission> {
 //set the state of the container
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        DBControl.image = File(pickedFile.path);
+        print(DBControl.image.path.toString());
       } else {
         print('No image selected.');
       }
@@ -169,11 +169,12 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          if (_image == null) {
+                          if (DBControl.image == null) {
                             //snackbar shown if any of the fields are empty
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
+                            DBControl.writeDB();
                             Navigator.pop(context);
                             Navigator.push(
                                 context,
@@ -210,7 +211,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 2.5,
-                    child: _image == null
+                    child: DBControl.image == null
                         ? Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Center(
@@ -219,7 +220,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                               textAlign: TextAlign.center,
                             )),
                           )
-                        : Image.file(_image),
+                        : Image.file(DBControl.image),
                   ),
                 ),
               ),

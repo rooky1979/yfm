@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
+import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 
 class SuccessSubmission extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class SuccessSubmission extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        leading: IconButton(
+/*         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 25,
@@ -16,7 +17,7 @@ class SuccessSubmission extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.pop(context);
-            }),
+            }), */
         title: Text('Successful!',
             style: TextStyle(
               color: Colors.white,
@@ -66,7 +67,7 @@ class SuccessSubmission extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               onPressed: () {
-                                DBControl.writeDB();
+                                DBControl.clearDBVariables();
                                 Navigator.pop(context);
                               },
                             ),
@@ -77,7 +78,6 @@ class SuccessSubmission extends StatelessWidget {
                   ],
                 ),
               ),
-              //button to complete the process
             ],
           )),
     );
