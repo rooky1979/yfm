@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_info_card.dart';
-import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_image.dart';
-import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
-import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
-import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_method.dart';
-import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_success.dart';
-
 import 'login/login_page.dart';
 
 Future<void> main() async {
