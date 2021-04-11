@@ -69,6 +69,10 @@ class SuccessSubmission extends StatelessWidget {
                               onPressed: () {
                                 DBControl.clearDBVariables();
                                 Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
                               },
                             ),
                           ),
