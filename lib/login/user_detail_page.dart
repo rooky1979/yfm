@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/login/placeholder_homepage.dart';
+import 'package:youth_food_movement/homepage/HomePage.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
-
-import 'search/data_controller.dart';
 
 class UserDetailPage extends StatefulWidget {
   @override
@@ -438,8 +437,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            PlaceholderHomePage()),
+                                        builder: (context) => HomePage()),
                                   );
                                 } else {
                                   final snackBar = SnackBar(
