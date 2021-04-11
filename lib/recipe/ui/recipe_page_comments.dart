@@ -1,19 +1,8 @@
-//import 'dart:io';
-import 'package:youth_food_movement/recipe/ui/comment.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
-import 'package:youth_food_movement/recipe/ui/comment_form.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:youth_food_movement/comments/comment.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/comments/comment_form.dart';
-import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_storage/firebase_storage.dart';
-//import 'package:image_picker/image_picker.dart';
 
 class CommentBoard extends StatefulWidget {
   @override
@@ -25,7 +14,6 @@ class CommentBoard extends StatefulWidget {
 
   const CommentBoard({Key key, this.snapshot, this.index, this.recipeID})
       : super(key: key);
-
 }
 
 class _CommentBoardState extends State<CommentBoard> {
@@ -36,7 +24,6 @@ class _CommentBoardState extends State<CommentBoard> {
       .doc('7jKfiM0kZugLdDFJ1XAy')
       .collection('comments')
       .snapshots();
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +49,6 @@ class _CommentBoardState extends State<CommentBoard> {
                               snapshot: snapshot.data,
                               index: index,
                               recipeID: '7jKfiM0kZugLdDFJ1XAy');
-
                         }),
                   ),
                 );

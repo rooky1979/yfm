@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -32,7 +31,6 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
 
 //displays the thumbnail from firebase storage
 class RecipeThumbnail extends StatelessWidget {
-
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -168,7 +166,6 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CommentBoard()))
-
                       }),
               Bookybok(),
             ],
