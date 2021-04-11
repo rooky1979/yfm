@@ -129,10 +129,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       textAlign: TextAlign.start,
                       keyboardType: TextInputType
                           .number, //only shows a numerical keyboard
-                      /* inputFormatters: <TextInputFormatter>[
+                      inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter
                             .digitsOnly //enables digits only for entry
-                      ], */
+                      ],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -264,7 +264,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 .showSnackBar(snackbar);
                           } else {
                             //if not empty, add to the list
-                            //add to the DB here as well
                             setState(() {});
                             DBControl.ingredients.add(amountController.text +
                                 ' ' +
