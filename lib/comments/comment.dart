@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 //import 'package:youth_food_movement/recipe/ui/comment_update_form.dart';
 
@@ -19,7 +18,6 @@ class Comment extends StatefulWidget {
 }
 
 class _CommentState extends State<Comment> {
-  @override
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
   Widget build(BuildContext context) {
