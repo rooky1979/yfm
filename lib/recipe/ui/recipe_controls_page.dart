@@ -1,9 +1,9 @@
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
     //main page setup
+
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 25),
@@ -30,7 +31,6 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
 
 //displays the thumbnail from firebase storage
 class RecipeThumbnail extends StatelessWidget {
-  //wrap it in inkwell?
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -85,7 +85,7 @@ class RecipeThumbnail extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.pop(context);
-            })
+            }),
       ],
     );
   }
@@ -123,17 +123,18 @@ class RecipeButtons extends StatelessWidget {
                   fillColor: Colors.white,
                   shape: CircleBorder(),
                   child: Icon(
-                    FontAwesomeIcons.pepperHot,
+                    FontAwesomeIcons.leaf,
                     size: 40,
                     color: Colors.red,
                   ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.pop(context),
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage())
+                                    IngredientsPage()))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -165,11 +166,39 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CommentBoard()))
-                      })
+                      }),
+              Bookybok(),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class Bookybok extends StatefulWidget {
+  @override
+  _BookybokState createState() => _BookybokState();
+}
+
+class _BookybokState extends State<Bookybok> {
+  bool _isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+        padding: EdgeInsets.all(11),
+        fillColor: Colors.white,
+        shape: CircleBorder(),
+        child: Icon(
+          FontAwesomeIcons.solidBookmark, //comments button
+          size: 40,
+          color: _isFavorite ? Colors.red : Colors.black,
+        ),
+        onPressed: () {
+          setState(() {
+            _isFavorite = !_isFavorite;
+          });
+        });
   }
 }
