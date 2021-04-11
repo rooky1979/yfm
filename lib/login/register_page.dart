@@ -50,14 +50,32 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  context.read<AuthenticationService>().signUp(
-                    email: emailInputController.text.trim(),
-                    password: passwordInputController.text.trim(),
-                  );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserDetailPage()),
-                  );
+                  if(emailInputController.text.isNotEmpty) {
+                    if (passwordInputController.text.isNotEmpty) {
+                      context.read<AuthenticationService>().signUp(
+                        email: emailInputController.text.trim(),
+                        password: passwordInputController.text.trim(),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserDetailPage()),
+                      );
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text('Password not entered'),
+                        duration: Duration(milliseconds: 1000),
+                        backgroundColor: Colors.red,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  }else {
+                    final snackBar = SnackBar(
+                      content: Text('Email not entered'),
+                      duration: Duration(milliseconds: 1000),
+                      backgroundColor: Colors.red,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
                 },
                 child: Text("Next"),
               ),

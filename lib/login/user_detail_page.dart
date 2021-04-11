@@ -21,17 +21,19 @@ class UserDetailPage extends StatefulWidget {
 class _UserDetailPageState extends State<UserDetailPage> {
   var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseStorage storage = FirebaseStorage.instanceFor(
+  final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
   String regionDropdownValue;
-  int imageSelected;
+  String imageSelected;
   bool usernameExists = true;
+  String username;
   final f = new DateFormat('dd-MMM-yyyy');
   DateTime birthday = DateTime.now();
   QuerySnapshot snapshotData;
   List _allergies;
+
 
   List<dynamic> _allergiesList = [
     {
@@ -149,26 +151,73 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                              //TODO change image to something in database
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              //TODO change image selected to image link in database
-                              imageSelected = 1;
-                            }),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 2;
-                            }),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage1URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
+                      ),Padding(
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage2URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
                       ),
                     ],
                   ),
@@ -176,23 +225,73 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 3;
-                            }),
+                        child: Container(
+                          width: 175.0,
+                          height: 160.0,
+                          margin: EdgeInsets.all(8.0),
+                          child: Card(
+                            child: FutureBuilder(
+                              future: _getImage3URL(),
+                                builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  //this creates the pictures to be clickable
+                                  //and will take the user to the recipe page
+                                  return GestureDetector(
+                                    child: Image.network(
+                                        snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onTap: () {
+                                      imageSelected = "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                    },
+                                  );
+                                }
+                                else {
+                                  return Container(
+                                    child: Center(
+                                      child: CircularProgressIndicator()
+                                    ),
+                                  );
+                                }
+                              }
+                            ),
+                          ),
+                        )
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 4;
-                            }),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage4URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
                       ),
                     ],
                   ),
@@ -251,6 +350,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         if(snapshotData.docs.isEmpty) {
                                           setState(() {
                                             usernameExists = false;
+                                            username = usernameInputController.text;
                                           });
                                           final snackBar = SnackBar(
                                             content: Text('Username does not exist'),
@@ -404,7 +504,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   FirebaseFirestore.instance.collection('Users').add({
                                     'uid' : _firebaseAuth.currentUser.uid,
                                     'Name' : fullNameInputController.text,
-                                    'Username' : usernameInputController.text,
+                                    'Username' : username,
                                     'Image' : imageSelected,
                                     'Region' : regionDropdownValue,
                                     'Birthday' : f.format(birthday),
@@ -513,6 +613,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
         });
       },
     );
+  }
+
+  Future _getImage1URL() async {
+    String downloadURL = await avatarStorage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage2URL() async {
+    String downloadURL = await avatarStorage.ref('avatar2.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage3URL() async {
+    String downloadURL = await avatarStorage.ref('avatar3.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage4URL() async {
+    String downloadURL = await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+    return downloadURL;
   }
 }
 
