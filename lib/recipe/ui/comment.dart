@@ -12,8 +12,10 @@ class Comment extends StatefulWidget {
   _CommentState createState() => _CommentState();
   final QuerySnapshot snapshot;
   final int index;
+  final String recipeID;
 
-  const Comment({Key key, this.snapshot, this.index}) : super(key: key);
+  const Comment({Key key, this.snapshot, this.index, this.recipeID})
+      : super(key: key);
 }
 
 class _CommentState extends State<Comment> {
@@ -31,8 +33,6 @@ class _CommentState extends State<Comment> {
     var docID = widget.snapshot.docs[widget.index].id;
     var user = "Temp Name 2";
     var list = [user];
-    String img =
-        'https://cdn.pixabay.com/photo/2021/02/11/05/21/woman-6004239__340.jpg';
     Color likeColor = Colors.grey;
     //int counter = 100;
     var numLikes = snapshotData['likes'];
@@ -63,6 +63,35 @@ class _CommentState extends State<Comment> {
                         style: const TextStyle(
                             fontSize: 17.0, color: Colors.black)),
                     leading: Icon(Icons.account_circle_rounded, size: 50)),
+                FutureBuilder(
+                    future: _getImageURL(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return GestureDetector(
+                          child: Image.network(
+                            snapshot.data,
+                            fit: BoxFit.cover,
+                          ),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return GestureDetector(
+                                child: Center(
+                                  child: Image.network(
+                                    snapshot.data,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                onTap: () => Navigator.pop(context),
+                              );
+                            }));
+                          },
+                        );
+                      } else {
+                        return Container(child: Center());
+                      }
+                    }),
                 Container(
                   padding: const EdgeInsets.only(
                       top: 5, left: 10, right: 10, bottom: 5),
@@ -86,13 +115,17 @@ class _CommentState extends State<Comment> {
                                       likeColor = Colors.blue;
                                       numLikes++;
                                       FirebaseFirestore.instance
-                                          .collection('board')
+                                          .collection('recipe')
+                                          .doc(widget.recipeID)
+                                          .collection('comments')
                                           .doc(docID)
                                           .update({'likes': numLikes});
                                       clickedLike = !clickedLike;
 
                                       FirebaseFirestore.instance
-                                          .collection('board')
+                                          .collection('recipe')
+                                          .doc(widget.recipeID)
+                                          .collection('comments')
                                           .doc(docID)
                                           .update({
                                         'likedUsers':
@@ -105,13 +138,17 @@ class _CommentState extends State<Comment> {
                                       debugPrint("before dislike" +
                                           clickedLike.toString());
                                       FirebaseFirestore.instance
-                                          .collection('board')
+                                          .collection('recipe')
+                                          .doc(widget.recipeID)
+                                          .collection('comments')
                                           .doc(docID)
                                           .update({'likes': numLikes});
                                       clickedLike = !clickedLike;
                                       //debugPrint("after change");
                                       FirebaseFirestore.instance
-                                          .collection('board')
+                                          .collection('recipe')
+                                          .doc(widget.recipeID)
+                                          .collection('comments')
                                           .doc(docID)
                                           .update({
                                         'likedUsers':
@@ -157,35 +194,6 @@ class _CommentState extends State<Comment> {
                 //     width: 85,
                 //   ),
                 // ),
-                FutureBuilder(
-                    future: _getImageURL(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        //return the image and make it cover the container
-                        return GestureDetector(
-                          child: Image.network(
-                            snapshot.data,
-                            fit: BoxFit.cover,
-                          ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return GestureDetector(
-                                child: Center(
-                                  child: Image.network(
-                                    snapshot.data,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                onTap: () => Navigator.pop(context),
-                              );
-                            }));
-                          },
-                        );
-                      } else {
-                        return Container(child: Center());
-                      }
-                    }),
               ],
             ),
           ),
@@ -252,7 +260,7 @@ class _CommentState extends State<Comment> {
               child: new Text("Yes"),
               onPressed: () {
                 var collectionReference =
-                    FirebaseFirestore.instance.collection('board');
+                    FirebaseFirestore.instance.collection('comment');
                 collectionReference.doc(docId).delete();
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),

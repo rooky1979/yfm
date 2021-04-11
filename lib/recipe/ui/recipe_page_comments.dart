@@ -11,11 +11,22 @@ import 'package:firebase_storage/firebase_storage.dart';
 class CommentBoard extends StatefulWidget {
   @override
   _CommentBoardState createState() => _CommentBoardState();
+  final String recipeID;
+  final QuerySnapshot snapshot;
+  final int index;
+
+  const CommentBoard({Key key, this.snapshot, this.index, this.recipeID})
+      : super(key: key);
 }
 
 class _CommentBoardState extends State<CommentBoard> {
 //   database connection to the board firebase
-  var firestoreDb = FirebaseFirestore.instance.collection('board').snapshots();
+
+  var firestoreDb = FirebaseFirestore.instance
+      .collection('recipe')
+      .doc('7jKfiM0kZugLdDFJ1XAy')
+      .collection('comments')
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,10 @@ class _CommentBoardState extends State<CommentBoard> {
                     child: ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, int index) {
-                          return Comment(snapshot: snapshot.data, index: index);
+                          return Comment(
+                              snapshot: snapshot.data,
+                              index: index,
+                              recipeID: '7jKfiM0kZugLdDFJ1XAy');
                         }),
                   ),
                 );
