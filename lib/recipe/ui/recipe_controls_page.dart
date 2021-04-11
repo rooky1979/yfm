@@ -1,4 +1,5 @@
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -167,6 +168,7 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     CommentBoard()))
+
                       }),
               Bookybok(),
             ],
