@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/login/placeholder_homepage.dart';
 import 'package:youth_food_movement/login/register_page.dart';
-import 'package:youth_food_movement/login/user_detail_page.dart';
-
-import 'user_detail_process.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -36,7 +34,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if(firebaseUser != null){
-      return UserDetailPage();
+      return PlaceholderHomePage();
     }
     return LogIn();
   }

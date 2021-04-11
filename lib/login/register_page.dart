@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:youth_food_movement/login/login_page.dart';
+import 'package:youth_food_movement/login/user_detail_page.dart';
 
 import 'authentication_service.dart';
 
@@ -53,18 +54,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     email: emailInputController.text.trim(),
                     password: passwordInputController.text.trim(),
                   );
-                  final snackBar = SnackBar(
-                    content: Text('Register Completed'),
-                    duration: Duration(milliseconds: 1000),
-                    backgroundColor: Colors.green,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LogIn()),
+                    MaterialPageRoute(builder: (context) => UserDetailPage()),
                   );
                 },
-                child: Text("Register"),
+                child: Text("Next"),
               ),
               ElevatedButton(
                 onPressed: () {

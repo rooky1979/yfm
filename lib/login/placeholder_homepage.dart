@@ -4,7 +4,12 @@ import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'authentication_service.dart';
 
-class PlaceholderHomePage extends StatelessWidget {
+class PlaceholderHomePage extends StatefulWidget {
+  @override
+  _PlaceholderHomePageState createState() => _PlaceholderHomePageState();
+}
+
+class _PlaceholderHomePageState extends State<PlaceholderHomePage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override

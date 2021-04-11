@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:youth_food_movement/login/placeholder_homepage.dart';
 import 'authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -416,7 +417,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     backgroundColor: Colors.green,
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  //Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => PlaceholderHomePage()),
+                                  );
                                 }else {
                                   final snackBar = SnackBar(
                                     content: Text('Birthday has not been selected'),
