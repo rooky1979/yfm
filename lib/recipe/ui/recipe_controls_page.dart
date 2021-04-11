@@ -31,7 +31,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
 
 //displays the thumbnail from firebase storage
 class RecipeThumbnail extends StatelessWidget {
-  //wrap it in inkwell?
+
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');

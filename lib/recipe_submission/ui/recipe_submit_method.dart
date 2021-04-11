@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_image.dart';
 
 class MethodSubmission extends StatefulWidget {
@@ -8,6 +9,7 @@ class MethodSubmission extends StatefulWidget {
 }
 
 class _MethodSubmissionState extends State<MethodSubmission> {
+
   //value used for measurement selection
   // ignore: unused_field
   var _measurementValue;
@@ -37,10 +39,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
           )));
   //text controller for the textfield
   TextEditingController methodController;
-  //string to hold the measurement unit
-  String unit = '';
-  //list to hold ingredient strings
-  List methodSteps = [];
 
   @override
   void initState() {
@@ -51,6 +49,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -91,7 +90,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                 padding: const EdgeInsets.all(13.0),
                 //text field to enter the name of the recipe
                 child: TextField(
-                  //need to send to DB refer to comment section
                   controller: methodController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -134,8 +132,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         ),
                         onPressed: () {
                           setState(() {});
-                          if (methodSteps.isNotEmpty) {
-                            methodSteps.removeLast();
+                          if (DBControl.methodSteps.isNotEmpty) {
+                            DBControl.methodSteps.removeLast();
                           } else {} //remove last ingredient from the list
                           //if list is empty, do nothing
                         },
@@ -164,7 +162,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                             //if not empty, add to the list
                             //add to the DB here as well
                             setState(() {});
-                            methodSteps.add(methodController.text);
+                            DBControl.methodSteps.add(methodController.text);
                             methodController.clear();
                           }
                         },
@@ -193,7 +191,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       child: ListView.builder(
                           //physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: methodSteps.length,
+                          itemCount: DBControl.methodSteps.length,
                           itemBuilder: (context, int index) {
                             return Column(
                               children: [
@@ -202,7 +200,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                                     backgroundColor: Colors.red,
                                     radius: 10,
                                   ),
-                                  title: Text(methodSteps[index].toString(),
+                                  title: Text(DBControl.methodSteps[index].toString(),
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
@@ -239,7 +237,10 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
+                          DBControl.clearDBVariables();
+                          methodController.clear();
                           Navigator.pop(context);
+                          //take user back to profile page?
                         },
                       ),
                     ),
@@ -257,11 +258,12 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          if (methodSteps.isEmpty) {
+                          if (DBControl.methodSteps.isEmpty) {
                             //snackbar shown if any of the fields are empty
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
+                            Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
