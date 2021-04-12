@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:image_picker/image_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+//import 'package:firebase_core/firebase_core.dart';
+//import 'dart:math';
 
 class CommentEntryDialog extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class CommentEntryDialog extends StatefulWidget {
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
   //database connection to the board firebase
-  var firestoreDb = FirebaseFirestore.instance.collection('board').snapshots();
+  var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
   CollectionReference imgRef;
   firebase_storage.Reference ref;
   //controllers for the editable text fields
@@ -38,7 +39,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _imgfile = File(imgfile.path);
-      debugPrint(_imgfile.path.toString());
+      //debugPrint(_imgfile.path.toString());
       imgAttached = "true";
     });
     Navigator.of(context).pop();
@@ -48,7 +49,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
       _imgfile = File(imgfile.path);
-      debugPrint(_imgfile.path.toString());
+      // debugPrint(_imgfile.path.toString());
     });
     Navigator.of(context).pop();
   }
@@ -221,34 +222,40 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 IconButton(
                     //button to save the comment to the database
                     onPressed: () {
-                      if (descriptionInputController.text.isNotEmpty) {
-                        FirebaseFirestore.instance.collection('board').add({
-                          'user': "Temp Name 2",
-                          'title': "Temp Title",
-                          'imgAttached': imgAttached,
-                          'description': descriptionInputController.text,
-                          'timestamp': new DateTime.now(),
-                          'image_url': url
-                        }).then((response) {
-                          print(response.id);
-                          if (imgAttached == "true") {
-                            _uploadImageToFirebase(response.id);
-                          }
+                      print(imgAttached);
 
-                          final snackBar = SnackBar(
-                            content: Text('Comment Posted'),
-                            duration: Duration(milliseconds: 1000),
-                            backgroundColor: Colors.green,
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          Navigator.pop(context);
-                          nameInputController.clear();
-                          titleInputController.clear();
-                          descriptionInputController.clear();
-                          _imgfile = null;
-                          imgAttached = "false";
-                        }).catchError((onError) => print(onError));
-                      }
+                      FirebaseFirestore.instance
+                          .collection('recipe')
+                          .doc('7jKfiM0kZugLdDFJ1XAy')
+                          .collection('comments')
+                          .add({
+                        'user': "Temp Name 2",
+                        'title': "Temp Title",
+                        'imgAttached': imgAttached,
+                        'description': descriptionInputController.text,
+                        'timestamp': new DateTime.now(),
+                        'image_url': url,
+                        'likes': 0,
+                        'likedUsers': [],
+                      }).then((response) {
+                        print(response.id);
+                        if (imgAttached == "true") {
+                          _uploadImageToFirebase(response.id);
+                        }
+
+                        final snackBar = SnackBar(
+                          content: Text('Comment Posted'),
+                          duration: Duration(milliseconds: 1000),
+                          backgroundColor: Colors.green,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        Navigator.pop(context);
+                        nameInputController.clear();
+                        titleInputController.clear();
+                        descriptionInputController.clear();
+                        _imgfile = null;
+                        imgAttached = "false";
+                      }).catchError((onError) => print(onError));
                     },
                     padding: const EdgeInsets.only(left: 120),
                     icon: Icon(Icons.check),

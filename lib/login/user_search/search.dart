@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/login/placeholder_homepage.dart';
-import 'package:youth_food_movement/login/search/data_controller.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 
 class Search extends StatefulWidget {
   @override

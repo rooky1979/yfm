@@ -80,7 +80,7 @@ class ProfileButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    SettingPage()))
+                                    SettingsPage()))
                       }),
               RawMaterialButton(
                 padding: EdgeInsets.all(10),

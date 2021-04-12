@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 //a temp page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
@@ -12,9 +11,8 @@ Widget build(BuildContext context) {
   return Center();
 }
 
-class SettingPage extends StatelessWidget {
-  // ignore: unused_field
-  final FirebaseAuth _firbaseAuth = FirebaseAuth.instance;
+// ignore: must_be_immutable
+class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,15 +28,8 @@ class SettingPage extends StatelessWidget {
                 color: Colors.red),
           ),
         ),
-        Card(
-          child: new Text('UserName'),
-        ),
-        Card(
-          child: new Text('City'),
-        ),
-        Card(
-          child: new Text('Birthday'),
-        ),
+        Card(),
+        Card(),
         ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -57,3 +48,5 @@ class SettingPage extends StatelessWidget {
     );
   }
 }
+
+class FirebaseApp {}

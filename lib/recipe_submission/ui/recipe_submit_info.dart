@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
-import 'dart:convert';
 
 class InformationSubmission extends StatefulWidget {
   @override
@@ -14,7 +13,6 @@ class InformationSubmission extends StatefulWidget {
 
 //form for the recipe name, servings, preptime, allergies, category and proteins
 class _InformationSubmissionState extends State<InformationSubmission> {
-
   //allergies affected list for the checkbox
   List<dynamic> _allergiesList = [
     {
@@ -385,7 +383,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                   ),
                 ],
-              ), 
+              ),
               divider,
               //allergies
               Padding(
@@ -500,7 +498,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .showSnackBar(snackbar);
                           } else {
                             //if not empty, add to the list
-                            _setPrepTime(DBControl.hoursController.text, DBControl.minutesController.text);
+                            _setPrepTime(DBControl.hoursController.text,
+                                DBControl.minutesController.text);
                             Navigator.pop(context);
                             Navigator.push(
                                 context,
@@ -598,11 +597,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   }
 
   _setPrepTime(String hoursText, String minutesText) {
-
     int hours = int.parse(hoursText) * 60;
     int minutes = int.parse(minutesText);
     DBControl.prepTime = hours + minutes;
     print(DBControl.prepTime);
-
   }
 }
