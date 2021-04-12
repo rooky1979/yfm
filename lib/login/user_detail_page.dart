@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/login/placeholder_homepage.dart';
+import 'package:youth_food_movement/login/login_page.dart';
+import 'package:youth_food_movement/login/search/data_controller.dart';
 import 'authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
-import 'search/data_controller.dart';
 
 class UserDetailPage extends StatefulWidget {
   @override
@@ -19,22 +19,29 @@ class UserDetailPage extends StatefulWidget {
 }
 
 class _UserDetailPageState extends State<UserDetailPage> {
+  //reference to firestore database
   var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+  //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  //reference to firebase storage
   final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+  //Controllers for textfields
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
-  String regionDropdownValue;
-  String imageSelected;
-  bool usernameExists = true;
-  String username;
-  final f = new DateFormat('dd-MMM-yyyy');
-  DateTime birthday = DateTime.now();
+  //date formatted to day/month/year
+  final formattedDate = new DateFormat('dd-MMM-yyyy');
+  DateTime today = DateTime.now();
+  //used for searching if username already exist check button
   QuerySnapshot snapshotData;
+  //other variables used for this class
+  String _regionDropdownValue;
+  String _imageSelected;
+  bool usernameExists = true;
+  String _username;
   List _allergies;
 
-
+  //list of allergy list in array for multi select form
   List<dynamic> _allergiesList = [
     {
       "display": "None",
@@ -70,15 +77,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
     },
   ];
 
+  //Function used to pick a date(birthday)
   Future<void> _selectDate(BuildContext context) async {
     final DateTime pickedDate = await showDatePicker(
         context: context,
-        initialDate: birthday,
+        initialDate: today,
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
-    if (pickedDate != null && pickedDate != birthday)
+    if (pickedDate != null && pickedDate != today)
       setState(() {
-        birthday = pickedDate;
+        today = pickedDate;
       });
   }
 
@@ -133,6 +141,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
               ),
               Column(
                 children: [
+                  //Label for select avatars
                   Padding(
                     padding: const EdgeInsets.only(left: 13.0, right: 13.0, top: 4.0),
                     child: SizedBox(
@@ -148,6 +157,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ),
                     ),
                   ),
+                  //1st row of button with avatar image from database
                   Row(
                     children: [
                       Padding(
@@ -169,7 +179,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
                                         },
                                       );
                                     }
@@ -203,7 +213,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
                                         },
                                       );
                                     }
@@ -221,6 +231,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ),
                     ],
                   ),
+                  //2nd row of button with avatar image from database
                   Row(
                     children: [
                       Padding(
@@ -242,7 +253,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       fit: BoxFit.cover,
                                     ),
                                     onTap: () {
-                                      imageSelected = "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                      _imageSelected = "gs://youth-food-movement.appspot.com/avatar3.jpg";
                                     },
                                   );
                                 }
@@ -277,7 +288,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
                                         },
                                       );
                                     }
@@ -295,6 +306,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ),
                     ],
                   ),
+                  //Textfield for name
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: TextField(
@@ -315,6 +327,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       controller: fullNameInputController,
                     ),
                   ),
+                  //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Row(
@@ -350,7 +363,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         if(snapshotData.docs.isEmpty) {
                                           setState(() {
                                             usernameExists = false;
-                                            username = usernameInputController.text;
+                                            _username = usernameInputController.text;
                                           });
                                           final snackBar = SnackBar(
                                             content: Text('Username does not exist'),
@@ -375,6 +388,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ],
                     ),
                   ),
+                  //label for enter birthday
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Column(
@@ -394,6 +408,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               ),
                             ),
                           ),
+                        //button to bring out datepicker for birthday
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
@@ -403,7 +418,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           child: TextButton(
                               onPressed: () => _selectDate(context),
                               child: Text(
-                                f.format(birthday).toString(),
+                                formattedDate.format(today).toString(),
                                 style: whiteText,
                               )
                           ),
@@ -411,6 +426,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ],
                     ),
                   ),
+                  //dropdown button list to pick which region user lives in
                   Padding(
                       padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                       child: Container(
@@ -430,7 +446,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               labelStyle: whiteText,
                             ),
                             dropdownColor: Colors.red[300],
-                            value: regionDropdownValue,
+                            value: _regionDropdownValue,
                             items: [
                               "Northland",
                               "Auckland",
@@ -461,12 +477,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     ))
                                 .toList(),
                             onChanged: (value) {
-                              setState(() => regionDropdownValue = value);
+                              setState(() => _regionDropdownValue = value);
                             },
                           ),
                         ),
                       )
                   ),
+                  //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: _allergiesCheckList(
@@ -474,6 +491,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   ),
                 ],
               ),
+              //cancel button and save button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -482,9 +500,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       onPressed: () {
                         fullNameInputController.clear();
                         usernameInputController.clear();
-                        imageSelected = null;
-                        regionDropdownValue = null;
-                        birthday = DateTime.now();
+                        _imageSelected = null;
+                        _regionDropdownValue = null;
+                        today = DateTime.now();
                         //Navigator.pop(context);
                         context.read<AuthenticationService>().signOut();
                       },
@@ -498,17 +516,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         if(usernameInputController.text.isNotEmpty) {
                           //change to false later
                           if(usernameExists = true) {
-                            if(imageSelected != null) {
-                              if(regionDropdownValue != null) {
-                                if(f.format(birthday) != f.format(DateTime.now())) {
+                            if(_imageSelected != null) {
+                              if(_regionDropdownValue != null) {
+                                if(formattedDate.format(today) != formattedDate.format(DateTime.now())) {
                                   FirebaseFirestore.instance.collection('Users').add({
                                     'uid' : _firebaseAuth.currentUser.uid,
                                     'Name' : fullNameInputController.text,
-                                    'Username' : username,
-                                    'Image' : imageSelected,
-                                    'Region' : regionDropdownValue,
-                                    'Birthday' : f.format(birthday),
-                                    'Accounted Created Time': f.format(new DateTime.now()),
+                                    'Username' : _username,
+                                    'Image' : _imageSelected,
+                                    'Region' : _regionDropdownValue,
+                                    'Birthday' : formattedDate.format(today),
+                                    'Accounted Created Time': formattedDate.format(new DateTime.now()),
                                     'Allergy' : _allergies
                                   });
                                   final snackBar = SnackBar(
@@ -519,7 +537,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => PlaceholderHomePage()),
+                                    MaterialPageRoute(builder: (context) => LoginPage()),
                                   );
                                 }else {
                                   final snackBar = SnackBar(
@@ -581,6 +599,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
       ),
     );
   }
+
   //helper method for the checkboxes
   Widget _allergiesCheckList(String title, List checklistOptions, var textStyle,) {
     return MultiSelectFormField(
@@ -615,6 +634,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
     );
   }
 
+  //method for getting avatar images
   Future _getImage1URL() async {
     String downloadURL = await avatarStorage.ref('avatar1.jpg').getDownloadURL();
     return downloadURL;

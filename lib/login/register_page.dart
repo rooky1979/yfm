@@ -11,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  //controllers for text fields
   final TextEditingController emailInputController = TextEditingController();
   final TextEditingController passwordInputController = TextEditingController();
 
@@ -50,12 +51,16 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  //check if email has been entered
                   if(emailInputController.text.isNotEmpty) {
+                    //check if password has been entered
                     if (passwordInputController.text.isNotEmpty) {
+                      //signup account with entered email and password if both are entered
                       context.read<AuthenticationService>().signUp(
                         email: emailInputController.text.trim(),
                         password: passwordInputController.text.trim(),
                       );
+                      //move to next page
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => UserDetailPage()),
@@ -79,6 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: Text("Next"),
               ),
+              //button to cancel registration and go back to login page
               ElevatedButton(
                 onPressed: () {
                   final snackBar = SnackBar(

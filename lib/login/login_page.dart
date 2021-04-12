@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:youth_food_movement/login/placeholder_homepage.dart';
-
+import 'package:youth_food_movement/homepage/HomePage.dart';
+import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:youth_food_movement/login/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -15,11 +13,8 @@ class LoginPage extends StatelessWidget {
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
-
- 
         StreamProvider(
           create: (context) => context.read<AuthenticationService>().authStateChanges,
-
         )
       ],
       child: MaterialApp(
@@ -34,16 +29,14 @@ class AuthenticationWrapper extends StatelessWidget {
 
   const AuthenticationWrapper({Key key,}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-
-
+    //if email and password exist in firebase then move to homepage
     if(firebaseUser != null){
-      return PlaceholderHomePage();
-
+      return HomePage();
     }
+    //if email and password doesnt exist in firebase then move back to login
     return LogIn();
   }
 }
@@ -54,6 +47,7 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  //Controllers for textfields
   final TextEditingController emailInputController = TextEditingController();
   final TextEditingController passwordInputController = TextEditingController();
 
@@ -74,27 +68,26 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
               ),
+              //Container for email textfield
               Container(
                 width: 200,
                 padding: EdgeInsets.all(10),
                 child: TextField(
-
                   decoration: InputDecoration(labelText: "Email"),
-
                   controller: emailInputController,
                 ),
               ),
+              //Container for password textfield
               Container(
                 width: 200,
                 padding: EdgeInsets.all(10),
                 child: TextField(
                   decoration: InputDecoration(labelText: "Password"),
                   controller: passwordInputController,
-
                   obscureText: true,
-
                 ),
               ),
+              //sign in button
               ElevatedButton(
                 onPressed: () {
                   context.read<AuthenticationService>().signIn(
@@ -106,6 +99,7 @@ class _LogInState extends State<LogIn> {
                 },
                 child: Text("Login"),
               ),
+              //register account button
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
