@@ -26,6 +26,7 @@ class _CommentBoardState extends State<CommentBoard> {
       .collection('recipe')
       .doc('7jKfiM0kZugLdDFJ1XAy')
       .collection('comments')
+      .orderBy('likes', descending: true)
       .snapshots();
 
   @override
