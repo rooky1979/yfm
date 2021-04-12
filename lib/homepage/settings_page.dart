@@ -17,34 +17,36 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Card(
-          child: Container(
-            width: 200.0,
-            height: 200.0,
-            decoration: new BoxDecoration(),
-            child: Icon(FontAwesomeIcons.plusCircle, //comments button
-                size: 40,
-                color: Colors.red),
-          ),
-        ),
-        Card(),
-        Card(),
-        ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  return Colors.red;
-                },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Card(
+              child: Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: new BoxDecoration(),
+                child: Icon(FontAwesomeIcons.plusCircle, //comments button
+                    size: 40,
+                    color: Colors.red),
               ),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-              context.read<AuthenticationService>().signOut();
-            },
-            child: Text("Sign Out")),
-      ])),
+            ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      return Colors.red;
+                    },
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  context.read<AuthenticationService>().signOut();
+                },
+                child: Text("Sign Out")),
+          ],
+        ),
+      ),
     );
   }
 }
