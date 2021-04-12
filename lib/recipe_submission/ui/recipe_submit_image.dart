@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_success.dart';
 
@@ -152,6 +153,12 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                         onPressed: () {
                           DBControl.clearDBVariables();
                           Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ProfilePage());
                         },
                       ),
                     ),
@@ -175,7 +182,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                                 .showSnackBar(snackbar);
                           } else {
                             DBControl.writeDB();
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

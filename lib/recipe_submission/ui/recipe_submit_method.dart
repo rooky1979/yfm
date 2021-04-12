@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_image.dart';
 
@@ -10,9 +11,6 @@ class MethodSubmission extends StatefulWidget {
 
 class _MethodSubmissionState extends State<MethodSubmission> {
 
-  //value used for measurement selection
-  // ignore: unused_field
-  var _measurementValue;
   //refactored textstyle used buttons/textfields
   var whiteText =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
@@ -90,6 +88,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                 padding: const EdgeInsets.all(13.0),
                 //text field to enter the name of the recipe
                 child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
                   controller: methodController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -160,7 +159,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                                 .showSnackBar(snackbar);
                           } else {
                             //if not empty, add to the list
-                            //add to the DB here as well
                             setState(() {});
                             DBControl.methodSteps.add(methodController.text);
                             methodController.clear();
@@ -172,6 +170,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                 ],
               ),
               divider,
+              //List to show added items so far
               Expanded(
                 child: Column(
                   children: [
@@ -189,7 +188,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                          //physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: DBControl.methodSteps.length,
                           itemBuilder: (context, int index) {
@@ -240,7 +238,11 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           DBControl.clearDBVariables();
                           methodController.clear();
                           Navigator.pop(context);
-                          //take user back to profile page?
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ProfilePage());
                         },
                       ),
                     ),
@@ -263,7 +265,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
