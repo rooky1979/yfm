@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_method.dart';
 
@@ -129,10 +130,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       textAlign: TextAlign.start,
                       keyboardType: TextInputType
                           .number, //only shows a numerical keyboard
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter
-                            .digitsOnly //enables digits only for entry
-                      ],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -281,6 +278,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                 ],
               ),
               divider,
+              //List to show what has been added so far
               Expanded(
                 child: Column(
                   children: [
@@ -298,7 +296,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                          //physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: DBControl.ingredients.length,
                           itemBuilder: (context, int index) {
@@ -351,7 +348,11 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           amountController.clear();
                           ingredientController.clear();
                           _measurementValue = null;
+                          DBControl.clearDBVariables();
                           Navigator.pop(context);
+                          Navigator.pop(context);
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => ProfilePage());
                         },
                       ),
                     ),
@@ -374,7 +375,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
