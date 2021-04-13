@@ -237,9 +237,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         onPressed: () {
                           DBControl.clearDBVariables();
                           methodController.clear();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
+                          DBControl.popPage(3, context);
                           MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         ProfilePage());

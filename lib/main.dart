@@ -21,7 +21,8 @@ Future<void> main() async {
                 fontSize: 25,
                 color: Colors.white,*/
       ),
-      home: LoginPage(),
+      //home: LoginPage(),
+      home: ProfilePage(),
     ),
   );
 }

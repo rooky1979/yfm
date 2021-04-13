@@ -349,8 +349,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           ingredientController.clear();
                           _measurementValue = null;
                           DBControl.clearDBVariables();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
+                          DBControl.popPage(2, context);
                           MaterialPageRoute(
                               builder: (BuildContext context) => ProfilePage());
                         },
