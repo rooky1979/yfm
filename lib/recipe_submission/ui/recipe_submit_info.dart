@@ -155,6 +155,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               if (DBControl.difficultyValue != null) {
                 DBControl.difficultyValue = null;
               }
+              DBControl.clearDBVariables();
               Navigator.pop(context);
             }),
         title: Text('Submit your recipe!',
@@ -478,7 +479,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           if (DBControl.difficultyValue != null) {
                             DBControl.difficultyValue = null;
                           }
-                          Navigator.pop(context);
+                          DBControl.clearDBVariables();
+                          DBControl.popPage(1, context);
+                          //Navigator.pop(context);
                           MaterialPageRoute(
                               builder: (BuildContext context) => ProfilePage());
                         },

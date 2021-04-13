@@ -42,7 +42,7 @@ class DBControl {
       "allergies": allergies,
       "category": categoryValue,
       "description": descriptionController.text,
-      "image": recipeDocRef.id,//basename(image.path),
+      "image": recipeDocRef.id, //basename(image.path),
       "ingredients": ingredients,
       "prepTime": prepTime,
       "protein": proteins,
@@ -53,8 +53,9 @@ class DBControl {
     await recipeDocRef.collection("method").add({"method": methodSteps});
     //upload image to firebase storage
     String fileName = basename(image.path);
-    Reference firebaseStorageRef =
-    FirebaseStorage.instance.ref().child('recipe_images/'+ recipeDocRef.id);
+    Reference firebaseStorageRef = FirebaseStorage.instance
+        .ref()
+        .child('recipe_images/' + recipeDocRef.id);
     UploadTask uploadTask = firebaseStorageRef.putFile(image);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
@@ -63,21 +64,30 @@ class DBControl {
   }
 
   //method to clear the controllers and variables if a user clicks on cancel at anytime or clicks finished
+  //performs if statements to see if any of the variables are not empty
+  //if any of the variables are empty, nothing happens
   static void clearDBVariables() {
     // ignore: unnecessary_statements
-    categoryValue;
+    if (categoryValue != null) categoryValue;
     // ignore: unnecessary_statements
-    difficultyValue;
-    allergies.clear();
-    proteins.clear();
-    recipeNameController.clear();
-    servingsController.clear();
-    hoursController.clear();
-    minutesController.clear();
-    descriptionController.clear();
-    prepTime = null;
-    ingredients.clear();
-    methodSteps.clear();
-    image = null;
+    if (difficultyValue != null) difficultyValue;
+    if (allergies != null) allergies.clear();
+    if (proteins != null) proteins.clear();
+    if (recipeNameController.text.isNotEmpty) recipeNameController.clear();
+    if (servingsController.text.isNotEmpty) servingsController.clear();
+    if (hoursController.text.isNotEmpty) hoursController.clear();
+    if (minutesController.text.isNotEmpty) minutesController.clear();
+    if (descriptionController.text.isNotEmpty) descriptionController.clear();
+    if (prepTime != null) prepTime = null;
+    if (ingredients != null) ingredients.clear();
+    if (methodSteps != null) methodSteps.clear();
+    if (image != null) image = null;
+  }
+
+  //helper method to pop the required amount of pages off when cancel is pressed
+  static void popPage(int popAmount, BuildContext context) {
+    for (int i = 0; i < popAmount; ++i) {
+      Navigator.pop(context);
+    }
   }
 }

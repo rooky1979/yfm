@@ -12,7 +12,6 @@ class ImageSubmission extends StatefulWidget {
 }
 
 class _ImageSubmissionState extends State<ImageSubmission> {
-
 //method to get the image
   Future getImage(bool gallery) async {
     ImagePicker picker = ImagePicker();
@@ -152,13 +151,9 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
+                          DBControl.popPage(4, context);
                           MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ProfilePage());
+                              builder: (BuildContext context) => ProfilePage());
                         },
                       ),
                     ),

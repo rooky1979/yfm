@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'login/login_page.dart';
 
@@ -21,7 +22,8 @@ Future<void> main() async {
                 fontSize: 25,
                 color: Colors.white,*/
       ),
-      home: LoginPage(),
+      //home: LoginPage(),
+      home: IngredientsPage(),
     ),
   );
 }

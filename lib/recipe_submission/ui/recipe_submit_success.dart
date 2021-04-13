@@ -58,11 +58,7 @@ class SuccessSubmission extends StatelessWidget {
                               ),
                               onPressed: () {
                                 DBControl.clearDBVariables();
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                DBControl.popPage(5, context);
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         ProfilePage());
