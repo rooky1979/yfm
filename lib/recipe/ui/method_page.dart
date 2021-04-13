@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore: must_be_immutable
 class Method extends StatelessWidget {
   var firestoreDbMethod =
-      FirebaseFirestore.instance.collection('method').snapshots();
+      FirebaseFirestore.instance.collection('recipe').doc('BZrIwfHcVtgrCRK74nWa').collection('method').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

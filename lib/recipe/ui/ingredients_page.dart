@@ -6,7 +6,7 @@ import 'recipe_info_card.dart';
 // ignore: must_be_immutable
 class IngredientsPage extends StatelessWidget {
   var firestoreDb =
-      FirebaseFirestore.instance.collection('ingredients').snapshots();
+      FirebaseFirestore.instance.collection('recipe').doc('BZrIwfHcVtgrCRK74nWa').collection('ingredients').snapshots();
 
   @override
   Widget build(BuildContext context) {
