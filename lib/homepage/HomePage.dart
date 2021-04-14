@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              RecipeControlsPage(),
+                                              IngredientsPage(),
                                         ),
                                       );
                                     },
