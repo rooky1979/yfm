@@ -277,8 +277,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 child: TextField(
                   controller: DBControl.servingsController,
                   textAlign: TextAlign.start,
-                  keyboardType:
-                      TextInputType.number, //only shows a numerical keyboard
+                  keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true), //only shows a numerical keyboard
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter
                         .digitsOnly //enables digits only for entry
@@ -328,8 +327,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       child: TextField(
                         controller: DBControl.hoursController,
                         textAlign: TextAlign.start,
-                        keyboardType: TextInputType
-                            .number, //only shows a numerical keyboard
+                        keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true), //only shows a numerical keyboard
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter
                               .digitsOnly //enables digits only for entry
@@ -363,8 +361,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       child: TextField(
                         controller: DBControl.minutesController,
                         textAlign: TextAlign.start,
-                        keyboardType: TextInputType
-                            .number, //only shows a numerical keyboard
+                        keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true), //only shows a numerical keyboard
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter
                               .digitsOnly //enables digits only for entry

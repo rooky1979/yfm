@@ -128,8 +128,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     child: TextField(
                       controller: amountController,
                       textAlign: TextAlign.start,
-                      keyboardType: TextInputType
-                          .number, //only shows a numerical keyboard
+                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),//only shows a numerical keyboard
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
