@@ -53,6 +53,7 @@ class DBControl {
     //write the recipe table method subcollection instance
     await recipeDocRef.collection("method").add({"method": methodSteps});
     //upload image to firebase storage
+    // ignore: unused_local_variable
     String fileName = basename(image.path);
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
