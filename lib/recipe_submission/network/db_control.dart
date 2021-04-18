@@ -30,6 +30,7 @@ class DBControl {
   //recipe_image_submission static variables
   static File image;
   static String docID;
+  static String recipeID;
 
 //static method that writes to the DB
   static void writeDB() async {

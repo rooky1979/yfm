@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/homepage/settings_page.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
+import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
 import 'login/login_page.dart';
@@ -25,7 +26,7 @@ Future<void> main() async {
                 color: Colors.white,*/
       ),
       //home: LoginPage(),
-      home: IngredientsSubmission(),
+      home: TestHomepage(),
     ),
   );
 }
