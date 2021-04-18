@@ -4,6 +4,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
+/**
+ * This Comment.dart file generates a single card for a comment as a list tile.
+ * This class is called as many times as necesarry by the recipe_page_comments.dart file.
+ * It is constructed with index, snapshot, and recipeID which allow it to know which subtable document it belongs to.
+ */
 class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
@@ -18,19 +23,19 @@ class Comment extends StatefulWidget {
 class _CommentState extends State<Comment> {
   @override
   Widget build(BuildContext context) {
-    //CollectionReference imgRef;
-//to convert the timestamp into readble format
+    //to convert the timestamp into readble format
     var timeToDate = new DateTime.fromMillisecondsSinceEpoch(
         widget.snapshot.docs[widget.index]['timestamp'].seconds * 1000);
-//format the timestamp into a readable date
+
+    //format the timestamp into a readable date
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
 
+    //Assigns the data from the constructor
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
     var user = "Temp Name";
 
-    //_getCommentImage(docID, widget.index);
-
+    //This is the main code which generates the comment card
     return Column(
       children: [
         Container(
@@ -44,7 +49,6 @@ class _CommentState extends State<Comment> {
                     title: Text(snapshotData['user']),
                     subtitle: Text(snapshotData['description']),
                     leading: Icon(Icons.account_circle_rounded, size: 50)),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -52,12 +56,10 @@ class _CommentState extends State<Comment> {
                     children: [
                       Text('User: ${snapshotData['user']} '),
                       Text(dateFormatted),
-                      //Image.network(src)
                     ],
                   ),
                 ),
                 Row(
-                  //edit button to edit the comments
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [_checkUser(docID, widget.index, user)],
                 )
@@ -69,13 +71,12 @@ class _CommentState extends State<Comment> {
     );
   }
 
-  // ignore: unused_element
-  Future _getCommentImage(String docId, int id) async {
-    //FirebaseFirestore.instance.collection('board');
-
-    //instantiate storage bucket
-    //create a futurebuilder which calls this method as a future
-    //return a container with a circular progresss indicator child
+  /*
+   * This GetCommentImage method checks if the comment has an image attached to it. 
+   * If an image is attached it returns the image from the Firebase storage, within the folder 'images/'
+   * Each image is named by the ID of the comment, making this a 1-1 relationship
+   */
+  Future _getCommentImage(String docId) async {
     if (widget.snapshot.docs[widget.index]['imgAttached'] == "true") {
       final ref = FirebaseStorage.instance.ref().child('images/' + docId);
       var url = await ref.getDownloadURL();
@@ -83,19 +84,24 @@ class _CommentState extends State<Comment> {
     }
   }
 
+/*
+ * This check user method compares the current session user to the user who has made the comment. 
+ * If the user has made the comment the delete button is returned to the comment card, and when pressed deletes from the database
+ */
   _checkUser(String docId, int id, String user) {
+    //Checks whether users match
     if (widget.snapshot.docs[widget.index]['user'] == user) {
-      // if (user == user)
+      //Returns container with delete button if true
       return Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-                //delete the comment from the database
                 icon: Icon(
                   FontAwesomeIcons.trashAlt,
                   size: 25,
                 ),
+                //Delete comment from Database
                 onPressed: () async {
                   var collectionReference =
                       FirebaseFirestore.instance.collection('board');
@@ -111,6 +117,7 @@ class _CommentState extends State<Comment> {
         ),
       );
     } else {
+      //Returns empty container effectively disabling the delete button
       return (Container());
     }
   }
