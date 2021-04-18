@@ -5,10 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
 class Method extends StatelessWidget {
-  var firestoreDbMethod =
-      FirebaseFirestore.instance.collection('recipe').doc('BZrIwfHcVtgrCRK74nWa').collection('method').snapshots();
+  
+  final String recipeID;
+  Method([this.recipeID]);
+  
   @override
   Widget build(BuildContext context) {
+    var firestoreDbMethod =
+      FirebaseFirestore.instance.collection('recipe').doc('$recipeID').collection('method').snapshots();
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 25),

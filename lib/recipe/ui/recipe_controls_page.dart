@@ -94,13 +94,15 @@ class RecipeThumbnail extends StatelessWidget {
 //method to get the image URL
   Future _getImageURL() async {
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('recipe_images/$TestGridTile.recipeID').getDownloadURL();
+    String docID = TestGridTile.idNumber.toString();
+    String downloadURL = await storage.ref('recipe_images/$docID').getDownloadURL();
     return downloadURL;
   }
 }
 
 //creates the buttons on the screen to take the user to each section
 class RecipeButtons extends StatelessWidget {
+  String docID = TestGridTile.idNumber.toString();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -135,7 +137,7 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage()))
+                                    IngredientsPage(docID)))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -150,7 +152,7 @@ class RecipeButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Method()))
+                                builder: (BuildContext context) => Method(docID)))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
