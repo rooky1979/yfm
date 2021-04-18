@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 //import 'package:firebase_core/firebase_core.dart';
 //import 'dart:math';
@@ -12,8 +13,14 @@ class CommentEntryDialog extends StatefulWidget {
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  //final DocumentReference userDetails = .instance.collection('users').document('_firebaseAuth.currentUser.uid');
+
   //database connection to the board firebase
-  var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
+
+  //var firestoreDb = FirebaseFirestore.instance.collection('recipe').doc(_firebaseAuth.currentUser.uid);
+  //FirebaseFirestore.instance.collection('products').doc('L1g7FpTJ4JxNyasTbTF7').get().then((doc) { price = doc.data()['price'].toString(); this.title = doc.data()['name'].toString(); });
   CollectionReference imgRef;
   firebase_storage.Reference ref;
   //controllers for the editable text fields
@@ -224,12 +231,15 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     onPressed: () {
                       print(imgAttached);
 
+                      CollectionReference users =
+                          FirebaseFirestore.instance.collection('Users');
+
                       FirebaseFirestore.instance
                           .collection('recipe')
                           .doc('7jKfiM0kZugLdDFJ1XAy')
                           .collection('comments')
                           .add({
-                        'user': "Temp Name 2",
+                        'user': ('temp'),
                         'title': "Temp Title",
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
