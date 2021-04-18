@@ -17,9 +17,7 @@ class TestGridTile extends StatelessWidget {
     var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
-    
-    
-    //recipeID = docID.toString();
+ 
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.25,
@@ -35,7 +33,6 @@ class TestGridTile extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 onTap: (){
-                      print(recipeID);
                       idNumber = recipeID;
                       Navigator.push(
                             context,

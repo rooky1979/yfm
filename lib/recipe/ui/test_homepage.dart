@@ -29,20 +29,12 @@ class _TestHomepageState extends State<TestHomepage> {
                     crossAxisCount: 2),
                 itemBuilder: (context, int index) {
                   return GestureDetector(
-                                      child: Card(
+                    child: Card(
                       child: TestGridTile(
                         snapshot: snapshot.data,
                         index: index,
                       ),
                     ),
-                    /* onTap: (){
-                      print(TestGridTile.recipeID);
-                      Navigator.push(
-                            context,
-                      MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                IngredientsPage()));
-                    }, */
                   );
                 });
           }),
