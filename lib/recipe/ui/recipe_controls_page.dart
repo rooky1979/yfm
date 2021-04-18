@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
+import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -92,14 +93,15 @@ class RecipeThumbnail extends StatelessWidget {
 
 //method to get the image URL
   Future _getImageURL() async {
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('recipe_images/BZrIwfHcVtgrCRK74nWa').getDownloadURL();
+    String downloadURL = await storage.ref('recipe_images/' + TestGridTile.idNumber.toString()).getDownloadURL();
     return downloadURL;
   }
 }
 
 //creates the buttons on the screen to take the user to each section
+// ignore: must_be_immutable
 class RecipeButtons extends StatelessWidget {
+  String docID = TestGridTile.idNumber.toString();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -134,7 +136,7 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage()))
+                                    IngredientsPage(TestGridTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -149,7 +151,7 @@ class RecipeButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Method()))
+                                builder: (BuildContext context) => Method(TestGridTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
