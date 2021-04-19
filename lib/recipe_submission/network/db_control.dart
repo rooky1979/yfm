@@ -57,6 +57,7 @@ class DBControl {
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
         .child('recipe_images/' + recipeDocRef.id);
+        print(recipeDocRef.id.toString());
     UploadTask uploadTask = firebaseStorageRef.putFile(image);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
