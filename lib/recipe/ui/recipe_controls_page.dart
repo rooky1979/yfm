@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -39,11 +40,11 @@ class RecipeThumbnail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topLeft,
+      //alignment: Alignment.topLeft,
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.25,
+          height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
           child: FutureBuilder(
               future: _getImageURL(),
@@ -87,13 +88,30 @@ class RecipeThumbnail extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
+        Positioned(
+            right: 10.0,
+            bottom: 10.0,
+            child:
+                Favourites() /* IconButton(
+              //alignment: Alignment.bottomRight,
+              icon: Icon(
+                Icons.favorite,
+                size: 40,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }), */
+            ),
       ],
     );
   }
 
 //method to get the image URL
   Future _getImageURL() async {
-    String downloadURL = await storage.ref('recipe_images/' + TestGridTile.idNumber.toString()).getDownloadURL();
+    String downloadURL = await storage
+        .ref('recipe_images/' + TestGridTile.idNumber.toString())
+        .getDownloadURL();
     return downloadURL;
   }
 }
@@ -136,7 +154,8 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage(TestGridTile.idNumber.toString())))
+                                    IngredientsPage(
+                                        TestGridTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -151,7 +170,8 @@ class RecipeButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Method(TestGridTile.idNumber.toString())))
+                                builder: (BuildContext context) =>
+                                    Method(TestGridTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
@@ -169,7 +189,7 @@ class RecipeButtons extends StatelessWidget {
                                 builder: (BuildContext context) =>
                                     CommentBoard()))
                       }),
-              Bookybok(),
+              //Favourites(),
             ],
           ),
         ),
@@ -178,29 +198,40 @@ class RecipeButtons extends StatelessWidget {
   }
 }
 
-class Bookybok extends StatefulWidget {
+class Favourites extends StatefulWidget {
   @override
-  _BookybokState createState() => _BookybokState();
+  _FavouritesState createState() => _FavouritesState();
 }
 
-class _BookybokState extends State<Bookybok> {
+class _FavouritesState extends State<Favourites> {
   bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
-        padding: EdgeInsets.all(11),
-        fillColor: Colors.white,
-        shape: CircleBorder(),
-        child: Icon(
-          FontAwesomeIcons.solidBookmark, //comments button
-          size: 40,
-          color: _isFavorite ? Colors.red : Colors.black,
-        ),
-        onPressed: () {
-          setState(() {
-            _isFavorite = !_isFavorite;
+    if (!_isFavorite) {
+      return IconButton(
+          icon: Icon(
+            Icons.favorite_outline_rounded, //comments button
+            size: 50,
+            color: Colors.red,
+          ),
+          onPressed: () {
+            setState(() {
+              _isFavorite = !_isFavorite;
+            });
           });
-        });
+    } else {
+      return IconButton(
+          icon: Icon(
+            Icons.favorite_rounded,
+            size: 50,
+            color: Colors.red,
+          ),
+          onPressed: () {
+            setState(() {
+              _isFavorite = !_isFavorite;
+            });
+          });
+    }
   }
 }
