@@ -21,7 +21,7 @@ class _CommentBoardState extends State<CommentBoard> {
 
   var firestoreDb = FirebaseFirestore.instance
       .collection('recipe')
-      .doc('7jKfiM0kZugLdDFJ1XAy')
+      .doc('recipeID')
       .collection('comments')
       .snapshots();
 

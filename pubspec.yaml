@@ -37,6 +37,7 @@ dependencies:
   get: ^4.1.1
   firebase_messaging:
   multiselect_formfield: ^0.1.6
+  favorite_button: ^0.0.3
 
 
 dev_dependencies:
