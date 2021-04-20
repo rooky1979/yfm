@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
+import 'package:youth_food_movement/login/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ Future<void> main() async {
                 color: Colors.white,*/
       ),
       //home: LoginPage(),
-      home: TestHomepage(),
+      home: LoginPage(),
     ),
   );
 }

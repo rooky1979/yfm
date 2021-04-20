@@ -19,6 +19,7 @@ class SettingsPage extends StatelessWidget {
   //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +64,6 @@ class SettingsPage extends StatelessWidget {
                 }),
           ),
         ),
-        Card(),
-        Card(),
         ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color>(

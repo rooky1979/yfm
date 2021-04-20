@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //card that displays the recipe information
 class UserInformationCard extends StatelessWidget {
@@ -11,15 +12,19 @@ class UserInformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     //snaphot of the doc
     int userindex = 0;
     var snapshotData = snapshot.docs[userindex];
     //snapshot document ID for use later
     // ignore: unused_local_variable
-    var docID = snapshot.docs[index].id;
-    var userID = snapshotData['uid'];
-    if (userID != docID) {
-      userindex += 1;
+    String docID = snapshot.docs[userindex].id;
+    String userID = snapshotData['uid'];
+    String uid = firebaseAuth.currentUser.uid;
+    while (userID != uid) {
+      userindex++;
+      snapshotData = snapshot.docs[userindex];
+      userID = snapshotData['uid'];
     }
     return Column(
       children: [
@@ -91,7 +96,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: userID,
+                                  text: 'Name',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
@@ -125,7 +130,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: docID,
+                                  text: 'Region',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
