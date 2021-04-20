@@ -14,10 +14,11 @@ class TestGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //snaphot of the docs
+    // ignore: unused_local_variable
     var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
- 
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.25,
@@ -32,14 +33,14 @@ class TestGridTile extends StatelessWidget {
                   snapshot.data,
                   fit: BoxFit.cover,
                 ),
-                onTap: (){
-                      idNumber = recipeID;
-                      Navigator.push(
-                            context,
+                onTap: () {
+                  idNumber = recipeID;
+                  Navigator.push(
+                      context,
                       MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                IngredientsPage(recipeID)));
-                    },
+                          builder: (BuildContext context) =>
+                              IngredientsPage(recipeID)));
+                },
               );
             } else {
               return Container(

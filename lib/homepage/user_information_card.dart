@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //card that displays the recipe information
 class UserInformationCard extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
   final int index;
-
   const UserInformationCard({Key key, this.snapshot, this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //snaphot of the docs
-    var snapshotData = snapshot.docs[index];
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    //snaphot of the doc
+    int userindex = 0;
+    var snapshotData = snapshot.docs[userindex];
     //snapshot document ID for use later
     // ignore: unused_local_variable
-    var docID = snapshot.docs[index].id;
+    String docID = snapshot.docs[userindex].id;
+    String userID = snapshotData['uid'];
+    String uid = firebaseAuth.currentUser.uid;
+    while (userID != uid) {
+      userindex++;
+      snapshotData = snapshot.docs[userindex];
+      userID = snapshotData['uid'];
+    }
     return Column(
       children: [
         FittedBox(
@@ -36,7 +45,6 @@ class UserInformationCard extends StatelessWidget {
                       endIndent: 10,
                       color: Colors.redAccent,
                     ),
-                    
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -81,17 +89,22 @@ class UserInformationCard extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
+                          child: Text.rich(
+                            TextSpan(
                               style: TextStyle(
                                 fontSize: 20,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'Name: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: snapshotData['Name']),
-                              ])),
+                                  text: 'Name',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: snapshotData['Name'],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -110,21 +123,26 @@ class UserInformationCard extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
+                          child: Text.rich(
+                            TextSpan(
                               style: TextStyle(
                                 fontSize: 20,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'Region: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: snapshotData['Region']),
-                              ])),
+                                  text: 'Region',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: snapshotData['Region'],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  ),           
+                  ),
                   Divider(
                     height: 10,
                     thickness: 2,
@@ -139,19 +157,24 @@ class UserInformationCard extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
+                          child: Text.rich(
+                            TextSpan(
                               style: TextStyle(
                                 fontSize: 20,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'Allergies: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                  text: 'Allergies: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                                 TextSpan(
-                                    text:
-                                        _printArray(snapshotData['Allergy'])),
-                              ])),
+                                  text: _printArray(
+                                    snapshotData['Allergy'],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -172,17 +195,23 @@ class UserInformationCard extends StatelessWidget {
                           padding: const EdgeInsets.all(3.0),
                           child: Padding(
                             padding: const EdgeInsets.all(3.0),
-                            child: Text.rich(TextSpan(
+                            child: Text.rich(
+                              TextSpan(
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: 'Username: ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(text: snapshotData['Username']),
-                                ])),
+                                    text: 'Username: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                    text: snapshotData['Username'],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ],
