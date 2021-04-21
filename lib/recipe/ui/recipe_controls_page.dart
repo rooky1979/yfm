@@ -3,6 +3,7 @@ import 'package:youth_food_movement/comments/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 
 class RecipeControlsPage extends StatefulWidget {
@@ -99,7 +100,16 @@ class RecipeThumbnail extends StatelessWidget {
 }
 
 //creates the buttons on the screen to take the user to each section
-class RecipeButtons extends StatelessWidget {
+class RecipeButtons extends StatefulWidget {
+  @override
+  _RecipeButtonsState createState() => _RecipeButtonsState();
+
+  final String recipeID;
+
+  const RecipeButtons({Key key, this.recipeID}) : super(key: key);
+}
+
+class _RecipeButtonsState extends State<RecipeButtons> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -164,8 +174,9 @@ class RecipeButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    CommentBoard()))
+                                builder: (BuildContext context) => CommentBoard(
+                                      recipeID: widget.recipeID,
+                                    )))
                       }),
               Bookybok(),
             ],

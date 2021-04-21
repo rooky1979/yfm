@@ -8,6 +8,10 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class CommentEntryDialog extends StatefulWidget {
   @override
   _CommentEntryDialogState createState() => _CommentEntryDialogState();
+
+  const CommentEntryDialog({Key key, this.recipeID}) : super(key: key);
+
+  final String recipeID;
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
@@ -188,6 +192,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
  */
   @override
   Widget build(BuildContext context) {
+    String recipeID = widget.recipeID;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 0),
@@ -220,10 +225,10 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
 
                       FirebaseFirestore.instance
                           .collection('recipe')
-                          .doc('7jKfiM0kZugLdDFJ1XAy')
+                          .doc('$recipeID')
                           .collection('comments')
                           .add({
-                        'user': ('temp'),
+                        'user': 'temp',
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
                         'timestamp': new DateTime.now(),

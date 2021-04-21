@@ -1,22 +1,29 @@
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
 import 'recipe_info_card.dart';
 
 // ignore: must_be_immutable
 class IngredientsPage extends StatelessWidget {
-  var firestoreDb =
-      FirebaseFirestore.instance.collection('ingredients').snapshots();
+  final String recipeID;
+  IngredientsPage([this.recipeID]);
 
   @override
   Widget build(BuildContext context) {
+    var firestoreDb = FirebaseFirestore.instance
+        .collection('recipe')
+        .doc('$recipeID')
+        .collection('ingredients')
+        .snapshots();
+
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 25),
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(),
+          RecipeButtons(recipeID: recipeID),
           StreamBuilder(
               stream: firestoreDb,
               builder: (
@@ -31,7 +38,8 @@ class IngredientsPage extends StatelessWidget {
                         return RecipeInformationCard(
                           snapshot: snapshot.data,
                           index:
-                              0, //this changes depending on what recipe is selected
+                              index, //this changes depending on what recipe is selected
+                          recipeID: recipeID,
                         );
                       }),
                 );
