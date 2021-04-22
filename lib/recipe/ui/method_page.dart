@@ -12,6 +12,11 @@ class Method extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var firestoreDbMethod = FirebaseFirestore.instance
+        .collection('recipe')
+        .doc('$recipeID')
+        .collection('method')
+        .snapshots();
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 25),

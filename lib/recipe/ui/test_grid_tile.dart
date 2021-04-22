@@ -14,6 +14,7 @@ class TestGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //snaphot of the docs
+    // ignore: unused_local_variable
     var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
