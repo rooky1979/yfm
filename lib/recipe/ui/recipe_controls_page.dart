@@ -94,7 +94,7 @@ class RecipeThumbnail extends StatelessWidget {
 //method to get the image URL
   Future _getImageURL() async {
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+    String downloadURL = await storage.ref('recipe_images/BZrIwfHcVtgrCRK74nWa').getDownloadURL();
     return downloadURL;
   }
 }
@@ -133,7 +133,7 @@ class _RecipeButtonsState extends State<RecipeButtons> {
                   fillColor: Colors.white,
                   shape: CircleBorder(),
                   child: Icon(
-                    FontAwesomeIcons.leaf,
+                    FontAwesomeIcons.info,
                     size: 40,
                     color: Colors.red,
                   ),

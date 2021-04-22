@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
 
@@ -123,7 +124,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
 
   @override
   Widget build(BuildContext context) {
-    //refactored textstyle used buttons/textfields
+    //refactored textstyle used in buttons/textfields
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
     var blackText = TextStyle(
@@ -148,6 +149,13 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               color: Colors.white,
             ),
             onPressed: () {
+              if (DBControl.categoryValue != null) {
+                DBControl.categoryValue = null;
+              }
+              if (DBControl.difficultyValue != null) {
+                DBControl.difficultyValue = null;
+              }
+              DBControl.clearDBVariables();
               Navigator.pop(context);
             }),
         title: Text('Submit your recipe!',
@@ -169,7 +177,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 padding: const EdgeInsets.all(13.0),
                 //text field to enter the name of the recipe
                 child: TextField(
-                  //need to send to DB refer to comment section
+                  textCapitalization: TextCapitalization.sentences,
                   controller: DBControl.recipeNameController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -196,7 +204,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 padding: const EdgeInsets.all(13.0),
                 //text field to enter the name of the recipe
                 child: TextField(
-                  //need to send to DB refer to comment section
+                  textCapitalization: TextCapitalization.sentences,
                   controller: DBControl.descriptionController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -465,9 +473,17 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          //take user back to profile page?
+                          if (DBControl.categoryValue != null) {
+                            DBControl.categoryValue = null;
+                          }
+                          if (DBControl.difficultyValue != null) {
+                            DBControl.difficultyValue = null;
+                          }
                           DBControl.clearDBVariables();
-                          Navigator.pop(context);
+                          DBControl.popPage(1, context);
+                          //Navigator.pop(context);
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => ProfilePage());
                         },
                       ),
                     ),
@@ -500,7 +516,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                             //if not empty, add to the list
                             _setPrepTime(DBControl.hoursController.text,
                                 DBControl.minutesController.text);
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

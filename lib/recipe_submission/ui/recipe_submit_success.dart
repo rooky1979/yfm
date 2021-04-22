@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 
 class SuccessSubmission extends StatelessWidget {
@@ -7,15 +8,6 @@ class SuccessSubmission extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-/*         leading: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.arrowLeft,
-              size: 25,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }), */
         title: Text('Successful!',
             style: TextStyle(
               color: Colors.white,
@@ -66,11 +58,10 @@ class SuccessSubmission extends StatelessWidget {
                               ),
                               onPressed: () {
                                 DBControl.clearDBVariables();
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                DBControl.popPage(5, context);
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ProfilePage());
                               },
                             ),
                           ),
