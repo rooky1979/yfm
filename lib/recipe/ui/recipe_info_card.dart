@@ -6,8 +6,10 @@ class RecipeInformationCard extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
   final int index;
+  final String recipeID;
 
-  const RecipeInformationCard({Key key, this.snapshot, this.index})
+  const RecipeInformationCard(
+      {Key key, this.snapshot, this.index, this.recipeID})
       : super(key: key);
 
   @override

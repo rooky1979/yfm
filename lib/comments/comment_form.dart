@@ -2,31 +2,31 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-//import 'package:firebase_core/firebase_core.dart';
-//import 'dart:math';
 
 class CommentEntryDialog extends StatefulWidget {
   @override
   _CommentEntryDialogState createState() => _CommentEntryDialogState();
+
+  const CommentEntryDialog({Key key, this.recipeID}) : super(key: key);
+
+  final String recipeID;
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
-  //database connection to the board firebase
-  var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   CollectionReference imgRef;
   firebase_storage.Reference ref;
-  //controllers for the editable text fields
-  TextEditingController nameInputController;
-  TextEditingController titleInputController;
+
+  //controllers for the editable text field
   TextEditingController descriptionInputController;
 
   @override
   void initState() {
     super.initState();
-//initialise and instantiate the text controllers
-    nameInputController = TextEditingController();
-    titleInputController = TextEditingController();
+//initialise and instantiate the text controller
     descriptionInputController = TextEditingController();
   }
 
@@ -35,16 +35,21 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   String imgAttached = "false";
   var url;
 
+/*
+ * This method opens the gallery and saves the file path/sets the image attached string to true
+ */
   _openGallery(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _imgfile = File(imgfile.path);
-      //debugPrint(_imgfile.path.toString());
       imgAttached = "true";
     });
     Navigator.of(context).pop();
   }
 
+/*
+ * This method opens the camera and saves the file path/sets the image attached string to true
+ */
   _openCamera(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
@@ -54,6 +59,9 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     Navigator.of(context).pop();
   }
 
+/*
+ * This method adds the image to the firebase storage with the same ID as the newly created comment.
+ */
   Future _uploadImageToFirebase(String commentId) async {
     if (_imgfile != null) {
       ref = firebase_storage.FirebaseStorage.instance
@@ -62,33 +70,14 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
       await ref.putFile(_imgfile).whenComplete(() async {
         await ref.getDownloadURL().then((value) {});
       });
-      //debugPrint("Download URL" + ref.getDownloadURL().toString());
     }
   }
 
-  // Future<void> _addPathToDatabase(String text) async {
-  //   try {
-  //     // Get image URL from firebase
-  //     final ref = FireStorage().ref().child(text);
-  //     var imageString = await ref.getDownloadURL();
-
-  //     // Add location and url to database
-  //     await Firestore.instance.collection('storage').document().setData({'url':imageString , 'location':text});
-  //   }catch(e){
-  //     print(e.message);
-  //     showDialog(
-  //         context: context,
-  //         builder: (context) {
-  //           return AlertDialog(
-  //             content: Text(e.message),
-  //           );
-  //         }
-  //     );
-  //   }
-  // }
-
+/*
+ * This widget creates the image button, if an image is attached it shows the image, and changes the text to "Change image"
+ * It also calls the _showChoiceDialog alert box when the button is pressed.
+ */
   Widget _decideImageView() {
-    //debugPrint(_imgfile.path.toString());
     if (_imgfile == null) {
       return Container(
         alignment: Alignment.center,
@@ -140,7 +129,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                   ),
                   Container(
                     width: 10,
-                    //height: 4,
                     color: Colors.black38,
                   ),
                   VerticalDivider(
@@ -162,6 +150,10 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     }
   }
 
+/*
+  This method creates an AlertDialog which allows the user to pick between gallery and camera for the image source.
+  Once picked either _openGallery or _openCamera are called.
+*/
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -193,8 +185,14 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
         });
   }
 
+/*
+ * This is the main widget that has the body of the comment form
+ * It contains the text entry field, button to cancel and send the comment,
+ * and image add button.
+ */
   @override
   Widget build(BuildContext context) {
+    String recipeID = widget.recipeID;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 0),
@@ -211,8 +209,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 IconButton(
                     //button to cancel the comment and clear the textfields
                     onPressed: () {
-                      nameInputController.clear();
-                      //titleInputController.clear();
                       descriptionInputController.clear();
                       Navigator.pop(context);
                     },
@@ -224,17 +220,18 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     onPressed: () {
                       print(imgAttached);
 
+                      CollectionReference users =
+                          FirebaseFirestore.instance.collection('Users');
+
                       FirebaseFirestore.instance
                           .collection('recipe')
-                          .doc('7jKfiM0kZugLdDFJ1XAy')
+                          .doc('$recipeID')
                           .collection('comments')
                           .add({
-                        'user': "Temp Name 2",
-                        'title': "Temp Title",
+                        'user': 'temp',
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
                         'timestamp': new DateTime.now(),
-                        'image_url': url,
                         'likes': 0,
                         'likedUsers': [],
                       }).then((response) {
@@ -250,8 +247,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.pop(context);
-                        nameInputController.clear();
-                        titleInputController.clear();
                         descriptionInputController.clear();
                         _imgfile = null;
                         imgAttached = "false";
