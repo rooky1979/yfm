@@ -20,7 +20,7 @@ class _SearchState extends State<Search> {
     Widget searchedData() {
       return ListView.builder(
         itemCount: snapshotData.docs.length,
-        itemBuilder: (BuildContext, int index) {
+        itemBuilder: (buildContext, int index) {
           return GestureDetector(
             //not working rn
             onTap: () {
@@ -33,7 +33,7 @@ class _SearchState extends State<Search> {
               //   backgroundImage:
               //       NetworkImage(snapshotData.docs[index].data()['Image']),
               // ),
-              title: Text(snapshotData.docs[index].data()['Username'],
+              title: Text(snapshotData.docs[index].data()['username'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
