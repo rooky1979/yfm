@@ -10,16 +10,24 @@ class DataController extends GetxController {
   }
 
   //Search for whether certain uid exist in database
-  Future UidQueryData(String queryString) async {
-    return FirebaseFirestore.instance.collection('Users')
+  Future uidQueryData(String queryString) async {
+    return FirebaseFirestore.instance.collection('users')
         .where('uid', isEqualTo: queryString)
         .get();
   }
 
   //search for whether certain username exist in database
-  Future UsernameQueryData(String queryString) async {
-    return FirebaseFirestore.instance.collection('Users')
-        .where('Username', isEqualTo: queryString)
+  Future usernameQueryData(String queryString) async {
+    return FirebaseFirestore.instance.collection('users')
+        .where('username', isEqualTo: queryString)
+        .get();
+  }
+
+  //search for whether certain username exist in database
+  Future foodTitleQueryData(String queryString) async {
+    return FirebaseFirestore.instance.collection('ingredients')
+        .where('title', isGreaterThanOrEqualTo: queryString)
+        .where('title', isLessThan: queryString + "\uF7FF")
         .get();
   }
 }

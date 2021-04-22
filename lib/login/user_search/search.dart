@@ -31,14 +31,14 @@ class _SearchState extends State<Search> {
             child: ListTile(
               // leading: CircleAvatar(
               //   backgroundImage:
-              //       NetworkImage(snapshotData.docs[index].data()['Image']),
+              //       NetworkImage(snapshotData.docs[index].data()['image']),
               // ),
-              title: Text(snapshotData.docs[index].data()['Username'],
+              title: Text(snapshotData.docs[index].data()['uid'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0)),
-              subtitle: Text(snapshotData.docs[index].data()['City'],
+              subtitle: Text(snapshotData.docs[index].data()['Username'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.UidQueryData(searchController.text).then((value) {
+                      val.foodTitleQueryData(searchController.text).then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;
@@ -85,7 +85,7 @@ class _SearchState extends State<Search> {
           ? searchedData()
           : Container(
               child: Center(
-                child: Text('search any uid',
+                child: Text('search Food Title',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

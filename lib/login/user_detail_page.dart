@@ -347,7 +347,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     icon: Icon(Icons.check),
                                     onPressed: () {
                                       if(usernameInputController.text.isNotEmpty) {
-                                        val.UsernameQueryData(usernameInputController.text).then((value) {
+                                        val.usernameQueryData(usernameInputController.text).then((value) {
                                           snapshotData = value;
                                           if(snapshotData.docs.isEmpty) {
                                             setState(() {
@@ -519,15 +519,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             if(_imageSelected != null) {
                               if(_regionDropdownValue != null) {
                                 if(formattedDate.format(today) != formattedDate.format(DateTime.now())) {
-                                  FirebaseFirestore.instance.collection('Users').add({
+                                  FirebaseFirestore.instance.collection('users').add({
                                     'uid' : _firebaseAuth.currentUser.uid,
-                                    'Name' : fullNameInputController.text,
-                                    'Username' : _username,
-                                    'Image' : _imageSelected,
-                                    'Region' : _regionDropdownValue,
-                                    'Birthday' : formattedDate.format(today),
-                                    'Accounted Created Time': formattedDate.format(new DateTime.now()),
-                                    'Allergy' : _allergies
+                                    'name' : fullNameInputController.text,
+                                    'username' : _username,
+                                    'image' : _imageSelected,
+                                    'region' : _regionDropdownValue,
+                                    'birthday' : formattedDate.format(today),
+                                    'accountedCreatedTime': formattedDate.format(new DateTime.now()),
+                                    'allergy' : _allergies
                                   });
                                   final snackBar = SnackBar(
                                     content: Text('Account Successfully Created'),
