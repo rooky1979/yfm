@@ -19,7 +19,7 @@ class UserDetailPage extends StatefulWidget {
 
 class _UserDetailPageState extends State<UserDetailPage> {
   //reference to firestore database
-  var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+  var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
   //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   //reference to firebase storage
@@ -526,17 +526,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 if (formattedDate.format(today) !=
                                     formattedDate.format(DateTime.now())) {
                                   FirebaseFirestore.instance
-                                      .collection('Users')
+                                      .collection('users')
                                       .add({
                                     'uid': _firebaseAuth.currentUser.uid,
-                                    'Name': fullNameInputController.text,
-                                    'Username': _username,
-                                    'Image': _imageSelected,
-                                    'Region': _regionDropdownValue,
-                                    'Birthday': formattedDate.format(today),
-                                    'Accounted Created Time': formattedDate
+                                    'name': fullNameInputController.text,
+                                    'username': _username,
+                                    'image': _imageSelected,
+                                    'region': _regionDropdownValue,
+                                    'birthday': formattedDate.format(today),
+                                    'accountedCreatedTime': formattedDate
                                         .format(new DateTime.now()),
-                                    'Allergy': _allergies
+                                    'allergy': _allergies
                                   });
                                   final snackBar = SnackBar(
                                     content:

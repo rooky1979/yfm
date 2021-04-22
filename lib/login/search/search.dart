@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/homepage/HomePage.dart';
-import 'package:youth_food_movement/login/search/data_controller.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -26,8 +26,7 @@ class _SearchState extends State<Search> {
             onTap: () {
               Get.to(HomePage(),
                   transition: Transition.downToUp,
-                  arguments: snapshotData.docs[index]
-              );
+                  arguments: snapshotData.docs[index]);
             },
             child: ListTile(
               // leading: CircleAvatar(
@@ -38,14 +37,12 @@ class _SearchState extends State<Search> {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24.0)
-              ),
+                      fontSize: 24.0)),
               subtitle: Text(snapshotData.docs[index].data()['City'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14.0)
-              ),
+                      fontSize: 14.0)),
             ),
           );
         },
@@ -66,7 +63,7 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.UidQueryData(searchController.text).then((value) {
+                      val.uidQueryData(searchController.text).then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;
@@ -84,15 +81,17 @@ class _SearchState extends State<Search> {
         ),
         backgroundColor: Colors.black,
       ),
-      body: isExecuted ? searchedData() : Container(
-        child: Center(
-          child: Text('search any uid',
-              style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 30.0)),
-        ),
-      ),
+      body: isExecuted
+          ? searchedData()
+          : Container(
+              child: Center(
+                child: Text('search any uid',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0)),
+              ),
+            ),
     );
   }
 }

@@ -15,7 +15,7 @@ Widget build(BuildContext context) {
 
 // ignore: must_be_immutable
 class SettingsPage extends StatelessWidget {
-  var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+  var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
   //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -92,7 +92,7 @@ class SettingsPage extends StatelessWidget {
                       return UserInformationCard(
                         snapshot: snapshot.data,
                         index:
-                            0, //this changes depending on what user is selected
+                            1, //this changes depending on what user is selected
                         //index will be used
                       );
                     }),
