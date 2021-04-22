@@ -3,7 +3,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Card(
                             child: FutureBuilder(
-                              future: _getImageURL(),
+                              // future: _getImageURL(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   //this creates the pictures to be clickable
@@ -129,9 +128,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future _getImageURL() async {
+  // ignore: unused_element
+  Future _getImageURL(var docID) async {
+    //declare and instantiate the firebase storage bucket
+    final FirebaseStorage storage = FirebaseStorage.instanceFor(
+        bucket: 'gs://youth-food-movement.appspot.com');
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+    String downloadURL =
+        await storage.ref('recipe_images/$docID').getDownloadURL();
     return downloadURL;
   }
 }

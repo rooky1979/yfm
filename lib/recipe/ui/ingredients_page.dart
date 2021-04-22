@@ -5,17 +5,17 @@ import 'recipe_info_card.dart';
 
 // ignore: must_be_immutable
 class IngredientsPage extends StatelessWidget {
-
   final String recipeID;
   IngredientsPage([this.recipeID]);
-  
-  
-    
+
   @override
   Widget build(BuildContext context) {
-    var firestoreDb =
-      FirebaseFirestore.instance.collection('recipe').doc('$recipeID').collection('ingredients').snapshots();
-    
+    var firestoreDb = FirebaseFirestore.instance
+        .collection('recipe')
+        .doc('$recipeID')
+        .collection('ingredients')
+        .snapshots();
+
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 25),
