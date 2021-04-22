@@ -23,7 +23,7 @@ class IngredientsPage extends StatelessWidget {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(recipeID: recipeID),
+          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDb,
               builder: (
