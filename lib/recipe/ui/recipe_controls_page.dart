@@ -1,8 +1,9 @@
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_page_comments.dart';
+import 'package:youth_food_movement/comments/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -187,8 +188,9 @@ class RecipeButtons extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    CommentBoard()))
+                                builder: (BuildContext context) => CommentBoard(
+                                      recipeID: TestGridTile.idNumber.toString(),
+                                    )))
                       }),
             ],
           ),
