@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/login/placeholder_homepage.dart';
+import 'package:youth_food_movement/homepage/HomePage.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 
 class Search extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SearchState extends State<Search> {
           return GestureDetector(
             //not working rn
             onTap: () {
-              Get.to(PlaceholderHomePage(),
+              Get.to(HomePage(),
                   transition: Transition.downToUp,
                   arguments: snapshotData.docs[index]);
             },
@@ -63,7 +63,7 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.uidQueryData(searchController.text).then((value) {
+                      val.UidQueryData(searchController.text).then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;

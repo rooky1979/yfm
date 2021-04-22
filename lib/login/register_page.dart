@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_detail_page.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
-import 'package:youth_food_movement/login/login_page.dart';
-import 'package:youth_food_movement/login/user_detail_page.dart';
 import 'authentication_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -52,51 +50,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  decoration: InputDecoration(labelText: "Email"),
-                  controller: emailInputController,
-                ),
-              ),
-              Container(
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  decoration: InputDecoration(labelText: "Password"),
-                  controller: passwordInputController,
-                  obscureText: true,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<AuthenticationService>().signUp(
-                        email: emailInputController.text.trim(),
-                        password: passwordInputController.text.trim(),
-                      );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserDetailPage()),
-                  );
-                },
-                child: Text("Next"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final snackBar = SnackBar(
-                    content: Text('Register Cancelled'),
-                    duration: Duration(milliseconds: 1000),
-                    backgroundColor: Colors.red,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LogIn()),
-                  );
-                },
-                child: Text("Back"),
               ),
               Center(
                 child: Container(
