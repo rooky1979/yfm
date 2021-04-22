@@ -15,8 +15,6 @@ class CommentEntryDialog extends StatefulWidget {
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   CollectionReference imgRef;
   firebase_storage.Reference ref;
 
@@ -192,6 +190,8 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
  */
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
     String recipeID = widget.recipeID;
     return Scaffold(
       body: Padding(
@@ -228,7 +228,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           .doc('$recipeID')
                           .collection('comments')
                           .add({
-                        'user': 'temp',
+                        'user': _firebaseAuth.currentUser.uid,
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
                         'timestamp': new DateTime.now(),
