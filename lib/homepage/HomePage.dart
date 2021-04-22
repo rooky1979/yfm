@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,12 +15,42 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+  final TextEditingController searchController = TextEditingController();
+  QuerySnapshot snapshotData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
+        actions: [
+          GetBuilder<DataController>(
+              init: DataController(),
+              builder: (val) {
+                return Row(
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          val.foodTitleQueryData(searchController.text)
+                              .then((value) {
+                            snapshotData = value;
+                            setState(() {});
+                          });
+                        }),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()),
+                          );
+                        },
+                        icon: Icon(Icons.settings)),
+                  ],
+                );
+              })
+        ],
         title: Container(
             margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
             decoration:
@@ -39,19 +71,9 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   flex: 0,
                   child: Row(),
-                )
+                ),
               ],
             )),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()),
-                );
-              },
-              icon: Icon(Icons.settings)),
-        ],
       ),
       //this area will create a lister of catergories that currently only displays one
       //recipe
@@ -86,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Card(
                             child: FutureBuilder(
-                              future: _getImageURL(),
+                              // future: _getImageURL(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   //this creates the pictures to be clickable
@@ -129,9 +151,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future _getImageURL() async {
+  // ignore: unused_element
+  Future _getImageURL(var docID) async {
+    //declare and instantiate the firebase storage bucket
+    final FirebaseStorage storage = FirebaseStorage.instanceFor(
+        bucket: 'gs://youth-food-movement.appspot.com');
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+    String downloadURL =
+        await storage.ref('recipe_images/$docID').getDownloadURL();
     return downloadURL;
   }
 }

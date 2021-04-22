@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/login/placeholder_homepage.dart';
+import 'package:youth_food_movement/homepage/HomePage.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 
 class Search extends StatefulWidget {
@@ -24,21 +24,21 @@ class _SearchState extends State<Search> {
           return GestureDetector(
             //not working rn
             onTap: () {
-              Get.to(PlaceholderHomePage(),
+              Get.to(HomePage(),
                   transition: Transition.downToUp,
                   arguments: snapshotData.docs[index]);
             },
             child: ListTile(
               // leading: CircleAvatar(
               //   backgroundImage:
-              //       NetworkImage(snapshotData.docs[index].data()['Image']),
+              //       NetworkImage(snapshotData.docs[index].data()['image']),
               // ),
-              title: Text(snapshotData.docs[index].data()['Username'],
+              title: Text(snapshotData.docs[index].data()['uid'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0)),
-              subtitle: Text(snapshotData.docs[index].data()['City'],
+              subtitle: Text(snapshotData.docs[index].data()['Username'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.uidQueryData(searchController.text).then((value) {
+                      val.foodTitleQueryData(searchController.text).then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;
@@ -85,7 +85,7 @@ class _SearchState extends State<Search> {
           ? searchedData()
           : Container(
               child: Center(
-                child: Text('search any uid',
+                child: Text('search Food Title',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

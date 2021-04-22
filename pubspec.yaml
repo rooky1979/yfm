@@ -35,8 +35,9 @@ dependencies:
   google_maps_flutter: ^0.5.21+15
   intl: ^0.17.0
   get: ^4.1.1
-
+  firebase_messaging:
   multiselect_formfield: ^0.1.6
+  favorite_button: ^0.0.3
 
 
 dev_dependencies:
