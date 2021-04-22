@@ -106,6 +106,35 @@ class RecipeInformationCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                                    Padding(
+                    //widget to show the serving size
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text.rich(TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Difficulty: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: snapshotData['difficulty']),
+                              ])),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: Colors.red[200],
+                  ),
                   Padding(
                     //widget to show the serving size
                     padding: const EdgeInsets.all(3.0),
