@@ -5,7 +5,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
-import 'package:favorite_button/favorite_button.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
