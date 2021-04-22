@@ -8,12 +8,8 @@ class Method extends StatelessWidget {
   Method([this.recipeID]);
   final String recipeID;
   var firestoreDbMethod =
-<<<<<<< HEAD
       FirebaseFirestore.instance.collection('method').snapshots();
 
-=======
-      FirebaseFirestore.instance.collection('recipe').doc('BZrIwfHcVtgrCRK74nWa').collection('method').snapshots();
->>>>>>> 118181220700cbed8f6f821c6fd6338236dd304e
   @override
   Widget build(BuildContext context) {
     return Scaffold(

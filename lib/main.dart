@@ -23,13 +23,7 @@ Future<void> main() async {
                 fontSize: 25,
                 color: Colors.white,*/
       ),
-<<<<<<< HEAD
       home: LoginPage(),
-=======
-
-      home: TestHomepage(),
-
->>>>>>> 118181220700cbed8f6f821c6fd6338236dd304e
     ),
   );
 }
