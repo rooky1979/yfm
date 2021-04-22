@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/homepage/HomePage.dart';
+import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,7 +40,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
-      return HomePage();
+      return TestHomepage();
     }
     return LogIn();
   }

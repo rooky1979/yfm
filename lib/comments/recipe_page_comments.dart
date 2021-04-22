@@ -26,7 +26,7 @@ class _CommentBoardState extends State<CommentBoard> {
   Widget build(BuildContext context) {
     String recipeId = widget.recipeID;
     // This firestoreDB saves the comments in descending order by likes.
-    debugPrint(widget.recipeID + 'Here is the recipe ID');
+
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
@@ -39,7 +39,7 @@ class _CommentBoardState extends State<CommentBoard> {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(),
+          RecipeButtons(recipeID: recipeId),
           StreamBuilder(
               stream: firestoreDb,
               builder: (context, snapshot) {

@@ -144,7 +144,7 @@ class _RecipeButtonsState extends State<RecipeButtons> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    IngredientsPage()))
+                                    IngredientsPage(widget.recipeID)))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -159,7 +159,9 @@ class _RecipeButtonsState extends State<RecipeButtons> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Method()))
+                                builder: (BuildContext context) => Method(
+                                      widget.recipeID,
+                                    )))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),

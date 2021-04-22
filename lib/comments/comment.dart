@@ -27,7 +27,7 @@ class _CommentState extends State<Comment> {
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
-    var user = "Temp Name 2";
+    var user = "temp2";
     var list = [user];
     Color likeColor = Colors.grey;
     //int counter = 100;
@@ -53,9 +53,7 @@ class _CommentState extends State<Comment> {
                     title: Text(snapshotData['user'] + " - " + dateFormatted,
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 12.0)),
-                    subtitle: Text(
-                        snapshotData['description'] +
-                            snapshotData['imgAttached'],
+                    subtitle: Text(snapshotData['description'],
                         style: const TextStyle(
                             fontSize: 17.0, color: Colors.black)),
                     leading: Icon(Icons.account_circle_rounded, size: 50)),
@@ -234,7 +232,7 @@ class _CommentState extends State<Comment> {
                       color: Colors.black,
                     ),
                     onPressed: () async {
-                      showAlert(context, docId);
+                      showDeleteAlert(context, docId);
                     }),
               ],
             ),
@@ -242,11 +240,30 @@ class _CommentState extends State<Comment> {
         ],
       );
     } else {
-      return (Container());
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: Row(
+              children: [
+                IconButton(
+                    //delete the comment from the database
+                    icon: Icon(
+                      Icons.flag,
+                      color: Colors.black,
+                    ),
+                    onPressed: () async {
+                      showReportAlert(context, docId);
+                    }),
+              ],
+            ),
+          ),
+        ],
+      );
     }
   }
 
-  showAlert(BuildContext context, var docId) {
+  showDeleteAlert(BuildContext context, var docId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -256,9 +273,12 @@ class _CommentState extends State<Comment> {
             TextButton(
               child: new Text("Yes"),
               onPressed: () {
-                var collectionReference =
-                    FirebaseFirestore.instance.collection('comment');
-                collectionReference.doc(docId).delete();
+                FirebaseFirestore.instance
+                    .collection('recipe')
+                    .doc(widget.recipeID)
+                    .collection('comments')
+                    .doc(docId)
+                    .delete();
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),
                   duration: Duration(milliseconds: 1000),
@@ -266,6 +286,43 @@ class _CommentState extends State<Comment> {
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  showReportAlert(BuildContext context, var docId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text('Report comment?'),
+          actions: <Widget>[
+            TextButton(
+              child: new Text("Yes"),
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('recipe')
+                    .doc(widget.recipeID)
+                    .collection('comments')
+                    .doc(docId)
+                    .update({'reported': true});
+                final snackBar = SnackBar(
+                  content: Text('Comment Reported'),
+                  duration: Duration(milliseconds: 1000),
+                  backgroundColor: Colors.red,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.of(context).pop();
               },
             ),

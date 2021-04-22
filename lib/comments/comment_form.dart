@@ -234,6 +234,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         'timestamp': new DateTime.now(),
                         'likes': 0,
                         'likedUsers': [],
+                        'reported': false
                       }).then((response) {
                         print(response.id);
                         if (imgAttached == "true") {

@@ -5,8 +5,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
 class Method extends StatelessWidget {
+  Method([this.recipeID]);
+  final String recipeID;
   var firestoreDbMethod =
       FirebaseFirestore.instance.collection('method').snapshots();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +18,7 @@ class Method extends StatelessWidget {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(),
+          RecipeButtons(recipeID: recipeID),
           StreamBuilder(
               stream: firestoreDbMethod,
               builder: (
