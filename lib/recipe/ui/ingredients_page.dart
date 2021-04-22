@@ -6,10 +6,8 @@ import 'recipe_info_card.dart';
 
 // ignore: must_be_immutable
 class IngredientsPage extends StatelessWidget {
-
   final String recipeID;
   IngredientsPage([this.recipeID]);
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,6 @@ class IngredientsPage extends StatelessWidget {
                           snapshot: snapshot.data,
                           index:
                               index, //this changes depending on what recipe is selected
-                          recipeID: recipeID,
                         );
                       }),
                 );

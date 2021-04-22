@@ -30,6 +30,7 @@ class DBControl {
   //recipe_image_submission static variables
   static File image;
   static String docID;
+  static String recipeID;
 
 //static method that writes to the DB
   static void writeDB() async {
@@ -42,7 +43,7 @@ class DBControl {
       "allergies": allergies,
       "category": categoryValue,
       "description": descriptionController.text,
-      "image": recipeDocRef.id, //basename(image.path),
+      "image": recipeDocRef.id,
       "ingredients": ingredients,
       "prepTime": prepTime,
       "protein": proteins,
@@ -52,10 +53,10 @@ class DBControl {
     //write the recipe table method subcollection instance
     await recipeDocRef.collection("method").add({"method": methodSteps});
     //upload image to firebase storage
-    String fileName = basename(image.path);
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
         .child('recipe_images/' + recipeDocRef.id);
+        print(recipeDocRef.id.toString());
     UploadTask uploadTask = firebaseStorageRef.putFile(image);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
