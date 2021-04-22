@@ -14,9 +14,7 @@ class RecipeInformationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     //snaphot of the docs
     var snapshotData = snapshot.docs[index];
-    //snapshot document ID for use later
-    // ignore: unused_local_variable
-    var docID = snapshot.docs[index].id;
+    //list that holds an array of the ingredients
     List<String> ingredientsList = List.from(snapshotData['ingredients']);
 
     return Column(
@@ -38,6 +36,7 @@ class RecipeInformationCard extends StatelessWidget {
                       endIndent: 10,
                       color: Colors.redAccent,
                     ),
+                    //display the recipe title
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -53,6 +52,7 @@ class RecipeInformationCard extends StatelessWidget {
                         ],
                       ),
                     ),
+                    //display the recipe description
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -105,7 +105,7 @@ class RecipeInformationCard extends StatelessWidget {
                     ),
                   ),
                                     Padding(
-                    //widget to show the serving size
+                    //widget to show the recipe difficulty
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
                       children: [
@@ -327,6 +327,7 @@ class RecipeInformationCard extends StatelessWidget {
                 ],
               ),
             ),
+            //list view to build the tiles and populate with the ingredients from the indredients array
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -404,15 +405,3 @@ class RecipeInformationCard extends StatelessWidget {
   }
 }
 
-//helper method to print arrays in a list form
-// ignore: unused_element
-String _printArrayList(var snapshotData) {
-  String string = '';
-
-  for (int i = 0; i < snapshotData.length; ++i) {
-    string += '- ';
-    string += snapshotData[i];
-    string += '\n';
-  }
-  return string;
-}

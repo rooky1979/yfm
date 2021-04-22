@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//test comment
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
   //snapshot of the database
@@ -14,9 +13,7 @@ class MethodCard extends StatelessWidget {
   Widget build(BuildContext context) {
     //snaphot of the docs in firebase DB
     var snapshotData = snapshot.docs[index];
-    //snapshot document ID for use later
-    // ignore: unused_local_variable
-    var docID = snapshot.docs[index].id;
+    //list created from the method snapshot
     List<String> methodList = List.from(snapshotData['method']);
 
     return Column(
@@ -35,6 +32,7 @@ class MethodCard extends StatelessWidget {
             ],
           ),
         ),
+        //list view to build the method
         ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -51,6 +49,7 @@ class MethodCard extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
+                  //each tile prints each element of the array
                   title: Text(methodList[index].toString(),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
