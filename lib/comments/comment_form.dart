@@ -220,15 +220,13 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     onPressed: () {
                       print(imgAttached);
 
-                      CollectionReference users =
-                          FirebaseFirestore.instance.collection('Users');
-
                       FirebaseFirestore.instance
                           .collection('recipe')
                           .doc('$recipeID')
                           .collection('comments')
                           .add({
                         'user': _firebaseAuth.currentUser.uid,
+                        'uid': _firebaseAuth.currentUser.uid,
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
                         'timestamp': new DateTime.now(),

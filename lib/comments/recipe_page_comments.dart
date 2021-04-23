@@ -31,12 +31,15 @@ class _CommentBoardState extends State<CommentBoard> {
     debugPrint(_firebaseAuth.currentUser.uid);
 
     // This firestoreDB saves the comments in descending order by likes.
+    var firestoreDbUsers =
+        FirebaseFirestore.instance.collection('Users').snapshots();
 
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
         .collection('comments')
         .snapshots();
+
     return Scaffold(
         //the body has the whole screen being used
         body: Padding(
@@ -44,7 +47,7 @@ class _CommentBoardState extends State<CommentBoard> {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(recipeID: recipeId),
+          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDb,
               builder: (context, snapshot) {

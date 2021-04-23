@@ -32,11 +32,11 @@ class _CommentState extends State<Comment> {
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
-    var user = _firebaseAuth.currentUser.uid;
+    var username = "";
+    String user = _firebaseAuth.currentUser.uid;
     var list = [user];
     Color likeColor = Colors.grey;
 
-    var userName = widget.userSnapshot.docs[snapshotData['user']];
     //int counter = 100;
     var numLikes = snapshotData['likes'];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
@@ -45,6 +45,15 @@ class _CommentState extends State<Comment> {
     //TextEditingController descriptionInputController =
     TextEditingController(text: snapshotData['description']);
 
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('uid', isEqualTo: snapshotData['user'])
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        username = doc["username"];
+      });
+    });
     //_getCommentImage(docID, widget.index);
 
     return Column(
@@ -57,7 +66,7 @@ class _CommentState extends State<Comment> {
               children: [
                 //tile contents
                 ListTile(
-                    title: Text(snapshotData['user'] + " - " + dateFormatted,
+                    title: Text(user + " - " + dateFormatted,
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 12.0)),
                     subtitle: Text(snapshotData['description'],
