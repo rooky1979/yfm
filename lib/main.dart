@@ -7,6 +7,8 @@ import 'login/login_page.dart';
 import 'recipe/ui/test_homepage.dart';
 import 'package:youth_food_movement/homepage/HomePage.dart';
 import 'package:youth_food_movement/login/user_search/search.dart';
+import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
+import 'package:youth_food_movement/login/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

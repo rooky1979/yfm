@@ -23,7 +23,7 @@ class IngredientsPage extends StatelessWidget {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(recipeID: recipeID),
+          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDb,
               builder: (
@@ -39,7 +39,6 @@ class IngredientsPage extends StatelessWidget {
                           snapshot: snapshot.data,
                           index:
                               index, //this changes depending on what recipe is selected
-                          recipeID: recipeID,
                         );
                       }),
                 );
