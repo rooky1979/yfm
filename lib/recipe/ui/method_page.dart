@@ -1,14 +1,12 @@
-import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable
 class Method extends StatelessWidget {
-  Method([this.recipeID]);
   final String recipeID;
-  var firestoreDbMethod =
-      FirebaseFirestore.instance.collection('method').snapshots();
+  Method([this.recipeID]);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class Method extends StatelessWidget {
       child: Column(
         children: [
           RecipeThumbnail(),
-          RecipeButtons(recipeID: recipeID),
+          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDbMethod,
               builder: (
