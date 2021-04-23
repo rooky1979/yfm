@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 //import 'package:youth_food_movement/recipe/ui/comment_update_form.dart';
 
 class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
   final QuerySnapshot snapshot;
+  final QuerySnapshot userSnapshot;
   final int index;
   final String recipeID;
 
-  const Comment({Key key, this.snapshot, this.index, this.recipeID})
+  const Comment(
+      {Key key, this.snapshot, this.userSnapshot, this.index, this.recipeID})
       : super(key: key);
 }
 
 class _CommentState extends State<Comment> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
   Widget build(BuildContext context) {
@@ -27,9 +32,11 @@ class _CommentState extends State<Comment> {
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
-    var user = "temp2";
+    var user = _firebaseAuth.currentUser.uid;
     var list = [user];
     Color likeColor = Colors.grey;
+
+    var userName = widget.userSnapshot.docs[snapshotData['user']];
     //int counter = 100;
     var numLikes = snapshotData['likes'];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);

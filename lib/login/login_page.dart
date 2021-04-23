@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/homepage/HomePage.dart';
-import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
-
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
+import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 
 class LoginPage extends StatelessWidget {
   @override
