@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:firebase_storage/firebase_storage.dart';
-
 class CommentBoard extends StatefulWidget {
   @override
   _CommentBoardState createState() => _CommentBoardState();
@@ -28,6 +26,7 @@ class _CommentBoardState extends State<CommentBoard> {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     debugPrint(_firebaseAuth.currentUser.uid);
 
+    //Creates the snapshot of all comments
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
@@ -48,7 +47,7 @@ class _CommentBoardState extends State<CommentBoard> {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: SizedBox(
-                    //height: 120,
+                    //List view generates a list of comment widgets, of length determineed by number of docs.
                     child: ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, int index) {
