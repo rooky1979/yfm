@@ -19,8 +19,6 @@ class CommentBoard extends StatefulWidget {
 }
 
 class _CommentBoardState extends State<CommentBoard> {
-//   database connection to the board firebase
-
 /*
  * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
  */
@@ -29,10 +27,6 @@ class _CommentBoardState extends State<CommentBoard> {
     String recipeId = widget.recipeID;
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     debugPrint(_firebaseAuth.currentUser.uid);
-
-    // This firestoreDB saves the comments in descending order by likes.
-    var firestoreDbUsers =
-        FirebaseFirestore.instance.collection('Users').snapshots();
 
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
