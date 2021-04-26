@@ -41,6 +41,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     setState(() {
       _imgfile = File(imgfile.path);
       imgAttached = "true";
+      debugPrint(_imgfile.path);
     });
     Navigator.of(context).pop();
   }
@@ -64,7 +65,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     if (_imgfile != null) {
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('/images/' + commentId);
+          .child('/comment_images/' + commentId);
       await ref.putFile(_imgfile).whenComplete(() async {
         await ref.getDownloadURL().then((value) {});
       });

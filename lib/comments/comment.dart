@@ -32,7 +32,6 @@ class _CommentState extends State<Comment> {
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
-    var username = "";
     String user = _firebaseAuth.currentUser.uid;
     var list = [user];
     Color likeColor = Colors.grey;
@@ -45,17 +44,7 @@ class _CommentState extends State<Comment> {
     //TextEditingController descriptionInputController =
     TextEditingController(text: snapshotData['description']);
 
-    FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: snapshotData['user'])
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        username = doc["username"];
-      });
-    });
     //_getCommentImage(docID, widget.index);
-
     return Column(
       children: [
         Container(
@@ -66,45 +55,83 @@ class _CommentState extends State<Comment> {
               children: [
                 //tile contents
                 ListTile(
-                    title: Text(user + " - " + dateFormatted,
+                  title: Row(children: [
+                    FutureBuilder(
+                        future: _getUserName(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            //return the image and make it cover the container
+                            return Container(
+                              child: Text(snapshot.data,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 15.0)),
+                            );
+                          } else {
+                            return Container(child: Center());
+                          }
+                        }),
+                    Text(" - " + dateFormatted,
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 12.0)),
-                    subtitle: Text(snapshotData['description'],
-                        style: const TextStyle(
-                            fontSize: 17.0, color: Colors.black)),
-                    leading: Icon(Icons.account_circle_rounded, size: 50)),
-                FutureBuilder(
-                    future: _getImageURL(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        //return the image and make it cover the container
-                        return GestureDetector(
-                          child: Image.network(
-                            snapshot.data,
-                            fit: BoxFit.cover,
-                          ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return GestureDetector(
-                                child: Center(
-                                  child: Image.network(
-                                    snapshot.data,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                onTap: () => Navigator.pop(context),
-                              );
-                            }));
-                          },
-                        );
-                      } else {
-                        return Container(child: Center());
-                      }
-                    }),
+                  ]),
+                  subtitle: Text(snapshotData['description'],
+                      style:
+                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                  leading: FutureBuilder(
+                      future: _getUserImage(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          //return the image and make it cover the container
+                          return CircleAvatar(
+                            radius: 30.0,
+                            backgroundImage: NetworkImage(snapshot.data),
+                            backgroundColor: Colors.transparent,
+                          );
+                        } else {
+                          return const Icon(Icons.verified_user_rounded);
+                        }
+                      }),
+                ),
+
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                    child: FutureBuilder(
+                        future: _getImageURL(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            //return the image and make it cover the container
+                            return GestureDetector(
+                              child: Image.network(
+                                snapshot.data,
+                                fit: BoxFit.cover,
+                              ),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    child: Center(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    onTap: () => Navigator.pop(context),
+                                  );
+                                }));
+                              },
+                            );
+                          } else {
+                            return Container(child: Center());
+                          }
+                        }),
+                  ),
+                ),
+
                 Container(
                   padding: const EdgeInsets.only(
-                      top: 5, left: 10, right: 10, bottom: 5),
+                      top: 5, left: 10, right: 15, bottom: 5),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     Container(
@@ -226,13 +253,35 @@ class _CommentState extends State<Comment> {
   Future _getImageURL() async {
     //ref string will change so the parameter will be the jpg ID (maybe)
     String downloadURL = await storage
-        .ref('images/' + widget.snapshot.docs[widget.index].id)
+        .ref('comment_images/' + widget.snapshot.docs[widget.index].id)
         .getDownloadURL();
     return downloadURL;
   }
 
+  Future _getUserImage() async {
+    //ref string will change so the parameter will be the jpg ID (maybe)
+    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getUserName() async {
+    String username;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: widget.snapshot.docs[widget.index][
+                'uid']) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        username = doc["username"];
+      });
+    });
+    return username;
+  }
+
   _checkUser(String docId, int id, String user, int counter, Color likeColor) {
-    if (widget.snapshot.docs[widget.index]['user'] == user) {
+    if (widget.snapshot.docs[widget.index]['uid'] == user) {
       // if (user == user)
 
       return Row(
