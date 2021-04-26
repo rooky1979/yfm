@@ -130,10 +130,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     width: 10,
                     color: Colors.black38,
                   ),
-                  VerticalDivider(
-                    thickness: 4,
-                    width: 1,
-                  ),
                   TextButton(
                       onPressed: () {
                         _showChoiceDialog(context);
@@ -220,13 +216,11 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     //button to save the comment to the database
                     onPressed: () {
                       print(imgAttached);
-
                       FirebaseFirestore.instance
                           .collection('recipe')
                           .doc('$recipeID')
                           .collection('comments')
                           .add({
-                        'user': _firebaseAuth.currentUser.uid,
                         'uid': _firebaseAuth.currentUser.uid,
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
@@ -239,7 +233,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         if (imgAttached == "true") {
                           _uploadImageToFirebase(response.id);
                         }
-
                         final snackBar = SnackBar(
                           content: Text('Comment Posted'),
                           duration: Duration(milliseconds: 1000),
