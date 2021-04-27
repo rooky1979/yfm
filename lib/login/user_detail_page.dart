@@ -514,7 +514,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if(usernameInputController.text.isNotEmpty) {
-                          //change to false later
                           if(usernameExists = true) {
                             if(_imageSelected != null) {
                               if(_regionDropdownValue != null) {
