@@ -30,7 +30,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
 
   File _imgfile;
   final imagePicker = ImagePicker();
-  String imgAttached = "false";
+  bool imgAttached = false;
   var url;
 
 /*
@@ -40,7 +40,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _imgfile = File(imgfile.path);
-      imgAttached = "true";
+      imgAttached = true;
       debugPrint(_imgfile.path);
     });
     Navigator.of(context).pop();
@@ -53,6 +53,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
       _imgfile = File(imgfile.path);
+      imgAttached = true;
       // debugPrint(_imgfile.path.toString());
     });
     Navigator.of(context).pop();
@@ -230,7 +231,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         'reported': false
                       }).then((response) {
                         print(response.id);
-                        if (imgAttached == "true") {
+                        if (imgAttached == true) {
                           _uploadImageToFirebase(response.id);
                         }
                         final snackBar = SnackBar(
@@ -242,7 +243,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         Navigator.pop(context);
                         descriptionInputController.clear();
                         _imgfile = null;
-                        imgAttached = "false";
+                        imgAttached = false;
                       }).catchError((onError) => print(onError));
                     },
                     padding: const EdgeInsets.only(left: 120),

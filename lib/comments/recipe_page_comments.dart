@@ -60,7 +60,7 @@ class _CommentBoardState extends State<CommentBoard> {
                 );
               }),
           Container(
-            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(width: 1),

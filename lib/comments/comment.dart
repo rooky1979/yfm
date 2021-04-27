@@ -100,40 +100,43 @@ class _CommentState extends State<Comment> {
                       }),
                 ),
                 //This center contains the comment image
-                Center(
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                    //Future builder allows the app to get comment data from db async
-                    child: FutureBuilder(
-                        future: _getImageURL(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return GestureDetector(
-                              child: Image.network(
-                                snapshot.data,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GestureDetector(
-                                    child: Center(
-                                      child: Image.network(
-                                        snapshot.data,
-                                        fit: BoxFit.cover,
+                if (snapshotData['imgAttached'] == true)
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                      //Future builder allows the app to get comment data from db async
+                      child: FutureBuilder(
+                          future: _getImageURL(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return GestureDetector(
+                                child: Image.network(
+                                  snapshot.data,
+                                  fit: BoxFit.cover,
+                                ),
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return GestureDetector(
+                                      child: Center(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                    ),
-                                    onTap: () => Navigator.pop(context),
-                                  );
-                                }));
-                              },
-                            );
-                          } else {
-                            return Container(child: Center());
-                          }
-                        }),
+                                      onTap: () => Navigator.pop(context),
+                                    );
+                                  }));
+                                },
+                              );
+                            } else {
+                              return Container(
+                                  child: Center(
+                                      child: CircularProgressIndicator()));
+                            }
+                          }),
+                    ),
                   ),
-                ),
                 Container(
                   padding: const EdgeInsets.only(
                       top: 5, left: 10, right: 15, bottom: 5),
@@ -224,7 +227,7 @@ class _CommentState extends State<Comment> {
     );
   }
 
-  /**
+  /*
    * This method gets the image associated with a comment from the database
    */
   Future _getImageURL() async {
