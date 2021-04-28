@@ -53,6 +53,8 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Center(
                 child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   margin: const EdgeInsets.only(top: 230),
                   child: Column(
                     children: [
@@ -68,7 +70,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: 200,
                         padding: EdgeInsets.all(10),
                         child: TextField(
-                          decoration: InputDecoration(labelText: "Password"),
+                          decoration: InputDecoration(
+                              labelText: "Password",
+                              hintText: "6 letters+"
+                          ),
                           controller: passwordInputController,
                           obscureText: true,
                         ),
@@ -81,18 +86,29 @@ class _RegisterPageState extends State<RegisterPage> {
                             if (emailInputController.text.isNotEmpty) {
                               //check if password has been entered
                               if (passwordInputController.text.isNotEmpty) {
-                                //signup account with entered email and password if both are entered
-                                context.read<AuthenticationService>().signUp(
-                                      email: emailInputController.text.trim(),
-                                      password:
-                                          passwordInputController.text.trim(),
-                                    );
-                                //move to next page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UserDetailPage()),
-                                );
+                                //check if password is longer than 6 letters
+                                if(passwordInputController.text.length >= 6) {
+                                  //signup account with entered email and password if both are entered
+                                  context.read<AuthenticationService>().signUp(
+                                    email: emailInputController.text.trim(),
+                                    password:
+                                    passwordInputController.text.trim(),
+                                  );
+                                  //move to next page
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UserDetailPage()),
+                                  );
+                                } else {
+                                  final snackBar = SnackBar(
+                                    content: Text('Password is not 6 letters or longer'),
+                                    duration: Duration(milliseconds: 1000),
+                                    backgroundColor: Colors.red,
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
                               } else {
                                 final snackBar = SnackBar(
                                   content: Text('Password not entered'),

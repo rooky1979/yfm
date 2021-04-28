@@ -93,6 +93,8 @@ class _LogInState extends State<LogIn> {
               ),
               Center(
                 child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   margin: const EdgeInsets.only(top: 230),
                   child: Column(
                     children: [
