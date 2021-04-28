@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class TestHomepage extends StatefulWidget {
   @override
@@ -85,15 +86,14 @@ class _TestHomepageState extends State<TestHomepage> {
                       child: new ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 10,
+                        itemCount: 1,
                         itemBuilder: (context, index) {
                           return new Card(
                             elevation: 5.0,
-                            child: new Container(
-                              height: MediaQuery.of(context).size.width / 3,
-                              width: MediaQuery.of(context).size.width / 3,
-                              alignment: Alignment.center,
-                              child: new Text('Item $index'),
+                            child: new Row(
+                              children: [
+                                RecipeThumbnail(),
+                              ],
                             ),
                           );
                         },
@@ -111,7 +111,6 @@ class _TestHomepageState extends State<TestHomepage> {
   }
 }
 /*
-var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
 @override
 Widget build(BuildContext context) {
   return Scaffold(
