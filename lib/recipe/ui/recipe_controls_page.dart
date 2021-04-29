@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -90,21 +89,7 @@ class RecipeThumbnail extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        Positioned(
-            right: 10.0,
-            bottom: 10.0,
-            child:
-                Favourites() /* IconButton(
-              //alignment: Alignment.bottomRight,
-              icon: Icon(
-                Icons.favorite,
-                size: 40,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }), */
-            ),
+        Positioned(right: 10.0, bottom: 10.0, child: Favourites()),
       ],
     );
   }

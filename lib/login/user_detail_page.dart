@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/homepage/HomePage.dart';
+import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -18,20 +18,29 @@ class UserDetailPage extends StatefulWidget {
 }
 
 class _UserDetailPageState extends State<UserDetailPage> {
-  var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+  //reference to firestore database
+  var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
+  //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseStorage storage = FirebaseStorage.instanceFor(
+  //reference to firebase storage
+  final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+  //Controllers for textfields
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
-  String regionDropdownValue;
-  int imageSelected;
-  bool usernameExists = true;
-  final f = new DateFormat('dd-MMM-yyyy');
-  DateTime birthday = DateTime.now();
+  //date formatted to day/month/year
+  final formattedDate = new DateFormat('dd-MMM-yyyy');
+  DateTime today = DateTime.now();
+  //used for searching if username already exist check button
   QuerySnapshot snapshotData;
+  //other variables used for this class
+  String _regionDropdownValue;
+  String _imageSelected;
+  bool usernameExists = true;
+  String _username;
   List _allergies;
 
+  //list of allergy list in array for multi select form
   List<dynamic> _allergiesList = [
     {
       "display": "None",
@@ -67,15 +76,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
     },
   ];
 
+  //Function used to pick a date(birthday)
   Future<void> _selectDate(BuildContext context) async {
     final DateTime pickedDate = await showDatePicker(
         context: context,
-        initialDate: birthday,
+        initialDate: today,
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
-    if (pickedDate != null && pickedDate != birthday)
+    if (pickedDate != null && pickedDate != today)
       setState(() {
-        birthday = pickedDate;
+        today = pickedDate;
       });
   }
 
@@ -92,16 +102,18 @@ class _UserDetailPageState extends State<UserDetailPage> {
     //refactored textstyle used buttons/textfields
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
-    /*var blackText = TextStyle(
+    // ignore: unused_local_variable
+    var blackText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black);
     //refactored dividers
+    // ignore: unused_local_variable
     var divider = Divider(
       height: 10,
       thickness: 3,
       indent: 20,
       endIndent: 20,
       color: Colors.black,
-    );*/
+    );
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -130,6 +142,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
               ),
               Column(
                 children: [
+                  //Label for select avatars
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 13.0, right: 13.0, top: 4.0),
@@ -148,54 +161,145 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           )),
                     ),
                   ),
+                  //1st row of button with avatar image from database
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 1;
-                            }),
-                      ),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage1URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          _imageSelected =
+                                              "gs://youth-food-movement.appspot.com/avatar1.jpg";
+                                        },
+                                      );
+                                    } else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          )),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 2;
-                            }),
-                      ),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage2URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          _imageSelected =
+                                              "gs://youth-food-movement.appspot.com/avatar2.jpg";
+                                        },
+                                      );
+                                    } else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          )),
                     ],
                   ),
+                  //2nd row of button with avatar image from database
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 3;
-                            }),
-                      ),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage3URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          _imageSelected =
+                                              "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                        },
+                                      );
+                                    } else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          )),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: IconButton(
-                            icon: Image.network(
-                                "https://cdn.pixabay.com/photo/2021/03/29/11/44/muffins-6133902_1280.jpg"),
-                            iconSize: 160,
-                            onPressed: () {
-                              imageSelected = 4;
-                            }),
-                      ),
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: 175.0,
+                            height: 160.0,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage4URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          _imageSelected =
+                                              "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                        },
+                                      );
+                                    } else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      );
+                                    }
+                                  }),
+                            ),
+                          )),
                     ],
                   ),
+                  //Textfield for name
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: TextField(
@@ -216,6 +320,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       controller: fullNameInputController,
                     ),
                   ),
+                  //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Row(
@@ -254,6 +359,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       if (snapshotData.docs.isEmpty) {
                                         setState(() {
                                           usernameExists = false;
+                                          _username =
+                                              usernameInputController.text;
                                         });
                                         final snackBar = SnackBar(
                                           content:
@@ -283,6 +390,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ],
                     ),
                   ),
+                  //label for enter birthday
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Column(
@@ -304,6 +412,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 )),
                           ),
                         ),
+                        //button to bring out datepicker for birthday
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
@@ -313,13 +422,14 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           child: TextButton(
                               onPressed: () => _selectDate(context),
                               child: Text(
-                                f.format(birthday).toString(),
+                                formattedDate.format(today).toString(),
                                 style: whiteText,
                               )),
                         ),
                       ],
                     ),
                   ),
+                  //dropdown button list to pick which region user lives in
                   Padding(
                       padding:
                           const EdgeInsets.only(left: 13, right: 13, top: 7),
@@ -340,7 +450,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               labelStyle: whiteText,
                             ),
                             dropdownColor: Colors.red[300],
-                            value: regionDropdownValue,
+                            value: _regionDropdownValue,
                             items: [
                               "Northland",
                               "Auckland",
@@ -371,11 +481,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     ))
                                 .toList(),
                             onChanged: (value) {
-                              setState(() => regionDropdownValue = value);
+                              setState(() => _regionDropdownValue = value);
                             },
                           ),
                         ),
                       )),
+                  //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: _allergiesCheckList(
@@ -385,6 +496,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       )),
                 ],
               ),
+              //cancel button and save button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -393,9 +505,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       onPressed: () {
                         fullNameInputController.clear();
                         usernameInputController.clear();
-                        imageSelected = null;
-                        regionDropdownValue = null;
-                        birthday = DateTime.now();
+                        _imageSelected = null;
+                        _regionDropdownValue = null;
+                        today = DateTime.now();
                         //Navigator.pop(context);
                         context.read<AuthenticationService>().signOut();
                       },
@@ -409,22 +521,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         if (usernameInputController.text.isNotEmpty) {
                           //change to false later
                           if (usernameExists = true) {
-                            if (imageSelected != null) {
-                              if (regionDropdownValue != null) {
-                                if (f.format(birthday) !=
-                                    f.format(DateTime.now())) {
+                            if (_imageSelected != null) {
+                              if (_regionDropdownValue != null) {
+                                if (formattedDate.format(today) !=
+                                    formattedDate.format(DateTime.now())) {
                                   FirebaseFirestore.instance
-                                      .collection('Users')
+                                      .collection('users')
                                       .add({
                                     'uid': _firebaseAuth.currentUser.uid,
-                                    'Name': fullNameInputController.text,
-                                    'Username': usernameInputController.text,
-                                    'Image': imageSelected,
-                                    'Region': regionDropdownValue,
-                                    'Birthday': f.format(birthday),
-                                    'Accounted Created Time':
-                                        f.format(new DateTime.now()),
-                                    'Allergy': _allergies
+                                    'name': fullNameInputController.text,
+                                    'username': _username,
+                                    'image': _imageSelected,
+                                    'region': _regionDropdownValue,
+                                    'birthday': formattedDate.format(today),
+                                    'accountedCreatedTime': formattedDate
+                                        .format(new DateTime.now()),
+                                    'allergy': _allergies
                                   });
                                   final snackBar = SnackBar(
                                     content:
@@ -437,7 +549,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomePage()),
+                                        builder: (context) => LoginPage()),
                                   );
                                 } else {
                                   final snackBar = SnackBar(
@@ -541,5 +653,30 @@ class _UserDetailPageState extends State<UserDetailPage> {
         });
       },
     );
+  }
+
+  //method for getting avatar images
+  Future _getImage1URL() async {
+    String downloadURL =
+        await avatarStorage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getImage2URL() async {
+    String downloadURL =
+        await avatarStorage.ref('avatar2.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getImage3URL() async {
+    String downloadURL =
+        await avatarStorage.ref('avatar3.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getImage4URL() async {
+    String downloadURL =
+        await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+    return downloadURL;
   }
 }

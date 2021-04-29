@@ -33,7 +33,7 @@ class _SearchState extends State<Search> {
               //   backgroundImage:
               //       NetworkImage(snapshotData.docs[index].data()['Image']),
               // ),
-              title: Text(snapshotData.docs[index].data()['Username'],
+              title: Text(snapshotData.docs[index].data()['username'],
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
