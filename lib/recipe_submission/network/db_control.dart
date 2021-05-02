@@ -43,7 +43,7 @@ class DBControl {
       "allergies": allergies,
       "category": categoryValue,
       "description": descriptionController.text,
-      "image": recipeDocRef.id, //basename(image.path),
+      "image": recipeDocRef.id,
       "ingredients": ingredients,
       "prepTime": prepTime,
       "protein": proteins,
@@ -53,8 +53,6 @@ class DBControl {
     //write the recipe table method subcollection instance
     await recipeDocRef.collection("method").add({"method": methodSteps});
     //upload image to firebase storage
-    // ignore: unused_local_variable
-    String fileName = basename(image.path);
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
         .child('recipe_images/' + recipeDocRef.id);
