@@ -3,7 +3,7 @@ import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/comments/comment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CommentBoard extends StatefulWidget {
   @override
@@ -17,21 +17,22 @@ class CommentBoard extends StatefulWidget {
 }
 
 class _CommentBoardState extends State<CommentBoard> {
-//   database connection to the board firebase
-
 /*
  * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
  */
   @override
   Widget build(BuildContext context) {
     String recipeId = widget.recipeID;
-    // This firestoreDB saves the comments in descending order by likes.
-    debugPrint(widget.recipeID + 'Here is the recipe ID');
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    debugPrint(_firebaseAuth.currentUser.uid);
+
+    //Creates the snapshot of all comments
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
         .collection('comments')
         .snapshots();
+
     return Scaffold(
         //the body has the whole screen being used
         body: Padding(
@@ -46,7 +47,7 @@ class _CommentBoardState extends State<CommentBoard> {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: SizedBox(
-                    //height: 120,
+                    //List view generates a list of comment widgets, of length determineed by number of docs.
                     child: ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, int index) {
@@ -59,7 +60,7 @@ class _CommentBoardState extends State<CommentBoard> {
                 );
               }),
           Container(
-            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+            padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(width: 1),
