@@ -11,9 +11,10 @@ class AuthenticationService {
     await _firebaseAuth.signOut();
   }
 
-  Future<String> signIn ({String email, String password}) async{
+  Future<String> signIn({String email, String password}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
 
       return "signed in";
     } on FirebaseAuthException catch (e) {
@@ -21,16 +22,14 @@ class AuthenticationService {
     }
   }
 
-
-  Future<String> signUp ({String email, String password}) async{
+  Future<String> signUp({String email, String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
 
       return "Signed Up";
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
   }
-
 }
-

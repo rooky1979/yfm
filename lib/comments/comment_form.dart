@@ -222,6 +222,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           .doc('$recipeID')
                           .collection('comments')
                           .add({
+                        'user': _firebaseAuth.currentUser.uid,
                         'uid': _firebaseAuth.currentUser.uid,
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,

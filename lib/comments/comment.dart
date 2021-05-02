@@ -10,10 +10,12 @@ class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
   final QuerySnapshot snapshot;
+  final QuerySnapshot userSnapshot;
   final int index;
   final String recipeID;
 
-  const Comment({Key key, this.snapshot, this.index, this.recipeID})
+  const Comment(
+      {Key key, this.snapshot, this.userSnapshot, this.index, this.recipeID})
       : super(key: key);
 }
 
