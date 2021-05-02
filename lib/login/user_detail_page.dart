@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
+
 class UserDetailPage extends StatefulWidget {
   @override
   _UserDetailPageState createState() => _UserDetailPageState();
@@ -130,8 +131,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 children: [
                   //Label for select avatars
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 13.0, right: 13.0, top: 4.0),
+                    padding: const EdgeInsets.only(left: 13.0, right: 13.0, top: 4.0),
                     child: SizedBox(
                       height: 50,
                       child: Container(
@@ -141,10 +141,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             color: Colors.red[400],
                           ),
                           alignment: Alignment.center,
-                          child: Text(
-                            "Select Prefered Avatar",
-                            style: whiteText,
-                          )),
+                          child: Text("Select Prefered Avatar", style: whiteText,)
+                      ),
                     ),
                   ),
                   //1st row of button with avatar image from database
@@ -169,6 +167,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+<<<<<<< Updated upstream
                                           _imageSelected =
                                               "gs://youth-food-movement.appspot.com/avatar1.jpg";
                                         },
@@ -183,6 +182,26 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             ),
                           )),
                       Padding(
+=======
+
+
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
+                      ),Padding(
+>>>>>>> Stashed changes
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
                             width: 175.0,
@@ -201,6 +220,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+<<<<<<< Updated upstream
                                           _imageSelected =
                                               "gs://youth-food-movement.appspot.com/avatar2.jpg";
                                         },
@@ -214,12 +234,32 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
+=======
+
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
+                      ),
+>>>>>>> Stashed changes
                     ],
                   ),
                   //2nd row of button with avatar image from database
                   Row(
                     children: [
                       Padding(
+<<<<<<< Updated upstream
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
                             width: 175.0,
@@ -251,6 +291,43 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
+=======
+
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Container(
+                          width: 175.0,
+                          height: 160.0,
+                          margin: EdgeInsets.all(8.0),
+                          child: Card(
+                            child: FutureBuilder(
+                              future: _getImage3URL(),
+                                builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  //this creates the pictures to be clickable
+                                  //and will take the user to the recipe page
+                                  return GestureDetector(
+                                    child: Image.network(
+                                        snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onTap: () {
+                                      _imageSelected = "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                    },
+                                  );
+                                }
+                                else {
+                                  return Container(
+                                    child: Center(
+                                      child: CircularProgressIndicator()
+                                    ),
+                                  );
+                                }
+                              }
+                            ),
+                          ),
+                        )
+                      ),
+>>>>>>> Stashed changes
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
@@ -270,6 +347,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+<<<<<<< Updated upstream
                                           _imageSelected =
                                               "gs://youth-food-movement.appspot.com/avatar4.jpg";
                                         },
@@ -283,6 +361,25 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
+=======
+
+                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                        },
+                                      );
+                                    }
+                                    else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()
+                                        ),
+                                      );
+                                    }
+                                  }
+                              ),
+                            ),
+                          )
+                      ),
+>>>>>>> Stashed changes
                     ],
                   ),
                   //Textfield for name
@@ -320,8 +417,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               fillColor: Colors.red[400],
                               filled: true,
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.greenAccent, width: 3.0),
+                                borderSide:
+                                    BorderSide(color: Colors.greenAccent, width: 3.0),
                               ),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide:
@@ -332,6 +429,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           ),
                         ),
                         GetBuilder<DataController>(
+<<<<<<< Updated upstream
                             init: DataController(),
                             builder: (val) {
                               return IconButton(
@@ -384,6 +482,49 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     }
                                   });
                             }),
+=======
+                              init: DataController(),
+                              builder: (val) {
+                                return IconButton(
+                                    icon: Icon(Icons.check),
+                                    onPressed: () {
+                                      if(usernameInputController.text.isNotEmpty) {
+                                        val.usernameQueryData(usernameInputController.text).then((value) {
+                                          snapshotData = value;
+                                          if(snapshotData.docs.isEmpty) {
+                                            setState(() {
+                                              usernameExists = false;
+                                              _username = usernameInputController.text;
+                                            });
+                                            final snackBar = SnackBar(
+                                              content: Text('Username does not exist'),
+                                              duration: Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          }else {
+                                            setState(() {
+                                              usernameExists = true;
+                                            });
+                                            final snackBar = SnackBar(
+                                              content: Text('Username exists'),
+                                              duration: Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.red,
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          }
+                                        });
+                                      } else {
+                                        final snackBar = SnackBar(
+                                          content: Text('Username not entered'),
+                                          duration: Duration(milliseconds: 1000),
+                                          backgroundColor: Colors.red,
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      }
+                                    });
+                              }),
+>>>>>>> Stashed changes
                       ],
                     ),
                   ),
@@ -392,23 +533,25 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 7.0),
-                          child: SizedBox(
-                            height: 40,
-                            child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.red[400],
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 7.0),
+                            child: SizedBox(
+                              height: 40,
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.red[400],
+                                  ),
                                 alignment: Alignment.center,
-                                child: Text(
-                                  "Enter Birthday",
-                                  style: whiteText,
-                                )),
+                                child: Text("Enter Birthday", style: whiteText,)
+                              ),
+                            ),
                           ),
+<<<<<<< Updated upstream
                         ),
+=======
+>>>>>>> Stashed changes
                         //button to bring out datepicker for birthday
                         Container(
                           width: MediaQuery.of(context).size.width,
@@ -421,15 +564,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               child: Text(
                                 formattedDate.format(today).toString(),
                                 style: whiteText,
-                              )),
+                              )
+                          ),
                         ),
                       ],
                     ),
                   ),
                   //dropdown button list to pick which region user lives in
                   Padding(
-                      padding:
-                          const EdgeInsets.only(left: 13, right: 13, top: 7),
+                      padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -482,15 +625,20 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             },
                           ),
                         ),
+<<<<<<< Updated upstream
                       )),
+=======
+
+                      )
+                  ),
+
+>>>>>>> Stashed changes
                   //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: _allergiesCheckList(
-                        'Allergies affected',
-                        _allergiesList,
-                        whiteText,
-                      )),
+                        'Allergies affected', _allergiesList, whiteText,)
+                  ),
                 ],
               ),
               //cancel button and save button
@@ -518,8 +666,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     //button to check if datas are all entered and save data to the database
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
-                        if (usernameInputController.text.isNotEmpty) {
+                        if(usernameInputController.text.isNotEmpty) {
                           //change to false later
+<<<<<<< Updated upstream
                           if (usernameExists = true) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
@@ -537,47 +686,62 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     'accountedCreatedTime': formattedDate
                                         .format(new DateTime.now()),
                                     'allergy': _allergies
+=======
+
+                          if(usernameExists = true) {
+                            if(_imageSelected != null) {
+                              if(_regionDropdownValue != null) {
+                                if(formattedDate.format(today) != formattedDate.format(DateTime.now())) {
+                                  FirebaseFirestore.instance.collection('users').add({
+                                    'uid' : _firebaseAuth.currentUser.uid,
+                                    'name' : fullNameInputController.text,
+                                    'username' : _username,
+                                    'image' : _imageSelected,
+                                    'region' : _regionDropdownValue,
+                                    'birthday' : formattedDate.format(today),
+                                    'accountedCreatedTime': formattedDate.format(new DateTime.now()),
+                                    'allergy' : _allergies
+>>>>>>> Stashed changes
                                   });
                                   final snackBar = SnackBar(
-                                    content:
-                                        Text('Account Successfully Created'),
+                                    content: Text('Account Successfully Created'),
                                     duration: Duration(milliseconds: 1000),
                                     backgroundColor: Colors.green,
                                   );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   Navigator.push(
                                     context,
+<<<<<<< Updated upstream
                                     MaterialPageRoute(
                                         builder: (context) => LoginPage()),
+=======
+
+                                    MaterialPageRoute(builder: (context) => LoginPage()),
+>>>>>>> Stashed changes
                                   );
-                                } else {
+                                }else {
                                   final snackBar = SnackBar(
-                                    content:
-                                        Text('Birthday has not been selected'),
+                                    content: Text('Birthday has not been selected'),
                                     duration: Duration(milliseconds: 1000),
                                     backgroundColor: Colors.red,
                                   );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
-                              } else {
+                              }else {
                                 final snackBar = SnackBar(
                                   content: Text('Region has not been selected'),
                                   duration: Duration(milliseconds: 1000),
                                   backgroundColor: Colors.red,
                                 );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
-                            } else {
+                            }else {
                               final snackBar = SnackBar(
                                 content: Text('Image has not been selected'),
                                 duration: Duration(milliseconds: 1000),
                                 backgroundColor: Colors.red,
                               );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             }
                           } else {
                             final snackBar = SnackBar(
@@ -585,8 +749,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                         } else {
                           final snackBar = SnackBar(
@@ -618,11 +781,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   }
 
   //helper method for the checkboxes
-  Widget _allergiesCheckList(
-    String title,
-    List checklistOptions,
-    var textStyle,
-  ) {
+  Widget _allergiesCheckList(String title, List checklistOptions, var textStyle,) {
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -631,7 +790,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
       checkBoxActiveColor: Colors.red,
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       title: Text(
         title,
         style: textStyle,
@@ -657,6 +816,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   //method for getting avatar images
   Future _getImage1URL() async {
+<<<<<<< Updated upstream
     String downloadURL =
         await avatarStorage.ref('avatar1.jpg').getDownloadURL();
     return downloadURL;
@@ -677,6 +837,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Future _getImage4URL() async {
     String downloadURL =
         await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+=======
+
+    String downloadURL = await avatarStorage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage2URL() async {
+    String downloadURL = await avatarStorage.ref('avatar2.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage3URL() async {
+    String downloadURL = await avatarStorage.ref('avatar3.jpg').getDownloadURL();
+    return downloadURL;
+  }
+  Future _getImage4URL() async {
+    String downloadURL = await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+>>>>>>> Stashed changes
     return downloadURL;
   }
 }
+

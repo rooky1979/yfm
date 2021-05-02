@@ -63,9 +63,15 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
+<<<<<<< Updated upstream
                       val
                           .foodTitleQueryData(searchController.text)
                           .then((value) {
+=======
+
+                      val.foodTitleQueryData(searchController.text).then((value) {
+
+>>>>>>> Stashed changes
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;
