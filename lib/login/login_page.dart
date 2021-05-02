@@ -118,13 +118,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       //sign in button
                       Padding(
-<<<<<<< Updated upstream
                         padding: const EdgeInsets.only(top: 12.0),
-=======
-
-                        padding: const EdgeInsets.only(top:12.0),
-
->>>>>>> Stashed changes
                         child: ElevatedButton(
                           onPressed: () {
                             context.read<AuthenticationService>().signIn(
@@ -137,12 +131,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       //register account button
                       Padding(
-<<<<<<< Updated upstream
                         padding: const EdgeInsets.only(top: 12.0),
-=======
-
-                        padding: const EdgeInsets.only(top:12.0),
->>>>>>> Stashed changes
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
