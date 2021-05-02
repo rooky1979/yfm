@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
-import 'authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +17,7 @@ class UserDetailPage extends StatefulWidget {
 
 class _UserDetailPageState extends State<UserDetailPage> {
   //reference to firestore database
-  var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
+  var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
   //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   //reference to firebase storage
@@ -102,18 +100,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
     //refactored textstyle used buttons/textfields
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
-    // ignore: unused_local_variable
-    var blackText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black);
-    //refactored dividers
-    // ignore: unused_local_variable
-    var divider = Divider(
-      height: 10,
-      thickness: 3,
-      indent: 20,
-      endIndent: 20,
-      color: Colors.black,
-    );
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -351,40 +337,51 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               return IconButton(
                                   icon: Icon(Icons.check),
                                   onPressed: () {
-                                    val
-                                        .usernameQueryData(
-                                            usernameInputController.text)
-                                        .then((value) {
-                                      snapshotData = value;
-                                      if (snapshotData.docs.isEmpty) {
-                                        setState(() {
-                                          usernameExists = false;
-                                          _username =
-                                              usernameInputController.text;
-                                        });
-                                        final snackBar = SnackBar(
-                                          content:
-                                              Text('Username does not exist'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Colors.green,
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      } else {
-                                        setState(() {
-                                          usernameExists = true;
-                                        });
-                                        final snackBar = SnackBar(
-                                          content: Text('Username exists'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Colors.red,
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
-                                    });
+                                    if (usernameInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .usernameQueryData(
+                                              usernameInputController.text)
+                                          .then((value) {
+                                        snapshotData = value;
+                                        if (snapshotData.docs.isEmpty) {
+                                          setState(() {
+                                            usernameExists = false;
+                                            _username =
+                                                usernameInputController.text;
+                                          });
+                                          final snackBar = SnackBar(
+                                            content:
+                                                Text('Username does not exist'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.green,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        } else {
+                                          setState(() {
+                                            usernameExists = true;
+                                          });
+                                          final snackBar = SnackBar(
+                                            content: Text('Username exists'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.red,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                      });
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        content: Text('Username not entered'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Colors.red,
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
                                   });
                             }),
                       ],
@@ -486,6 +483,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           ),
                         ),
                       )),
+
                   //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
@@ -508,8 +506,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         _imageSelected = null;
                         _regionDropdownValue = null;
                         today = DateTime.now();
-                        //Navigator.pop(context);
-                        context.read<AuthenticationService>().signOut();
+                        _firebaseAuth.currentUser.delete();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
                       },
                       padding: const EdgeInsets.only(right: 120),
                       icon: Icon(Icons.clear),
@@ -520,6 +521,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
                           //change to false later
+
                           if (usernameExists = true) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:youth_food_movement/homepage/test_homepage.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
-import 'package:youth_food_movement/homepage/test_homepage.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -90,41 +90,6 @@ class _LogInState extends State<LogIn> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  decoration: InputDecoration(labelText: "Email"),
-                  controller: emailInputController,
-                ),
-              ),
-              Container(
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  decoration: InputDecoration(labelText: "Password"),
-                  controller: passwordInputController,
-                  obscureText: true,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<AuthenticationService>().signIn(
-                        email: emailInputController.text.trim(),
-                        password: passwordInputController.text.trim(),
-                      );
-                },
-                child: Text("Login"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
-                },
-                child: Text("Register"),
               ),
               Center(
                 child: Container(

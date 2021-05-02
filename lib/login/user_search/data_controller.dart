@@ -22,7 +22,16 @@ class DataController extends GetxController {
   Future usernameQueryData(String queryString) async {
     return FirebaseFirestore.instance
         .collection('users')
-        .where('Username', isEqualTo: queryString)
+        .where('username', isEqualTo: queryString)
+        .get();
+  }
+
+  //search for whether certain username exist in database
+  Future foodTitleQueryData(String queryString) async {
+    return FirebaseFirestore.instance
+        .collection('ingredients')
+        .where('title', isGreaterThanOrEqualTo: queryString)
+        .where('title', isLessThan: queryString + "\uF7FF")
         .get();
   }
 }
