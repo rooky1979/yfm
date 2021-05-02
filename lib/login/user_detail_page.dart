@@ -167,6 +167,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+
+
                                           _imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
                                         },
                                       );
@@ -201,6 +203,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+
                                           _imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
                                         },
                                       );
@@ -223,6 +226,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Row(
                     children: [
                       Padding(
+
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                         child: Container(
                           width: 175.0,
@@ -276,6 +280,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
+
                                           _imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
                                         },
                                       );
@@ -478,8 +483,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             },
                           ),
                         ),
+
                       )
                   ),
+
                   //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
@@ -515,6 +522,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       if (fullNameInputController.text.isNotEmpty) {
                         if(usernameInputController.text.isNotEmpty) {
                           //change to false later
+
                           if(usernameExists = true) {
                             if(_imageSelected != null) {
                               if(_regionDropdownValue != null) {
@@ -537,6 +545,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   Navigator.push(
                                     context,
+
                                     MaterialPageRoute(builder: (context) => LoginPage()),
                                   );
                                 }else {
@@ -636,6 +645,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   //method for getting avatar images
   Future _getImage1URL() async {
+
     String downloadURL = await avatarStorage.ref('avatar1.jpg').getDownloadURL();
     return downloadURL;
   }

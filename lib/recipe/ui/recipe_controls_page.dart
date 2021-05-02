@@ -189,7 +189,8 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => CommentBoard(
-                                      recipeID: TestGridTile.idNumber.toString(),
+                                      recipeID:
+                                          TestGridTile.idNumber.toString(),
                                     )))
                       }),
             ],
@@ -283,5 +284,4 @@ class _FavouritesState extends State<Favourites> {
             
 
       }
-  
 }

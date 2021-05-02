@@ -3,6 +3,8 @@ import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/comments/comment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 
 class CommentBoard extends StatefulWidget {
@@ -25,13 +27,19 @@ class _CommentBoardState extends State<CommentBoard> {
   @override
   Widget build(BuildContext context) {
     String recipeId = widget.recipeID;
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    debugPrint(_firebaseAuth.currentUser.uid);
+
     // This firestoreDB saves the comments in descending order by likes.
-    debugPrint(widget.recipeID + 'Here is the recipe ID');
+    var firestoreDbUsers =
+        FirebaseFirestore.instance.collection('Users').snapshots();
+
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
         .collection('comments')
         .snapshots();
+
     return Scaffold(
         //the body has the whole screen being used
         body: Padding(

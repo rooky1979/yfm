@@ -117,6 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       //button to cancel registration and go back to login page
                       Padding(
+
                         padding: const EdgeInsets.only(top:12.0),
                         child: ElevatedButton(
                           onPressed: () {
@@ -125,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
+
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             Navigator.push(
                               context,

@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 //import 'package:youth_food_movement/recipe/ui/comment_update_form.dart';
 
 class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
   final QuerySnapshot snapshot;
+  final QuerySnapshot userSnapshot;
   final int index;
   final String recipeID;
 
-  const Comment({Key key, this.snapshot, this.index, this.recipeID})
+  const Comment(
+      {Key key, this.snapshot, this.userSnapshot, this.index, this.recipeID})
       : super(key: key);
 }
 
 class _CommentState extends State<Comment> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
   Widget build(BuildContext context) {
@@ -27,9 +32,10 @@ class _CommentState extends State<Comment> {
     var dateFormatted = new DateFormat('EEE d MMM, y').format(timeToDate);
     var snapshotData = widget.snapshot.docs[widget.index];
     var docID = widget.snapshot.docs[widget.index].id;
-    var user = "Temp Name 2";
+    String user = _firebaseAuth.currentUser.uid;
     var list = [user];
     Color likeColor = Colors.grey;
+
     //int counter = 100;
     var numLikes = snapshotData['likes'];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
@@ -39,7 +45,6 @@ class _CommentState extends State<Comment> {
     TextEditingController(text: snapshotData['description']);
 
     //_getCommentImage(docID, widget.index);
-
     return Column(
       children: [
         Container(
@@ -50,47 +55,83 @@ class _CommentState extends State<Comment> {
               children: [
                 //tile contents
                 ListTile(
-                    title: Text(snapshotData['user'] + " - " + dateFormatted,
+                  title: Row(children: [
+                    FutureBuilder(
+                        future: _getUserName(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            //return the image and make it cover the container
+                            return Container(
+                              child: Text(snapshot.data,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 15.0)),
+                            );
+                          } else {
+                            return Container(child: Center());
+                          }
+                        }),
+                    Text(" - " + dateFormatted,
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 12.0)),
-                    subtitle: Text(
-                        snapshotData['description'] +
-                            snapshotData['imgAttached'],
-                        style: const TextStyle(
-                            fontSize: 17.0, color: Colors.black)),
-                    leading: Icon(Icons.account_circle_rounded, size: 50)),
-                FutureBuilder(
-                    future: _getImageURL(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        //return the image and make it cover the container
-                        return GestureDetector(
-                          child: Image.network(
-                            snapshot.data,
-                            fit: BoxFit.cover,
-                          ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return GestureDetector(
-                                child: Center(
-                                  child: Image.network(
-                                    snapshot.data,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                onTap: () => Navigator.pop(context),
-                              );
-                            }));
-                          },
-                        );
-                      } else {
-                        return Container(child: Center());
-                      }
-                    }),
+                  ]),
+                  subtitle: Text(snapshotData['description'],
+                      style:
+                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                  leading: FutureBuilder(
+                      future: _getUserImage(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          //return the image and make it cover the container
+                          return CircleAvatar(
+                            radius: 30.0,
+                            backgroundImage: NetworkImage(snapshot.data),
+                            backgroundColor: Colors.transparent,
+                          );
+                        } else {
+                          return const Icon(Icons.verified_user_rounded);
+                        }
+                      }),
+                ),
+
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                    child: FutureBuilder(
+                        future: _getImageURL(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            //return the image and make it cover the container
+                            return GestureDetector(
+                              child: Image.network(
+                                snapshot.data,
+                                fit: BoxFit.cover,
+                              ),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    child: Center(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    onTap: () => Navigator.pop(context),
+                                  );
+                                }));
+                              },
+                            );
+                          } else {
+                            return Container(child: Center());
+                          }
+                        }),
+                  ),
+                ),
+
                 Container(
                   padding: const EdgeInsets.only(
-                      top: 5, left: 10, right: 10, bottom: 5),
+                      top: 5, left: 10, right: 15, bottom: 5),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     Container(
@@ -212,13 +253,35 @@ class _CommentState extends State<Comment> {
   Future _getImageURL() async {
     //ref string will change so the parameter will be the jpg ID (maybe)
     String downloadURL = await storage
-        .ref('images/' + widget.snapshot.docs[widget.index].id)
+        .ref('comment_images/' + widget.snapshot.docs[widget.index].id)
         .getDownloadURL();
     return downloadURL;
   }
 
+  Future _getUserImage() async {
+    //ref string will change so the parameter will be the jpg ID (maybe)
+    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getUserName() async {
+    String username;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: widget.snapshot.docs[widget.index][
+                'uid']) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        username = doc["username"];
+      });
+    });
+    return username;
+  }
+
   _checkUser(String docId, int id, String user, int counter, Color likeColor) {
-    if (widget.snapshot.docs[widget.index]['user'] == user) {
+    if (widget.snapshot.docs[widget.index]['uid'] == user) {
       // if (user == user)
 
       return Row(
@@ -234,7 +297,7 @@ class _CommentState extends State<Comment> {
                       color: Colors.black,
                     ),
                     onPressed: () async {
-                      showAlert(context, docId);
+                      showDeleteAlert(context, docId);
                     }),
               ],
             ),
@@ -242,11 +305,30 @@ class _CommentState extends State<Comment> {
         ],
       );
     } else {
-      return (Container());
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: Row(
+              children: [
+                IconButton(
+                    //delete the comment from the database
+                    icon: Icon(
+                      Icons.flag,
+                      color: Colors.black,
+                    ),
+                    onPressed: () async {
+                      showReportAlert(context, docId);
+                    }),
+              ],
+            ),
+          ),
+        ],
+      );
     }
   }
 
-  showAlert(BuildContext context, var docId) {
+  showDeleteAlert(BuildContext context, var docId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -256,9 +338,12 @@ class _CommentState extends State<Comment> {
             TextButton(
               child: new Text("Yes"),
               onPressed: () {
-                var collectionReference =
-                    FirebaseFirestore.instance.collection('comment');
-                collectionReference.doc(docId).delete();
+                FirebaseFirestore.instance
+                    .collection('recipe')
+                    .doc(widget.recipeID)
+                    .collection('comments')
+                    .doc(docId)
+                    .delete();
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),
                   duration: Duration(milliseconds: 1000),
@@ -266,6 +351,43 @@ class _CommentState extends State<Comment> {
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  showReportAlert(BuildContext context, var docId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text('Report comment?'),
+          actions: <Widget>[
+            TextButton(
+              child: new Text("Yes"),
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('recipe')
+                    .doc(widget.recipeID)
+                    .collection('comments')
+                    .doc(docId)
+                    .update({'reported': true});
+                final snackBar = SnackBar(
+                  content: Text('Comment Reported'),
+                  duration: Duration(milliseconds: 1000),
+                  backgroundColor: Colors.red,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.of(context).pop();
               },
             ),
