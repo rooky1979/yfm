@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -169,7 +170,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                             fit: BoxFit.cover,
                                           ),
                                           onTap: () {
-                                            _imageSelected = "gs://youth-food-movement.appspot.com/avatar1.jpg";
+                                            _imageSelected = "avatar1.jpg";
+                                            final snackBar = SnackBar(
+                                              content: Text('Avatar 1 selected'),
+                                              duration: Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                           },
                                         );
                                       }
@@ -203,7 +210,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                             fit: BoxFit.cover,
                                           ),
                                           onTap: () {
-                                            _imageSelected = "gs://youth-food-movement.appspot.com/avatar2.jpg";
+                                            _imageSelected = "avatar2.jpg";
+                                            final snackBar = SnackBar(
+                                              content: Text('Avatar 2 selected'),
+                                              duration: Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                           },
                                         );
                                       }
@@ -244,7 +257,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       fit: BoxFit.cover,
                                     ),
                                     onTap: () {
-                                      _imageSelected = "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                      _imageSelected = "avatar3.jpg";
+                                      final snackBar = SnackBar(
+                                        content: Text('Avatar 3 selected'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Colors.green,
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                     },
                                   );
                                 }
@@ -279,7 +298,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          _imageSelected = "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                          _imageSelected = "avatar4.jpg";
+                                          final snackBar = SnackBar(
+                                            content: Text('Avatar 4 selected'),
+                                            duration: Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.green,
+                                          );
+                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                         },
                                       );
                                     }
@@ -651,19 +676,19 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   //method for getting avatar images
   Future _getImage1URL() async {
-    String downloadURL = await avatarStorage.ref('avatar1.jpg').getDownloadURL();
+    String downloadURL = await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
     return downloadURL;
   }
   Future _getImage2URL() async {
-    String downloadURL = await avatarStorage.ref('avatar2.jpg').getDownloadURL();
+    String downloadURL = await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
     return downloadURL;
   }
   Future _getImage3URL() async {
-    String downloadURL = await avatarStorage.ref('avatar3.jpg').getDownloadURL();
+    String downloadURL = await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
     return downloadURL;
   }
   Future _getImage4URL() async {
-    String downloadURL = await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+    String downloadURL = await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
     return downloadURL;
   }
 }

@@ -16,6 +16,13 @@ class DataController extends GetxController {
         .get();
   }
 
+  //Search for whether email exists in database
+  Future emailQueryData(String queryString) async {
+    return FirebaseFirestore.instance.collection('users')
+        .where('email', isEqualTo: queryString)
+        .get();
+  }
+
   //search for whether certain username exist in database
   Future usernameQueryData(String queryString) async {
     return FirebaseFirestore.instance.collection('users')
