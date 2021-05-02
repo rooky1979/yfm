@@ -1,4 +1,3 @@
-  
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:youth_food_movement/comments/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
-
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -203,6 +201,7 @@ class RecipeButtons extends StatelessWidget {
 }
 
 //favourites button that toggles solid for favourited and outline for unfavourited
+// ignore: must_be_immutable
 class Favourites extends StatefulWidget {
   var firestoreDb = FirebaseFirestore.instance
       .collection('recipe')
@@ -218,71 +217,73 @@ class _FavouritesState extends State<Favourites> {
   @override
   Widget build(BuildContext context) {
     _checkRecipeFavourited(TestGridTile.idNumber);
-        if (!_isFavorite) {
-          return IconButton(
-              icon: Icon(
-                Icons.favorite_outline_rounded, //comments button
-                size: 50,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isFavorite = !_isFavorite;
-                  //add recipe ID to favourites array
-                  _addFavouriteToDB(TestGridTile.idNumber.toString());
-                });
-              });
-        } else {
-          return IconButton(
-              icon: Icon(
-                Icons.favorite_rounded,
-                size: 50,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isFavorite = !_isFavorite;
-                  //if array contains recipeID, remove
-                  _removeFavouriteFromDB(TestGridTile.idNumber);
-                });
-              });
-        }
-      }
-    //helper method to add the recipe ID to the firestore favourites array
-      void _addFavouriteToDB(String idNumber) async {
-        //instantiate a local list to hold temp ID
-        List recipes = [];
-        //add the idNumber to the temp array
-        recipes.add(idNumber);
-        //add the temp array to the firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc('0dT614naJKZgbjRZCGMj')
-            .update({'favourites': FieldValue.arrayUnion(recipes)});
-            //clear the temp array
-            recipes.clear();
-      }
-    //helper method to add the recipe ID to the firestore favourites array
-      void _removeFavouriteFromDB(String idNumber) async {
-            //instantiate a local list to hold temp ID
-        List recipes = [];
-            //add the idNumber to the temp array
-        recipes.add(idNumber);
-            //add the temp array to the firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc('0dT614naJKZgbjRZCGMj')
-            .update({'favourites': FieldValue.arrayRemove(recipes)});
-            //clear the temp array
-            recipes.clear();
-      }
-    //method to check if the recipe ID is in the users array
-      void _checkRecipeFavourited(String idNumber) async{
+    if (!_isFavorite) {
+      return IconButton(
+          icon: Icon(
+            Icons.favorite_outline_rounded, //comments button
+            size: 50,
+            color: Colors.red,
+          ),
+          onPressed: () {
+            setState(() {
+              _isFavorite = !_isFavorite;
+              //add recipe ID to favourites array
+              _addFavouriteToDB(TestGridTile.idNumber.toString());
+            });
+          });
+    } else {
+      return IconButton(
+          icon: Icon(
+            Icons.favorite_rounded,
+            size: 50,
+            color: Colors.red,
+          ),
+          onPressed: () {
+            setState(() {
+              _isFavorite = !_isFavorite;
+              //if array contains recipeID, remove
+              _removeFavouriteFromDB(TestGridTile.idNumber);
+            });
+          });
+    }
+  }
 
-        var firestoreDB =  FirebaseFirestore.instance
-            .collection('users')
-            .doc('0dT614naJKZgbjRZCGMj').snapshots();
-            
+  //helper method to add the recipe ID to the firestore favourites array
+  void _addFavouriteToDB(String idNumber) async {
+    //instantiate a local list to hold temp ID
+    List recipes = [];
+    //add the idNumber to the temp array
+    recipes.add(idNumber);
+    //add the temp array to the firestore
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc('0dT614naJKZgbjRZCGMj')
+        .update({'favourites': FieldValue.arrayUnion(recipes)});
+    //clear the temp array
+    recipes.clear();
+  }
 
-      }
+  //helper method to add the recipe ID to the firestore favourites array
+  void _removeFavouriteFromDB(String idNumber) async {
+    //instantiate a local list to hold temp ID
+    List recipes = [];
+    //add the idNumber to the temp array
+    recipes.add(idNumber);
+    //add the temp array to the firestore
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc('0dT614naJKZgbjRZCGMj')
+        .update({'favourites': FieldValue.arrayRemove(recipes)});
+    //clear the temp array
+    recipes.clear();
+  }
+
+  //method to check if the recipe ID is in the users array
+  void _checkRecipeFavourited(String idNumber) async {
+    // ignore: unused_local_variable
+    var firestoreDB = FirebaseFirestore.instance
+        .collection('users')
+        .doc('0dT614naJKZgbjRZCGMj')
+        .snapshots();
+  }
 }
