@@ -11,6 +11,7 @@ class DataController extends GetxController {
 
   //Search for whether certain uid exist in database
   Future uidQueryData(String queryString) async {
+
     return FirebaseFirestore.instance.collection('users')
         .where('uid', isEqualTo: queryString)
         .get();
@@ -25,6 +26,7 @@ class DataController extends GetxController {
 
   //search for whether certain username exist in database
   Future usernameQueryData(String queryString) async {
+
     return FirebaseFirestore.instance.collection('users')
         .where('username', isEqualTo: queryString)
         .get();

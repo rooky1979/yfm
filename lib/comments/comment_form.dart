@@ -15,8 +15,6 @@ class CommentEntryDialog extends StatefulWidget {
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   CollectionReference imgRef;
   firebase_storage.Reference ref;
 
@@ -32,7 +30,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
 
   File _imgfile;
   final imagePicker = ImagePicker();
-  String imgAttached = "false";
+  bool imgAttached = false;
   var url;
 
 /*
@@ -42,7 +40,8 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
       _imgfile = File(imgfile.path);
-      imgAttached = "true";
+      imgAttached = true;
+      debugPrint(_imgfile.path);
     });
     Navigator.of(context).pop();
   }
@@ -54,6 +53,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
       _imgfile = File(imgfile.path);
+      imgAttached = true;
       // debugPrint(_imgfile.path.toString());
     });
     Navigator.of(context).pop();
@@ -66,7 +66,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     if (_imgfile != null) {
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('/images/' + commentId);
+          .child('/comment_images/' + commentId);
       await ref.putFile(_imgfile).whenComplete(() async {
         await ref.getDownloadURL().then((value) {});
       });
@@ -131,10 +131,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     width: 10,
                     color: Colors.black38,
                   ),
-                  VerticalDivider(
-                    thickness: 4,
-                    width: 1,
-                  ),
                   TextButton(
                       onPressed: () {
                         _showChoiceDialog(context);
@@ -192,6 +188,8 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
  */
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
     String recipeID = widget.recipeID;
     return Scaffold(
       body: Padding(
@@ -219,27 +217,24 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     //button to save the comment to the database
                     onPressed: () {
                       print(imgAttached);
-
-                      CollectionReference users =
-                          FirebaseFirestore.instance.collection('Users');
-
                       FirebaseFirestore.instance
                           .collection('recipe')
                           .doc('$recipeID')
                           .collection('comments')
                           .add({
-                        'user': 'temp',
+                        'user': _firebaseAuth.currentUser.uid,
+                        'uid': _firebaseAuth.currentUser.uid,
                         'imgAttached': imgAttached,
                         'description': descriptionInputController.text,
                         'timestamp': new DateTime.now(),
                         'likes': 0,
                         'likedUsers': [],
+                        'reported': false
                       }).then((response) {
                         print(response.id);
-                        if (imgAttached == "true") {
+                        if (imgAttached == true) {
                           _uploadImageToFirebase(response.id);
                         }
-
                         final snackBar = SnackBar(
                           content: Text('Comment Posted'),
                           duration: Duration(milliseconds: 1000),
@@ -249,7 +244,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         Navigator.pop(context);
                         descriptionInputController.clear();
                         _imgfile = null;
-                        imgAttached = "false";
+                        imgAttached = false;
                       }).catchError((onError) => print(onError));
                     },
                     padding: const EdgeInsets.only(left: 120),

@@ -186,7 +186,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                               child: CircularProgressIndicator()
                                           ),
                                         );
-                                      }
                                     }
                                 ),
                               ),
@@ -226,7 +225,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                               child: CircularProgressIndicator()
                                           ),
                                         );
-                                      }
                                     }
                                 ),
                               ),
@@ -239,6 +237,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Row(
                     children: [
                       Padding(
+
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                         child: Container(
                           width: MediaQuery.of(context).size.width*0.4,
@@ -518,8 +517,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             },
                           ),
                         ),
+
                       )
                   ),
+
                   //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
@@ -577,6 +578,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   Navigator.push(
                                     context,
+
                                     MaterialPageRoute(builder: (context) => LoginPage()),
                                   );
                                 }else {

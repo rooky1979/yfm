@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
+import 'package:youth_food_movement/recipe/ui/test_homepage.dart';
 
 import 'user_search/data_controller.dart';
 
@@ -42,7 +43,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     //if email and password exist in firebase then move to homepage
     if (firebaseUser != null) {
-      return HomePage();
+      return TestHomepage();
     }
     //if email and password doesnt exist in firebase then move back to login
     return LogIn();
@@ -125,6 +126,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       //sign in button
                       Padding(
+
                         padding: const EdgeInsets.only(top:12.0),
                         child: GetBuilder<DataController>(
                             init: DataController(),
@@ -181,6 +183,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       //register account button
                       Padding(
+
                         padding: const EdgeInsets.only(top:12.0),
                         child: ElevatedButton(
                           onPressed: () {
