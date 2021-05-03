@@ -20,8 +20,8 @@ class TestGridTile extends StatelessWidget {
     String recipeID = docID.toString();
 
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
+      width: 150,//MediaQuery.of(context).size.width,
+      height: 150,//MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
           future: _getImageURL(docID),
@@ -31,7 +31,7 @@ class TestGridTile extends StatelessWidget {
               return GestureDetector(
                 child: Image.network(
                   snapshot.data,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 onTap: () {
                   idNumber = recipeID;
