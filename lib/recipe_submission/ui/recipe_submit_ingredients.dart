@@ -137,7 +137,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: TextField(
                         controller: amountController,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9\.]")),],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9\.]")),
+                        ],
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType.numberWithOptions(
                             signed: true,

@@ -28,22 +28,22 @@ class _SearchState extends State<Search> {
                   transition: Transition.downToUp,
                   arguments: snapshotData.docs[index]);
             },
-            child: ListTile(
-              // leading: CircleAvatar(
-              //   backgroundImage:
-              //       NetworkImage(snapshotData.docs[index].data()['image']),
-              // ),
-              title: Text(snapshotData.docs[index].data()['uid'],
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0)),
-              subtitle: Text(snapshotData.docs[index].data()['Username'],
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0)),
-            ),
+            //  child: ListTile(
+            //    // leading: CircleAvatar(
+            //    //   backgroundImage:
+            //    //       NetworkImage(snapshotData.docs[index].data()['image']),
+            //    // ),
+            //    title: Text(snapshotData.docs[index].data()['uid'],
+            //        style: TextStyle(
+            //            color: Colors.white,
+            //            fontWeight: FontWeight.bold,
+            //            fontSize: 24.0)),
+            //    subtitle: Text(snapshotData.docs[index].data()['Username'],
+            //        style: TextStyle(
+            //            color: Colors.white,
+            //            fontWeight: FontWeight.bold,
+            //            fontSize: 14.0)),
+            //  ),
           );
         },
       );
