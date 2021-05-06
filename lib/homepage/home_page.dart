@@ -98,8 +98,8 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height - 100.0,
         child: ListView.builder(
-          itemCount: 11,
-          itemBuilder: (BuildContext context, int index) => Column(
+          itemCount: 4,
+          itemBuilder: (context, index) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -117,32 +117,31 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 height: 180.0,
-                child: StreamBuilder(
-                                stream: firestoreDb,
-                                builder: (
-                                  context,
-                                  snapshot,
-                                ) {
-                                  if (!snapshot.hasData)
-                                    return CircularProgressIndicator();
-                                  return ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: snapshot.data.docs.length,
-                                      itemBuilder: (context, int index) {
-                                        return GestureDetector(
-                                          child: Card(
-                                            elevation: 5,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: TestGridTile(
-                                              snapshot: snapshot.data,
-                                              index: index,
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                }),
+                child: FutureBuilder(
+                  future: getRecipeCategory(categories[index].toString()),
+                    //stream: ,
+                    builder: (
+                      context,
+                      snapshot,
+                    ) {
+                      if (!snapshot.hasData) return CircularProgressIndicator();
+                      return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data.docs.length,
+                          itemBuilder: (context, int index) {
+                            return GestureDetector(
+                              child: Card(
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: TestGridTile(
+                                  snapshot: snapshot.data,
+                                  index: index,
+                                ),
+                              ),
+                            );
+                          });
+                    }),
               ),
             ],
           ),
@@ -160,6 +159,15 @@ class _HomePageState extends State<HomePage> {
     String downloadURL =
         await storage.ref('recipe_images/$docID').getDownloadURL();
     return downloadURL;
+  }
+
+  getRecipeCategory(String queryString) async {
+    var recipeDocRef =
+        await FirebaseFirestore.instance.collection('recipe').add({});
+    //get the info from the DB
+    await recipeDocRef.collection("ingredients")
+        .where('protein', isEqualTo: queryString)
+        .get();
   }
 }
 /* body: StreamBuilder(
