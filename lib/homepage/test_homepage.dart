@@ -12,7 +12,11 @@ class _TestHomepageState extends State<TestHomepage> {
   var arr = ['dead index', 'Beef', 'Pork', 'Dairy', 'Vege', 'Chicken'];
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
   @override
+<<<<<<< Updated upstream
   Widget build(BuildContext context) {
+=======
+  /* Widget build(BuildContext context) {
+>>>>>>> Stashed changes
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -109,6 +113,7 @@ class _TestHomepageState extends State<TestHomepage> {
       ),
     );
   }
+<<<<<<< Updated upstream
 }
 /*
 @override
@@ -139,3 +144,71 @@ Widget build(BuildContext context) {
   );
 }
 */
+=======
+}*/
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Search",
+                      hintStyle: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 0,
+                  child: Row(),
+                )
+              ],
+            )),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
+              icon: Icon(Icons.settings)),
+        ],
+      ),
+      body: StreamBuilder(
+          stream: firestoreDb,
+          builder: (
+            context,
+            snapshot,
+          ) {
+            if (!snapshot.hasData) return CircularProgressIndicator();
+            return GridView.builder(
+                itemCount: snapshot.data.docs.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, int index) {
+                  return GestureDetector(
+                    child: Card(
+                      child: TestGridTile(
+                        snapshot: snapshot.data,
+                        index: index,
+                      ),
+                    ),
+                  );
+                });
+          }),
+    );
+  }
+}
+>>>>>>> Stashed changes
