@@ -28,12 +28,12 @@ class _TestHomepageState extends State<TestHomepage> {
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          val
-                              .foodTitleQueryData(searchController.text)
-                              .then((value) {
-                            snapshotData = value;
-                            setState(() {});
-                          });
+//                         val
+//                             .foodTitleQueryData(searchController.text)
+//                             .then((value) {
+//                           snapshotData = value;
+//                           setState(() {});
+//                         });
                         }),
                     IconButton(
                         onPressed: () {

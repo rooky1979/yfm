@@ -159,13 +159,6 @@ class _LogInState extends State<LogIn> {
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.green,
                                           );
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TestHomepage(),
-                                            ),
-                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
                                         } else {
@@ -189,6 +182,11 @@ class _LogInState extends State<LogIn> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TestHomepage()),
+                                    );
                                   } else {
                                     final snackBar = SnackBar(
                                       content: Text('email not entered'),

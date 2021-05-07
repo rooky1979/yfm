@@ -86,9 +86,6 @@ class _CommentBoardState extends State<CommentBoard> {
     ));
   }
 
-/*
- * This dialogCall method produces the comment entry form
- */
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(
         context: context,
