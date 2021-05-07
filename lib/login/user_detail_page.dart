@@ -11,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
-
 class UserDetailPage extends StatefulWidget {
   @override
   _UserDetailPageState createState() => _UserDetailPageState();
@@ -132,7 +131,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 children: [
                   //Label for select avatars
                   Padding(
-                    padding: const EdgeInsets.only(left: 13.0, right: 13.0, top: 4.0),
+                    padding: const EdgeInsets.only(
+                        left: 13.0, right: 13.0, top: 4.0),
                     child: SizedBox(
                       height: 50,
                       child: Container(
@@ -142,8 +142,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             color: Colors.red[400],
                           ),
                           alignment: Alignment.center,
-                          child: Text("Select Prefered Avatar", style: whiteText,)
-                      ),
+                          child: Text(
+                            "Select Prefered Avatar",
+                            style: whiteText,
+                          )),
                     ),
                   ),
                   //1st row of button with avatar image from database
@@ -152,10 +154,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     child: Row(
                       children: [
                         Padding(
-                            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                            padding:
+                                const EdgeInsets.only(left: 5.0, right: 5.0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width*0.4,
-                              height: MediaQuery.of(context).size.height*0.25,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.25,
                               margin: EdgeInsets.all(8.0),
                               child: Card(
                                 child: FutureBuilder(
@@ -172,29 +175,32 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           onTap: () {
                                             _imageSelected = "avatar1.jpg";
                                             final snackBar = SnackBar(
-                                              content: Text('Avatar 1 selected'),
-                                              duration: Duration(milliseconds: 1000),
+                                              content:
+                                                  Text('Avatar 1 selected'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
                                               backgroundColor: Colors.green,
                                             );
-                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
                                           },
                                         );
-                                      }
-                                      else {
+                                      } else {
                                         return Container(
                                           child: Center(
-                                              child: CircularProgressIndicator()
-                                          ),
+                                              child:
+                                                  CircularProgressIndicator()),
                                         );
-                                    }
-                                ),
+                                      }
+                                    }),
                               ),
-                            )
-                        ),Padding(
-                            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                            )),
+                        Padding(
+                            padding:
+                                const EdgeInsets.only(left: 5.0, right: 5.0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width*0.4,
-                              height: MediaQuery.of(context).size.height*0.25,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.25,
                               margin: EdgeInsets.all(8.0),
                               child: Card(
                                 child: FutureBuilder(
@@ -211,25 +217,26 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           onTap: () {
                                             _imageSelected = "avatar2.jpg";
                                             final snackBar = SnackBar(
-                                              content: Text('Avatar 2 selected'),
-                                              duration: Duration(milliseconds: 1000),
+                                              content:
+                                                  Text('Avatar 2 selected'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
                                               backgroundColor: Colors.green,
                                             );
-                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
                                           },
                                         );
-                                      }
-                                      else {
+                                      } else {
                                         return Container(
                                           child: Center(
-                                              child: CircularProgressIndicator()
-                                          ),
+                                              child:
+                                                  CircularProgressIndicator()),
                                         );
-                                    }
-                                ),
+                                      }
+                                    }),
                               ),
-                            )
-                        ),
+                            )),
                       ],
                     ),
                   ),
@@ -237,52 +244,49 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Row(
                     children: [
                       Padding(
-
-                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.4,
-                          height: MediaQuery.of(context).size.height*0.25,
-                          margin: EdgeInsets.all(8.0),
-                          child: Card(
-                            child: FutureBuilder(
-                              future: _getImage3URL(),
-                                builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  //this creates the pictures to be clickable
-                                  //and will take the user to the recipe page
-                                  return GestureDetector(
-                                    child: Image.network(
-                                        snapshot.data,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    onTap: () {
-                                      _imageSelected = "avatar3.jpg";
-                                      final snackBar = SnackBar(
-                                        content: Text('Avatar 3 selected'),
-                                        duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Colors.green,
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                  future: _getImage3URL(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      //this creates the pictures to be clickable
+                                      //and will take the user to the recipe page
+                                      return GestureDetector(
+                                        child: Image.network(
+                                          snapshot.data,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        onTap: () {
+                                          _imageSelected = "avatar3.jpg";
+                                          final snackBar = SnackBar(
+                                            content: Text('Avatar 3 selected'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.green,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        },
                                       );
-                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                    },
-                                  );
-                                }
-                                else {
-                                  return Container(
-                                    child: Center(
-                                      child: CircularProgressIndicator()
-                                    ),
-                                  );
-                                }
-                              }
+                                    } else {
+                                      return Container(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      );
+                                    }
+                                  }),
                             ),
-                          ),
-                        )
-                      ),
+                          )),
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width*0.4,
-                            height: MediaQuery.of(context).size.height*0.25,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
                             margin: EdgeInsets.all(8.0),
                             child: Card(
                               child: FutureBuilder(
@@ -300,25 +304,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           _imageSelected = "avatar4.jpg";
                                           final snackBar = SnackBar(
                                             content: Text('Avatar 4 selected'),
-                                            duration: Duration(milliseconds: 1000),
+                                            duration:
+                                                Duration(milliseconds: 1000),
                                             backgroundColor: Colors.green,
                                           );
-                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
                                         },
                                       );
-                                    }
-                                    else {
+                                    } else {
                                       return Container(
                                         child: Center(
-                                            child: CircularProgressIndicator()
-                                        ),
+                                            child: CircularProgressIndicator()),
                                       );
                                     }
-                                  }
-                              ),
+                                  }),
                             ),
-                          )
-                      ),
+                          )),
                     ],
                   ),
                   //Textfield for name
@@ -360,12 +362,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   fillColor: Colors.red[400],
                                   filled: true,
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.greenAccent, width: 3.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.greenAccent, width: 3.0),
                                   ),
                                   enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.red, width: 3.0),
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 3.0),
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                                 controller: usernameInputController,
@@ -376,49 +378,66 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
                             child: GetBuilder<DataController>(
-                                  init: DataController(),
-                                  builder: (val) {
-                                    return IconButton(
-                                        icon: Icon(Icons.check),
-                                        onPressed: () {
-                                          if(usernameInputController.text.isNotEmpty) {
-                                            val.usernameQueryData(usernameInputController.text).then((value) {
-                                              snapshotData = value;
-                                              if(snapshotData.docs.isEmpty) {
-                                                setState(() {
-                                                  usernameExists = false;
-                                                  _username = usernameInputController.text;
-                                                  debugPrint(usernameExists.toString());
-                                                });
-                                                final snackBar = SnackBar(
-                                                  content: Text('Username does not exist'),
-                                                  duration: Duration(milliseconds: 1000),
-                                                  backgroundColor: Colors.green,
-                                                );
-                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                              }else {
-                                                setState(() {
-                                                  usernameExists = true;
-                                                  debugPrint(usernameExists.toString());
-                                                });
-                                                final snackBar = SnackBar(
-                                                  content: Text('Username exists'),
-                                                  duration: Duration(milliseconds: 1000),
-                                                  backgroundColor: Colors.red,
-                                                );
-                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                              }
-                                            });
-                                          } else {
-                                            final snackBar = SnackBar(
-                                              content: Text('Username not entered'),
-                                              duration: Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.red,
-                                            );
-                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                          }
-                                        });
-                                  }),
+                                init: DataController(),
+                                builder: (val) {
+                                  return IconButton(
+                                      icon: Icon(Icons.check),
+                                      onPressed: () {
+                                        if (usernameInputController
+                                            .text.isNotEmpty) {
+                                          val
+                                              .usernameQueryData(
+                                                  usernameInputController.text)
+                                              .then((value) {
+                                            snapshotData = value;
+                                            if (snapshotData.docs.isEmpty) {
+                                              setState(() {
+                                                usernameExists = false;
+                                                _username =
+                                                    usernameInputController
+                                                        .text;
+                                                debugPrint(
+                                                    usernameExists.toString());
+                                              });
+                                              final snackBar = SnackBar(
+                                                content: Text(
+                                                    'Username does not exist'),
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                backgroundColor: Colors.green,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            } else {
+                                              setState(() {
+                                                usernameExists = true;
+                                                debugPrint(
+                                                    usernameExists.toString());
+                                              });
+                                              final snackBar = SnackBar(
+                                                content:
+                                                    Text('Username exists'),
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                backgroundColor: Colors.red,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            }
+                                          });
+                                        } else {
+                                          final snackBar = SnackBar(
+                                            content:
+                                                Text('Username not entered'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.red,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                      });
+                                }),
                           ),
                         ],
                       ),
@@ -429,21 +448,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
                     child: Column(
                       children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 7.0),
-                            child: SizedBox(
-                              height: 40,
-                              child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.red[400],
-                                  ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 7.0),
+                          child: SizedBox(
+                            height: 40,
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.red[400],
+                                ),
                                 alignment: Alignment.center,
-                                child: Text("Enter Birthday", style: whiteText,)
-                              ),
-                            ),
+                                child: Text(
+                                  "Enter Birthday",
+                                  style: whiteText,
+                                )),
                           ),
+                        ),
                         //button to bring out datepicker for birthday
                         Container(
                           width: MediaQuery.of(context).size.width,
@@ -456,15 +477,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               child: Text(
                                 formattedDate.format(today).toString(),
                                 style: whiteText,
-                              )
-                          ),
+                              )),
                         ),
                       ],
                     ),
                   ),
                   //dropdown button list to pick which region user lives in
                   Padding(
-                      padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+                      padding:
+                          const EdgeInsets.only(left: 13, right: 13, top: 7),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
@@ -517,16 +538,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             },
                           ),
                         ),
-
-                      )
-                  ),
+                      )),
 
                   //multiselect form for allergy check list
                   Padding(
                       padding: const EdgeInsets.all(13.0),
                       child: _allergiesCheckList(
-                        'Allergies affected', _allergiesList, whiteText,)
-                  ),
+                        'Allergies affected',
+                        _allergiesList,
+                        whiteText,
+                      )),
                 ],
               ),
               //cancel button and save button
@@ -554,56 +575,66 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     //button to check if datas are all entered and save data to the database
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
-                        if(usernameInputController.text.isNotEmpty) {
-                          if(usernameExists != true) {
-                            if(_imageSelected != null) {
-                              if(_regionDropdownValue != null) {
-                                if(formattedDate.format(today) != formattedDate.format(DateTime.now())) {
-                                  FirebaseFirestore.instance.collection('users').add({
-                                    'uid' : _firebaseAuth.currentUser.uid,
-                                    'email' : _firebaseAuth.currentUser.email,
-                                    'name' : fullNameInputController.text,
-                                    'username' : _username,
-                                    'image' : _imageSelected,
-                                    'region' : _regionDropdownValue,
-                                    'birthday' : formattedDate.format(today),
-                                    'accountedCreatedTime': formattedDate.format(new DateTime.now()),
-                                    'allergy' : _allergies
+                        if (usernameInputController.text.isNotEmpty) {
+                          if (usernameExists != true) {
+                            if (_imageSelected != null) {
+                              if (_regionDropdownValue != null) {
+                                if (formattedDate.format(today) !=
+                                    formattedDate.format(DateTime.now())) {
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .add({
+                                    'uid': _firebaseAuth.currentUser.uid,
+                                    'email': _firebaseAuth.currentUser.email,
+                                    'name': fullNameInputController.text,
+                                    'username': _username,
+                                    'image': _imageSelected,
+                                    'region': _regionDropdownValue,
+                                    'birthday': formattedDate.format(today),
+                                    'accountedCreatedTime': formattedDate
+                                        .format(new DateTime.now()),
+                                    'allergy': _allergies
                                   });
                                   final snackBar = SnackBar(
-                                    content: Text('Account Successfully Created'),
+                                    content:
+                                        Text('Account Successfully Created'),
                                     duration: Duration(milliseconds: 1000),
                                     backgroundColor: Colors.green,
                                   );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                   Navigator.push(
                                     context,
-
-                                    MaterialPageRoute(builder: (context) => LoginPage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
                                   );
-                                }else {
+                                } else {
                                   final snackBar = SnackBar(
-                                    content: Text('Birthday has not been selected'),
+                                    content:
+                                        Text('Birthday has not been selected'),
                                     duration: Duration(milliseconds: 1000),
                                     backgroundColor: Colors.red,
                                   );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
-                              }else {
+                              } else {
                                 final snackBar = SnackBar(
                                   content: Text('Region has not been selected'),
                                   duration: Duration(milliseconds: 1000),
                                   backgroundColor: Colors.red,
                                 );
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
                               }
-                            }else {
+                            } else {
                               final snackBar = SnackBar(
                                 content: Text('Image has not been selected'),
                                 duration: Duration(milliseconds: 1000),
                                 backgroundColor: Colors.red,
                               );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             }
                           } else {
                             final snackBar = SnackBar(
@@ -611,7 +642,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           }
                         } else {
                           final snackBar = SnackBar(
@@ -643,7 +675,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
   }
 
   //helper method for the checkboxes
-  Widget _allergiesCheckList(String title, List checklistOptions, var textStyle,) {
+  Widget _allergiesCheckList(
+    String title,
+    List checklistOptions,
+    var textStyle,
+  ) {
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -652,7 +688,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
       checkBoxActiveColor: Colors.red,
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       title: Text(
         title,
         style: textStyle,
@@ -678,20 +714,26 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   //method for getting avatar images
   Future _getImage1URL() async {
-    String downloadURL = await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
+    String downloadURL =
+        await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
     return downloadURL;
   }
+
   Future _getImage2URL() async {
-    String downloadURL = await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
+    String downloadURL =
+        await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
     return downloadURL;
   }
+
   Future _getImage3URL() async {
-    String downloadURL = await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
+    String downloadURL =
+        await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
     return downloadURL;
   }
+
   Future _getImage4URL() async {
-    String downloadURL = await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
+    String downloadURL =
+        await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
     return downloadURL;
   }
 }
-
