@@ -19,13 +19,13 @@ class UserInformationCard extends StatelessWidget {
     //snapshot document ID for use later
     // ignore: unused_local_variable
     String docID = snapshot.docs[userindex].id;
-    String uid = firebaseAuth.currentUser.uid;
+//    String userId = FirebaseAuth.instance.currentUser.uid;
     String userID = snapshotData['uid'];
-    while (userID != uid) {
-      userindex++;
-      snapshotData = snapshot.docs[userindex];
-      userID = snapshotData['uid'];
-    }
+//    while (userID != userId) {
+//      userindex++;
+//      snapshotData = snapshot.docs[userindex];
+//      userID = snapshotData['userId'];
+//    }
     return Column(
       children: [
         FittedBox(

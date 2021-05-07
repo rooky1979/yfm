@@ -157,6 +157,12 @@ class _LogInState extends State<LogIn> {
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.green,
                                           );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TestHomepage()),
+                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
                                         } else {
