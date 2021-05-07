@@ -126,7 +126,6 @@ class _LogInState extends State<LogIn> {
                       ),
                       //sign in button
                       Padding(
-
                         padding: const EdgeInsets.only(top:12.0),
                         child: GetBuilder<DataController>(
                             init: DataController(),
