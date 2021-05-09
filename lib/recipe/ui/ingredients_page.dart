@@ -1,7 +1,6 @@
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
+// import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
 import 'recipe_info_card.dart';
 
 // ignore: must_be_immutable
@@ -22,8 +21,6 @@ class IngredientsPage extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25),
       child: Column(
         children: [
-          RecipeThumbnail(),
-          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDb,
               builder: (

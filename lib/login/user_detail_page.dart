@@ -34,7 +34,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   //other variables used for this class
   String _regionDropdownValue;
   String _imageSelected;
-  bool usernameExists = true;
+  bool usernameExists;
   String _username;
   List _allergies;
 
@@ -148,73 +148,96 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     ),
                   ),
                   //1st row of button with avatar image from database
-                  Row(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                          child: Container(
-                            width: 175.0,
-                            height: 160.0,
-                            margin: EdgeInsets.all(8.0),
-                            child: Card(
-                              child: FutureBuilder(
-                                  future: _getImage1URL(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      //this creates the pictures to be clickable
-                                      //and will take the user to the recipe page
-                                      return GestureDetector(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onTap: () {
-                                          _imageSelected =
-                                              "gs://youth-food-movement.appspot.com/avatar1.jpg";
-                                        },
-                                      );
-                                    } else {
-                                      return Container(
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      );
-                                    }
-                                  }),
-                            ),
-                          )),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                          child: Container(
-                            width: 175.0,
-                            height: 160.0,
-                            margin: EdgeInsets.all(8.0),
-                            child: Card(
-                              child: FutureBuilder(
-                                  future: _getImage2URL(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      //this creates the pictures to be clickable
-                                      //and will take the user to the recipe page
-                                      return GestureDetector(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onTap: () {
-                                          _imageSelected =
-                                              "gs://youth-food-movement.appspot.com/avatar2.jpg";
-                                        },
-                                      );
-                                    } else {
-                                      return Container(
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      );
-                                    }
-                                  }),
-                            ),
-                          )),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                            padding:
+                                const EdgeInsets.only(left: 5.0, right: 5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              margin: EdgeInsets.all(8.0),
+                              child: Card(
+                                child: FutureBuilder(
+                                    future: _getImage1URL(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        //this creates the pictures to be clickable
+                                        //and will take the user to the recipe page
+                                        return GestureDetector(
+                                          child: Image.network(
+                                            snapshot.data,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          onTap: () {
+                                            _imageSelected = "avatar1.jpg";
+                                            final snackBar = SnackBar(
+                                              content:
+                                                  Text('Avatar 1 selected'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          },
+                                        );
+                                      } else {
+                                        return Container(
+                                          child: Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        );
+                                      }
+                                    }),
+                              ),
+                            )),
+                        Padding(
+                            padding:
+                                const EdgeInsets.only(left: 5.0, right: 5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              margin: EdgeInsets.all(8.0),
+                              child: Card(
+                                child: FutureBuilder(
+                                    future: _getImage2URL(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        //this creates the pictures to be clickable
+                                        //and will take the user to the recipe page
+                                        return GestureDetector(
+                                          child: Image.network(
+                                            snapshot.data,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          onTap: () {
+                                            _imageSelected = "avatar2.jpg";
+                                            final snackBar = SnackBar(
+                                              content:
+                                                  Text('Avatar 2 selected'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          },
+                                        );
+                                      } else {
+                                        return Container(
+                                          child: Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        );
+                                      }
+                                    }),
+                              ),
+                            )),
+                      ],
+                    ),
                   ),
                   //2nd row of button with avatar image from database
                   Row(
@@ -222,8 +245,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
-                            width: 175.0,
-                            height: 160.0,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
+
                             margin: EdgeInsets.all(8.0),
                             child: Card(
                               child: FutureBuilder(
@@ -238,8 +262,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          _imageSelected =
-                                              "gs://youth-food-movement.appspot.com/avatar3.jpg";
+                                          _imageSelected = "avatar3.jpg";
+                                          final snackBar = SnackBar(
+                                            content: Text('Avatar 3 selected'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.green,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+
                                         },
                                       );
                                     } else {
@@ -251,11 +283,13 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
+
+
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
-                            width: 175.0,
-                            height: 160.0,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
                             margin: EdgeInsets.all(8.0),
                             child: Card(
                               child: FutureBuilder(
@@ -270,8 +304,16 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           fit: BoxFit.cover,
                                         ),
                                         onTap: () {
-                                          _imageSelected =
-                                              "gs://youth-food-movement.appspot.com/avatar4.jpg";
+                                          _imageSelected = "avatar4.jpg";
+                                          final snackBar = SnackBar(
+                                            content: Text('Avatar 4 selected'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.green,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+
                                         },
                                       );
                                     } else {
@@ -309,62 +351,92 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 310,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Username',
-                              labelStyle: whiteText,
-                              fillColor: Colors.red[400],
-                              filled: true,
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.greenAccent, width: 3.0),
+
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.75,
+                            height: 50,
+                            child: SizedBox(
+                              width: 310,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  labelText: 'Username',
+                                  labelStyle: whiteText,
+                                  fillColor: Colors.red[400],
+                                  filled: true,
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.greenAccent, width: 3.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 3.0),
+                                      borderRadius: BorderRadius.circular(15)),
+                                ),
+                                controller: usernameInputController,
+
                               ),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.red, width: 3.0),
-                                  borderRadius: BorderRadius.circular(15)),
                             ),
-                            controller: usernameInputController,
                           ),
-                        ),
-                        GetBuilder<DataController>(
-                            init: DataController(),
-                            builder: (val) {
-                              return IconButton(
-                                  icon: Icon(Icons.check),
-                                  onPressed: () {
-                                    if (usernameInputController
-                                        .text.isNotEmpty) {
-                                      val
-                                          .usernameQueryData(
-                                              usernameInputController.text)
-                                          .then((value) {
-                                        snapshotData = value;
-                                        if (snapshotData.docs.isEmpty) {
-                                          setState(() {
-                                            usernameExists = false;
-                                            _username =
-                                                usernameInputController.text;
+
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: 40,
+                            child: GetBuilder<DataController>(
+                                init: DataController(),
+                                builder: (val) {
+                                  return IconButton(
+                                      icon: Icon(Icons.check),
+                                      onPressed: () {
+                                        if (usernameInputController
+                                            .text.isNotEmpty) {
+                                          val
+                                              .usernameQueryData(
+                                                  usernameInputController.text)
+                                              .then((value) {
+                                            snapshotData = value;
+                                            if (snapshotData.docs.isEmpty) {
+                                              setState(() {
+                                                usernameExists = false;
+                                                _username =
+                                                    usernameInputController
+                                                        .text;
+                                                debugPrint(
+                                                    usernameExists.toString());
+                                              });
+                                              final snackBar = SnackBar(
+                                                content: Text(
+                                                    'Username does not exist'),
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                backgroundColor: Colors.green,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            } else {
+                                              setState(() {
+                                                usernameExists = true;
+                                                debugPrint(
+                                                    usernameExists.toString());
+                                              });
+                                              final snackBar = SnackBar(
+                                                content:
+                                                    Text('Username exists'),
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                backgroundColor: Colors.red,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            }
                                           });
+                                        } else {
                                           final snackBar = SnackBar(
                                             content:
-                                                Text('Username does not exist'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.green,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        } else {
-                                          setState(() {
-                                            usernameExists = true;
-                                          });
-                                          final snackBar = SnackBar(
-                                            content: Text('Username exists'),
+                                                Text('Username not entered'),
+
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.red,
@@ -373,18 +445,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                               .showSnackBar(snackBar);
                                         }
                                       });
-                                    } else {
-                                      final snackBar = SnackBar(
-                                        content: Text('Username not entered'),
-                                        duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Colors.red,
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    }
-                                  });
-                            }),
-                      ],
+                                }),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   //label for enter birthday
@@ -520,9 +584,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
-                          //change to false later
+                          if (usernameExists != true) {
 
-                          if (usernameExists = true) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -531,6 +594,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       .collection('users')
                                       .add({
                                     'uid': _firebaseAuth.currentUser.uid,
+                                    'email': _firebaseAuth.currentUser.email,
+
                                     'name': fullNameInputController.text,
                                     'username': _username,
                                     'image': _imageSelected,
@@ -660,25 +725,31 @@ class _UserDetailPageState extends State<UserDetailPage> {
   //method for getting avatar images
   Future _getImage1URL() async {
     String downloadURL =
-        await avatarStorage.ref('avatar1.jpg').getDownloadURL();
+        await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage2URL() async {
     String downloadURL =
-        await avatarStorage.ref('avatar2.jpg').getDownloadURL();
+        await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage3URL() async {
     String downloadURL =
-        await avatarStorage.ref('avatar3.jpg').getDownloadURL();
+
+        await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage4URL() async {
     String downloadURL =
-        await avatarStorage.ref('avatar4.jpg').getDownloadURL();
+
+        await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
+
     return downloadURL;
   }
 }
