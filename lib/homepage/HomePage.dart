@@ -20,6 +20,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int categoryIndex = 0;
+    String category;
+    if (categoryIndex == 0) {
+      category = 'Beef';
+    } else if (categoryIndex == 1) {
+      category = 'Pork';
+    } else if (categoryIndex == 2) {
+      category = 'Chicken';
+    } else {
+      category = 'Vege';
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -32,7 +43,8 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          val.foodTitleQueryData(searchController.text)
+                          val
+                              .foodTitleQueryData(searchController.text)
                               .then((value) {
                             snapshotData = value;
                             setState(() {});
@@ -77,19 +89,24 @@ class _HomePageState extends State<HomePage> {
       ),
       //this area will create a lister of catergories that currently only displays one
       //recipe
+
       body: SafeArea(
           child: Container(
         alignment: Alignment.bottomRight,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height - 100.0,
         child: ListView.builder(
-          itemCount: 6,
-          itemBuilder: (BuildContext context, int categoryIndex) => Column(
+          itemCount: 4,
+          itemBuilder: (BuildContext context, categoryIndex) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text('category ${categoryIndex + 1}'),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(category),
               ),
               Container(
                 height: 180.0,
@@ -151,14 +168,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ignore: unused_element
-  Future _getImageURL(var docID) async {
-    //declare and instantiate the firebase storage bucket
-    final FirebaseStorage storage = FirebaseStorage.instanceFor(
-        bucket: 'gs://youth-food-movement.appspot.com');
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL =
-        await storage.ref('recipe_images/$docID').getDownloadURL();
-    return downloadURL;
-  }
+  // Future _getImageURL() async {
+  //ref string will change so the parameter will be the jpg ID (maybe)
+  //  String downloadURL = await storage.ref('prawnpasta.jpg').getDownloadURL();
+  //return downloadURL;
+  //}
 }
