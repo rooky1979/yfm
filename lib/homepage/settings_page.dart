@@ -4,6 +4,7 @@ import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //a temp page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
@@ -31,7 +32,7 @@ class SettingsPage extends StatelessWidget {
             height: 200.0,
             decoration: new BoxDecoration(),
             child: FutureBuilder(
-                future: _getImageURL(),
+                future: _getUserImage(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     //return the image and make it cover the container
@@ -106,6 +107,28 @@ class SettingsPage extends StatelessWidget {
   Future _getImageURL() async {
     //ref string will change so the parameter will be the jpg ID (maybe)
     String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    return downloadURL;
+  }
+
+  Future _getUserImage() async {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    String imageName;
+
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        imageName = doc["image"];
+      });
+    });
+
+    String downloadURL =
+        await storage.ref('avatar_images/' + imageName).getDownloadURL();
+    debugPrint(downloadURL);
     return downloadURL;
   }
 }
