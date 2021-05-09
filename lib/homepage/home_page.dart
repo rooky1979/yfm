@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/homepage/test_grid_tile.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
-import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[300],
+        backgroundColor: Colors.red[800],
         actions: [
           GetBuilder<DataController>(
               init: DataController(),
@@ -117,9 +116,9 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 height: 180.0,
-                child: FutureBuilder(
-                  future: getRecipeCategory(categories[index].toString()),
-                    //stream: ,
+                child: StreamBuilder(
+                    //future: getRecipeCategory(categories[index].toString()),
+                    stream: firestoreDb,
                     builder: (
                       context,
                       snapshot,
@@ -161,35 +160,13 @@ class _HomePageState extends State<HomePage> {
     return downloadURL;
   }
 
-  getRecipeCategory(String queryString) async {
+  Future getRecipeCategory(String queryString) async {
     var recipeDocRef =
         await FirebaseFirestore.instance.collection('recipe').add({});
     //get the info from the DB
-    await recipeDocRef.collection("ingredients")
-        .where('protein', isEqualTo: queryString)
+    await recipeDocRef
+        .collection("ingredients")
+        .where('protein', arrayContains: queryString)
         .get();
   }
 }
-/* body: StreamBuilder(
-          stream: firestoreDb,
-          builder: (
-            context,
-            snapshot,
-          ) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
-            return GridView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1),
-                itemBuilder: (context, int index) {
-                  return GestureDetector(
-                    child: Card(
-                      child: TestGridTile(
-                        snapshot: snapshot.data,
-                        index: index,
-                      ),
-                    ),
-                  );
-                });
-          }), */
