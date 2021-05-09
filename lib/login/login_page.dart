@@ -43,7 +43,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     //if email and password exist in firebase then move to homepage
     if (firebaseUser != null) {
-      return HomePage();
+      return TestHomePage();
     }
     //if email and password doesnt exist in firebase then move back to login
     return LogIn();
