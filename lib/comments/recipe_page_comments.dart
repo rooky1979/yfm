@@ -4,6 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/comments/comment.dart';
 import 'package:youth_food_movement/comments/comment_form.dart';
 
+import 'package:youth_food_movement/comments/comment.dart';
+import 'package:youth_food_movement/comments/comment_form.dart';
+
+
 class CommentBoard extends StatefulWidget {
   @override
   _CommentBoardState createState() => _CommentBoardState();

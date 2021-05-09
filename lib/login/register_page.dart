@@ -179,6 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             Navigator.push(

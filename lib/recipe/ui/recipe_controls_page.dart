@@ -6,7 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -219,6 +221,7 @@ class _FavouritesState extends State<Favourites> {
   Widget build(BuildContext context) {
     _checkRecipeFavourited(TestGridTile.idNumber);
 
+
     if (!_isFavorite) {
       return IconButton(
           icon: Icon(
@@ -314,11 +317,11 @@ class _FavouritesState extends State<Favourites> {
 
 //method to check if the recipe ID is in the users array
   _checkRecipeFavourited(String idNumber) async {
-    // ignore: unused_local_variable
     var firestoreDB = FirebaseFirestore.instance
         .collection('users')
         .doc('0dT614naJKZgbjRZCGMj')
         .snapshots();
+
 
     List recipes = [];
     bool checkMatch = false;
@@ -339,5 +342,6 @@ class _FavouritesState extends State<Favourites> {
     if (recipes.contains(idNumber)) {}
 
     return checkMatch;
+
   }
 }

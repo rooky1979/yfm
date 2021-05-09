@@ -346,6 +346,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+
                     child: Container(
                       child: Row(
                         children: [
@@ -370,9 +371,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                                 controller: usernameInputController,
+
                               ),
                             ),
                           ),
+
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
@@ -732,6 +735,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   Future _getImage4URL() async {
     String downloadURL =
+        await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
         await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
     return downloadURL;
   }
