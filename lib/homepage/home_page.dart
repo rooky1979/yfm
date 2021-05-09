@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +19,10 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
+  var rand = Random();
+  List<String> colours = [
+    'Colors.redAccent[700], Colors.red[400]',
+  ];
   List categories = [
     'All',
     'Beef',
@@ -34,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[800],
       appBar: AppBar(
         backgroundColor: Colors.red[800],
         actions: [
@@ -105,12 +111,25 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '${categories[index]}',
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        gradient:
+                            LinearGradient(colors: [Colors.redAccent[700], Colors.red[400]]),
+                        border: Border.all(color: Colors.red[800]),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        '${categories[index]}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25.0),
+                            textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
               ),
