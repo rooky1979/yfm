@@ -247,6 +247,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.4,
                             height: MediaQuery.of(context).size.height * 0.25,
+
                             margin: EdgeInsets.all(8.0),
                             child: Card(
                               child: FutureBuilder(
@@ -270,6 +271,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
+
                                         },
                                       );
                                     } else {
@@ -281,6 +283,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
+
+
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
@@ -309,6 +313,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
+
                                         },
                                       );
                                     } else {
@@ -346,6 +351,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+
                     child: Container(
                       child: Row(
                         children: [
@@ -370,9 +376,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                                 controller: usernameInputController,
+
                               ),
                             ),
                           ),
+
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
@@ -428,6 +436,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           final snackBar = SnackBar(
                                             content:
                                                 Text('Username not entered'),
+
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.red,
@@ -576,6 +585,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
                           if (usernameExists != true) {
+
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -585,6 +595,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       .add({
                                     'uid': _firebaseAuth.currentUser.uid,
                                     'email': _firebaseAuth.currentUser.email,
+
                                     'name': fullNameInputController.text,
                                     'username': _username,
                                     'image': _imageSelected,
@@ -715,24 +726,30 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Future _getImage1URL() async {
     String downloadURL =
         await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage2URL() async {
     String downloadURL =
         await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage3URL() async {
     String downloadURL =
+
         await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
+
     return downloadURL;
   }
 
   Future _getImage4URL() async {
     String downloadURL =
+
         await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
+
     return downloadURL;
   }
 }
