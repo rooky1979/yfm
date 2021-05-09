@@ -43,7 +43,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     //if email and password exist in firebase then move to homepage
     if (firebaseUser != null) {
-      return TestHomepage();
+      return HomePage();
     }
     //if email and password doesnt exist in firebase then move back to login
     return LogIn();
@@ -145,12 +145,6 @@ class _LogInState extends State<LogIn> {
                                               email: emailInputController.text.trim(),
                                               password: passwordInputController.text.trim(),
                                             );
-                                            final snackBar = SnackBar(
-                                              content: Text('Logged in'),
-                                              duration: Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.green,
-                                            );
-                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                           }else {
                                             final snackBar = SnackBar(
                                               content: Text('Email does not exist'),
