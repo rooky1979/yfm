@@ -29,21 +29,21 @@ class _SearchState extends State<Search> {
                   arguments: snapshotData.docs[index]);
             },
             child: ListTile(
-              // leading: CircleAvatar(
-              //   backgroundImage:
-              //       NetworkImage(snapshotData.docs[index].data()['image']),
-              // ),
-              title: Text(snapshotData.docs[index].data()['uid'],
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0)),
-              subtitle: Text(snapshotData.docs[index].data()['Username'],
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0)),
-            ),
+                // leading: CircleAvatar(
+                //   backgroundImage:
+                //       NetworkImage(snapshotData.docs[index].data()['image']),
+                // ),
+                //  title: Text(snapshotData.docs[index].data()['uid'],
+                //      style: TextStyle(
+                //          color: Colors.white,
+                //          fontWeight: FontWeight.bold,
+                //          fontSize: 24.0)),
+                //  subtitle: Text(snapshotData.docs[index].data()['Username'],
+                //      style: TextStyle(
+                //          color: Colors.white,
+                //          fontWeight: FontWeight.bold,
+                //          fontSize: 14.0)),
+                ),
           );
         },
       );
@@ -63,7 +63,9 @@ class _SearchState extends State<Search> {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () {
-                      val.foodTitleQueryData(searchController.text).then((value) {
+                      val
+                          .foodTitleQueryData(searchController.text)
+                          .then((value) {
                         snapshotData = value;
                         setState(() {
                           isExecuted = true;
