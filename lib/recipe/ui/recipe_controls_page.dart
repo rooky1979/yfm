@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
 import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -217,6 +218,7 @@ class _FavouritesState extends State<Favourites> {
   @override
   Widget build(BuildContext context) {
     _checkRecipeFavourited(TestGridTile.idNumber);
+
     if (!_isFavorite) {
       return IconButton(
           icon: Icon(
@@ -228,7 +230,7 @@ class _FavouritesState extends State<Favourites> {
             setState(() {
               _isFavorite = !_isFavorite;
               //add recipe ID to favourites array
-              _addFavouriteToDB(TestGridTile.idNumber.toString());
+              _getUserDocIdForAdd(TestGridTile.idNumber.toString());
             });
           });
     } else {
@@ -242,48 +244,100 @@ class _FavouritesState extends State<Favourites> {
             setState(() {
               _isFavorite = !_isFavorite;
               //if array contains recipeID, remove
-              _removeFavouriteFromDB(TestGridTile.idNumber);
+              _getUserDocIdForDelete(TestGridTile.idNumber);
             });
           });
     }
   }
 
   //helper method to add the recipe ID to the firestore favourites array
-  void _addFavouriteToDB(String idNumber) async {
+  void _addFavouriteToDB(String recipeIdNumber, String id) async {
     //instantiate a local list to hold temp ID
-    List recipes = [];
-    //add the idNumber to the temp array
-    recipes.add(idNumber);
+    List recipes = [recipeIdNumber];
+
     //add the temp array to the firestore
     await FirebaseFirestore.instance
         .collection('users')
-        .doc('0dT614naJKZgbjRZCGMj')
+        .doc(id)
         .update({'favourites': FieldValue.arrayUnion(recipes)});
     //clear the temp array
     recipes.clear();
   }
 
-  //helper method to add the recipe ID to the firestore favourites array
-  void _removeFavouriteFromDB(String idNumber) async {
+  void _getUserDocIdForAdd(String recipeIdNumber) async {
+    String id;
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        id = doc.id;
+        debugPrint(id);
+        _addFavouriteToDB(recipeIdNumber, id);
+      });
+    });
+  }
+
+  void _getUserDocIdForDelete(String recipeIdNumber) async {
+    String id;
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        id = doc.id;
+        debugPrint(id);
+        _removeFavouriteFromDB(recipeIdNumber, id);
+      });
+    });
+  }
+
+//helper method to add the recipe ID to the firestore favourites array
+  void _removeFavouriteFromDB(String recipeIdNumber, id) async {
     //instantiate a local list to hold temp ID
-    List recipes = [];
-    //add the idNumber to the temp array
-    recipes.add(idNumber);
+    List recipes = [recipeIdNumber];
+
     //add the temp array to the firestore
     await FirebaseFirestore.instance
         .collection('users')
-        .doc('0dT614naJKZgbjRZCGMj')
+        .doc(id)
         .update({'favourites': FieldValue.arrayRemove(recipes)});
-    //clear the temp array
-    recipes.clear();
   }
 
-  //method to check if the recipe ID is in the users array
-  void _checkRecipeFavourited(String idNumber) async {
+//method to check if the recipe ID is in the users array
+  _checkRecipeFavourited(String idNumber) async {
     // ignore: unused_local_variable
     var firestoreDB = FirebaseFirestore.instance
         .collection('users')
         .doc('0dT614naJKZgbjRZCGMj')
         .snapshots();
+
+    List recipes = [];
+    bool checkMatch = false;
+
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        recipes.add(doc['favourites']);
+      });
+    });
+
+    if (recipes.contains(idNumber)) {}
+
+    return checkMatch;
   }
 }
