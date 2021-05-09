@@ -1,4 +1,3 @@
-  
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:youth_food_movement/comments/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +37,6 @@ class RecipeThumbnail extends StatelessWidget {
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
-
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -207,6 +204,7 @@ class RecipeButtons extends StatelessWidget {
 }
 
 //favourites button that toggles solid for favourited and outline for unfavourited
+// ignore: must_be_immutable
 class Favourites extends StatefulWidget {
   var firestoreDb = FirebaseFirestore.instance
       .collection('recipe')
@@ -319,7 +317,6 @@ class _FavouritesState extends State<Favourites> {
 
 //method to check if the recipe ID is in the users array
   _checkRecipeFavourited(String idNumber) async {
-
     var firestoreDB = FirebaseFirestore.instance
         .collection('users')
         .doc('0dT614naJKZgbjRZCGMj')
@@ -342,9 +339,7 @@ class _FavouritesState extends State<Favourites> {
       });
     });
 
-    if (recipes.contains(idNumber)) {
-      checkMatch == true;
-    }
+    if (recipes.contains(idNumber)) {}
 
     return checkMatch;
 

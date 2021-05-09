@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          val.foodTitleQueryData(searchController.text)
+                          val
+                              .foodTitleQueryData(searchController.text)
                               .then((value) {
                             snapshotData = value;
                             setState(() {});

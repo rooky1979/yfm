@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:youth_food_movement/homepage/test_homepage.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
 import 'package:youth_food_movement/homepage/test_homepage.dart';
-
 import 'user_search/data_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -157,6 +158,12 @@ class _LogInState extends State<LogIn> {
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.green,
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TestHomepage()),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
