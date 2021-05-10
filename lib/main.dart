@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:youth_food_movement/login/login_page.dart';
-
 import 'package:youth_food_movement/login/login_page.dart';
 
 Future<void> main() async {
@@ -20,7 +18,6 @@ Future<void> main() async {
                 fontSize: 25,
                 color: Colors.white,*/
       ),
-
       home: LoginPage(),
     ),
   );
