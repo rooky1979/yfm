@@ -264,7 +264,7 @@ class RecipeInformationCard extends StatelessWidget {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: 'Protein: ',
+                                      text: 'Recipe Tags: ',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
                                   TextSpan(
