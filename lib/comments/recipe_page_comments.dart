@@ -1,9 +1,12 @@
-import 'package:youth_food_movement/comments/comment.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
-import 'package:youth_food_movement/comments/comment_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/comments/comment.dart';
+import 'package:youth_food_movement/comments/comment_form.dart';
+
+import 'package:youth_food_movement/comments/comment.dart';
+import 'package:youth_food_movement/comments/comment_form.dart';
+
 
 class CommentBoard extends StatefulWidget {
   @override
@@ -39,8 +42,6 @@ class _CommentBoardState extends State<CommentBoard> {
       padding: const EdgeInsets.only(top: 5),
       child: Column(
         children: [
-          RecipeThumbnail(),
-          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDb,
               builder: (context, snapshot) {

@@ -373,7 +373,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         child: TextField(
                           controller: DBControl.minutesController,
                           textAlign: TextAlign.start,
-                          keyboardType: TextInputType.number, 
+                          keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter
                                 .digitsOnly //enables digits only for entry

@@ -1,4 +1,3 @@
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,8 +19,6 @@ class Method extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25),
       child: Column(
         children: [
-          RecipeThumbnail(),
-          RecipeButtons(),
           StreamBuilder(
               stream: firestoreDbMethod,
               builder: (
