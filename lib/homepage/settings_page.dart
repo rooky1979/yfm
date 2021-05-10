@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
+import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -74,9 +75,8 @@ class SettingsPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
               context.read<AuthenticationService>().signOut();
+              MaterialPageRoute(builder: (context) => LoginPage());
             },
             child: Text("Sign Out")),
         StreamBuilder(
