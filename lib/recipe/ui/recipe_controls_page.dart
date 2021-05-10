@@ -411,6 +411,7 @@ _checkRecipeFavourited(String idNumber) async {
   });
 
   if (recipes.contains(idNumber)) {
+    // ignore: unnecessary_statements
     checkMatch == true;
   }
 
