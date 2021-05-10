@@ -96,7 +96,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Name',
+                                  text: 'Name: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
@@ -130,7 +130,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Region',
+                                  text: 'Region: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
