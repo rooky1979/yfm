@@ -145,6 +145,7 @@ class _LogInState extends State<LogIn> {
                                             );
                                           }
                                         });
+
                                     } else {
                                       final snackBar = SnackBar(
                                         content: Text('Password not entered'),
