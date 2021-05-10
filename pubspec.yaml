@@ -38,6 +38,7 @@ dependencies:
   firebase_messaging:
   multiselect_formfield: ^0.1.6
   favorite_button: ^0.0.3
+  profanity_filter: ^1.0.4
 
 
 dev_dependencies:
