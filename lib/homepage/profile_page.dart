@@ -7,6 +7,7 @@ import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 //a temp page to hold the user information and to display all the information
@@ -99,8 +100,11 @@ class ProfilePage extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.pop(context);
-              Navigator.pop(context);
               context.read<AuthenticationService>().signOut();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => LoginPage()));
             },
             child: Text("Sign Out")),
       ])),
