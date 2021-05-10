@@ -18,23 +18,29 @@ class UserDetailPage extends StatefulWidget {
 class _UserDetailPageState extends State<UserDetailPage> {
   //reference to firestore database
   var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+
   //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   //reference to firebase storage
   final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+
   //Controllers for textfields
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
+
   //date formatted to day/month/year
   final formattedDate = new DateFormat('dd-MMM-yyyy');
   DateTime today = DateTime.now();
+
   //used for searching if username already exist check button
   QuerySnapshot snapshotData;
+
   //other variables used for this class
   String _regionDropdownValue;
   String _imageSelected;
-  bool usernameExists;
+  bool usernameExists = true;
   String _username;
   List _allergies;
 
@@ -578,7 +584,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
-                          if (usernameExists != true) {
+                          if (usernameExists == false) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -640,7 +646,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text('Username already exists'),
+                              content: Text('Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
@@ -699,7 +705,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
       textField: 'display',
       valueField: 'value',
       okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
+      cancelButtonLabel: 'CANCEL',
+      //clear checklist
       hintWidget: Text(
         'Select allergies',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -735,7 +742,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
   Future _getImage4URL() async {
     String downloadURL =
-        await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
         await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
     return downloadURL;
   }

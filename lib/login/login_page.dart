@@ -43,7 +43,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     //if email and password exist in firebase then move to homepage
     if (firebaseUser != null) {
-      return TestHomepage();
+      return TestHomePage();
     }
     //if email and password doesnt exist in firebase then move back to login
     return LogIn();
@@ -131,54 +131,36 @@ class _LogInState extends State<LogIn> {
                             init: DataController(),
                             builder: (val) {
                               return ElevatedButton(
-                                onPressed: () {
-                                  //check if email has been entered
-                                  if (emailInputController.text.isNotEmpty) {
-                                    //check if password has been entered
-                                    if (passwordInputController
-                                        .text.isNotEmpty) {
-                                      val
-                                          .emailQueryData(
-                                              emailInputController.text)
-                                          .then((value) {
-                                        snapshotData = value;
-                                        //check if email exist in database
-                                        if (snapshotData.docs.isNotEmpty) {
-                                          context
-                                              .read<AuthenticationService>()
-                                              .signIn(
-                                                email: emailInputController.text
-                                                    .trim(),
-                                                password:
-                                                    passwordInputController.text
-                                                        .trim(),
-                                              );
-                                          final snackBar = SnackBar(
-                                            content: Text('Logged in'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.green,
-                                          );
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TestHomepage()),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        } else {
-                                          final snackBar = SnackBar(
-                                            content:
-                                                Text('Email does not exist'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.red,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        }
-                                      });
+                                  onPressed: () {
+                                    //check if email has been entered
+                                    if(emailInputController.text.isNotEmpty) {
+                                      //check if password has been entered
+                                      if(passwordInputController.text.isNotEmpty) {
+                                        val.emailQueryData(emailInputController.text).then((value) {
+                                          snapshotData = value;
+                                          //check if email exist in database
+                                          if(snapshotData.docs.isNotEmpty) {
+                                            context.read<AuthenticationService>().signIn(
+                                              email: emailInputController.text.trim(),
+                                              password: passwordInputController.text.trim(),
+                                            );
+                                          }else {
+                                            final snackBar = SnackBar(
+                                              content: Text('Email does not exist'),
+                                              duration: Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.red,
+                                            );
+                                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          }
+                                        });
+                                      } else {
+                                        final snackBar = SnackBar(
+                                          content: Text('Password not entered'),
+                                          duration: Duration(milliseconds: 1000),
+                                          backgroundColor: Colors.red,
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
                                     } else {
                                       final snackBar = SnackBar(
                                         content: Text('Password not entered'),
