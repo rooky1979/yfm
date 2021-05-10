@@ -100,6 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                         snapshotData = value;
                                         //check if email already exists
                                         if (snapshotData.docs.isEmpty) {
+                                          if (validateEmail(
+                                              emailInputController.text))
                                           //check if password is longer than 6 letters
                                           if (passwordInputController
                                                   .text.length >=
@@ -127,6 +129,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                             final snackBar = SnackBar(
                                               content: Text(
                                                   'Password is not 6 letters or longer'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.red,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+                                          else {
+                                            final snackBar = SnackBar(
+                                              content: Text(
+                                                  'Please enter a valid email!'),
                                               duration:
                                                   Duration(milliseconds: 1000),
                                               backgroundColor: Colors.red,
@@ -179,7 +192,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             Navigator.push(
@@ -199,5 +213,17 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  bool validateEmail(String value) {
+    Pattern pattern =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?)*$";
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value) || value == null)
+      return false;
+    else
+      return true;
   }
 }

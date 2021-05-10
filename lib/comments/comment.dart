@@ -288,7 +288,8 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if (widget.snapshot.docs[widget.index]['uid'] == user) {
+    if ((widget.snapshot.docs[widget.index]['uid'] == user) ||
+        (user == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2')) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

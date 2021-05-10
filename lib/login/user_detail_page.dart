@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/homepage/home_page.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -86,7 +87,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime pickedDate = await showDatePicker(
         context: context,
-        initialDate: today,
+        initialDate: DateTime(2000),
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
     if (pickedDate != null && pickedDate != today)
@@ -106,6 +107,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   @override
   Widget build(BuildContext context) {
     //refactored textstyle used buttons/textfields
+    final filter = ProfanityFilter();
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
 
@@ -390,7 +392,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   return IconButton(
                                       icon: Icon(Icons.check),
                                       onPressed: () {
-                                        if (usernameInputController
+                                        if (!filter.hasProfanity(
+                                            usernameInputController
+                                                .text)) if (usernameInputController
                                             .text.isNotEmpty) {
                                           val
                                               .usernameQueryData(
@@ -436,6 +440,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           final snackBar = SnackBar(
                                             content:
                                                 Text('Username not entered'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.red,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                        else {
+                                          final snackBar = SnackBar(
+                                            content: Text(
+                                                'Please use appropriate language'),
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.red,
@@ -645,7 +660,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text('Username already exists or not checked'),
+                              content: Text(
+                                  'Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );

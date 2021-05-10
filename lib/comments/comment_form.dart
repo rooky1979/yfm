@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -189,6 +190,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    final filter = ProfanityFilter();
 
     String recipeID = widget.recipeID;
     return Scaffold(
@@ -216,36 +218,56 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 IconButton(
                     //button to save the comment to the database
                     onPressed: () {
-                      print(imgAttached);
-                      FirebaseFirestore.instance
-                          .collection('recipe')
-                          .doc('$recipeID')
-                          .collection('comments')
-                          .add({
-                        'user': _firebaseAuth.currentUser.uid,
-                        'uid': _firebaseAuth.currentUser.uid,
-                        'imgAttached': imgAttached,
-                        'description': descriptionInputController.text,
-                        'timestamp': new DateTime.now(),
-                        'likes': 0,
-                        'likedUsers': [],
-                        'reported': false
-                      }).then((response) {
-                        print(response.id);
-                        if (imgAttached == true) {
-                          _uploadImageToFirebase(response.id);
+                      if (!filter
+                          .hasProfanity(descriptionInputController.text)) {
+                        if (descriptionInputController.text.isNotEmpty) {
+                          print(imgAttached);
+                          FirebaseFirestore.instance
+                              .collection('recipe')
+                              .doc('$recipeID')
+                              .collection('comments')
+                              .add({
+                            'user': _firebaseAuth.currentUser.uid,
+                            'uid': _firebaseAuth.currentUser.uid,
+                            'imgAttached': imgAttached,
+                            'description': descriptionInputController.text,
+                            'timestamp': new DateTime.now(),
+                            'likes': 0,
+                            'likedUsers': [],
+                            'reported': false
+                          }).then((response) {
+                            print(response.id);
+                            if (imgAttached == true) {
+                              _uploadImageToFirebase(response.id);
+                            }
+                            final snackBar = SnackBar(
+                              content: Text('Comment Posted'),
+                              duration: Duration(milliseconds: 1000),
+                              backgroundColor: Colors.green,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            Navigator.pop(context);
+                            descriptionInputController.clear();
+                            _imgfile = null;
+                            imgAttached = false;
+                          }).catchError((onError) => print(onError));
+                        } else {
+                          final snackBar = SnackBar(
+                            content: Text('Please Write Your Comment...'),
+                            duration: Duration(milliseconds: 1000),
+                            backgroundColor: Colors.red,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
+                      } else {
                         final snackBar = SnackBar(
-                          content: Text('Comment Posted'),
+                          content: Text('Please use appropriate language'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.red,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        Navigator.pop(context);
-                        descriptionInputController.clear();
-                        _imgfile = null;
-                        imgAttached = false;
-                      }).catchError((onError) => print(onError));
+                      }
                     },
                     padding: const EdgeInsets.only(left: 120),
                     icon: Icon(Icons.check),

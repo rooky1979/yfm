@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/homepage/home_page.dart';
 import 'package:youth_food_movement/homepage/test_homepage.dart';
+import 'package:youth_food_movement/homepage/home_page.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
 import 'user_search/data_controller.dart';
@@ -56,6 +59,8 @@ class _LogInState extends State<LogIn> {
   //Controllers for textfields
   final TextEditingController emailInputController = TextEditingController();
   final TextEditingController passwordInputController = TextEditingController();
+  //used for searching if email already exist in login
+  QuerySnapshot snapshotData;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +100,8 @@ class _LogInState extends State<LogIn> {
               ),
               Center(
                 child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   margin: const EdgeInsets.only(top: 230),
                   child: Column(
                     children: [
@@ -146,6 +153,16 @@ class _LogInState extends State<LogIn> {
                                                     passwordInputController.text
                                                         .trim(),
                                               );
+                                        } else {
+                                          final snackBar = SnackBar(
+                                            content: Text(
+                                                'Incorrect Email or Password!'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.red,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
                                         }
                                       });
                                     } else {
@@ -173,7 +190,7 @@ class _LogInState extends State<LogIn> {
                       ),
                       //register account button
                       Padding(
-                        padding: const EdgeInsets.only(top:12.0),
+                        padding: const EdgeInsets.only(top: 12.0),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(

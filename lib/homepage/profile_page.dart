@@ -180,19 +180,7 @@ class ProfileButtons extends StatelessWidget {
                                 builder: (BuildContext context) =>
                                     BookmarkedRecipeThumbnail()))
                       }),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(11),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.plusCircle,
-                      size: 40, color: Colors.red),
-                  onPressed: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    InformationSubmission()))
-                      }),
+              _checkMod(context)
             ],
           ),
         ),
@@ -210,4 +198,22 @@ _launchURL() async {
   }
 }
 
-class FirebaseApp {}
+_checkMod(BuildContext context) {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  if (_firebaseAuth.currentUser.uid == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2') {
+    return RawMaterialButton(
+        padding: EdgeInsets.all(11),
+        fillColor: Colors.white,
+        shape: CircleBorder(),
+        child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
+        onPressed: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          InformationSubmission()))
+            });
+  } else {
+    return Container();
+  }
+}
