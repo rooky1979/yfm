@@ -37,8 +37,6 @@ class RecipeThumbnail extends StatelessWidget {
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -205,6 +203,7 @@ class RecipeButtons extends StatelessWidget {
 }
 
 //favourites button that toggles solid for favourited and outline for unfavourited
+// ignore: must_be_immutable
 class Favourites extends StatefulWidget {
   var firestoreDb = FirebaseFirestore.instance
       .collection('recipe')
@@ -352,7 +351,6 @@ void _removeFavouriteFromDB() async {
   //instantiate a local list to hold temp ID
   List recipes = [TestGridTile.idNumber.toString()];
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   //add the temp array to the firestore
   await FirebaseFirestore.instance
       .collection('users')
@@ -364,7 +362,6 @@ Future _getLiked() async {
   bool liked = false;
   List recipes = [];
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   await FirebaseFirestore.instance
       .collection('users') // Users table in firestore
       .where('uid',

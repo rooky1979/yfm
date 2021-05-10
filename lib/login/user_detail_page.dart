@@ -643,8 +643,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text(
-                                  'Username already exists or not checked'),
+                              content: Text('Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );

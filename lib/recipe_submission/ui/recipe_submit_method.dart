@@ -10,7 +10,6 @@ class MethodSubmission extends StatefulWidget {
 }
 
 class _MethodSubmissionState extends State<MethodSubmission> {
-
   //refactored textstyle used buttons/textfields
   var whiteText =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
@@ -198,7 +197,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                                     backgroundColor: Colors.red,
                                     radius: 10,
                                   ),
-                                  title: Text(DBControl.methodSteps[index].toString(),
+                                  title: Text(
+                                      DBControl.methodSteps[index].toString(),
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
@@ -239,8 +239,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           methodController.clear();
                           DBControl.popPage(3, context);
                           MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ProfilePage());
+                              builder: (BuildContext context) => ProfilePage());
                         },
                       ),
                     ),
