@@ -180,8 +180,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               backgroundColor: Colors.red,
                             );
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => LogIn()),
