@@ -41,7 +41,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   //other variables used for this class
   String _regionDropdownValue;
   String _imageSelected;
-  bool usernameExists;
+  bool usernameExists = true;
   String _username;
   List _allergies;
 
@@ -582,7 +582,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
-                          if (usernameExists != true) {
+                          if (usernameExists == false) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -644,7 +644,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text('Username already exists'),
+                              content: Text('Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
