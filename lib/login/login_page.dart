@@ -89,13 +89,26 @@ class _LogInState extends State<LogIn> {
                           Colors.white.withOpacity(0.95)
                         ]),
                   ),
-                  child: Text(
-                    'Just Cook Login',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.black,
+                  // Text(
+                  //   'Just Cook Login',
+                  //   style: TextStyle(
+                  //     fontSize: 40,
+                  //     color: Colors.black,
+                  //   ),
+                  // ),
+                ),
+              ),
+              Center(
+                child: Container(
+                    padding: const EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width*0.8,
+                    height: MediaQuery.of(context).size.height*0.35,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.scaleDown,
+                        image: AssetImage('lib/logo/just-cook-logo.png'),
+                      )
                     ),
-                  ),
                 ),
               ),
               Center(
