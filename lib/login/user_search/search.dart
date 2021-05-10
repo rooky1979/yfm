@@ -47,8 +47,7 @@
 //           );
 //         },
 //       );
-//     }
-
+//     //
 //     return Scaffold(
 //       floatingActionButton: FloatingActionButton(
 //         child: Icon(Icons.clear),
@@ -62,10 +61,8 @@
 //               builder: (val) {
 //                 return IconButton(
 //                     icon: Icon(Icons.search),
-//                     onPressed: () {
-
-//                       val.foodTitleQueryData(searchController.text).then((value) {
-
+//                     onPressed: () //
+//                       val.foodTitleQueryData(searchController.text).then((value) //
 //                         snapshotData = value;
 //                         setState(() {
 //                           isExecuted = true;
@@ -97,85 +94,84 @@
 //     );
 //   }
 // }
-  @override
-  Widget build(BuildContext context) {
-    Widget searchedData() {
-      return ListView.builder(
-        itemCount: snapshotData.docs.length,
-        itemBuilder: (buildContext, int index) {
-          return GestureDetector(
-            //not working rn
-            onTap: () {
-              Get.to(HomePage(),
-                  transition: Transition.downToUp,
-                  arguments: snapshotData.docs[index]);
-            },
-            //  child: ListTile(
-            //    // leading: CircleAvatar(
-            //    //   backgroundImage:
-            //    //       NetworkImage(snapshotData.docs[index].data()['image']),
-            //    // ),
-            //    title: Text(snapshotData.docs[index].data()['uid'],
-            //        style: TextStyle(
-            //            color: Colors.white,
-            //            fontWeight: FontWeight.bold,
-            //            fontSize: 24.0)),
-            //    subtitle: Text(snapshotData.docs[index].data()['Username'],
-            //        style: TextStyle(
-            //            color: Colors.white,
-            //            fontWeight: FontWeight.bold,
-            //            fontSize: 14.0)),
-            //  ),
-          );
-        },
-      );
-    }
-
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.clear),
-        onPressed: () {},
-      ),
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        actions: [
-          GetBuilder<DataController>(
-              init: DataController(),
-              builder: (val) {
-                return IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      val
-                          .foodTitleQueryData(searchController.text)
-                          .then((value) {
-                        snapshotData = value;
-                        setState(() {
-                          isExecuted = true;
-                        });
-                      });
-                    });
-              })
-        ],
-        title: TextField(
-          style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-              hintText: 'Search string',
-              hintStyle: TextStyle(color: Colors.white)),
-          controller: searchController,
-        ),
-        backgroundColor: Colors.black,
-      ),
-      body: isExecuted
-          ? searchedData()
-          : Container(
-              child: Center(
-                child: Text('search Food Title',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0)),
-              ),
-            ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     Widget searchedData() {
+//       return ListView.builder(
+//         itemCount: snapshotData.docs.length,
+//         itemBuilder: (buildContext, int index) {
+//           return GestureDetector(
+//             //not working rn
+//             onTap: () {
+//               Get.to(HomePage(),
+//                   transition: Transition.downToUp,
+//                   arguments: snapshotData.docs[index]);
+//             },
+//             //  child: ListTile(
+//             //    // leading: CircleAvatar(
+//             //    //   backgroundImage:
+//             //    //       NetworkImage(snapshotData.docs[index].data()['image']),
+//             //    // ),
+//             //    title: Text(snapshotData.docs[index].data()['uid'],
+//             //        style: TextStyle(
+//             //            color: Colors.white,
+//             //            fontWeight: FontWeight.bold,
+//             //            fontSize: 24.0)),
+//             //    subtitle: Text(snapshotData.docs[index].data()['Username'],
+//             //        style: TextStyle(
+//             //            color: Colors.white,
+//             //            fontWeight: FontWeight.bold,
+//             //            fontSize: 14.0)),
+//             //  ),
+//           );
+//         },
+//       );
+//     }////
+//     return Scaffold(
+//       floatingActionButton: FloatingActionButton(
+//         child: Icon(Icons.clear),
+//         onPressed: () {},
+//       ),
+//       backgroundColor: Colors.black,
+//       appBar: AppBar(
+//         actions: [
+//           GetBuilder<DataController>(
+//               init: DataController(),
+//               builder: (val) {
+//                 return IconButton(
+//                     icon: Icon(Icons.search),
+//                     onPressed: () {
+//                       val
+//                           .foodTitleQueryData(searchController.text)
+//                           .then((value) {
+//                         snapshotData = value;
+//                         setState(() {
+//                           isExecuted = true;
+//                         });
+//                       });
+//                     });
+//               })
+//         ],
+//         title: TextField(
+//           style: TextStyle(color: Colors.white),
+//           decoration: InputDecoration(
+//               hintText: 'Search string',
+//               hintStyle: TextStyle(color: Colors.white)),
+//           controller: searchController,
+//         ),
+//         backgroundColor: Colors.black,
+//       ),
+//       body: isExecuted
+//           ? searchedData()
+//           : Container(
+//               child: Center(
+//                 child: Text('search Food Title',
+//                     style: TextStyle(
+//                         color: Colors.white,
+//                         fontWeight: FontWeight.bold,
+//                         fontSize: 30.0)),
+//               ),
+//             ),
+//     );
+//   }
+// }

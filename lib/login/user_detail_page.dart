@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:youth_food_movement/homepage/home_page.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -352,7 +354,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
-
                     child: Container(
                       child: Row(
                         children: [
@@ -377,11 +378,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                                 controller: usernameInputController,
-
                               ),
                             ),
                           ),
-
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
