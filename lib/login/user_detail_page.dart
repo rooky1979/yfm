@@ -18,23 +18,29 @@ class UserDetailPage extends StatefulWidget {
 class _UserDetailPageState extends State<UserDetailPage> {
   //reference to firestore database
   var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+
   //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   //reference to firebase storage
   final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+
   //Controllers for textfields
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
+
   //date formatted to day/month/year
   final formattedDate = new DateFormat('dd-MMM-yyyy');
   DateTime today = DateTime.now();
+
   //used for searching if username already exist check button
   QuerySnapshot snapshotData;
+
   //other variables used for this class
   String _regionDropdownValue;
   String _imageSelected;
-  bool usernameExists;
+  bool usernameExists = true;
   String _username;
   List _allergies;
 
@@ -247,7 +253,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.4,
                             height: MediaQuery.of(context).size.height * 0.25,
-
                             margin: EdgeInsets.all(8.0),
                             child: Card(
                               child: FutureBuilder(
@@ -271,7 +276,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
-
                                         },
                                       );
                                     } else {
@@ -283,8 +287,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   }),
                             ),
                           )),
-
-
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
@@ -313,7 +315,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
-
                                         },
                                       );
                                     } else {
@@ -351,7 +352,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   //textfield for username and check button to check if username already exists
                   Padding(
                     padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
-
                     child: Container(
                       child: Row(
                         children: [
@@ -376,11 +376,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       borderRadius: BorderRadius.circular(15)),
                                 ),
                                 controller: usernameInputController,
-
                               ),
                             ),
                           ),
-
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
@@ -436,7 +434,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           final snackBar = SnackBar(
                                             content:
                                                 Text('Username not entered'),
-
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.red,
@@ -584,8 +581,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
-                          if (usernameExists != true) {
-
+                          if (usernameExists == false) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -595,7 +591,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       .add({
                                     'uid': _firebaseAuth.currentUser.uid,
                                     'email': _firebaseAuth.currentUser.email,
-
                                     'name': fullNameInputController.text,
                                     'username': _username,
                                     'image': _imageSelected,
@@ -648,7 +643,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text('Username already exists'),
+                              content: Text(
+                                  'Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
@@ -707,7 +703,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
       textField: 'display',
       valueField: 'value',
       okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
+      cancelButtonLabel: 'CANCEL',
+      //clear checklist
       hintWidget: Text(
         'Select allergies',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -726,30 +723,24 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Future _getImage1URL() async {
     String downloadURL =
         await avatarStorage.ref('avatar_images/avatar1.jpg').getDownloadURL();
-
     return downloadURL;
   }
 
   Future _getImage2URL() async {
     String downloadURL =
         await avatarStorage.ref('avatar_images/avatar2.jpg').getDownloadURL();
-
     return downloadURL;
   }
 
   Future _getImage3URL() async {
     String downloadURL =
-
         await avatarStorage.ref('avatar_images/avatar3.jpg').getDownloadURL();
-
     return downloadURL;
   }
 
   Future _getImage4URL() async {
     String downloadURL =
-
         await avatarStorage.ref('avatar_images/avatar4.jpg').getDownloadURL();
-
     return downloadURL;
   }
 }

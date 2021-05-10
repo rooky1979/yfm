@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/homepage/profile_page.dart';
-import 'package:youth_food_movement/homepage/settings_page.dart';
+import 'package:youth_food_movement/homepage/test_homepage.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
 import 'package:youth_food_movement/login/register_page.dart';
 import 'package:youth_food_movement/homepage/test_homepage.dart';
-
 import 'user_search/data_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -44,7 +43,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     //if email and password exist in firebase then move to homepage
     if (firebaseUser != null) {
-      return ProfilePage();
+      return TestHomepage();
     }
     //if email and password doesnt exist in firebase then move back to login
     return LogIn();
@@ -160,15 +159,11 @@ class _LogInState extends State<LogIn> {
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.green,
                                           );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        } else {
-                                          final snackBar = SnackBar(
-                                            content:
-                                                Text('Email does not exist'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.red,
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TestHomepage()),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
