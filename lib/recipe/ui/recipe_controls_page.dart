@@ -9,7 +9,6 @@ import 'package:youth_food_movement/homepage/test_grid_tile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class RecipeControlsPage extends StatefulWidget {
   @override
   _RecipeControlsPageState createState() => _RecipeControlsPageState();
@@ -206,142 +205,221 @@ class RecipeButtons extends StatelessWidget {
 //favourites button that toggles solid for favourited and outline for unfavourited
 // ignore: must_be_immutable
 class Favourites extends StatefulWidget {
-  var firestoreDb = FirebaseFirestore.instance
-      .collection('recipe')
-      .doc('0ZWT2Ljrk8SS5wmh7zwD')
-      .snapshots();
+  bool isLiked;
+
   @override
   _FavouritesState createState() => _FavouritesState();
 }
 
 class _FavouritesState extends State<Favourites> {
-  bool _isFavorite = false;
+  //bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
-    _checkRecipeFavourited(TestGridTile.idNumber);
+    return Column(
+      children: [
+        Container(),
+        FutureBuilder(
+            future: _getLiked(),
+            builder: (context, snapshot) {
+              widget.isLiked = snapshot.data;
+              if (snapshot.hasData) {
+                return IconButton(
+                    icon: Icon(Icons.favorite_rounded, //comments button
+                        size: 50,
+                        color: widget.isLiked ? Colors.red : Colors.grey),
+                    onPressed: () {
+                      if (widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          debugPrint(widget.isLiked.toString() +
+                              "This has been removed from favourites: " +
+                              TestGridTile.idNumber.toString());
+                          _getUserDocIdForDelete(TestGridTile.idNumber);
+                        });
+                      } else if (!widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          debugPrint(widget.isLiked.toString() +
+                              "This has been removed from favourites: " +
+                              TestGridTile.idNumber.toString());
+                          _getUserDocIdForAdd(TestGridTile.idNumber);
+                        });
+                      }
+                    });
+                // } else if (widget.isLiked == false) {
+                //   return IconButton(
+                //       icon: Icon(
+                //         Icons.favorite_outline_rounded,
+                //         size: 50,
+                //         color: Colors.red,
+                //       ),
+                //       onPressed: () {
+                //         setState(() {
+                //           //if array contains recipeID, remove
+                //           widget.isLiked = !widget.isLiked;
+                //           debugPrint(widget.isLiked.toString() +
+                //               "This has been Added to favourites: " +
+                //               TestGridTile.idNumber.toString());
+                //           _getUserDocIdForAdd(TestGridTile.idNumber);
+                //         });
+                //         setState(() {});
+                //       });
+                // }
+              } else {
+                return CircularProgressIndicator();
+              }
+            }),
+      ],
+    );
 
-
-    if (!_isFavorite) {
-      return IconButton(
-          icon: Icon(
-            Icons.favorite_outline_rounded, //comments button
-            size: 50,
-            color: Colors.red,
-          ),
-          onPressed: () {
-            setState(() {
-              _isFavorite = !_isFavorite;
-              //add recipe ID to favourites array
-              _getUserDocIdForAdd(TestGridTile.idNumber.toString());
-            });
-          });
-    } else {
-      return IconButton(
-          icon: Icon(
-            Icons.favorite_rounded,
-            size: 50,
-            color: Colors.red,
-          ),
-          onPressed: () {
-            setState(() {
-              _isFavorite = !_isFavorite;
-              //if array contains recipeID, remove
-              _getUserDocIdForDelete(TestGridTile.idNumber);
-            });
-          });
-    }
+    //   if (!_isFavorite) {
+    //     return IconButton(
+    //         icon: Icon(
+    //           Icons.favorite_outline_rounded, //comments button
+    //           size: 50,
+    //           color: Colors.red,
+    //         ),
+    //         onPressed: () {
+    //           setState(() {
+    //             _isFavorite = !_isFavorite;
+    //             //add recipe ID to favourites array
+    //             _getUserDocIdForAdd(TestGridTile.idNumber.toString());
+    //           });
+    //         });
+    //   } else {
+    //     return IconButton(
+    //         icon: Icon(
+    //           Icons.favorite_rounded,
+    //           size: 50,
+    //           color: Colors.red,
+    //         ),
+    //         onPressed: () {
+    //           setState(() {
+    //             _isFavorite = !_isFavorite;
+    //             //if array contains recipeID, remove
+    //             _getUserDocIdForDelete(TestGridTile.idNumber);
+    //           });
+    //         });
   }
-
-  //helper method to add the recipe ID to the firestore favourites array
-  void _addFavouriteToDB(String recipeIdNumber, String id) async {
-    //instantiate a local list to hold temp ID
-    List recipes = [recipeIdNumber];
-
-    //add the temp array to the firestore
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(id)
-        .update({'favourites': FieldValue.arrayUnion(recipes)});
-    //clear the temp array
-    recipes.clear();
-  }
-
-  void _getUserDocIdForAdd(String recipeIdNumber) async {
-    String id;
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    await FirebaseFirestore.instance
-        .collection('users') // Users table in firestore
-        .where('uid',
-            isEqualTo: _firebaseAuth.currentUser
-                .uid) //first uid is the user ID of in the users table (not document id)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        id = doc.id;
-        debugPrint(id);
-        _addFavouriteToDB(recipeIdNumber, id);
-      });
-    });
-  }
-
-  void _getUserDocIdForDelete(String recipeIdNumber) async {
-    String id;
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    await FirebaseFirestore.instance
-        .collection('users') // Users table in firestore
-        .where('uid',
-            isEqualTo: _firebaseAuth.currentUser
-                .uid) //first uid is the user ID of in the users table (not document id)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        id = doc.id;
-        debugPrint(id);
-        _removeFavouriteFromDB(recipeIdNumber, id);
-      });
-    });
-  }
+}
 
 //helper method to add the recipe ID to the firestore favourites array
-  void _removeFavouriteFromDB(String recipeIdNumber, id) async {
-    //instantiate a local list to hold temp ID
-    List recipes = [recipeIdNumber];
+void _addFavouriteToDB(String recipeIdNumber, String id) async {
+  //instantiate a local list to hold temp ID
+  List recipes = [recipeIdNumber];
 
-    //add the temp array to the firestore
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(id)
-        .update({'favourites': FieldValue.arrayRemove(recipes)});
-  }
+  //add the temp array to the firestore
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(id)
+      .update({'favourites': FieldValue.arrayUnion(recipes)});
+  //clear the temp array
+  recipes.clear();
+}
+
+void _getUserDocIdForAdd(String recipeIdNumber) async {
+  String id;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      id = doc.id;
+      debugPrint(id);
+      _addFavouriteToDB(recipeIdNumber, id);
+    });
+  });
+}
+
+void _getUserDocIdForDelete(String recipeIdNumber) async {
+  String id;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      id = doc.id;
+      debugPrint(id);
+      _removeFavouriteFromDB(recipeIdNumber, id);
+    });
+  });
+}
+
+//helper method to add the recipe ID to the firestore favourites array
+void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
+  //instantiate a local list to hold temp ID
+  List recipes = [recipeIdNumber];
+
+  //add the temp array to the firestore
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(id)
+      .update({'favourites': FieldValue.arrayRemove(recipes)});
+  //clear the temp array
+  recipes.clear();
+}
+
+Future _getLiked() async {
+  bool liked = false;
+  List recipes = [];
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      recipes = doc['favourites'];
+      if (recipes.contains(TestGridTile.idNumber.toString())) {
+        liked = true;
+      }
+    });
+  });
+
+  return liked;
+}
 
 //method to check if the recipe ID is in the users array
-  _checkRecipeFavourited(String idNumber) async {
-    var firestoreDB = FirebaseFirestore.instance
-        .collection('users')
-        .doc('0dT614naJKZgbjRZCGMj')
-        .snapshots();
+_checkRecipeFavourited(String idNumber) async {
+  var firestoreDB = FirebaseFirestore.instance
+      .collection('users')
+      .doc('0dT614naJKZgbjRZCGMj')
+      .snapshots();
 
+  List recipes = [];
+  bool checkMatch = false;
 
-    List recipes = [];
-    bool checkMatch = false;
-
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    await FirebaseFirestore.instance
-        .collection('users') // Users table in firestore
-        .where('uid',
-            isEqualTo: _firebaseAuth.currentUser
-                .uid) //first uid is the user ID of in the users table (not document id)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        recipes.add(doc['favourites']);
-      });
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      debugPrint(doc['favourites'].toString() + "again");
+      recipes.add(doc['favourites']);
+      debugPrint(recipes.toString() + "Saved local");
+      return true;
     });
+  });
 
-    if (recipes.contains(idNumber)) {}
-
-    return checkMatch;
-
+  if (recipes.contains(idNumber)) {
+    // ignore: unnecessary_statements
+    checkMatch == true;
   }
+
+  return checkMatch;
 }
