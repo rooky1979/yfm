@@ -106,6 +106,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "display": "Salad",
       "value": "Salad",
     },
+    {
+      "display": "Rice",
+      "value": "Rice",
+    },
   ];
 
   //snackbar if any of the fields are empty and the user tries to add ingredients
