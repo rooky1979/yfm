@@ -245,7 +245,22 @@ class _CommentState extends State<Comment> {
    * (Needs to change to use the string stored in db)
    */
   Future _getUserImage() async {
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    String imageName;
+
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: widget.snapshot.docs[widget.index][
+                'uid']) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        imageName = doc["image"];
+      });
+    });
+
+    String downloadURL =
+        await storage.ref('avatar_images/' + imageName).getDownloadURL();
     return downloadURL;
   }
 
@@ -273,7 +288,8 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if (widget.snapshot.docs[widget.index]['uid'] == user) {
+    if ((widget.snapshot.docs[widget.index]['uid'] == user) ||
+        (user == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2')) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

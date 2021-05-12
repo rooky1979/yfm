@@ -19,12 +19,12 @@ class UserInformationCard extends StatelessWidget {
     //snapshot document ID for use later
     // ignore: unused_local_variable
     String docID = snapshot.docs[userindex].id;
-    String userId = firebaseAuth.currentUser.uid;
     String userID = snapshotData['uid'];
-    while (userID != userId) {
+    String uid = firebaseAuth.currentUser.uid;
+    while (userID != uid) {
       userindex++;
       snapshotData = snapshot.docs[userindex];
-      userID = snapshotData['userId'];
+      userID = snapshotData['uid'];
     }
     return Column(
       children: [
@@ -96,7 +96,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Name',
+                                  text: 'Name: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
@@ -130,7 +130,7 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Region',
+                                  text: 'Region: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
