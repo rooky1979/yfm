@@ -5,20 +5,20 @@ import 'package:youth_food_movement/bookmark/bookmark_tile.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 class BookmarkPage extends StatefulWidget {
   @override
   _BookmarkPageState createState() => _BookmarkPageState();
 }
-
 class _BookmarkPageState extends State<BookmarkPage> {
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
-  List favourites = [];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
@@ -67,5 +67,4 @@ class _BookmarkPageState extends State<BookmarkPage> {
           }),
     );
   }
-
 }

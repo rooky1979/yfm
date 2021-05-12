@@ -19,11 +19,11 @@ class BookmarkTile extends StatelessWidget {
     var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
-    var favourites = _getFavorites();
+    //var favourites = _getFavorites();
 
     return Container(
-      width: 150,//MediaQuery.of(context).size.width,
-      height: 150,//MediaQuery.of(context).size.height * 0.25,
+      width: 150, //MediaQuery.of(context).size.width,
+      height: 150, //MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
           future: _getImageURL(docID),
@@ -56,30 +56,47 @@ class BookmarkTile extends StatelessWidget {
 
   //method to get the image URL
   Future _getImageURL(var docID) async {
+    List recipes = [];
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        recipes = List<String>.from(doc['favourites']);
+      });
+    });
     //declare and instantiate the firebase storage bucket
     final FirebaseStorage storage = FirebaseStorage.instanceFor(
         bucket: 'gs://youth-food-movement.appspot.com');
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL =
-        await storage.ref('recipe_images/$docID').getDownloadURL();
-    return downloadURL;
+    if (recipes.contains(docID)) {
+      String downloadURL =
+          await storage.ref('recipe_images/$docID').getDownloadURL();
+      return downloadURL;
+    }
   }
 
-  Future<List<String>> _getFavorites() async {
-   final favourites = [];
+ /*  Future<List<String>> _getFavorites() async {
+    List recipes = [];
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final String uid = _firebaseAuth.currentUser.uid;
-
-  // Get groupe Document
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(uid)
-      .get()
-      .then((DocumentSnapshot snapshot) {
-    favourites.add(snapshot.data);
-  });
-  return favourites;
-
-
-} 
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: _firebaseAuth.currentUser
+                .uid) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        recipes = List<String>.from(doc['favourites']);
+      });
+    });
+    for (int i = 0; i < recipes.length; i++) {
+      print(recipes[i].toString());
+    }
+    return recipes;
+  } */
 }
