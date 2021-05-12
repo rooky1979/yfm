@@ -51,7 +51,7 @@ class UserInformationCard extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              'Birthday: ${snapshotData['Birthday']}',
+                              'Birthday: ${snapshotData['birthday']}',
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -96,11 +96,11 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Name',
+                                  text: 'Name: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
-                                  text: snapshotData['Name'],
+                                  text: snapshotData['name'],
                                 ),
                               ],
                             ),
@@ -130,11 +130,11 @@ class UserInformationCard extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Region',
+                                  text: 'Region: ',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 TextSpan(
-                                  text: snapshotData['Region'],
+                                  text: snapshotData['region'],
                                 ),
                               ],
                             ),
@@ -169,7 +169,7 @@ class UserInformationCard extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: _printArray(
-                                    snapshotData['Allergy'],
+                                    snapshotData['allergy'],
                                   ),
                                 ),
                               ],
@@ -207,7 +207,7 @@ class UserInformationCard extends StatelessWidget {
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
-                                    text: snapshotData['Username'],
+                                    text: snapshotData['username'],
                                   ),
                                 ],
                               ),

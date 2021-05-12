@@ -106,7 +106,7 @@ class RecipeInformationCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                                    Padding(
+                  Padding(
                     //widget to show the recipe difficulty
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
@@ -406,4 +406,3 @@ class RecipeInformationCard extends StatelessWidget {
     return string;
   }
 }
-

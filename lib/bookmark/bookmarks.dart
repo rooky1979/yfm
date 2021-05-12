@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'bookmarked_recipe_control.dart';
 
 //This page is the display page for the recipes a user has favourited. it currently displays
