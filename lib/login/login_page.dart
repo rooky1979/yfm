@@ -102,28 +102,74 @@ class _LogInState extends State<LogIn> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  margin: const EdgeInsets.only(top: 230),
+                  margin: const EdgeInsets.only(top: 250),
                   child: Column(
                     children: [
                       //Container for email textfield
                       Container(
                         width: 200,
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
+                        // child: TextField(
+                        //   decoration: InputDecoration(labelText: "Email"),
+
+                        //   controller: emailInputController,
+
                         child: TextField(
-                          decoration: InputDecoration(labelText: "Email"),
                           controller: emailInputController,
+                          cursorColor: Color(0xFF7a243e),
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            fillColor: Color(0xFFe62d1),
+                            filled: true,
+                            labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 3),
+                            ),
+                          ),
                         ),
                       ),
                       //Container for password textfield
                       Container(
                         width: 200,
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
-                          decoration: InputDecoration(labelText: "Password"),
                           controller: passwordInputController,
                           obscureText: true,
+                          cursorColor: Color(0xFF7a243e),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock_open_outlined),
+                            focusColor: Color(0xFF7a243e),
+                            hintText: 'Password',
+                            fillColor: Color(0xFFe62d1),
+                            filled: true,
+                            hintStyle: TextStyle(
+                              color: Color(0xFE7a243e),
+                            ),
+                            //helperText: 'What yo',
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 2),
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(60.0),
+                                )),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 3),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(60.0),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
+
                       //sign in button
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0),
@@ -176,7 +222,7 @@ class _LogInState extends State<LogIn> {
                                     }
                                   } else {
                                     final snackBar = SnackBar(
-                                      content: Text('email not entered'),
+                                      content: Text('Email not entered'),
                                       duration: Duration(milliseconds: 1000),
                                       backgroundColor: Colors.red,
                                     );
@@ -184,7 +230,7 @@ class _LogInState extends State<LogIn> {
                                         .showSnackBar(snackBar);
                                   }
                                 },
-                                child: Text("Login"),
+                                child: Text("LOGIN"),
                               );
                             }),
                       ),
@@ -199,7 +245,7 @@ class _LogInState extends State<LogIn> {
                                   builder: (context) => RegisterPage()),
                             );
                           },
-                          child: Text("Register"),
+                          child: Text("REGISTER"),
                         ),
                       ),
                     ],
