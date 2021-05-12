@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/bookmark/bookmarks.dart';
+import 'package:youth_food_movement/bookmark/bookmark_page.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,6 +29,24 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.red[800],
+          leading: IconButton(
+              icon: Icon(
+                FontAwesomeIcons.arrowLeft,
+                size: 25,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          title: Text('User Profile',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              )),
+        ),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Card(
@@ -178,7 +197,7 @@ class ProfileButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    BookmarkedRecipeThumbnail()))
+                                    BookmarkPage()))
                       }),
               _checkMod(context)
             ],
