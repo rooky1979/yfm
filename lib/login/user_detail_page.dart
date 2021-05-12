@@ -616,7 +616,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     'accountedCreatedTime': formattedDate
                                         .format(new DateTime.now()),
                                     'allergy': _allergies,
-                                    'favourites': []
+                                    'favourites': [],
+                                    'isModerator': false
                                   });
                                   final snackBar = SnackBar(
                                     content:
