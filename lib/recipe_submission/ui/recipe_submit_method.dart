@@ -49,7 +49,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: new Color(0xFFe62d11),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -97,14 +97,15 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                   decoration: InputDecoration(
                     labelText: 'Enter step',
                     labelStyle: whiteText,
-                    fillColor: Colors.red[400],
+                    fillColor: new Color(0xFFe62d11),
                     filled: true,
                     focusedBorder: UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.greenAccent, width: 3.0),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 3.0),
+                        borderSide: BorderSide(
+                            color: new Color(0xFFe62d11), width: 3.0),
                         borderRadius: BorderRadius.circular(15)),
                   ),
                 ),
@@ -126,7 +127,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'Previous',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           setState(() {});
@@ -149,7 +151,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'Next',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (methodController.text.isEmpty) {
@@ -194,7 +197,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: new Color(0xFFe62d11),
                                     radius: 10,
                                   ),
                                   title: Text(
@@ -232,7 +235,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'Cancel',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -250,7 +254,9 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(
+                          primary: new Color(0xFFe62d11),
+                        ),
                         child: Text(
                           'Done',
                           style: TextStyle(

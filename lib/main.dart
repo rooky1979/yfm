@@ -10,7 +10,7 @@ Future<void> main() async {
       //theme: _appTheme,
       theme: ThemeData(
         //brightness: Brightness.light,
-        primaryColor: Colors.red[300],
+        primaryColor: new Color(0xFFe62d11),
         /* textTheme: TextTheme(
             headline5: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
             bodyText1: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),

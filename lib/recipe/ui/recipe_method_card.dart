@@ -29,8 +29,10 @@ class MethodCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text('Method:',
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    )),
               ),
             ],
           ),
@@ -45,11 +47,12 @@ class MethodCard extends StatelessWidget {
               children: [
                 ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: new Color(0xFF7a243e),
                     child: Text(
                       (index + 1).toString(),
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: new Color(0xFFebe7d2),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   //each tile prints each element of the array
@@ -62,7 +65,7 @@ class MethodCard extends StatelessWidget {
                   thickness: 2,
                   indent: 40,
                   endIndent: 20,
-                  color: Colors.red[200],
+                  color: new Color(0xFF7a243e),
                 ),
               ],
             );
