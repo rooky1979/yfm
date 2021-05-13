@@ -15,7 +15,7 @@ class Method extends StatelessWidget {
         .collection('method')
         .snapshots();
     return Scaffold(
-        backgroundColor: new Color(0xFFebe7d2),
+        backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
           padding: const EdgeInsets.only(top: 25),
           child: Column(

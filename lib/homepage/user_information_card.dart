@@ -39,35 +39,41 @@ class UserInformationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            //height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.redAccent[700],
-                                  Colors.red[400]
-                                ]),
-                                border: Border.all(color: Colors.red[800]),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Name: ${snapshotData['name']}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        //height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.redAccent[700],
+                              Colors.red[400]
+                            ]),
+                            border: Border.all(color: Colors.red[800]),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'Name: ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                        ))
+                            Flexible(
+                              child: Text(
+                                '${snapshotData['name']}',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 )),
           ),
@@ -83,35 +89,41 @@ class UserInformationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            //height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.redAccent[700],
-                                  Colors.red[400]
-                                ]),
-                                border: Border.all(color: Colors.red[800]),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Birthday: ${snapshotData['birthday']}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        //height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.redAccent[700],
+                              Colors.red[400]
+                            ]),
+                            border: Border.all(color: Colors.red[800]),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'Birthday: ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                        ))
+                            Flexible(
+                              child: Text(
+                                '${snapshotData['birthday']}',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 )),
           ),
@@ -127,35 +139,41 @@ class UserInformationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            //height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.redAccent[700],
-                                  Colors.red[400]
-                                ]),
-                                border: Border.all(color: Colors.red[800]),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Username: ${snapshotData['username']}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        //height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.redAccent[700],
+                              Colors.red[400]
+                            ]),
+                            border: Border.all(color: Colors.red[800]),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'Username: ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                        ))
+                            Flexible(
+                              child: Text(
+                                '${snapshotData['username']}',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 )),
           ),
@@ -171,35 +189,41 @@ class UserInformationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            //height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.redAccent[700],
-                                  Colors.red[400]
-                                ]),
-                                border: Border.all(color: Colors.red[800]),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Region: ${snapshotData['region']}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        //height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.redAccent[700],
+                              Colors.red[400]
+                            ]),
+                            border: Border.all(color: Colors.red[800]),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'Region: ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                        ))
+                            Flexible(
+                              child: Text(
+                                '${snapshotData['region']}',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 )),
           ),
@@ -216,32 +240,35 @@ class UserInformationCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Allergies: ${snapshotData['allergy']}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30),
-                                textAlign: TextAlign.center,
-                              ),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      //height: MediaQuery.of(context).size.height,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [Colors.redAccent[700], Colors.red[400]]),
+                          border: Border.all(color: Colors.red[800]),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Allergies: ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                              textAlign: TextAlign.center,
                             ),
-                          ],
-                        ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              '${snapshotData['allergy']}',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

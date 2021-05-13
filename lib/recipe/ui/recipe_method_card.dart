@@ -51,7 +51,7 @@ class MethodCard extends StatelessWidget {
                     child: Text(
                       (index + 1).toString(),
                       style: TextStyle(
-                          color: new Color(0xFFebe7d2),
+                          color: new Color(0xFFf0f1eb),
                           fontWeight: FontWeight.bold),
                     ),
                   ),

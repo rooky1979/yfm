@@ -19,7 +19,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   Widget build(BuildContext context) {
     //main page setup
     return Scaffold(
-        backgroundColor: new Color(0xFFebe7d2),
+        backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
           padding: const EdgeInsets.only(top: 25),
           child: Column(
@@ -43,7 +43,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: new Color(0xFFebe7d2),
+          color: new Color(0xFFf0f1eb),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -76,7 +76,7 @@ class RecipeThumbnail extends StatelessWidget {
                   );
                 } else {
                   return Container(
-                      color: new Color(0xFFebe7d2),
+                      color: new Color(0xFFf0f1eb),
                       //while image is loading, display the circular indicator
                       child: Center(
                         child: CircularProgressIndicator(),
@@ -145,7 +145,7 @@ class RecipeButtons extends StatelessWidget {
             children: [
               RawMaterialButton(
                   padding: EdgeInsets.all(10), //ingredients button
-                  fillColor: new Color(0xFFebe7d2),
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
                   child: Icon(
                     FontAwesomeIcons.info,
@@ -165,7 +165,7 @@ class RecipeButtons extends StatelessWidget {
               RawMaterialButton(
                   // recipe method button
                   padding: EdgeInsets.all(10),
-                  fillColor: new Color(0xFFebe7d2),
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
                   child: Icon(
                     FontAwesomeIcons.book,
@@ -183,7 +183,7 @@ class RecipeButtons extends StatelessWidget {
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
-                  fillColor: new Color(0xFFebe7d2),
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
                   child: Icon(
                     FontAwesomeIcons.comments, //comments button
@@ -226,7 +226,7 @@ class _FavouritesState extends State<Favourites> {
     return Column(
       children: [
         Container(
-          color: new Color(0xFFebe7d2),
+          color: new Color(0xFFf0f1eb),
         ),
         FutureBuilder(
             future: _getLiked(),

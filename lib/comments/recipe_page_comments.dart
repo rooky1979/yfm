@@ -34,7 +34,7 @@ class _CommentBoardState extends State<CommentBoard> {
         .snapshots();
 
     return Scaffold(
-        backgroundColor: new Color(0xFFebe7d2),
+        backgroundColor: new Color(0xFFf0f1eb),
         //the body has the whole screen being used
         body: Padding(
           padding: const EdgeInsets.only(top: 5),
