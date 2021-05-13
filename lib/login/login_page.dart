@@ -71,6 +71,7 @@ class _LogInState extends State<LogIn> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
+        color: Color(0xFFebe7d2),
         height: double.infinity,
         child: SingleChildScrollView(
           child: Stack(
@@ -107,7 +108,7 @@ class _LogInState extends State<LogIn> {
                     children: [
                       //Container for email textfield
                       Container(
-                        width: 200,
+                        width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         // child: TextField(
                         //   decoration: InputDecoration(labelText: "Email"),
@@ -118,6 +119,8 @@ class _LogInState extends State<LogIn> {
                           controller: emailInputController,
                           cursorColor: Color(0xFF7a243e),
                           decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.mail_outline, color: Colors.black),
                             labelText: 'Email',
                             fillColor: Color(0xFFe62d1),
                             filled: true,
@@ -137,115 +140,131 @@ class _LogInState extends State<LogIn> {
                       ),
                       //Container for password textfield
                       Container(
-                        width: 200,
+                        width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: passwordInputController,
                           obscureText: true,
                           cursorColor: Color(0xFF7a243e),
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock_open_outlined),
-                            focusColor: Color(0xFF7a243e),
-                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.lock_outline_rounded,
+                                color: Colors.black),
+                            focusColor: Color(0xFFe62d11),
+                            labelText: 'Password',
+
                             fillColor: Color(0xFFe62d1),
                             filled: true,
+                            labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                            ),
                             hintStyle: TextStyle(
                               color: Color(0xFE7a243e),
                             ),
                             //helperText: 'What yo',
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.transparent, width: 2),
-                                borderRadius: const BorderRadius.all(
-                                  const Radius.circular(60.0),
-                                )),
-                            focusedBorder: OutlineInputBorder(
+                            enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.transparent, width: 3),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(60.0),
-                              ),
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 3),
                             ),
                           ),
                         ),
                       ),
 
                       //sign in button
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12.0),
-                        child: GetBuilder<DataController>(
-                            init: DataController(),
-                            builder: (val) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  //check if email has been entered
-                                  if (emailInputController.text.isNotEmpty) {
-                                    //check if password has been entered
-                                    if (passwordInputController
-                                        .text.isNotEmpty) {
-                                      val
-                                          .emailQueryData(
-                                              emailInputController.text)
-                                          .then((value) {
-                                        snapshotData = value;
-                                        //check if email exist in database
-                                        if (snapshotData.docs.isNotEmpty) {
-                                          context
-                                              .read<AuthenticationService>()
-                                              .signIn(
-                                                email: emailInputController.text
-                                                    .trim(),
-                                                password:
-                                                    passwordInputController.text
-                                                        .trim(),
-                                              );
-                                        } else {
-                                          final snackBar = SnackBar(
-                                            content: Text(
-                                                'Incorrect Email or Password!'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.red,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        }
-                                      });
+                      Container(
+                        width: 180,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 12.0),
+                          child: GetBuilder<DataController>(
+                              init: DataController(),
+                              builder: (val) {
+                                return ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 4,
+                                    primary: Color(0xFF4ca5b5), // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  onPressed: () {
+                                    //check if email has been entered
+                                    if (emailInputController.text.isNotEmpty) {
+                                      //check if password has been entered
+                                      if (passwordInputController
+                                          .text.isNotEmpty) {
+                                        val
+                                            .emailQueryData(
+                                                emailInputController.text)
+                                            .then((value) {
+                                          snapshotData = value;
+                                          //check if email exist in database
+                                          if (snapshotData.docs.isNotEmpty) {
+                                            context
+                                                .read<AuthenticationService>()
+                                                .signIn(
+                                                  email: emailInputController
+                                                      .text
+                                                      .trim(),
+                                                  password:
+                                                      passwordInputController
+                                                          .text
+                                                          .trim(),
+                                                );
+                                          } else {
+                                            final snackBar = SnackBar(
+                                              content: Text(
+                                                  'Incorrect Email or Password!'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.red,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+                                        });
+                                      } else {
+                                        final snackBar = SnackBar(
+                                          content: Text('Password not entered'),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor: Colors.red,
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      }
                                     } else {
                                       final snackBar = SnackBar(
-                                        content: Text('Password not entered'),
+                                        content: Text('Email not entered'),
                                         duration: Duration(milliseconds: 1000),
                                         backgroundColor: Colors.red,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
-                                  } else {
-                                    final snackBar = SnackBar(
-                                      content: Text('Email not entered'),
-                                      duration: Duration(milliseconds: 1000),
-                                      backgroundColor: Colors.red,
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  }
-                                },
-                                child: Text("LOGIN"),
-                              );
-                            }),
+                                  },
+                                  child: Text("LOGIN"),
+                                );
+                              }),
+                        ),
                       ),
                       //register account button
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()),
-                            );
-                          },
-                          child: Text("REGISTER"),
+                      Container(
+                        width: 180,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 6.0),
+                          child: OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterPage()),
+                                );
+                              },
+                              child: Text("REGISTER"),
+                              style: OutlinedButton.styleFrom(
+                                primary: Color(0xFF4ca5b5),
+                              )),
                         ),
                       ),
                     ],
