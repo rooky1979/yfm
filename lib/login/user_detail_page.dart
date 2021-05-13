@@ -109,6 +109,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
 
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
         backgroundColor: Color(0xFFe62d11),
         leading: IconButton(

@@ -16,6 +16,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
         backgroundColor: Colors.red[800],

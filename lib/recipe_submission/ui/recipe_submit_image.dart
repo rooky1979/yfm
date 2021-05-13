@@ -53,6 +53,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
         backgroundColor: Colors.red,
         leading: IconButton(

@@ -12,6 +12,7 @@ class _BeefRecipe extends State<BeefRecipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: new Color(0xFFf0f1eb),
       body: ListView(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -87,6 +88,7 @@ class _BeefRecipe extends State<BeefRecipe> {
 }
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: new Color(0xFFf0f1eb),
       body:  ListView(
         shrinkWrap: true,
         physics: ScrollPhysics(),

@@ -6,6 +6,7 @@ class SuccessSubmission extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text('Successful!',

@@ -49,6 +49,7 @@
 //       );
 //     //
 //     return Scaffold(
+//        backgroundColor: new Color(0xFFf0f1eb),
 //       floatingActionButton: FloatingActionButton(
 //         child: Icon(Icons.clear),
 //         onPressed: () {},
@@ -128,6 +129,7 @@
 //       );
 //     }////
 //     return Scaffold(
+//       backgroundColor: new Color(0xFFf0f1eb),
 //       floatingActionButton: FloatingActionButton(
 //         child: Icon(Icons.clear),
 //         onPressed: () {},

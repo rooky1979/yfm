@@ -46,6 +46,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
