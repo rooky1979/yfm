@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 //a temp page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
 
@@ -21,6 +22,7 @@ Widget build(BuildContext context) {
 // ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
+
   //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -29,112 +31,125 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.red[800],
-          leading: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.arrowLeft,
-                size: 25,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          title: Text('User Profile',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              )),
-        ),
+        backgroundColor: new Color(0xFF7a243e),
+        title: Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 0,
+                  child: Row(),
+                ),
+              ],
+            )),
+      ),
       body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Card(
-          child: Container(
-            width: 200.0,
-            height: 200.0,
-            decoration: new BoxDecoration(),
-            child: FutureBuilder(
-                future: _getUserImage(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    //return the image and make it cover the container
-                    return GestureDetector(
-                      child: Image.network(
-                        snapshot.data,
-                        fit: BoxFit.cover,
-                      ),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return GestureDetector(
-                            child: Center(
-                              child: Image.network(
-                                snapshot.data,
-                                fit: BoxFit.cover,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                child: Container(
+                  width: 200.0,
+                  height: 180.0,
+                  decoration: new BoxDecoration(),
+                  child: FutureBuilder(
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return GestureDetector(
+                          child: Image.network(
+                            snapshot.data,
+                            fit: BoxFit.cover,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    child: Center(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    onTap: () => Navigator.pop(context),
+                                  );
+                                },
                               ),
-                            ),
-                            onTap: () => Navigator.pop(context),
-                          );
-                        }));
-                      },
-                    );
-                  } else {
-                    return Container(
-                        child: Center(
-                      child: CircularProgressIndicator(),
-                    ));
-                  }
-                }),
-          ),
-        ),
-        ProfileButtons(),
-        StreamBuilder(
-            stream: firestoreDb,
-            builder: (
-              context,
-              snapshot,
-            ) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
-              return Expanded(
-                child: ListView.builder(
-                    itemCount: 1, //snapshot.data.docs.length,
-                    itemBuilder: (context, int index) {
-                      return UserInformationCard(
-                        snapshot: snapshot.data,
-                        index:
-                            1, //this changes depending on what user is selected
-                        //index will be used
-                      );
-                    }),
-              );
-            }),
-        ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  return Colors.red;
-                },
+                            );
+                          },
+                        );
+                      } else {
+                        return Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<AuthenticationService>().signOut();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
-            },
-            child: Text("Sign Out")),
-      ])),
+            ProfileButtons(),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 13.0, right: 13.0, top: 12.0, bottom: 1.0),
+            ),
+            StreamBuilder(
+              stream: firestoreDb,
+              builder: (
+                context,
+                snapshot,
+              ) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: 1, //snapshot.data.docs.length,
+                      itemBuilder: (context, int index) {
+                        return UserInformationCard(
+                          snapshot: snapshot.data,
+                          index:
+                              1, //this changes depending on what user is selected
+                          //index will be used
+                        );
+                      }),
+                );
+              },
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * .90,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 4,
+                  primary: Color(0xFFe62d11), // background
+                  onPrimary: Colors.white, // foreground
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<AuthenticationService>().signOut();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage()));
+                },
+                child: Text("SIGN OUT"),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   //method to get the image URL
-  Future _getImageURL() async {
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
-    return downloadURL;
-  }
 
   Future _getUserImage() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -163,14 +178,14 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
+      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: 90,
+        width: MediaQuery.of(context).size.width * .90,
+        height: 75,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.red[400],
+          borderRadius: BorderRadius.circular(10),
+          color: new Color(0xFF7a243e),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -181,16 +196,19 @@ class ProfileButtons extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
                 shape: CircleBorder(),
-                child:
-                    Icon(FontAwesomeIcons.globe, size: 40, color: Colors.red),
+                child: Icon(FontAwesomeIcons.globe,
+                    size: 40, color: new Color(0xFF7a243e)),
                 onPressed: _launchURL,
               ),
               RawMaterialButton(
                   padding: EdgeInsets.all(10),
                   fillColor: Colors.white,
                   shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.solidBookmark,
-                      size: 40, color: Colors.red),
+                  child: Icon(
+                    FontAwesomeIcons.solidBookmark,
+                    size: 40,
+                    color: new Color(0xFF7a243e),
+                  ),
                   onPressed: () => {
                         Navigator.push(
                             context,
@@ -217,21 +235,18 @@ _launchURL() async {
 }
 
 _checkMod(BuildContext context) {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  if (_firebaseAuth.currentUser.uid == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2') {
-    return RawMaterialButton(
-        padding: EdgeInsets.all(11),
-        fillColor: Colors.white,
-        shape: CircleBorder(),
-        child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
-        onPressed: () => {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          InformationSubmission()))
-            });
-  } else {
-    return Container();
-  }
+  //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  return RawMaterialButton(
+      padding: EdgeInsets.all(11),
+      fillColor: Colors.white,
+      shape: CircleBorder(),
+      child:
+          Icon(FontAwesomeIcons.plusCircle, size: 40, color: Color(0xFF7a243e)),
+      onPressed: () => {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => InformationSubmission()))
+          });
 }

@@ -21,7 +21,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: Colors.black,
+    color: Color(0xFF7a243e),
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -49,7 +49,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: new Color(0xFFe62d11),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -77,7 +77,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         const EdgeInsets.only(top: 13.0, left: 30, bottom: 8.0),
                     child: Text(
                       'Add method instructions:',
-                      style: blackText,
+                      style: TextStyle(color: Color(0xFF7a243e), fontSize: 20),
                     ),
                   )
                 ],
@@ -91,27 +91,24 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                   controller: methodController,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF7a243e),
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
                     labelText: 'Enter step',
                     labelStyle: whiteText,
-                    fillColor: Colors.red[400],
+                    fillColor: new Color(0xFFe62d11),
                     filled: true,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF7a243e), width: 2),
+                    ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide:
-                          BorderSide(color: Colors.greenAccent, width: 3.0),
+                          BorderSide(color: Color(0xFF7a243e), width: 3),
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 3.0),
-                        borderRadius: BorderRadius.circular(15)),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 13.0),
-                child: divider,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,12 +118,15 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                     child: SizedBox(
                       width: 150,
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          primary: Color(0xFF4ca5b5),
+                        ),
                         child: Text(
-                          'Previous',
+                          'PREVIOUS',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           setState(() {});
@@ -144,12 +144,13 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.red[100]),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF4ca5b5)),
                         child: Text(
-                          'Next',
+                          'NEXT',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (methodController.text.isEmpty) {
@@ -180,7 +181,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               top: 8.0, left: 30, bottom: 8.0),
                           child: Text(
                             'Added so far:',
-                            style: blackText,
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
                           ),
                         )
                       ],
@@ -194,21 +196,21 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: new Color(0xFFe62d11),
                                     radius: 10,
                                   ),
                                   title: Text(
                                       DBControl.methodSteps[index].toString(),
                                       style: TextStyle(
                                           fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
+                                          color: Color(0xFF7a243e))),
                                 ),
                                 Divider(
                                   height: 10,
                                   thickness: 2,
                                   indent: 40,
                                   endIndent: 20,
-                                  color: Colors.red[200],
+                                  color: Color(0xFF7a243e),
                                 ),
                               ],
                             );
@@ -227,12 +229,15 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                     child: SizedBox(
                       width: 150,
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          primary: Color(0xFF4ca5b5),
+                        ),
                         child: Text(
-                          'Cancel',
+                          'CANCEL',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -250,11 +255,12 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(
+                          primary: new Color(0xFFe62d11),
+                        ),
                         child: Text(
-                          'Done',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                          'DONE',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (DBControl.methodSteps.isEmpty) {

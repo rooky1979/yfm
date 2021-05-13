@@ -18,15 +18,16 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   Widget build(BuildContext context) {
     //main page setup
     return Scaffold(
+        backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: Column(
-        children: [
-          RecipeThumbnail(),
-          RecipeButtons(),
-        ],
-      ),
-    ));
+          padding: const EdgeInsets.only(top: 25),
+          child: Column(
+            children: [
+              RecipeThumbnail(),
+              RecipeButtons(),
+            ],
+          ),
+        ));
   }
 }
 
@@ -40,6 +41,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          color: new Color(0xFFf0f1eb),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -72,10 +74,11 @@ class RecipeThumbnail extends StatelessWidget {
                   );
                 } else {
                   return Container(
+                      color: new Color(0xFFf0f1eb),
                       //while image is loading, display the circular indicator
                       child: Center(
-                    child: CircularProgressIndicator(),
-                  ));
+                        child: CircularProgressIndicator(),
+                      ));
                 }
               }),
         ),
@@ -84,7 +87,7 @@ class RecipeThumbnail extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 30,
-              color: Colors.red,
+              color: new Color(0xFFe62d11),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -120,10 +123,9 @@ class RecipeButtons extends StatelessWidget {
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
         height: 90,
-        //color: Colors.red[400],
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.red[400],
+          color: new Color(0xFFe62d11),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -132,12 +134,12 @@ class RecipeButtons extends StatelessWidget {
             children: [
               RawMaterialButton(
                   padding: EdgeInsets.all(10), //ingredients button
-                  fillColor: Colors.white,
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
                   child: Icon(
                     FontAwesomeIcons.info,
                     size: 40,
-                    color: Colors.red,
+                    color: new Color(0xFFe62d11),
                   ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -152,10 +154,13 @@ class RecipeButtons extends StatelessWidget {
               RawMaterialButton(
                   // recipe method button
                   padding: EdgeInsets.all(10),
-                  fillColor: Colors.white,
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
-                  child:
-                      Icon(FontAwesomeIcons.book, size: 40, color: Colors.red),
+                  child: Icon(
+                    FontAwesomeIcons.book,
+                    size: 40,
+                    color: new Color(0xFFe62d11),
+                  ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.pop(context),
@@ -167,11 +172,13 @@ class RecipeButtons extends StatelessWidget {
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
-                  fillColor: Colors.white,
+                  fillColor: new Color(0xFFf0f1eb),
                   shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.comments, //comments button
-                      size: 40,
-                      color: Colors.red),
+                  child: Icon(
+                    FontAwesomeIcons.comments, //comments button
+                    size: 40,
+                    color: new Color(0xFFe62d11),
+                  ),
                   onPressed: () => {
                         //pops any page currently loaded off the stack and pushes the required page onto the stack
                         Navigator.pop(context),
@@ -207,7 +214,9 @@ class _FavouritesState extends State<Favourites> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(),
+        Container(
+          color: new Color(0xFFf0f1eb),
+        ),
         FutureBuilder(
             future: _getLiked(),
             builder: (context, snapshot) {
@@ -216,7 +225,9 @@ class _FavouritesState extends State<Favourites> {
                 return IconButton(
                     icon: Icon(Icons.favorite_rounded, //comments button
                         size: 50,
-                        color: widget.isLiked ? Colors.red : Colors.grey),
+                        color: widget.isLiked
+                            ? new Color(0xFFe62d11)
+                            : Colors.grey),
                     onPressed: () {
                       if (widget.isLiked) {
                         setState(() {
