@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 //a temp page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
 
@@ -21,6 +22,7 @@ Widget build(BuildContext context) {
 // ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
+
   //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -29,6 +31,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
           backgroundColor: Colors.red[800],
           leading: IconButton(
               icon: Icon(
@@ -46,6 +49,7 @@ class ProfilePage extends StatelessWidget {
                 fontSize: 25,
               )),
         ),
+
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Card(
