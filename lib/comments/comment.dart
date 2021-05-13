@@ -25,6 +25,9 @@ class _CommentState extends State<Comment> {
 //This gets the current user data
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  var userfirestoreDb =
+      FirebaseFirestore.instance.collection('users').snapshots();
+
   Widget build(BuildContext context) {
 //to convert the timestamp into readble format
     var timeToDate = new DateTime.fromMillisecondsSinceEpoch(
@@ -43,6 +46,7 @@ class _CommentState extends State<Comment> {
     //This list is used to add and remove users from the list of users who have liked a comment
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
+    // ignore: unused_local_variable
     Color likeColor = Colors.grey;
 
     //This boolean is used to limit how many times a person can like a comment
@@ -242,7 +246,22 @@ class _CommentState extends State<Comment> {
    * (Needs to change to use the string stored in db)
    */
   Future _getUserImage() async {
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    String imageName;
+
+    await FirebaseFirestore.instance
+        .collection('users') // Users table in firestore
+        .where('uid',
+            isEqualTo: widget.snapshot.docs[widget.index][
+                'uid']) //first uid is the user ID of in the users table (not document id)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        imageName = doc["image"];
+      });
+    });
+
+    String downloadURL =
+        await storage.ref('avatar_images/' + imageName).getDownloadURL();
     return downloadURL;
   }
 
@@ -270,7 +289,9 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if (widget.snapshot.docs[widget.index]['uid'] == user) {
+    if ((widget.snapshot.docs[widget.index]['uid'] ==
+        user)) //Add mod feature before handover?
+    {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

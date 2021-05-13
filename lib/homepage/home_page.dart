@@ -1,11 +1,12 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
+import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
-import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,12 +18,27 @@ class _HomePageState extends State<HomePage> {
       bucket: 'gs://youth-food-movement.appspot.com');
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
-
+  var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
+  List categories = [
+    'All',
+    'Beef',
+    'Pork',
+    'Poultry',
+    'Fish',
+    'Shellfish',
+    'Pulses',
+    'Eggs',
+    'Dairy',
+    'Pasta',
+    'Salads',
+    'Rice'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.red[800],
         actions: [
           GetBuilder<DataController>(
               init: DataController(),
@@ -32,7 +48,8 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
-                          val.foodTitleQueryData(searchController.text)
+                          val
+                              .foodTitleQueryData(searchController.text)
                               .then((value) {
                             snapshotData = value;
                             setState(() {});
@@ -75,7 +92,7 @@ class _HomePageState extends State<HomePage> {
               ],
             )),
       ),
-      //this area will create a lister of catergories that currently only displays one
+      //this area will create a list of catergories that currently only displays one
       //recipe
       body: SafeArea(
           child: Container(
@@ -83,66 +100,63 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height - 100.0,
         child: ListView.builder(
-          itemCount: 6,
-          itemBuilder: (BuildContext context, int categoryIndex) => Column(
+          itemCount: 4,
+          itemBuilder: (context, index) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text('category ${categoryIndex + 1}'),
-              ),
-              Container(
-                height: 180.0,
-                child: PageView.builder(
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      2,
-                      (cardIndex) => GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          width: (MediaQuery.of(context).size.width - 32.0) / 2,
-                          height: 200.0,
-                          margin: EdgeInsets.all(8.0),
-                          padding: EdgeInsets.all(8.0),
-                          child: Card(
-                            child: FutureBuilder(
-                              // future: _getImageURL(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  //this creates the pictures to be clickable
-                                  //and will take the user to the recipe page
-                                  return GestureDetector(
-                                    child: Image.network(
-                                      snapshot.data,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              IngredientsPage(),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                } else {
-                                  return Container(
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                          ),
-                        ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        gradient:
+                            LinearGradient(colors: [Colors.redAccent[700], Colors.red[400]]),
+                        border: Border.all(color: Colors.red[800]),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        '${categories[index]}',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25.0),
+                            textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
+              ),
+              Container(
+                height: 180.0,
+                child: StreamBuilder(
+                    //future: getRecipeCategory(categories[index].toString()),
+                    stream: firestoreDb,
+                    builder: (
+                      context,
+                      snapshot,
+                    ) {
+                      if (!snapshot.hasData) return CircularProgressIndicator();
+                      return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data.docs.length,
+                          itemBuilder: (context, int index) {
+                            return GestureDetector(
+                              child: Card(
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: HomepageTile(
+                                  snapshot: snapshot.data,
+                                  index: index,
+                                ),
+                              ),
+                            );
+                          });
+                    }),
               ),
             ],
           ),

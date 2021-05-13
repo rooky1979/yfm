@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:youth_food_movement/login/authentication_service.dart';
+import 'package:provider/provider.dart';
+import 'package:youth_food_movement/homepage/home_page.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,23 +21,29 @@ class UserDetailPage extends StatefulWidget {
 class _UserDetailPageState extends State<UserDetailPage> {
   //reference to firestore database
   var firestoreDb = FirebaseFirestore.instance.collection('Users').snapshots();
+
   //reference to firebase auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   //reference to firebase storage
   final FirebaseStorage avatarStorage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+
   //Controllers for textfields
   TextEditingController usernameInputController;
   TextEditingController fullNameInputController;
+
   //date formatted to day/month/year
   final formattedDate = new DateFormat('dd-MMM-yyyy');
   DateTime today = DateTime.now();
+
   //used for searching if username already exist check button
   QuerySnapshot snapshotData;
+
   //other variables used for this class
   String _regionDropdownValue;
   String _imageSelected;
-  bool usernameExists;
+  bool usernameExists = true;
   String _username;
   List _allergies;
 
@@ -79,7 +87,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime pickedDate = await showDatePicker(
         context: context,
-        initialDate: today,
+        initialDate: DateTime(2000),
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
     if (pickedDate != null && pickedDate != today)
@@ -99,6 +107,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
   @override
   Widget build(BuildContext context) {
     //refactored textstyle used buttons/textfields
+    final filter = ProfanityFilter();
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
 
@@ -383,7 +392,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   return IconButton(
                                       icon: Icon(Icons.check),
                                       onPressed: () {
-                                        if (usernameInputController
+                                        if (!filter.hasProfanity(
+                                            usernameInputController
+                                                .text)) if (usernameInputController
                                             .text.isNotEmpty) {
                                           val
                                               .usernameQueryData(
@@ -429,6 +440,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           final snackBar = SnackBar(
                                             content:
                                                 Text('Username not entered'),
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            backgroundColor: Colors.red,
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                        else {
+                                          final snackBar = SnackBar(
+                                            content: Text(
+                                                'Please use appropriate language'),
                                             duration:
                                                 Duration(milliseconds: 1000),
                                             backgroundColor: Colors.red,
@@ -576,7 +598,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     onPressed: () {
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
-                          if (usernameExists != true) {
+                          if (usernameExists == false) {
                             if (_imageSelected != null) {
                               if (_regionDropdownValue != null) {
                                 if (formattedDate.format(today) !=
@@ -593,7 +615,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     'birthday': formattedDate.format(today),
                                     'accountedCreatedTime': formattedDate
                                         .format(new DateTime.now()),
-                                    'allergy': _allergies
+                                    'allergy': _allergies,
+                                    'favourites': [],
+                                    'isModerator': false
                                   });
                                   final snackBar = SnackBar(
                                     content:
@@ -638,7 +662,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text('Username already exists'),
+                              content: Text(
+                                  'Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
                               backgroundColor: Colors.red,
                             );
@@ -697,7 +722,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
       textField: 'display',
       valueField: 'value',
       okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
+      cancelButtonLabel: 'CANCEL',
+      //clear checklist
       hintWidget: Text(
         'Select allergies',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),

@@ -64,8 +64,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "value": "Vegan",
     }
   ];
-//list for the proteins
-  List<dynamic> _proteinList = [
+//list for the recipe tags
+  List<dynamic> _tagsList = [
     {
       "display": "Beef",
       "value": "Beef",
@@ -97,6 +97,18 @@ class _InformationSubmissionState extends State<InformationSubmission> {
     {
       "display": "Eggs",
       "value": "Eggs",
+    },
+    {
+      "display": "Pasta",
+      "value": "Pasta",
+    },
+    {
+      "display": "Salad",
+      "value": "Salad",
+    },
+    {
+      "display": "Rice",
+      "value": "Rice",
     },
   ];
 
@@ -373,7 +385,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         child: TextField(
                           controller: DBControl.minutesController,
                           textAlign: TextAlign.start,
-                          keyboardType: TextInputType.number, 
+                          keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter
                                 .digitsOnly //enables digits only for entry
@@ -458,9 +470,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                 //proteins
                 Padding(
                     padding: const EdgeInsets.all(13.0),
-                    child: _proteinsCheckList(
-                      'Protein:',
-                      _proteinList,
+                    child: _recipeTagsCheckList(
+                      'Recipe Tags:',
+                      _tagsList,
                       whiteText,
                     )),
                 divider,
@@ -586,7 +598,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   }
 
   //helper method for the protein checkboxes
-  Widget _proteinsCheckList(
+  Widget _recipeTagsCheckList(
     String title,
     List checklistOptions,
     var textStyle,
