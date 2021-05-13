@@ -33,6 +33,7 @@ class UserInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
+
                 elevation: 1,
                 shadowColor: Colors.red,
                 child: Column(
@@ -110,6 +111,7 @@ class UserInformationCard extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25),
                                 textAlign: TextAlign.center,
+
                               ),
                             ),
                             Flexible(

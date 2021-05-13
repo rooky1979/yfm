@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profanity_filter/profanity_filter.dart';
@@ -110,43 +109,43 @@ class _UserDetailPageState extends State<UserDetailPage> {
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFe62d11),
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              size: 20,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Text('Account Set-Up',
+            style: TextStyle(
+              color: Colors.white,
+              //fontWeight: FontWeight.bold,
+              fontSize: 20,
+            )),
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: ListView(
             children: [
-              AppBar(
-                backgroundColor: Colors.red,
-                leading: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                title: Text('User Detail Page',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    )),
-              ),
               Column(
                 children: [
                   //Label for select avatars
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 13.0, right: 13.0, top: 4.0),
+                        left: 13.0, right: 13.0, top: 12.0, bottom: 5.0),
                     child: SizedBox(
                       height: 50,
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.red[400],
+                            color: Color(0xFF7a243e),
                           ),
                           alignment: Alignment.center,
                           child: Text(
@@ -159,6 +158,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Padding(
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
                             padding:
@@ -249,6 +249,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   ),
                   //2nd row of button with avatar image from database
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
@@ -331,53 +332,66 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     ],
                   ),
                   //Textfield for name
-                  Padding(
-                    padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+
+                  Container(
+                    // width: 250,
+                    padding: const EdgeInsets.only(
+                        left: 13, right: 13, top: 7, bottom: 10),
                     child: TextField(
+                      controller: fullNameInputController,
+                      cursorColor: Color(0xFF7a243e),
                       decoration: InputDecoration(
+                        //prefixIcon:
+                        // Icon(Icons.mail_outline, color: Colors.black),
                         labelText: 'Full Name',
-                        labelStyle: whiteText,
-                        fillColor: Colors.red[400],
+                        fillColor: Color(0xFFe62d1),
                         filled: true,
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.greenAccent, width: 3.0),
+                        labelStyle: TextStyle(
+                          color: Color(0xFF7a243e),
                         ),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.red, width: 3.0),
-                            borderRadius: BorderRadius.circular(15)),
+                          borderSide:
+                              BorderSide(color: Color(0xFF7a243e), width: 2),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF7a243e), width: 3),
+                        ),
                       ),
-                      controller: fullNameInputController,
                     ),
                   ),
                   //textfield for username and check button to check if username already exists
                   Padding(
-                    padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+                    padding: const EdgeInsets.only(
+                        left: 13, right: 13, top: 7, bottom: 10),
                     child: Container(
                       child: Row(
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width * 0.75,
-                            height: 50,
-                            child: SizedBox(
-                              width: 310,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  labelText: 'Username',
-                                  labelStyle: whiteText,
-                                  fillColor: Colors.red[400],
-                                  filled: true,
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.greenAccent, width: 3.0),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 3.0),
-                                      borderRadius: BorderRadius.circular(15)),
+                            // width: 250,
+                            // padding: const EdgeInsets.only(
+                            //     left: 13, right: 13, top: 7, bottom: 10),
+                            child: TextField(
+                              controller: usernameInputController,
+                              cursorColor: Color(0xFF7a243e),
+                              decoration: InputDecoration(
+                                //prefixIcon:
+                                // Icon(Icons.mail_outline, color: Colors.black),
+                                labelText: 'Username',
+                                fillColor: Color(0xFFe62d1),
+                                filled: true,
+                                labelStyle: TextStyle(
+                                  color: Color(0xFF7a243e),
                                 ),
-                                controller: usernameInputController,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color(0xFF7a243e), width: 2),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color(0xFF7a243e), width: 3),
+                                ),
                               ),
                             ),
                           ),
@@ -388,7 +402,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 init: DataController(),
                                 builder: (val) {
                                   return IconButton(
-                                      icon: Icon(Icons.check),
+                                      icon: Icon(Icons.check_circle,
+                                          size: 40, color: Color(0xFF4ca5b5)),
                                       onPressed: () {
                                         if (!filter.hasProfanity(
                                             usernameInputController
@@ -465,7 +480,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   ),
                   //label for enter birthday
                   Padding(
-                    padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+                    padding: const EdgeInsets.only(
+                        left: 13, right: 13, top: 7, bottom: 10),
                     child: Column(
                       children: [
                         Padding(
@@ -476,7 +492,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  color: Colors.red[400],
+                                  color: Color(0xFF7a243e),
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
@@ -487,18 +503,26 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         ),
                         //button to bring out datepicker for birthday
                         Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.red[400],
-                          ),
-                          child: TextButton(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                //borderRadius: BorderRadius.circular(15),
+
+                                ),
+                            child: OutlinedButton.icon(
+                              icon: Icon(Icons.calendar_today),
                               onPressed: () => _selectDate(context),
-                              child: Text(
+                              // style: OutlinedButton.style(
+
+                              // ),
+                              label: Text(
                                 formattedDate.format(today).toString(),
-                                style: whiteText,
-                              )),
-                        ),
+                                style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )),
                       ],
                     ),
                   ),

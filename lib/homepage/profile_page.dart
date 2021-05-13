@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/bookmark/bookmarks.dart';
+import 'package:youth_food_movement/bookmark/bookmark_page.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 //a temp page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
 
@@ -21,6 +22,7 @@ Widget build(BuildContext context) {
 // ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   var firestoreDb = FirebaseFirestore.instance.collection('users').snapshots();
+
   //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
@@ -204,7 +206,7 @@ class ProfileButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    BookmarkedRecipeThumbnail()))
+                                    BookmarkPage()))
                       }),
               _checkMod(context)
             ],

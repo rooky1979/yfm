@@ -5,8 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
-import 'package:youth_food_movement/homepage/test_grid_tile.dart';
-
+import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeControlsPage extends StatefulWidget {
@@ -37,7 +36,6 @@ class RecipeThumbnail extends StatelessWidget {
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -98,16 +96,7 @@ class RecipeThumbnail extends StatelessWidget {
             right: 10.0,
             bottom: 10.0,
             child:
-                Favourites() /* IconButton(
-              //alignment: Alignment.bottomRight,
-              icon: Icon(
-                Icons.favorite,
-                size: 40,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }), */
+                Favourites()
             ),
       ],
     );
@@ -116,7 +105,7 @@ class RecipeThumbnail extends StatelessWidget {
 //ansynchronous method to get the image URL
   Future _getImageURL() async {
     String downloadURL = await storage
-        .ref('recipe_images/' + TestGridTile.idNumber.toString())
+        .ref('recipe_images/' + HomepageTile.idNumber.toString())
         .getDownloadURL();
     return downloadURL;
   }
@@ -125,7 +114,7 @@ class RecipeThumbnail extends StatelessWidget {
 //creates the buttons on the screen to take the user to each section
 // ignore: must_be_immutable
 class RecipeButtons extends StatelessWidget {
-  String docID = TestGridTile.idNumber.toString();
+  String docID = HomepageTile.idNumber.toString();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -160,7 +149,7 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     IngredientsPage(
-                                        TestGridTile.idNumber.toString())))
+                                        HomepageTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -179,7 +168,7 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Method(TestGridTile.idNumber.toString())))
+                                    Method(HomepageTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
@@ -198,7 +187,7 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) => CommentBoard(
                                       recipeID:
-                                          TestGridTile.idNumber.toString(),
+                                          HomepageTile.idNumber.toString(),
                                     )))
                       }),
             ],
@@ -245,16 +234,16 @@ class _FavouritesState extends State<Favourites> {
                           widget.isLiked = !widget.isLiked;
                           debugPrint(widget.isLiked.toString() +
                               "This has been removed from favourites: " +
-                              TestGridTile.idNumber.toString());
-                          _getUserDocIdForDelete(TestGridTile.idNumber);
+                              HomepageTile.idNumber.toString());
+                          _getUserDocIdForDelete(HomepageTile.idNumber);
                         });
                       } else if (!widget.isLiked) {
                         setState(() {
                           widget.isLiked = !widget.isLiked;
                           debugPrint(widget.isLiked.toString() +
                               "This has been removed from favourites: " +
-                              TestGridTile.idNumber.toString());
-                          _getUserDocIdForAdd(TestGridTile.idNumber);
+                              HomepageTile.idNumber.toString());
+                          _getUserDocIdForAdd(HomepageTile.idNumber);
                         });
                       }
                     });
@@ -271,8 +260,8 @@ class _FavouritesState extends State<Favourites> {
                 //           widget.isLiked = !widget.isLiked;
                 //           debugPrint(widget.isLiked.toString() +
                 //               "This has been Added to favourites: " +
-                //               TestGridTile.idNumber.toString());
-                //           _getUserDocIdForAdd(TestGridTile.idNumber);
+                //               HomepageTile.idNumber.toString());
+                //           _getUserDocIdForAdd(HomepageTile.idNumber);
                 //         });
                 //         setState(() {});
                 //       });
@@ -295,7 +284,7 @@ class _FavouritesState extends State<Favourites> {
     //           setState(() {
     //             _isFavorite = !_isFavorite;
     //             //add recipe ID to favourites array
-    //             _getUserDocIdForAdd(TestGridTile.idNumber.toString());
+    //             _getUserDocIdForAdd(HomepageTile.idNumber.toString());
     //           });
     //         });
     //   } else {
@@ -309,7 +298,7 @@ class _FavouritesState extends State<Favourites> {
     //           setState(() {
     //             _isFavorite = !_isFavorite;
     //             //if array contains recipeID, remove
-    //             _getUserDocIdForDelete(TestGridTile.idNumber);
+    //             _getUserDocIdForDelete(HomepageTile.idNumber);
     //           });
     //         });
   }
@@ -392,7 +381,7 @@ Future _getLiked() async {
       .then((QuerySnapshot querySnapshot) {
     querySnapshot.docs.forEach((doc) {
       recipes = doc['favourites'];
-      if (recipes.contains(TestGridTile.idNumber.toString())) {
+      if (recipes.contains(HomepageTile.idNumber.toString())) {
         liked = true;
       }
     });
