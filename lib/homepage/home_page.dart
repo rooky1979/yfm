@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
         backgroundColor: Colors.red[800],
         actions: [

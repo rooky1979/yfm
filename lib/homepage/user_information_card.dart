@@ -33,7 +33,6 @@ class UserInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-
                 elevation: 1,
                 shadowColor: Colors.red,
                 child: Column(
@@ -111,7 +110,6 @@ class UserInformationCard extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25),
                                 textAlign: TextAlign.center,
-
                               ),
                             ),
                             Flexible(
@@ -281,18 +279,5 @@ class UserInformationCard extends StatelessWidget {
         ),
       ],
     );
-  }
-
-//helper method to print the array
-  String _printArray(var snapshotData) {
-    String string = '';
-
-    for (int i = 0; i < snapshotData.length; ++i) {
-      string += snapshotData[i];
-      if (i < snapshotData.length - 1) {
-        string += ', ';
-      }
-    }
-    return string;
   }
 }
