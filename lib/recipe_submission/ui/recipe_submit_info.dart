@@ -191,25 +191,27 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.recipeNameController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        color: Color(0xFF7a243e),
+                        fontSize: 17,
+                        ),
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
-                      filled: true,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                      labelStyle: TextStyle(
+                        color: Color(0xFF7a243e),
                       ),
+                      fillColor: Color(0xFFe62d1),
+                      filled: true,
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 3),
+                      ),
                     ),
                   ),
                 ),
-                divider,
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //text field to enter the name of the recipe
@@ -218,35 +220,33 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.descriptionController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
-                      labelText: 'Enter a description of the finished dish',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
-                      filled: true,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                      labelText: 'Enter a description of the finished dish.',
+                      labelStyle: TextStyle(
+                        color: Color(0xFF7a243e),
                       ),
+                      fillColor: Color(0xFFe62d1),
+                      filled: true,
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 3),
+                      ),
                     ),
                   ),
                 ),
-                divider,
                 //dropdown menu for difficulty selection
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //create a container and decorate
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
-                    ),
                     //create a drop down menu and remove the underline
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -254,12 +254,24 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         iconEnabledColor: Colors.white,
                         isExpanded: true,
                         decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
+                          //enabledBorder: InputBorder.none,
                           labelText: 'Select recipe difficulty',
-                          labelStyle: whiteText,
+                          labelStyle: TextStyle(
+                            color: Color(0xFF7a243e),
+                          ),
+                          fillColor: Color(0xFFe62d1),
+                          filled: true,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xFF7a243e), width: 2),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xFF7a243e), width: 3),
+                          ),
                         ),
                         //dropdown menu labels
-                        dropdownColor: Colors.red[300],
+                        dropdownColor: Colors.white,
                         value: DBControl.difficultyValue,
                         items: ["Easy", "Intermediate", "Hard"]
                             .map((label) => DropdownMenuItem(
@@ -267,7 +279,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                     child: Text(
                                       label,
                                       textAlign: TextAlign.center,
-                                      style: whiteText,
+                                      style: TextStyle(
+                                        color: Color(0xFF7a243e),
+                                      ),
                                     ),
                                   ),
                                   value: label,
@@ -280,7 +294,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                   ),
                 ),
-                divider,
                 //textfield for the user to enter the number of servings
                 Padding(
                   padding: const EdgeInsets.all(13.0),
@@ -294,25 +307,27 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           .digitsOnly //enables digits only for entry
                     ],
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
-                      filled: true,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                      labelStyle: TextStyle(
+                        color: Color(0xFF7a243e),
                       ),
+                      fillColor: Color(0xFFe62d1),
+                      filled: true,
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 3),
+                      ),
                     ),
                   ),
                 ),
-                divider,
                 //preptime
                 Padding(
                   padding: const EdgeInsets.only(
@@ -322,7 +337,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     children: [
                       Text(
                         'How long to prepare and cook?',
-                        style: blackText,
+                        style: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontSize: 23
+                        ),
                       )
                     ],
                   ),
@@ -345,22 +363,24 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Color(0xFF7a243e),
+                            fontSize: 17,
+                          ),
                           decoration: InputDecoration(
                             labelText: 'Hours',
-                            labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                            ),
+                            fillColor: Color(0xFFe62d1),
                             filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.greenAccent, width: 3.0),
+                                  color: Color(0xFF7a243e), width: 3),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
                       ),
@@ -379,29 +399,30 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Color(0xFF7a243e),
+                            fontSize: 17,
+                          ),
                           decoration: InputDecoration(
                             labelText: 'Minutes',
-                            labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                            ),
+                            fillColor: Color(0xFFe62d1),
                             filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.greenAccent, width: 3.0),
+                                  color: Color(0xFF7a243e), width: 3),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                divider,
                 //allergies
                 Padding(
                     padding: const EdgeInsets.all(13.0),
@@ -410,30 +431,37 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       _allergiesList,
                       whiteText,
                     )),
-                divider,
                 //category (vegan, vegetarian or non-vegetarian)
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //create a container and decorate
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
-                    ),
                     //create a drop down menu and remove the underline
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: DropdownButtonFormField(
-                        iconEnabledColor: Colors.white,
+                        iconEnabledColor: Color(0xFF7a243e),
                         isExpanded: true,
                         decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
+                          //enabledBorder: InputBorder.none,
                           labelText: 'Recipe category:',
-                          labelStyle: whiteText,
+                          labelStyle: TextStyle(
+                            color: Color(0xFF7a243e),
+                          ),
+                          fillColor: Color(0xFFe62d1),
+                          filled: true,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xFF7a243e), width: 2),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xFF7a243e), width: 3),
+                          ),
                         ),
                         //dropdown menu labels
-                        dropdownColor: Colors.red[300],
+                        dropdownColor: Colors.white,
                         value: DBControl.categoryValue,
                         items: ["Vegan", "Vegetarian", "Non-Vegetarian"]
                             .map((label) => DropdownMenuItem(
@@ -441,7 +469,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                     child: Text(
                                       label,
                                       textAlign: TextAlign.center,
-                                      style: whiteText,
+                                      style: TextStyle(
+                                        color: Color(0xFF7a243e),
+                                      ),
                                     ),
                                   ),
                                   value: label,
@@ -454,7 +484,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                   ),
                 ),
-                divider,
                 //proteins
                 Padding(
                     padding: const EdgeInsets.all(13.0),
@@ -463,7 +492,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       _proteinList,
                       whiteText,
                     )),
-                divider,
                 //cancel and next buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -473,13 +501,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       child: SizedBox(
                         width: 100,
                         height: 50,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           style:
-                              ElevatedButton.styleFrom(primary: Colors.red[50]),
+                              OutlinedButton.styleFrom(
+                                primary: Color(0xFF4ca5b5), // background
+                              ),
                           child: Text(
-                            'Cancel',
+                            'CANCEL',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             if (DBControl.categoryValue != null) {
@@ -504,9 +534,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          style: ElevatedButton.styleFrom(primary: Color(0xFF4ca5b5)),
                           child: Text(
-                            'Done',
+                            'DONE',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
@@ -555,10 +585,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return MultiSelectFormField(
       autovalidate: false,
-      fillColor: Colors.red[400],
+      fillColor: Color(0xFF7a243e),
       chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
+      chipLabelStyle: TextStyle(color: Color(0xFF7a243e)),
+      checkBoxActiveColor: Color(0xFF7a243e),
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -593,10 +623,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return MultiSelectFormField(
       autovalidate: false,
-      fillColor: Colors.red[400],
+      fillColor: Color(0xFF7a243e),
       chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
+      chipLabelStyle: TextStyle(color: Color(0xFF7a243e)),
+      checkBoxActiveColor: Color(0xFF7a243e),
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
