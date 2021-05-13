@@ -86,7 +86,10 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: new Color(0xFF7a243e),
+                  ),
                   borderRadius: BorderRadius.circular(2)),
               width: double.infinity,
               child: Row(children: [
@@ -101,7 +104,11 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                     onPressed: () {
                       _showChoiceDialog(context);
                     },
-                    child: Text("Add An Image", style: TextStyle(fontSize: 18)))
+                    child: Text("Add An Image",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: new Color(0xFF7a243e),
+                        )))
               ]),
             ),
           ],
@@ -115,7 +122,10 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(width: 1),
+                  border: Border.all(
+                    width: 1,
+                    color: new Color(0xFF7a243e),
+                  ),
                   borderRadius: BorderRadius.circular(2)),
               width: double.infinity,
               child: IntrinsicHeight(
@@ -194,13 +204,17 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
 
     String recipeID = widget.recipeID;
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       body: Padding(
         padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 0),
         child: Column(
           children: [
             Text(
               'Comment',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(
+                fontSize: 20,
+                color: new Color(0xFF7a243e),
+              ),
             ),
             Divider(thickness: 2),
             Row(
@@ -283,13 +297,14 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
-                    hintText: 'A Question, Comment, or Tip!',
-                    labelText: 'Type Here...',
-                    labelStyle: TextStyle(
-                      color: Colors.red,
-                      fontSize: 17,
-                    ),
-                    border: const OutlineInputBorder()),
+                  hintText: 'A Question, Comment, or Tip!',
+                  labelText: 'Type Here...',
+                  labelStyle: TextStyle(
+                    color: Colors.red,
+                    fontSize: 17,
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
                 controller: descriptionInputController,
               ),
             ),

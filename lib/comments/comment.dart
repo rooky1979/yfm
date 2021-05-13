@@ -150,8 +150,9 @@ class _CommentState extends State<Comment> {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(width: 2)),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(width: 2),
+                      ),
                       child: Container(
                         padding: const EdgeInsets.only(
                             top: 5, left: 10, right: 10, bottom: 5),

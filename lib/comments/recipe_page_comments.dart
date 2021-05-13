@@ -64,7 +64,10 @@ class _CommentBoardState extends State<CommentBoard> {
                 padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(width: 1),
+                      border: Border.all(
+                        width: 1,
+                        color: new Color(0xFF7a243e),
+                      ),
                       borderRadius: BorderRadius.circular(2)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +79,9 @@ class _CommentBoardState extends State<CommentBoard> {
                             },
                             child: Text("Leave a comment!",
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black87))),
+                                  fontSize: 18,
+                                  color: new Color(0xFF7a243e),
+                                ))),
                       ),
                     ],
                   ),
