@@ -202,7 +202,7 @@ class _CommentState extends State<Comment> {
                                 },
                                 icon: Icon(Icons.thumb_up,
                                     color: clickedLike
-                                        ? Colors.blue
+                                        ? Color(0xFF009e5fb)
                                         : Colors.black)),
                             Container(
                               padding: const EdgeInsets.only(

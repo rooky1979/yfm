@@ -24,7 +24,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: Colors.black,
+    color: Color(0xFF7a243e),
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -97,25 +97,27 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     controller: ingredientController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Ingredient',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
-                      filled: true,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                      labelStyle: TextStyle(
+                        color: Color(0xFF7a243e),
                       ),
+                      fillColor: Color(0xFFe62d1),
+                      filled: true,
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color(0xFF7a243e), width: 3),
+                      ),
                     ),
                   ),
                 ),
-                divider,
                 //textbox for measurement entries
                 Row(
                   children: [
@@ -124,7 +126,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           top: 8.0, left: 30, bottom: 8.0),
                       child: Text(
                         'Measurements:',
-                        style: blackText,
+                        style: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontSize: 20
+                        ),
                       ),
                     )
                   ],
@@ -145,32 +150,30 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             signed: true,
                             decimal: true), //only shows a numerical keyboard
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                            color: Color(0xFF7a243e),
+                            fontSize: 17,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Enter amount',
-                          labelStyle: whiteText,
-                          fillColor: Colors.red[400],
+                          labelStyle: TextStyle(
+                            color: Color(0xFF7a243e),
+                          ),
+                          fillColor: Color(0xFFe62d1),
                           filled: true,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color(0xFF7a243e), width: 2),
+                          ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 3.0),
+                                color: Color(0xFF7a243e), width: 3),
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 3.0),
-                              borderRadius: BorderRadius.circular(15)),
                         ),
                       ),
                     ),
                     //dropdown menu for the measurement unit
                     Container(
                       width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.red[400],
-                      ),
                       //create a drop down menu and remove the underline
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -181,12 +184,24 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           iconEnabledColor: Colors.white,
                           isExpanded: true,
                           decoration: InputDecoration(
-                            enabledBorder: InputBorder.none,
+                            //enabledBorder: InputBorder.none,
                             labelText: 'Unit',
-                            labelStyle: whiteText,
+                            labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                            ),
+                            fillColor: Color(0xFFe62d1),
+                            filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 3),
+                            ),
                           ),
                           //dropdown menu labels
-                          dropdownColor: Colors.red[300],
+                          dropdownColor: Colors.white,
                           value: _measurementValue,
                           items: [
                             "",
@@ -209,7 +224,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                       child: Text(
                                         label,
                                         textAlign: TextAlign.center,
-                                        style: whiteText,
+                                        style: TextStyle(
+                                          color: Color(0xFF7a243e)
+                                        ),
                                       ),
                                     ),
                                     value: label,
@@ -224,10 +241,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 13.0),
-                  child: divider,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -236,13 +249,15 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       child: SizedBox(
                         width: 150,
                         height: 50,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
+                          OutlinedButton.styleFrom(
+                            primary: Color(0xFF4ca5b5),
+                          ),
                           child: Text(
-                            'Previous',
+                            'PREVIOUS',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             setState(() {});
@@ -261,11 +276,13 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.red[100]),
+                              primary: Color(0xFF4ca5b5)
+                          ),
                           child: Text(
-                            'Next',
+                            'NEXT',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                           onPressed: () {
                             if (ingredientController.text.isEmpty ||
@@ -304,7 +321,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 top: 8.0, left: 30, bottom: 8.0),
                             child: Text(
                               'Added so far:',
-                              style: blackText,
+                              style: TextStyle(
+                                color: Color(0xFF7a243e),
+                                fontSize: 20
+                              ),
                             ),
                           )
                         ],
@@ -318,21 +338,22 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 children: [
                                   ListTile(
                                     leading: CircleAvatar(
-                                      backgroundColor: Colors.red,
+                                      backgroundColor:Color(0xFF7a243e),
                                       radius: 10,
                                     ),
                                     title: Text(
                                         DBControl.ingredients[index].toString(),
                                         style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold)),
+                                          color: Color(0xFF7a243e),
+                                        ),
+                                    )
                                   ),
                                   Divider(
                                     height: 10,
                                     thickness: 2,
                                     indent: 40,
                                     endIndent: 20,
-                                    color: Colors.red[200],
+                                    color: Color(0xFF7a243e),
                                   ),
                                 ],
                               );
@@ -341,7 +362,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     ],
                   ),
                 ),
-                divider,
                 //cancel and done buttons to move to next page or go to previous page
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -351,13 +371,15 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       child: SizedBox(
                         width: 150,
                         height: 50,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
+                          OutlinedButton.styleFrom(
+                            primary: Color(0xFF4ca5b5),
+                          ),
                           child: Text(
-                            'Cancel',
+                            'CANCEL',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             //clears the controllers and variables
@@ -379,11 +401,12 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         width: 150,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF4ca5b5),
+                          ),
                           child: Text(
-                            'Done',
+                            'DONE',
                             style: TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
