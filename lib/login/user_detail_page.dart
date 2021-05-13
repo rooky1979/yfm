@@ -117,7 +117,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
             child: ListView(
               children: [
                 AppBar(
-                  backgroundColor: Color(0xFFe62d11),
+                  backgroundColor: Color(0xFF7a243e),
                   leading: IconButton(
                       icon: Icon(
                         Icons.arrow_back,
