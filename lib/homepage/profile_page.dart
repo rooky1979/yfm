@@ -175,7 +175,7 @@ class ProfilePage extends StatelessWidget {
 
 // ignore: must_be_immutable
 class ProfileButtons extends StatelessWidget {
-    //colours for the fields
+  //colours for the fields
   Color lightPurple = Color(0xFFe62d1);
   Color darkPurple = Color(0xFF7a243e);
   @override
@@ -187,10 +187,9 @@ class ProfileButtons extends StatelessWidget {
         width: MediaQuery.of(context).size.width * .90,
         height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: darkPurple,
-          border: Border.all(color: darkPurple)
-        ),
+            borderRadius: BorderRadius.circular(10),
+            color: darkPurple,
+            border: Border.all(color: darkPurple)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -227,13 +226,14 @@ class ProfileButtons extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'http://justcook.co.nz/about-us';
+  const url = 'https://nutritionfoundation.org.nz/about-us';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
     throw 'Could not launch $url';
   }
 }
+
 //currently unused method to validate if the user is a moderator or not
 _checkMod(BuildContext context) {
   //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
