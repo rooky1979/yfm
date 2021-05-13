@@ -30,14 +30,14 @@ class _TestHomepageState extends State<TestHomepage> {
                         icon: Icon(Icons.search),
                         onPressed: () {
                           val
-                          //on pressing search, it invokes the search method from data_contriller.dart
+                              //on pressing search, it invokes the search method from data_contriller.dart
                               .foodTitleQueryData(searchController.text)
                               .then((value) {
                             snapshotData = value;
                             setState(() {});
                           });
                         }),
-                        //button for the settings page
+                    //button for the settings page
                     IconButton(
                         onPressed: () {
                           Navigator.push(
@@ -91,7 +91,8 @@ class _TestHomepageState extends State<TestHomepage> {
                   return GestureDetector(
                     child: Card(
                       elevation: 5,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                       child: TestGridTile(
                         snapshot: snapshot.data,
                         index: index,
