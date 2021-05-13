@@ -31,114 +31,117 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-          backgroundColor: Colors.red[800],
-          leading: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.arrowLeft,
-                size: 25,
-                color: Colors.white,
+        backgroundColor: new Color(0xFFe62d11),
+        title: Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 0,
+                  child: Row(),
+                ),
+              ],
+            )),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Card(
+              child: Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: new BoxDecoration(),
+                child: FutureBuilder(
+                  future: _getUserImage(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      //return the image and make it cover the container
+                      return GestureDetector(
+                        child: Image.network(
+                          snapshot.data,
+                          fit: BoxFit.cover,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return GestureDetector(
+                                  child: Center(
+                                    child: Image.network(
+                                      snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  onTap: () => Navigator.pop(context),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return Container(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ),
+            ProfileButtons(),
+            StreamBuilder(
+              stream: firestoreDb,
+              builder: (
+                context,
+                snapshot,
+              ) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: 1, //snapshot.data.docs.length,
+                      itemBuilder: (context, int index) {
+                        return UserInformationCard(
+                          snapshot: snapshot.data,
+                          index:
+                              1, //this changes depending on what user is selected
+                          //index will be used
+                        );
+                      }),
+                );
+              },
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                    return new Color(0xFFe62d11);
+                  },
+                ),
               ),
               onPressed: () {
                 Navigator.pop(context);
-              }),
-          title: Text('User Profile',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              )),
-        ),
-
-      body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Card(
-          child: Container(
-            width: 200.0,
-            height: 200.0,
-            decoration: new BoxDecoration(),
-            child: FutureBuilder(
-                future: _getUserImage(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    //return the image and make it cover the container
-                    return GestureDetector(
-                      child: Image.network(
-                        snapshot.data,
-                        fit: BoxFit.cover,
-                      ),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return GestureDetector(
-                            child: Center(
-                              child: Image.network(
-                                snapshot.data,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            onTap: () => Navigator.pop(context),
-                          );
-                        }));
-                      },
-                    );
-                  } else {
-                    return Container(
-                        child: Center(
-                      child: CircularProgressIndicator(),
-                    ));
-                  }
-                }),
-          ),
-        ),
-        ProfileButtons(),
-        StreamBuilder(
-            stream: firestoreDb,
-            builder: (
-              context,
-              snapshot,
-            ) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
-              return Expanded(
-                child: ListView.builder(
-                    itemCount: 1, //snapshot.data.docs.length,
-                    itemBuilder: (context, int index) {
-                      return UserInformationCard(
-                        snapshot: snapshot.data,
-                        index:
-                            1, //this changes depending on what user is selected
-                        //index will be used
-                      );
-                    }),
-              );
-            }),
-        ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  return Colors.red;
-                },
-              ),
+                context.read<AuthenticationService>().signOut();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPage()));
+              },
+              child: Text("Sign Out"),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<AuthenticationService>().signOut();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
-            },
-            child: Text("Sign Out")),
-      ])),
+          ],
+        ),
+      ),
     );
   }
 
   //method to get the image URL
-  Future _getImageURL() async {
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
-    return downloadURL;
-  }
 
   Future _getUserImage() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -174,7 +177,7 @@ class ProfileButtons extends StatelessWidget {
         height: 90,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.red[400],
+          color: new Color(0xFFe62d11),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -185,16 +188,19 @@ class ProfileButtons extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
                 shape: CircleBorder(),
-                child:
-                    Icon(FontAwesomeIcons.globe, size: 40, color: Colors.red),
+                child: Icon(FontAwesomeIcons.globe,
+                    size: 40, color: new Color(0xFFe62d11)),
                 onPressed: _launchURL,
               ),
               RawMaterialButton(
                   padding: EdgeInsets.all(10),
                   fillColor: Colors.white,
                   shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.solidBookmark,
-                      size: 40, color: Colors.red),
+                  child: Icon(
+                    FontAwesomeIcons.solidBookmark,
+                    size: 40,
+                    color: new Color(0xFFe62d11),
+                  ),
                   onPressed: () => {
                         Navigator.push(
                             context,

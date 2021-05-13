@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
         backgroundColor: Colors.red[800],
         actions: [
@@ -112,8 +111,8 @@ class _HomePageState extends State<HomePage> {
                     width: MediaQuery.of(context).size.width,
                     //height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                        gradient:
-                            LinearGradient(colors: [Colors.redAccent[700], Colors.red[400]]),
+                        gradient: LinearGradient(
+                            colors: [Colors.redAccent[700], Colors.red[400]]),
                         border: Border.all(color: Colors.red[800]),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
@@ -124,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 25.0),
-                            textAlign: TextAlign.center,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),

@@ -80,7 +80,7 @@ class BookmarkTile extends StatelessWidget {
     }
   }
 
- /*  Future<List<String>> _getFavorites() async {
+  /*  Future<List<String>> _getFavorites() async {
     List recipes = [];
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     await FirebaseFirestore.instance
