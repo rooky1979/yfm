@@ -11,7 +11,7 @@ import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//a temp page to hold the user information and to display all the information
+//a profile page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
 
 @override
@@ -31,20 +31,17 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(
+              FontAwesomeIcons.arrowLeft,
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Text('Profile Information'),
         backgroundColor: new Color(0xFF7a243e),
-        title: Container(
-            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 0,
-                  child: Row(),
-                ),
-              ],
-            )),
       ),
       body: Center(
         child: Column(
@@ -72,6 +69,7 @@ class ProfilePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (BuildContext context) {
+                                  //make the picture full screen onTap
                                   return GestureDetector(
                                     child: Center(
                                       child: Image.network(
@@ -112,35 +110,37 @@ class ProfilePage extends StatelessWidget {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: 1, //snapshot.data.docs.length,
+                      itemCount: 1,
                       itemBuilder: (context, int index) {
                         return UserInformationCard(
                           snapshot: snapshot.data,
-                          index:
-                              1, //this changes depending on what user is selected
-                          //index will be used
+                          index: 1,
                         );
                       }),
                 );
               },
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * .90,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 4,
-                  primary: Color(0xFFe62d11), // background
-                  onPrimary: Colors.white, // foreground
+            //sign out of the account button
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Container(
+                width: MediaQuery.of(context).size.width * .90,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4,
+                    primary: Color(0xFFe62d11), // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    context.read<AuthenticationService>().signOut();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginPage()));
+                  },
+                  child: Text("SIGN OUT"),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  context.read<AuthenticationService>().signOut();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => LoginPage()));
-                },
-                child: Text("SIGN OUT"),
               ),
             ),
           ],
@@ -150,7 +150,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   //method to get the image URL
-
   Future _getUserImage() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     String imageName;
@@ -174,7 +173,11 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ProfileButtons extends StatelessWidget {
+  //colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -182,43 +185,40 @@ class ProfileButtons extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .90,
-        height: 75,
+        height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: new Color(0xFF7a243e),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RawMaterialButton(
+            borderRadius: BorderRadius.circular(10),
+            color: darkPurple,
+            border: Border.all(color: darkPurple)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            RawMaterialButton(
+              padding: EdgeInsets.all(10),
+              fillColor: Colors.white,
+              shape: CircleBorder(side: BorderSide(color: darkPurple)),
+              child: Icon(FontAwesomeIcons.globe,
+                  size: 20, color: Color(0xFF7a243e)),
+              onPressed: _launchURL,
+            ),
+            RawMaterialButton(
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
                 shape: CircleBorder(),
-                child: Icon(FontAwesomeIcons.globe,
-                    size: 40, color: new Color(0xFF7a243e)),
-                onPressed: _launchURL,
-              ),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(10),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.solidBookmark,
-                    size: 40,
-                    color: new Color(0xFF7a243e),
-                  ),
-                  onPressed: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    BookmarkPage()))
-                      }),
-              _checkMod(context)
-            ],
-          ),
+                child: Icon(
+                  FontAwesomeIcons.solidBookmark,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  BookmarkPage()))
+                    }),
+            _checkMod(context)
+          ],
         ),
       ),
     );
@@ -226,7 +226,7 @@ class ProfileButtons extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'http://justcook.co.nz/about-us';
+  const url = 'https://nutritionfoundation.org.nz/about-us';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -234,15 +234,15 @@ _launchURL() async {
   }
 }
 
+//currently unused method to validate if the user is a moderator or not
 _checkMod(BuildContext context) {
   //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   return RawMaterialButton(
       padding: EdgeInsets.all(11),
       fillColor: Colors.white,
       shape: CircleBorder(),
       child:
-          Icon(FontAwesomeIcons.plusCircle, size: 40, color: Color(0xFF7a243e)),
+          Icon(FontAwesomeIcons.plusCircle, size: 20, color: Color(0xFF7a243e)),
       onPressed: () => {
             Navigator.push(
                 context,

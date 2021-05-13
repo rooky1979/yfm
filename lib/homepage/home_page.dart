@@ -18,10 +18,11 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
+  //list to hold the categories
   List categories = [
     'All',
     'Beef',
-    'Pork',
+    'Salads',
     'Poultry',
     'Fish',
     'Shellfish',
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
     'Eggs',
     'Dairy',
     'Pasta',
-    'Salads',
     'Rice'
   ];
   @override
@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
               builder: (val) {
                 return Row(
                   children: [
+                    //search function
                     IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () {
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                 );
               })
         ],
+        //search bar textfield
         title: Container(
             margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
             decoration:
@@ -91,8 +93,7 @@ class _HomePageState extends State<HomePage> {
               ],
             )),
       ),
-      //this area will create a list of catergories that currently only displays one
-      //recipe
+//creates the category name and list tiles
       body: SafeArea(
           child: Container(
         alignment: Alignment.bottomRight,
@@ -132,7 +133,6 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 180.0,
                 child: StreamBuilder(
-                    //future: getRecipeCategory(categories[index].toString()),
                     stream: firestoreDb,
                     builder: (
                       context,
@@ -162,16 +162,5 @@ class _HomePageState extends State<HomePage> {
         ),
       )),
     );
-  }
-
-  // ignore: unused_element
-  Future _getImageURL(var docID) async {
-    //declare and instantiate the firebase storage bucket
-    final FirebaseStorage storage = FirebaseStorage.instanceFor(
-        bucket: 'gs://youth-food-movement.appspot.com');
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL =
-        await storage.ref('recipe_images/$docID').getDownloadURL();
-    return downloadURL;
   }
 }

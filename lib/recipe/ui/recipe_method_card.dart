@@ -19,8 +19,6 @@ class MethodCard extends StatelessWidget {
 
     return Column(
       children: [
-        RecipeThumbnail(),
-        RecipeButtons(),
         Padding(
           //widget for the recipe info title
           padding: const EdgeInsets.all(3.0),
