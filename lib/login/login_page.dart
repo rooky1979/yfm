@@ -68,10 +68,11 @@ class _LogInState extends State<LogIn> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: Color(0xFFebe7d2),
+        color: Color(0xFFf0f1eb),
         height: double.infinity,
         child: SingleChildScrollView(
           child: Stack(
@@ -101,15 +102,14 @@ class _LogInState extends State<LogIn> {
               ),
               Center(
                 child: Container(
-                    padding: const EdgeInsets.all(10),
-                    width: MediaQuery.of(context).size.width*0.8,
-                    height: MediaQuery.of(context).size.height*0.35,
-                    decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  decoration: BoxDecoration(
                       image: DecorationImage(
-                        fit: BoxFit.scaleDown,
-                        image: AssetImage('lib/logo/just-cook-logo.png'),
-                      )
-                    ),
+                    fit: BoxFit.scaleDown,
+                    image: AssetImage('lib/logo/just-cook-logo.png'),
+                  )),
                 ),
               ),
               Center(
@@ -230,7 +230,8 @@ class _LogInState extends State<LogIn> {
                                                   'Incorrect Email or Password!'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.red,
+                                              backgroundColor:
+                                                  Color(0xFFe62d11),
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
@@ -241,7 +242,7 @@ class _LogInState extends State<LogIn> {
                                           content: Text('Password not entered'),
                                           duration:
                                               Duration(milliseconds: 1000),
-                                          backgroundColor: Colors.red,
+                                          backgroundColor: Color(0xFFe62d11),
                                         );
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
@@ -250,7 +251,7 @@ class _LogInState extends State<LogIn> {
                                       final snackBar = SnackBar(
                                         content: Text('Email not entered'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: Color(0xFFe62d11),
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);

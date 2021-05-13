@@ -84,7 +84,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Colors.red[400],
+                          fillColor: Color(0xFF7a243e),
                           child: Icon(
                             FontAwesomeIcons.solidImage,
                             size: 40,
@@ -109,7 +109,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Colors.red[400],
+                          fillColor: Color(0xFF7a243e),
                           child: Icon(
                             FontAwesomeIcons.camera,
                             size: 40,
@@ -142,12 +142,15 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     child: SizedBox(
                       width: 150,
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                      child: OutlinedButton(
+                        style:
+                        OutlinedButton.styleFrom(
+                          primary: Color(0xFF4ca5b5),
+                        ),
                         child: Text(
-                          'Cancel',
+                          'CANCEL',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -164,11 +167,11 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(primary: Color(0xFF4ca5b5)),
                         child: Text(
-                          'Finish',
+                          'FINISH',
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (DBControl.image == null) {
