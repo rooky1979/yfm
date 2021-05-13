@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: new Color(0xFFe62d11),
+        backgroundColor: new Color(0xFF7a243e),
         title: Container(
             margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
             decoration:
@@ -50,52 +50,59 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Card(
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                decoration: new BoxDecoration(),
-                child: FutureBuilder(
-                  future: _getUserImage(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      //return the image and make it cover the container
-                      return GestureDetector(
-                        child: Image.network(
-                          snapshot.data,
-                          fit: BoxFit.cover,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                  child: Center(
-                                    child: Image.network(
-                                      snapshot.data,
-                                      fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                child: Container(
+                  width: 200.0,
+                  height: 180.0,
+                  decoration: new BoxDecoration(),
+                  child: FutureBuilder(
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return GestureDetector(
+                          child: Image.network(
+                            snapshot.data,
+                            fit: BoxFit.cover,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    child: Center(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  onTap: () => Navigator.pop(context),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return Container(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                  },
+                                    onTap: () => Navigator.pop(context),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
             ProfileButtons(),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 13.0, right: 13.0, top: 12.0, bottom: 1.0),
+            ),
             StreamBuilder(
               stream: firestoreDb,
               builder: (
@@ -117,23 +124,24 @@ class ProfilePage extends StatelessWidget {
                 );
               },
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                    return new Color(0xFFe62d11);
-                  },
+            Container(
+              width: MediaQuery.of(context).size.width * .90,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 4,
+                  primary: Color(0xFFe62d11), // background
+                  onPrimary: Colors.white, // foreground
                 ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<AuthenticationService>().signOut();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage()));
+                },
+                child: Text("SIGN OUT"),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-                context.read<AuthenticationService>().signOut();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage()));
-              },
-              child: Text("Sign Out"),
             ),
           ],
         ),
@@ -170,14 +178,14 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
+      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: 90,
+        width: MediaQuery.of(context).size.width * .90,
+        height: 75,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: new Color(0xFFe62d11),
+          borderRadius: BorderRadius.circular(10),
+          color: new Color(0xFF7a243e),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -189,7 +197,7 @@ class ProfileButtons extends StatelessWidget {
                 fillColor: Colors.white,
                 shape: CircleBorder(),
                 child: Icon(FontAwesomeIcons.globe,
-                    size: 40, color: new Color(0xFFe62d11)),
+                    size: 40, color: new Color(0xFF7a243e)),
                 onPressed: _launchURL,
               ),
               RawMaterialButton(
@@ -199,7 +207,7 @@ class ProfileButtons extends StatelessWidget {
                   child: Icon(
                     FontAwesomeIcons.solidBookmark,
                     size: 40,
-                    color: new Color(0xFFe62d11),
+                    color: new Color(0xFF7a243e),
                   ),
                   onPressed: () => {
                         Navigator.push(
@@ -233,7 +241,8 @@ _checkMod(BuildContext context) {
       padding: EdgeInsets.all(11),
       fillColor: Colors.white,
       shape: CircleBorder(),
-      child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
+      child:
+          Icon(FontAwesomeIcons.plusCircle, size: 40, color: Color(0xFF7a243e)),
       onPressed: () => {
             Navigator.push(
                 context,

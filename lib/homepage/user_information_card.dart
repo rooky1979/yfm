@@ -31,251 +31,242 @@ class UserInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Name: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                '${snapshotData['name']}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Birthday: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                '${snapshotData['birthday']}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Username: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                '${snapshotData['username']}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Region: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                '${snapshotData['region']}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              elevation: 1,
-              shadowColor: Colors.red,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              // child: Card(
+              //     elevation: 1,
+              //     shadowColor: Colors.red,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      //height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Colors.redAccent[700], Colors.red[400]]),
-                          border: Border.all(color: Colors.red[800]),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          Flexible(
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.red[800], width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
                             child: Text(
-                              'Allergies: ',
+                              'Name: ',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color(0xFF7a243e),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 25),
+                                  fontSize: 20),
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          Flexible(
-                            child: Text(
-                              '${snapshotData['allergy']}',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                              textAlign: TextAlign.center,
-                            ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['name']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
-          ),
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              // child: Card(
+              //     elevation: 1,
+              //     shadowColor: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.red[800], width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Username: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['username']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              // child: Card(
+              //     elevation: 1,
+              //     shadowColor: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.red[800], width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Birthday: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['birthday']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              // child: Card(
+              //     elevation: 1,
+              //     shadowColor: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.red[800], width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Region: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['region']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              width: MediaQuery.of(context).size.width,
+              // child: Card(
+              //     elevation: 1,
+              //     shadowColor: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.red[800], width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Allergy: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['allergy']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
         ),
       ],
     );
