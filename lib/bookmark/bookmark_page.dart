@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/bookmark/bookmark_tile.dart';
+import 'package:youth_food_movement/homepage/home_page.dart';
 
 class BookmarkPage extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
     return Scaffold(
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
-        backgroundColor: Colors.red[800],
+        backgroundColor: Color(0xFF7a243e),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -43,7 +44,6 @@ class _BookmarkPageState extends State<BookmarkPage> {
           ) {
             if (!snapshot.hasData) return CircularProgressIndicator();
             return GridView.builder(
-                //scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data.docs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
