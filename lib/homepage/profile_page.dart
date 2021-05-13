@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/bookmark/bookmarks.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
@@ -9,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:youth_food_movement/login/login_page.dart';
-import 'package:youth_food_movement/login/user_search/data_controller.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 //a temp page to hold the user information and to display all the information
@@ -142,11 +140,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   //method to get the image URL
-  Future _getImageURL() async {
-    //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
-    return downloadURL;
-  }
 
   Future _getUserImage() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
