@@ -15,31 +15,32 @@ class Method extends StatelessWidget {
         .collection('method')
         .snapshots();
     return Scaffold(
+        backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: Column(
-        children: [
-          StreamBuilder(
-              stream: firestoreDbMethod,
-              builder: (
-                context,
-                snapshot,
-              ) {
-                if (!snapshot.hasData) return CircularProgressIndicator();
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: 1, //snapshot.data.docs.length,
-                      itemBuilder: (context, int index) {
-                        return MethodCard(
-                          snapshot: snapshot.data,
-                          index:
-                              0, //changes depending on what recipe is selected
-                        );
-                      }),
-                );
-              }),
-        ],
-      ),
-    ));
+          padding: const EdgeInsets.only(top: 25),
+          child: Column(
+            children: [
+              StreamBuilder(
+                  stream: firestoreDbMethod,
+                  builder: (
+                    context,
+                    snapshot,
+                  ) {
+                    if (!snapshot.hasData) return CircularProgressIndicator();
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: 1, //snapshot.data.docs.length,
+                          itemBuilder: (context, int index) {
+                            return MethodCard(
+                              snapshot: snapshot.data,
+                              index:
+                                  0, //changes depending on what recipe is selected
+                            );
+                          }),
+                    );
+                  }),
+            ],
+          ),
+        ));
   }
 }

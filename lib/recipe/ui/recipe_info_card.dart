@@ -18,7 +18,6 @@ class RecipeInformationCard extends StatelessWidget {
     var snapshotData = snapshot.docs[index];
     //list that holds an array of the ingredients
     List<String> ingredientsList = List.from(snapshotData['ingredients']);
-
     return Column(
       children: [
         FittedBox(
@@ -26,8 +25,9 @@ class RecipeInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
+                color: new Color(0xFFf0f1eb),
                 elevation: 1,
-                shadowColor: Colors.red,
+                shadowColor: new Color(0xFFe62d11),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -36,7 +36,7 @@ class RecipeInformationCard extends StatelessWidget {
                       thickness: 3,
                       indent: 10,
                       endIndent: 10,
-                      color: Colors.redAccent,
+                      color: new Color(0xFF7a243e),
                     ),
                     //display the recipe title
                     Padding(
@@ -78,10 +78,12 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
+            color: new Color(0xFFf0f1eb),
             width: MediaQuery.of(context).size.width,
             child: Card(
+              color: new Color(0xFFf0f1eb),
               elevation: 1,
-              shadowColor: Colors.red,
+              shadowColor: new Color(0xFFe62d11),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -90,7 +92,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: Colors.redAccent,
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget for the recipe info subheading
@@ -106,7 +108,7 @@ class RecipeInformationCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                                    Padding(
+                  Padding(
                     //widget to show the recipe difficulty
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
@@ -133,7 +135,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: Colors.red[200],
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget to show the serving size
@@ -162,7 +164,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: Colors.red[200],
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget to display the prep time
@@ -216,7 +218,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: Colors.red[200],
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget to show what allergies the recipes affects
@@ -247,7 +249,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: Colors.red[200],
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
@@ -281,7 +283,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: Colors.red[200],
+                    color: new Color(0xFF7a243e),
                   ),
                   Padding(
                     //widget showing vege, non-vege or vegan
@@ -305,58 +307,68 @@ class RecipeInformationCard extends StatelessWidget {
             ),
           ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Divider(
-              height: 10,
-              thickness: 3,
-              indent: 10,
-              endIndent: 10,
-              color: Colors.redAccent,
-            ),
-            Padding(
-              //widget for the recipe info title
-              padding: const EdgeInsets.all(3.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text('Ingredients:',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-            ),
-            //list view to build the tiles and populate with the ingredients from the indredients array
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: ingredientsList.length,
-                itemBuilder: (context, int index) {
-                  return Column(
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+            color: new Color(0xFFf0f1eb),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Divider(
+                  height: 10,
+                  thickness: 3,
+                  indent: 10,
+                  endIndent: 10,
+                  color: new Color(0xFF7a243e),
+                ),
+                Padding(
+                  //widget for the recipe info title
+                  padding: const EdgeInsets.all(3.0),
+                  child: Row(
                     children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.red,
-                          radius: 10,
-                        ),
-                        title: Text(ingredientsList[index].toString(),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text('Ingredients:',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ),
-                      Divider(
-                        height: 10,
-                        thickness: 2,
-                        indent: 40,
-                        endIndent: 20,
-                        color: Colors.red[200],
+                                fontSize: 25, fontWeight: FontWeight.bold)),
                       ),
                     ],
-                  );
-                })
-          ],
+                  ),
+                ),
+                //list view to build the tiles and populate with the ingredients from the indredients array
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: ingredientsList.length,
+                  itemBuilder: (context, int index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: new Color(0xFF7a243e),
+                            radius: 10,
+                          ),
+                          title: Text(ingredientsList[index].toString(),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        Divider(
+                          height: 10,
+                          thickness: 2,
+                          indent: 40,
+                          endIndent: 20,
+                          color: new Color(0xFF7a243e),
+                        ),
+                      ],
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
         )
       ],
     );
@@ -406,4 +418,3 @@ class RecipeInformationCard extends StatelessWidget {
     return string;
   }
 }
-
