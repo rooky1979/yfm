@@ -8,7 +8,7 @@ class SuccessSubmission extends StatelessWidget {
     return Scaffold(
       backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: new Color(0xFFe62d11),
         title: Text('Successful!',
             style: TextStyle(
               color: Colors.white,

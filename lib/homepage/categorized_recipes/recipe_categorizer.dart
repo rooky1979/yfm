@@ -31,7 +31,7 @@ class _BeefRecipe extends State<BeefRecipe> {
                       height: 200.0,
                       child: Container(
                         height: 50.0,
-                        color: Colors.red,
+                        color: new Color(0xFFe62d11),
                         child: Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +104,7 @@ class _BeefRecipe extends State<BeefRecipe> {
                   children: <Widget>[
                      Container(
                       height: 50.0,
-                      color: Colors.red,
+                      color: new Color(0xFFe62d11),
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[

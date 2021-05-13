@@ -67,7 +67,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: new Color(0xFFe62d11),
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -103,14 +103,15 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     decoration: InputDecoration(
                       labelText: 'Ingredient',
                       labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      fillColor: new Color(0xFFe62d11),
                       filled: true,
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.greenAccent, width: 3.0),
                       ),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
+                          borderSide: BorderSide(
+                              color: new Color(0xFFe62d11), width: 3.0),
                           borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
@@ -151,15 +152,15 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         decoration: InputDecoration(
                           labelText: 'Enter amount',
                           labelStyle: whiteText,
-                          fillColor: Colors.red[400],
+                          fillColor: new Color(0xFFe62d11),
                           filled: true,
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.greenAccent, width: 3.0),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 3.0),
+                              borderSide: BorderSide(
+                                  color: new Color(0xFFe62d11), width: 3.0),
                               borderRadius: BorderRadius.circular(15)),
                         ),
                       ),
@@ -169,7 +170,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: MediaQuery.of(context).size.width / 2.5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.red[400],
+                        color: new Color(0xFFe62d11),
                       ),
                       //create a drop down menu and remove the underline
                       child: Padding(
@@ -186,7 +187,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             labelStyle: whiteText,
                           ),
                           //dropdown menu labels
-                          dropdownColor: Colors.red[300],
+                          dropdownColor: new Color(0xFFe62d11),
                           value: _measurementValue,
                           items: [
                             "",
@@ -242,7 +243,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           child: Text(
                             'Previous',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                color: new Color(0xFFe62d11),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             setState(() {});
@@ -261,11 +263,12 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.red[100]),
+                              primary: new Color(0xFFe62d11)),
                           child: Text(
                             'Next',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                color: new Color(0xFFe62d11),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             if (ingredientController.text.isEmpty ||
@@ -318,7 +321,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 children: [
                                   ListTile(
                                     leading: CircleAvatar(
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: new Color(0xFFe62d11),
                                       radius: 10,
                                     ),
                                     title: Text(
@@ -332,7 +335,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                     thickness: 2,
                                     indent: 40,
                                     endIndent: 20,
-                                    color: Colors.red[200],
+                                    color: new Color(0xFFe62d11),
                                   ),
                                 ],
                               );
@@ -357,7 +360,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           child: Text(
                             'Cancel',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                color: new Color(0xFFe62d11),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             //clears the controllers and variables
@@ -379,7 +383,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         width: 150,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                              primary: new Color(0xFFe62d11)),
                           child: Text(
                             'Done',
                             style: TextStyle(

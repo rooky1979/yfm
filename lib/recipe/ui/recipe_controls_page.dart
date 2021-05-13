@@ -92,12 +92,7 @@ class RecipeThumbnail extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        Positioned(
-            right: 10.0,
-            bottom: 10.0,
-            child:
-                Favourites()
-            ),
+        Positioned(right: 10.0, bottom: 10.0, child: Favourites()),
       ],
     );
   }
@@ -252,7 +247,7 @@ class _FavouritesState extends State<Favourites> {
                 //       icon: Icon(
                 //         Icons.favorite_outline_rounded,
                 //         size: 50,
-                //         color: Colors.red,
+                //         color: new Color(0xFFe62d11),
                 //       ),
                 //       onPressed: () {
                 //         setState(() {
@@ -278,7 +273,7 @@ class _FavouritesState extends State<Favourites> {
     //         icon: Icon(
     //           Icons.favorite_outline_rounded, //comments button
     //           size: 50,
-    //           color: Colors.red,
+    //           color: new Color(0xFFe62d11),
     //         ),
     //         onPressed: () {
     //           setState(() {
@@ -292,7 +287,7 @@ class _FavouritesState extends State<Favourites> {
     //         icon: Icon(
     //           Icons.favorite_rounded,
     //           size: 50,
-    //           color: Colors.red,
+    //           color: new Color(0xFFe62d11),
     //         ),
     //         onPressed: () {
     //           setState(() {

@@ -444,7 +444,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                     Text('Username exists'),
                                                 duration: Duration(
                                                     milliseconds: 1000),
-                                                backgroundColor: Colors.red,
+                                                backgroundColor:
+                                                    new Color(0xFFe62d11),
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
@@ -456,7 +457,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 Text('Username not entered'),
                                             duration:
                                                 Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.red,
+                                            backgroundColor:
+                                                new Color(0xFFe62d11),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -467,7 +469,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 'Please use appropriate language'),
                                             duration:
                                                 Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.red,
+                                            backgroundColor:
+                                                new Color(0xFFe62d11),
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -660,7 +663,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     content:
                                         Text('Birthday has not been selected'),
                                     duration: Duration(milliseconds: 1000),
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: new Color(0xFFe62d11),
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
@@ -669,7 +672,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 final snackBar = SnackBar(
                                   content: Text('Region has not been selected'),
                                   duration: Duration(milliseconds: 1000),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: new Color(0xFFe62d11),
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
@@ -678,7 +681,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               final snackBar = SnackBar(
                                 content: Text('Image has not been selected'),
                                 duration: Duration(milliseconds: 1000),
-                                backgroundColor: Colors.red,
+                                backgroundColor: new Color(0xFFe62d11),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
@@ -688,7 +691,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               content: Text(
                                   'Username already exists or not checked'),
                               duration: Duration(milliseconds: 1000),
-                              backgroundColor: Colors.red,
+                              backgroundColor: new Color(0xFFe62d11),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -697,7 +700,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           final snackBar = SnackBar(
                             content: Text('Username is not entered'),
                             duration: Duration(milliseconds: 1000),
-                            backgroundColor: Colors.red,
+                            backgroundColor: new Color(0xFFe62d11),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
@@ -705,7 +708,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         final snackBar = SnackBar(
                           content: Text('Name is not entered'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: Colors.red,
+                          backgroundColor: new Color(0xFFe62d11),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -733,7 +736,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
       fillColor: Colors.red[400],
       chipBackGroundColor: Colors.white,
       chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
+      checkBoxActiveColor: new Color(0xFFe62d11),
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

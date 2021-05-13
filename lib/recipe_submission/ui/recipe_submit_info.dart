@@ -163,7 +163,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: new Color(0xFFe62d11),
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -209,14 +209,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
                       labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      fillColor: new Color(0xFFe62d11),
                       filled: true,
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.greenAccent, width: 3.0),
                       ),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
+                          borderSide: BorderSide(
+                              color: new Color(0xFFe62d11), width: 3.0),
                           borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
@@ -236,14 +237,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'Enter a description of the finished dish',
                       labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      fillColor: new Color(0xFFe62d11),
                       filled: true,
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.greenAccent, width: 3.0),
                       ),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
+                          borderSide: BorderSide(
+                              color: new Color(0xFFe62d11), width: 3.0),
                           borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
@@ -257,7 +259,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
+                      color: new Color(0xFFe62d11),
                     ),
                     //create a drop down menu and remove the underline
                     child: Padding(
@@ -312,14 +314,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
                       labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      fillColor: new Color(0xFFe62d11),
                       filled: true,
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.greenAccent, width: 3.0),
                       ),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
+                          borderSide: BorderSide(
+                              color: new Color(0xFFe62d11), width: 3.0),
                           borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
@@ -363,15 +366,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           decoration: InputDecoration(
                             labelText: 'Hours',
                             labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            fillColor: new Color(0xFFe62d11),
                             filled: true,
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.greenAccent, width: 3.0),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
+                                borderSide: BorderSide(
+                                    color: new Color(0xFFe62d11), width: 3.0),
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -397,15 +400,15 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           decoration: InputDecoration(
                             labelText: 'Minutes',
                             labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            fillColor: new Color(0xFFe62d11),
                             filled: true,
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.greenAccent, width: 3.0),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
+                                borderSide: BorderSide(
+                                    color: new Color(0xFFe62d11), width: 3.0),
                                 borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
@@ -431,7 +434,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
+                      color: new Color(0xFFe62d11),
                     ),
                     //create a drop down menu and remove the underline
                     child: Padding(
@@ -491,7 +494,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           child: Text(
                             'Cancel',
                             style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                                color: new Color(0xFFe62d11),
+                                fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             if (DBControl.categoryValue != null) {
@@ -516,7 +520,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         width: 100,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                            primary: new Color(0xFFe62d11),
+                          ),
                           child: Text(
                             'Done',
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -567,10 +573,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return MultiSelectFormField(
       autovalidate: false,
-      fillColor: Colors.red[400],
+      fillColor: new Color(0xFFe62d11),
       chipBackGroundColor: Colors.white,
       chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
+      checkBoxActiveColor: new Color(0xFFe62d11),
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -605,10 +611,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return MultiSelectFormField(
       autovalidate: false,
-      fillColor: Colors.red[400],
+      fillColor: new Color(0xFFe62d11),
       chipBackGroundColor: Colors.white,
       chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
+      checkBoxActiveColor: new Color(0xFFe62d11),
       checkBoxCheckColor: Colors.white,
       dialogShapeBorder:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

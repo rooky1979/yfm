@@ -236,8 +236,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'Cancel',
                           style: TextStyle(
-                              color: new Color(0xFFe62d11),
-                              fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();

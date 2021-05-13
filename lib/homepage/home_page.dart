@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
-        backgroundColor: Colors.red[800],
+        backgroundColor: new Color(0xFFe62d11),
         actions: [
           GetBuilder<DataController>(
               init: DataController(),
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             colors: [Colors.redAccent[700], Colors.red[400]]),
-                        border: Border.all(color: Colors.red[800]),
+                        border: Border.all(color: new Color(0xFFe62d11)),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),

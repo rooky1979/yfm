@@ -19,7 +19,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
       backgroundColor: new Color(0xFFf0f1eb),
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
-        backgroundColor: Colors.red[800],
+        backgroundColor: new Color(0xFFe62d11),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,

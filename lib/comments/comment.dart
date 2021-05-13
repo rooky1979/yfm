@@ -361,7 +361,7 @@ class _CommentState extends State<Comment> {
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: Colors.red,
+                  backgroundColor: new Color(0xFFe62d11),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
@@ -402,7 +402,7 @@ class _CommentState extends State<Comment> {
                 final snackBar = SnackBar(
                   content: Text('Comment Reported'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: Colors.red,
+                  backgroundColor: new Color(0xFFe62d11),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.of(context).pop();

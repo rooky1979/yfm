@@ -84,33 +84,39 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: new Color(0xFF7a243e),
+            GestureDetector(
+              onTap: () {
+                _showChoiceDialog(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: new Color(0xFF7a243e),
+                    ),
+                    borderRadius: BorderRadius.circular(2)),
+                width: double.infinity,
+                child: Row(children: [
+                  Icon(
+                    Icons.image,
+                    size: 85,
                   ),
-                  borderRadius: BorderRadius.circular(2)),
-              width: double.infinity,
-              child: Row(children: [
-                Icon(
-                  Icons.image,
-                  size: 85,
-                ),
-                VerticalDivider(
-                  thickness: 2,
-                ),
-                TextButton(
-                    onPressed: () {
-                      _showChoiceDialog(context);
-                    },
-                    child: Text("Add An Image",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: new Color(0xFF7a243e),
-                        )))
-              ]),
-            ),
+                  VerticalDivider(
+                    thickness: 2,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        _showChoiceDialog(context);
+                      },
+                      child: Container(
+                          child: Text("Add An Image",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: new Color(0xFF7a243e),
+                              ))))
+                ]),
+              ),
+            )
           ],
         ),
       );
@@ -206,7 +212,8 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     return Scaffold(
       backgroundColor: new Color(0xFFf0f1eb),
       body: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 0),
+        padding:
+            const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
         child: Column(
           children: [
             Text(
@@ -214,6 +221,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
               style: TextStyle(
                 fontSize: 20,
                 color: new Color(0xFF7a243e),
+                fontWeight: FontWeight.bold,
               ),
             ),
             Divider(thickness: 2),
@@ -226,7 +234,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                       descriptionInputController.clear();
                       Navigator.pop(context);
                     },
-                    padding: const EdgeInsets.only(right: 120),
+                    padding: const EdgeInsets.all(20),
                     icon: Icon(Icons.clear),
                     iconSize: 30),
                 IconButton(
@@ -270,7 +278,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
                             duration: Duration(milliseconds: 1000),
-                            backgroundColor: Colors.red,
+                            backgroundColor: new Color(0xFFe62d11),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
@@ -278,7 +286,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         final snackBar = SnackBar(
                           content: Text('Please use appropriate language'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: Colors.red,
+                          backgroundColor: new Color(0xFFe62d11),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -300,7 +308,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                   hintText: 'A Question, Comment, or Tip!',
                   labelText: 'Type Here...',
                   labelStyle: TextStyle(
-                    color: Colors.red,
+                    color: new Color(0xFFe62d11),
                     fontSize: 17,
                   ),
                   border: const OutlineInputBorder(),
@@ -308,7 +316,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 controller: descriptionInputController,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             _decideImageView(),
           ],
         ),

@@ -55,7 +55,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
     return Scaffold(
       backgroundColor: new Color(0xFFf0f1eb),
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: new Color(0xFFe62d11),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -148,7 +148,8 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                         child: Text(
                           'Cancel',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              color: new Color(0xFFe62d11),
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();

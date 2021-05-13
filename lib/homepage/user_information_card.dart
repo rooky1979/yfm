@@ -34,7 +34,7 @@ class UserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Card(
                 elevation: 1,
-                shadowColor: Colors.red,
+                shadowColor: new Color(0xFFe62d11),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -84,7 +84,7 @@ class UserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Card(
                 elevation: 1,
-                shadowColor: Colors.red,
+                shadowColor: new Color(0xFFe62d11),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -134,7 +134,7 @@ class UserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Card(
                 elevation: 1,
-                shadowColor: Colors.red,
+                shadowColor: new Color(0xFFe62d11),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -184,7 +184,7 @@ class UserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Card(
                 elevation: 1,
-                shadowColor: Colors.red,
+                shadowColor: new Color(0xFFe62d11),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -234,7 +234,7 @@ class UserInformationCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Card(
               elevation: 1,
-              shadowColor: Colors.red,
+              shadowColor: new Color(0xFFe62d11),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
