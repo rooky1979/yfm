@@ -27,6 +27,9 @@ class _CommentState extends State<Comment> {
 //This gets the current user data
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  var userfirestoreDb =
+      FirebaseFirestore.instance.collection('users').snapshots();
+
   Widget build(BuildContext context) {
 //to convert the timestamp into readble format
     var timeToDate = new DateTime.fromMillisecondsSinceEpoch(
@@ -288,7 +291,9 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if (widget.snapshot.docs[widget.index]['uid'] == user) {
+    if ((widget.snapshot.docs[widget.index]['uid'] ==
+        user)) //Add mod feature before handover?
+    {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

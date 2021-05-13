@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
-import 'package:youth_food_movement/homepage/test_grid_tile.dart';
+import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,10 +19,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
-  var rand = Random();
-  List<String> colours = [
-    'Colors.redAccent[700], Colors.red[400]',
-  ];
   List categories = [
     'All',
     'Beef',
@@ -34,7 +30,8 @@ class _HomePageState extends State<HomePage> {
     'Eggs',
     'Dairy',
     'Pasta',
-    'Salads'
+    'Salads',
+    'Rice'
   ];
   @override
   Widget build(BuildContext context) {
@@ -152,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                child: TestGridTile(
+                                child: HomepageTile(
                                   snapshot: snapshot.data,
                                   index: index,
                                 ),
@@ -177,15 +174,5 @@ class _HomePageState extends State<HomePage> {
     String downloadURL =
         await storage.ref('recipe_images/$docID').getDownloadURL();
     return downloadURL;
-  }
-
-  Future getRecipeCategory(String queryString) async {
-    var recipeDocRef =
-        await FirebaseFirestore.instance.collection('recipe').add({});
-    //get the info from the DB
-    await recipeDocRef
-        .collection("ingredients")
-        .where('protein', arrayContains: queryString)
-        .get();
   }
 }

@@ -33,43 +33,6 @@ class UserInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Divider(
-                      height: 10,
-                      thickness: 3,
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.redAccent,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Flexible(
-                            child: Text(
-                              'Birthday: ${snapshotData['birthday']}',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
               elevation: 1,
               shadowColor: Colors.red,
               child: Column(
@@ -81,6 +44,38 @@ class UserInformationCard extends StatelessWidget {
                     indent: 10,
                     endIndent: 10,
                     color: Colors.redAccent,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text.rich(
+                            TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Birthday: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: snapshotData['birthday'],
+                                ),
+                              ],
+                            ),
+                          ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: Colors.red[200],
                   ),
                   Padding(
                     //widget to show the serving size
@@ -219,9 +214,9 @@ class UserInformationCard extends StatelessWidget {
                   ),
                   Divider(
                     height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
+                    thickness: 3,
+                    indent: 10,
+                    endIndent: 10,
                     color: Colors.red[200],
                   ),
                 ],

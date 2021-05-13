@@ -5,8 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
-import 'package:youth_food_movement/homepage/test_grid_tile.dart';
-
+import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeControlsPage extends StatefulWidget {
@@ -36,7 +35,6 @@ class RecipeThumbnail extends StatelessWidget {
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -95,16 +93,7 @@ class RecipeThumbnail extends StatelessWidget {
             right: 10.0,
             bottom: 10.0,
             child:
-                Favourites() /* IconButton(
-              //alignment: Alignment.bottomRight,
-              icon: Icon(
-                Icons.favorite,
-                size: 40,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }), */
+                Favourites()
             ),
       ],
     );
@@ -113,7 +102,7 @@ class RecipeThumbnail extends StatelessWidget {
 //ansynchronous method to get the image URL
   Future _getImageURL() async {
     String downloadURL = await storage
-        .ref('recipe_images/' + TestGridTile.idNumber.toString())
+        .ref('recipe_images/' + HomepageTile.idNumber.toString())
         .getDownloadURL();
     return downloadURL;
   }
@@ -122,7 +111,7 @@ class RecipeThumbnail extends StatelessWidget {
 //creates the buttons on the screen to take the user to each section
 // ignore: must_be_immutable
 class RecipeButtons extends StatelessWidget {
-  String docID = TestGridTile.idNumber.toString();
+  String docID = HomepageTile.idNumber.toString();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -158,7 +147,7 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     IngredientsPage(
-                                        TestGridTile.idNumber.toString())))
+                                        HomepageTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   // recipe method button
@@ -174,7 +163,7 @@ class RecipeButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Method(TestGridTile.idNumber.toString())))
+                                    Method(HomepageTile.idNumber.toString())))
                       }),
               RawMaterialButton(
                   padding: EdgeInsets.all(11),
@@ -191,7 +180,7 @@ class RecipeButtons extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (BuildContext context) => CommentBoard(
                                       recipeID:
-                                          TestGridTile.idNumber.toString(),
+                                          HomepageTile.idNumber.toString(),
                                     )))
                       }),
             ],
@@ -205,10 +194,8 @@ class RecipeButtons extends StatelessWidget {
 //favourites button that toggles solid for favourited and outline for unfavourited
 // ignore: must_be_immutable
 class Favourites extends StatefulWidget {
-  var firestoreDb = FirebaseFirestore.instance
-      .collection('recipe')
-      .doc('0ZWT2Ljrk8SS5wmh7zwD')
-      .snapshots();
+  bool isLiked;
+
   @override
   _FavouritesState createState() => _FavouritesState();
 }
@@ -224,27 +211,32 @@ class _FavouritesState extends State<Favourites> {
         FutureBuilder(
             future: _getLiked(),
             builder: (context, snapshot) {
+              widget.isLiked = snapshot.data;
               if (snapshot.hasData) {
                 return IconButton(
-                    icon: Icon(
-                  Icons.favorite_rounded, //comments button
-                  size: 50,
-                  color: Colors.red,
-                ));
-                // if (snapshot.data == true) {
-                //   return IconButton(
-                //       icon: Icon(
-                //         Icons.favorite_rounded, //comments button
-                //         size: 50,
-                //         color: Colors.red,
-                //       ),
-                //       onPressed: () {
-                //         setState(() {
-                //           _removeFavouriteFromDB();
-                //         });
-                //       });
-                // }
-                // if (snapshot.data == false) {
+                    icon: Icon(Icons.favorite_rounded, //comments button
+                        size: 50,
+                        color: widget.isLiked ? Colors.red : Colors.grey),
+                    onPressed: () {
+                      if (widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          debugPrint(widget.isLiked.toString() +
+                              "This has been removed from favourites: " +
+                              HomepageTile.idNumber.toString());
+                          _getUserDocIdForDelete(HomepageTile.idNumber);
+                        });
+                      } else if (!widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          debugPrint(widget.isLiked.toString() +
+                              "This has been removed from favourites: " +
+                              HomepageTile.idNumber.toString());
+                          _getUserDocIdForAdd(HomepageTile.idNumber);
+                        });
+                      }
+                    });
+                // } else if (widget.isLiked == false) {
                 //   return IconButton(
                 //       icon: Icon(
                 //         Icons.favorite_outline_rounded,
@@ -254,8 +246,13 @@ class _FavouritesState extends State<Favourites> {
                 //       onPressed: () {
                 //         setState(() {
                 //           //if array contains recipeID, remove
-                //           _getUserDocIdForAdd(TestGridTile.idNumber);
+                //           widget.isLiked = !widget.isLiked;
+                //           debugPrint(widget.isLiked.toString() +
+                //               "This has been Added to favourites: " +
+                //               HomepageTile.idNumber.toString());
+                //           _getUserDocIdForAdd(HomepageTile.idNumber);
                 //         });
+                //         setState(() {});
                 //       });
                 // }
               } else {
@@ -276,7 +273,7 @@ class _FavouritesState extends State<Favourites> {
     //           setState(() {
     //             _isFavorite = !_isFavorite;
     //             //add recipe ID to favourites array
-    //             _getUserDocIdForAdd(TestGridTile.idNumber.toString());
+    //             _getUserDocIdForAdd(HomepageTile.idNumber.toString());
     //           });
     //         });
     //   } else {
@@ -290,7 +287,7 @@ class _FavouritesState extends State<Favourites> {
     //           setState(() {
     //             _isFavorite = !_isFavorite;
     //             //if array contains recipeID, remove
-    //             _getUserDocIdForDelete(TestGridTile.idNumber);
+    //             _getUserDocIdForDelete(HomepageTile.idNumber);
     //           });
     //         });
   }
@@ -328,34 +325,36 @@ void _getUserDocIdForAdd(String recipeIdNumber) async {
   });
 }
 
-// void _getUserDocIdForDelete(String recipeIdNumber) async {
-//   String id;
-//   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-//   await FirebaseFirestore.instance
-//       .collection('users') // Users table in firestore
-//       .where('uid',
-//           isEqualTo: _firebaseAuth.currentUser
-//               .uid) //first uid is the user ID of in the users table (not document id)
-//       .get()
-//       .then((QuerySnapshot querySnapshot) {
-//     querySnapshot.docs.forEach((doc) {
-//       id = doc.id;
-//       debugPrint(id);
-//       _removeFavouriteFromDB(recipeIdNumber, id);
-//     });
-//   });
-// }
+void _getUserDocIdForDelete(String recipeIdNumber) async {
+  String id;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      id = doc.id;
+      debugPrint(id);
+      _removeFavouriteFromDB(recipeIdNumber, id);
+    });
+  });
+}
 
 //helper method to add the recipe ID to the firestore favourites array
-void _removeFavouriteFromDB() async {
+void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   //instantiate a local list to hold temp ID
-  List recipes = [TestGridTile.idNumber.toString()];
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  List recipes = [recipeIdNumber];
+
   //add the temp array to the firestore
   await FirebaseFirestore.instance
       .collection('users')
-      .doc(_firebaseAuth.currentUser.uid)
+      .doc(id)
       .update({'favourites': FieldValue.arrayRemove(recipes)});
+  //clear the temp array
+  recipes.clear();
 }
 
 Future _getLiked() async {
@@ -370,9 +369,8 @@ Future _getLiked() async {
       .get()
       .then((QuerySnapshot querySnapshot) {
     querySnapshot.docs.forEach((doc) {
-      debugPrint(doc['favourites'].toString() + "again");
-      recipes.add(doc['favourites']);
-      if (recipes.contains(TestGridTile.idNumber.toString())) {
+      recipes = doc['favourites'];
+      if (recipes.contains(HomepageTile.idNumber.toString())) {
         liked = true;
       }
     });

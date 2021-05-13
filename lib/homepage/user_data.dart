@@ -117,7 +117,7 @@ class _UserDataState extends State<UserData> {
    * (Needs to change to use the string stored in db)
    */
   Future _getUserImage() async {
-    String downloadURL = await storage.ref('avatar1.jpg').getDownloadURL();
+    String downloadURL = await storage.ref('avatar1.png').getDownloadURL();
     return downloadURL;
   }
 

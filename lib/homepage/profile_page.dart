@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/bookmark/bookmarks.dart';
+import 'package:youth_food_movement/bookmark/bookmark_page.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,9 +31,25 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[600],
-        title: Text("Profile Page"),
-      ),
+
+          backgroundColor: Colors.red[800],
+          leading: IconButton(
+              icon: Icon(
+                FontAwesomeIcons.arrowLeft,
+                size: 25,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          title: Text('User Profile',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              )),
+        ),
+
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Card(
@@ -184,21 +200,9 @@ class ProfileButtons extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    BookmarkedRecipeThumbnail()))
+                                    BookmarkPage()))
                       }),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(11),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.plusCircle,
-                      size: 40, color: Colors.red),
-                  onPressed: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    InformationSubmission()))
-                      }),
+              _checkMod(context)
             ],
           ),
         ),
@@ -216,4 +220,22 @@ _launchURL() async {
   }
 }
 
-class FirebaseApp {}
+_checkMod(BuildContext context) {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  if (_firebaseAuth.currentUser.uid == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2') {
+    return RawMaterialButton(
+        padding: EdgeInsets.all(11),
+        fillColor: Colors.white,
+        shape: CircleBorder(),
+        child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
+        onPressed: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          InformationSubmission()))
+            });
+  } else {
+    return Container();
+  }
+}

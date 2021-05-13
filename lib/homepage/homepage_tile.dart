@@ -4,11 +4,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
 //card that displays the recipe information
-class TestGridTile extends StatelessWidget {
+class HomepageTile extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
   final int index;
-  const TestGridTile({Key key, this.snapshot, this.index}) : super(key: key);
+  const HomepageTile({Key key, this.snapshot, this.index}) : super(key: key);
   static String idNumber;
 
   @override
