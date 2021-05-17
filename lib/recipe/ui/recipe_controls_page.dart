@@ -16,7 +16,6 @@ class RecipeControlsPage extends StatefulWidget {
 class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
-    //main page setup
     return Scaffold(
         backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
@@ -92,12 +91,7 @@ class RecipeThumbnail extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        Positioned(
-            right: 10.0,
-            bottom: 10.0,
-            child:
-                Favourites()
-            ),
+        Positioned(right: 10.0, bottom: 10.0, child: Favourites()),
       ],
     );
   }
@@ -184,8 +178,7 @@ class RecipeButtons extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => CommentBoard(
-                                    recipeID:
-                                        HomepageTile.idNumber.toString(),
+                                    recipeID: HomepageTile.idNumber.toString(),
                                   )))
                     }),
           ],
@@ -307,11 +300,10 @@ void _addFavouriteToDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(id)
-      .update({'favourites': FieldValue.arrayUnion(recipes),
-      'num_favourites': FieldValue.increment(1)});
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayUnion(recipes),
+    'num_favourites': FieldValue.increment(1)
+  });
   //clear the temp array
   recipes.clear();
 }
@@ -358,11 +350,10 @@ void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(id)
-      .update({'favourites': FieldValue.arrayRemove(recipes),
-      'num_favourites': FieldValue.increment(-1)});
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayRemove(recipes),
+    'num_favourites': FieldValue.increment(-1)
+  });
   //clear the temp array
   recipes.clear();
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {

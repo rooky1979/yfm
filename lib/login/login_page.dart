@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/bookmark/bookmark_page.dart';
 import 'package:youth_food_movement/homepage/home_page.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

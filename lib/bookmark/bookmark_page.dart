@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/bookmark/bookmark_tile.dart';
-import 'package:youth_food_movement/homepage/home_page.dart';
 
 class BookmarkPage extends StatefulWidget {
   @override
