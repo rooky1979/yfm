@@ -58,6 +58,7 @@ class _LogInState extends State<LogIn> {
   //Controllers for textfields
   final TextEditingController emailInputController = TextEditingController();
   final TextEditingController passwordInputController = TextEditingController();
+
   //used for searching if email already exist in login
   QuerySnapshot snapshotData;
 
@@ -67,15 +68,18 @@ class _LogInState extends State<LogIn> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
+        //removes back button on appbar
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
         color: Color(0xFFf0f1eb),
         height: double.infinity,
+        //allows page to be scrollable
         child: SingleChildScrollView(
           child: Stack(
             children: [
+              //curved widget made for design purpose
               CurvedWidget(
                 child: Container(
                   padding: const EdgeInsets.only(top: 100, left: 50),
@@ -90,13 +94,6 @@ class _LogInState extends State<LogIn> {
                           Colors.white.withOpacity(0.95)
                         ]),
                   ),
-                  // Text(
-                  //   'Just Cook Login',
-                  //   style: TextStyle(
-                  //     fontSize: 40,
-                  //     color: Colors.black,
-                  //   ),
-                  // ),
                 ),
               ),
               Center(
@@ -122,11 +119,6 @@ class _LogInState extends State<LogIn> {
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
-                        // child: TextField(
-                        //   decoration: InputDecoration(labelText: "Email"),
-
-                        //   controller: emailInputController,
-
                         child: TextField(
                           controller: emailInputController,
                           cursorColor: Color(0xFF7a243e),
@@ -163,7 +155,6 @@ class _LogInState extends State<LogIn> {
                                 color: Colors.black),
                             focusColor: Color(0xFFe62d11),
                             labelText: 'Password',
-
                             fillColor: Color(0xFFe62d1),
                             filled: true,
                             labelStyle: TextStyle(
@@ -172,7 +163,6 @@ class _LogInState extends State<LogIn> {
                             hintStyle: TextStyle(
                               color: Color(0xFE7a243e),
                             ),
-                            //helperText: 'What yo',
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color(0xFF7a243e), width: 2),
@@ -190,6 +180,7 @@ class _LogInState extends State<LogIn> {
                         width: 180,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12.0),
+                          //call for data controller to search for email in database
                           child: GetBuilder<DataController>(
                               init: DataController(),
                               builder: (val) {
@@ -224,6 +215,7 @@ class _LogInState extends State<LogIn> {
                                                           .trim(),
                                                 );
                                           } else {
+                                            //snackbar for when incorrect email or password is entered
                                             final snackBar = SnackBar(
                                               content: Text(
                                                   'Incorrect Email or Password!'),
@@ -237,6 +229,7 @@ class _LogInState extends State<LogIn> {
                                           }
                                         });
                                       } else {
+                                        // snackbar for when password is not entered
                                         final snackBar = SnackBar(
                                           content: Text('Password not entered'),
                                           duration:
@@ -247,6 +240,7 @@ class _LogInState extends State<LogIn> {
                                             .showSnackBar(snackBar);
                                       }
                                     } else {
+                                      //snackbar for when email is not entered
                                       final snackBar = SnackBar(
                                         content: Text('Email not entered'),
                                         duration: Duration(milliseconds: 1000),
@@ -261,7 +255,7 @@ class _LogInState extends State<LogIn> {
                               }),
                         ),
                       ),
-                      //register account button
+                      //register button
                       Container(
                         width: 180,
                         child: Padding(
