@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
@@ -19,8 +18,6 @@ class MethodCard extends StatelessWidget {
 
     return Column(
       children: [
-        RecipeThumbnail(),
-        RecipeButtons(),
         Padding(
           //widget for the recipe info title
           padding: const EdgeInsets.all(3.0),
@@ -29,8 +26,10 @@ class MethodCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text('Method:',
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    )),
               ),
             ],
           ),
@@ -45,11 +44,12 @@ class MethodCard extends StatelessWidget {
               children: [
                 ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: new Color(0xFF7a243e),
                     child: Text(
                       (index + 1).toString(),
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: new Color(0xFFf0f1eb),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   //each tile prints each element of the array
@@ -62,7 +62,7 @@ class MethodCard extends StatelessWidget {
                   thickness: 2,
                   indent: 40,
                   endIndent: 20,
-                  color: Colors.red[200],
+                  color: new Color(0xFF7a243e),
                 ),
               ],
             );

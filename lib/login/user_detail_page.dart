@@ -343,6 +343,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       controller: fullNameInputController,
                       cursorColor: Color(0xFF7a243e),
                       decoration: InputDecoration(
+                        //prefixIcon:
+                        // Icon(Icons.mail_outline, color: Colors.black),
                         labelText: 'Full Name',
                         fillColor: Color(0xFFe62d1),//light purple
                         filled: true,

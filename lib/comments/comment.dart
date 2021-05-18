@@ -4,8 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-//import 'package:youth_food_movement/recipe/ui/comment_update_form.dart';
-
 class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
@@ -26,6 +24,9 @@ class _CommentState extends State<Comment> {
 
 //This gets the current user data
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  var userfirestoreDb =
+      FirebaseFirestore.instance.collection('users').snapshots();
 
   Widget build(BuildContext context) {
 //to convert the timestamp into readble format
@@ -201,7 +202,7 @@ class _CommentState extends State<Comment> {
                                 },
                                 icon: Icon(Icons.thumb_up,
                                     color: clickedLike
-                                        ? Colors.blue
+                                        ? Color(0xFF009e5fb)
                                         : Colors.black)),
                             Container(
                               padding: const EdgeInsets.only(
@@ -288,7 +289,9 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if (widget.snapshot.docs[widget.index]['uid'] == user) {
+    if ((widget.snapshot.docs[widget.index]['uid'] ==
+        user)) //Add mod feature before handover?
+    {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

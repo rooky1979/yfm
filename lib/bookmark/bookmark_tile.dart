@@ -4,11 +4,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
 //card that displays the recipe information
-class TestGridTile extends StatelessWidget {
+class BookmarkTile extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
   final int index;
-  const TestGridTile({Key key, this.snapshot, this.index}) : super(key: key);
+  const BookmarkTile({Key key, this.snapshot, this.index}) : super(key: key);
   static String idNumber;
 
   @override
@@ -18,10 +18,11 @@ class TestGridTile extends StatelessWidget {
     var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
+    //var favourites = _getFavorites();
 
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
+      width: 150, //MediaQuery.of(context).size.width,
+      height: 150, //MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
           future: _getImageURL(docID),
@@ -31,7 +32,7 @@ class TestGridTile extends StatelessWidget {
               return GestureDetector(
                 child: Image.network(
                   snapshot.data,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 onTap: () {
                   idNumber = recipeID;
@@ -58,8 +59,8 @@ class TestGridTile extends StatelessWidget {
     final FirebaseStorage storage = FirebaseStorage.instanceFor(
         bucket: 'gs://youth-food-movement.appspot.com');
     //ref string will change so the parameter will be the jpg ID (maybe)
-    String downloadURL =
-        await storage.ref('recipe_images/$docID').getDownloadURL();
-    return downloadURL;
+      String downloadURL =
+          await storage.ref('recipe_images/$docID').getDownloadURL();
+      return downloadURL;
   }
 }

@@ -23,6 +23,7 @@ environment:
 dependencies:
 
   image_picker: ^0.7.3
+  profanity_filter: ^1.0.4
   flutter:
     sdk: flutter
 
@@ -44,9 +45,8 @@ dev_dependencies:
   firebase_storage: any
   firebase_core: ^1.0.0
   firebase_auth: ^1.0.1
-
+  
   provider: ^5.0.0
-  get: ^4.1.4
   cloud_firestore: any
   url_launcher: ^5.4.0
 

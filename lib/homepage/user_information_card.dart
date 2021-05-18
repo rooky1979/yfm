@@ -19,221 +19,236 @@ class UserInformationCard extends StatelessWidget {
     //snapshot document ID for use later
     // ignore: unused_local_variable
     String docID = snapshot.docs[userindex].id;
-    String userId = firebaseAuth.currentUser.uid;
+    String uid = firebaseAuth.currentUser.uid;
     String userID = snapshotData['uid'];
-    while (userID != userId) {
+    while (userID != uid) {
       userindex++;
       snapshotData = snapshot.docs[userindex];
-      userID = snapshotData['userId'];
+      userID = snapshotData['uid'];
     }
     return Column(
       children: [
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Divider(
-                      height: 10,
-                      thickness: 3,
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.redAccent,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Flexible(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    //height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
                             child: Text(
-                              'Birthday: ${snapshotData['birthday']}',
+                              'Name: ',
                               style: TextStyle(
-                                  fontSize: 14,
+                                  color: Color(0xFF7a243e),
                                   fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['name']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
                     ),
-                  ],
-                )),
-          ),
+                  ),
+                ],
+              )),
         ),
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              elevation: 1,
-              shadowColor: Colors.red,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Divider(
-                    height: 10,
-                    thickness: 3,
-                    indent: 10,
-                    endIndent: 10,
-                    color: Colors.redAccent,
-                  ),
-                  Padding(
-                    //widget to show the serving size
-                    padding: const EdgeInsets.all(3.0),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(
-                            TextSpan(
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Username: ',
                               style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Name: ',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: snapshotData['name'],
-                                ),
-                              ],
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: Colors.red[200],
-                  ),
-                  Padding(
-                    //widget to show the serving size
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(
-                            TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Region: ',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: snapshotData['region'],
-                                ),
-                              ],
-                            ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['username']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: Colors.red[200],
-                  ),
-                  Padding(
-                    //widget to show what allergies the recipes affects
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(
-                            TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Allergies: ',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(
-                                  text: _printArray(
-                                    snapshotData['allergy'],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: Colors.red[200],
-                  ),
-                  Padding(
-                    //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Username: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  TextSpan(
-                                    text: snapshotData['username'],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: Colors.red[200],
                   ),
                 ],
-              ),
-            ),
-          ),
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Birthday: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['birthday']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              'Region: ',
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['region']}',
+                            style: TextStyle(
+                                color: Color(0xFF7a243e), fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .90,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe62d1),
+                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text.rich(TextSpan(
+                              style: TextStyle(
+                                color: Color(0xFF7a243e),
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Allergies: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                    text: _printArray(snapshotData['allergy'])),
+                              ])),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
         ),
       ],
     );
   }
 
-//helper method to print the array
+  //helper method to print the array
   String _printArray(var snapshotData) {
     String string = '';
 
