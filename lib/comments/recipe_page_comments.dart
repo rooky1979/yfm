@@ -16,17 +16,17 @@ class CommentBoard extends StatefulWidget {
   final int index;
 }
 
-class _CommentBoardState extends State<CommentBoard> {
 /*
  * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
  */
+class _CommentBoardState extends State<CommentBoard> {
   @override
   Widget build(BuildContext context) {
     String recipeId = widget.recipeID;
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     debugPrint(_firebaseAuth.currentUser.uid);
 
-    //Creates the snapshot of all comments
+    //Creates the snapshot of all comments in descending
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
@@ -49,7 +49,7 @@ class _CommentBoardState extends State<CommentBoard> {
                     if (!snapshot.hasData) return CircularProgressIndicator();
                     return Expanded(
                       child: SizedBox(
-                        //List view generates a list of comment widgets, of length determineed by number of docs.
+                        //List view generates a list of comment widgets, of length determined by number of docs.
                         child: ListView.builder(
                             itemCount: snapshot.data.docs.length,
                             itemBuilder: (context, int index) {
@@ -87,6 +87,11 @@ class _CommentBoardState extends State<CommentBoard> {
           ),
         ));
   }
+
+  /*
+   * This Method creates the comment entry form
+   * It takes the recipeID so the Comment is saved to the correct recipe
+   */
 
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(
