@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/homepage/homepage_tile.dart';
 import 'package:youth_food_movement/login/user_search/data_controller.dart';
@@ -35,9 +36,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: new Color(0xFFf0f1eb),
+      backgroundColor: cream,
       appBar: AppBar(
-        backgroundColor: Colors.red[800],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[ceruleanCrayola, celadonBlue])),
+        ),
         actions: [
           GetBuilder<DataController>(
               init: DataController(),
@@ -46,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     //search function
                     IconButton(
-                        icon: Icon(Icons.search),
+                        icon: Icon(Icons.search, color: Colors.white,),
                         onPressed: () {
                           val
                               .foodTitleQueryData(searchController.text)
@@ -63,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => ProfilePage()),
                           );
                         },
-                        icon: Icon(Icons.settings)),
+                        icon: Icon(Icons.settings, color: Colors.white,)),
                   ],
                 );
               })
@@ -71,8 +78,6 @@ class _HomePageState extends State<HomePage> {
         //search bar textfield
         title: Container(
             margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -113,8 +118,10 @@ class _HomePageState extends State<HomePage> {
                     //height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Colors.redAccent[700], Colors.red[400]]),
-                        border: Border.all(color: Colors.red[800]),
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [turquoiseGreen, greenSheen]),
+                        border: Border.all(color: Colors.green[50]),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),

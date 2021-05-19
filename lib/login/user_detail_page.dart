@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class UserDetailPage extends StatefulWidget {
   @override
@@ -111,8 +112,21 @@ class _UserDetailPageState extends State<UserDetailPage> {
         fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
 
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
-        backgroundColor: Color(0xFF7a243e),
+        centerTitle: true,
+        title: Text(
+          'Account Setup',
+          style: TextStyle(color: Colors.white),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[cream, radicalRed])),
+        ),
+        /*  backgroundColor: radicalRed,
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -127,7 +141,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
               color: Colors.white,
 
               fontSize: 20,
-            )),
+            )), */
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -146,8 +160,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: <Color>[turquoiseGreen, greenSheen]),
                             borderRadius: BorderRadius.circular(15),
-                            color: Color(0xFF7a243e),
+                            color: celadonBlue,
                           ),
                           alignment: Alignment.center,
                           child: Text(
@@ -341,23 +359,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         left: 13, right: 13, top: 7, bottom: 10),
                     child: TextField(
                       controller: fullNameInputController,
-                      cursorColor: Color(0xFF7a243e),
+                      cursorColor: greenSheen,
                       decoration: InputDecoration(
                         //prefixIcon:
                         // Icon(Icons.mail_outline, color: Colors.black),
                         labelText: 'Full Name',
-                        fillColor: Color(0xFFe62d1),//light purple
+                        fillColor: turquoiseGreen, //light purple
                         filled: true,
                         labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),//dark purple
+                          color: greenSheen, //dark purple
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xFF7a243e), width: 2),
+                              BorderSide(color: greenSheen, width: 2),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xFF7a243e), width: 3),
+                              BorderSide(color: greenSheen, width: 3),
                         ),
                       ),
                     ),
@@ -373,23 +391,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             width: MediaQuery.of(context).size.width * 0.75,
                             child: TextField(
                               controller: usernameInputController,
-                              cursorColor: Color(0xFF7a243e),
+                              cursorColor: greenSheen,
                               decoration: InputDecoration(
                                 //prefixIcon:
                                 // Icon(Icons.mail_outline, color: Colors.black),
                                 labelText: 'Username',
-                                fillColor: Color(0xFFe62d1),
+                                fillColor: turquoiseGreen,
                                 filled: true,
                                 labelStyle: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: greenSheen,
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xFF7a243e), width: 2),
+                                      color: greenSheen, width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xFF7a243e), width: 3),
+                                      color: greenSheen, width: 3),
                                 ),
                               ),
                             ),
@@ -402,7 +420,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 builder: (val) {
                                   return IconButton(
                                       icon: Icon(Icons.check_circle,
-                                          size: 40, color: Color(0xFF4ca5b5)),
+                                          size: 40, color: ceruleanCrayola),
                                       onPressed: () {
                                         if (!filter.hasProfanity(
                                             usernameInputController
@@ -493,6 +511,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: <Color>[turquoiseGreen, greenSheen]),
                                   border: Border.all(color: Color(0xFFe62d1)),
                                   borderRadius: BorderRadius.circular(15),
                                   color: Color(0xFF7a243e),
@@ -525,7 +547,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               label: Text(
                                 formattedDate.format(today).toString(),
                                 style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: turquoiseGreen,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -541,21 +563,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFF7a243e)),//dark purple
+                          border: Border.all(
+                              color: greenSheen), //dark purple
                           borderRadius: BorderRadius.circular(15),
-                          color: Color(0xFFe62d1),//light purple
+                          color: turquoiseGreen, //light purple
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: DropdownButtonFormField(
-                            iconEnabledColor: Color(0xFF7a243e),//dark purple
+                            iconEnabledColor: greenSheen, //dark purple
                             isExpanded: true,
                             decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
                               labelText: 'Select Your Region',
-                              labelStyle: darkPurpleText,
+                              labelStyle: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
                             ),
-                            dropdownColor: Colors.purple[50],
+                            dropdownColor: turquoiseGreen,
                             value: _regionDropdownValue,
                             items: [
                               "Northland",
@@ -580,7 +603,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         child: Text(
                                           label,
                                           textAlign: TextAlign.center,
-                                          style: darkPurpleText,
+                                          style: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
                                         ),
                                       ),
                                       value: label,
@@ -599,7 +622,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: _allergiesCheckList(
                         'Allergies affected',
                         _allergiesList,
-                        darkPurpleText,
+                        TextStyle(color: greenSheen),
                       )),
                 ],
               ),
@@ -623,7 +646,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       );
                     },
                     padding: const EdgeInsets.only(right: 120),
-                    icon: Icon(Icons.clear),
+                    icon: Icon(Icons.clear, color: Colors.white,),
                     iconSize: 30),
                 IconButton(
                   //button to check if datas are all entered and save data to the database
@@ -717,7 +740,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
-                  icon: Icon(Icons.save),
+                  icon: Icon(Icons.save, color: Colors.white),
                   iconSize: 30,
                 )
               ],
@@ -736,23 +759,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFF7a243e)),
-        borderRadius: BorderRadius.circular(11.0)
-      ),
+          border: Border.all(color: greenSheen),
+          borderRadius: BorderRadius.circular(11.0)),
       child: MultiSelectFormField(
         autovalidate: false,
-        fillColor: Color(0xFFe62d1),//light-purple
-        chipBackGroundColor: Color(0xFF7a243e),//dark purple
+        fillColor: turquoiseGreen, //light-purple
+        chipBackGroundColor: greenSheen, //dark purple
         chipLabelStyle: TextStyle(color: Colors.white),
-        checkBoxActiveColor: Color(0xFFe62d11),
+        checkBoxActiveColor: greenSheen,
         checkBoxCheckColor: Colors.white,
         border: InputBorder.none,
-        dialogShapeBorder:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),
-            side: BorderSide(color: Color(0xFF7a243e))),
+        dialogShapeBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: BorderSide(color: greenSheen)),
         title: Text(
           title,
-          style: textStyle,//dark purple
+          style: textStyle, //dark purple
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -762,7 +784,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
         //clear checklist
         hintWidget: Text(
           'Select allergies',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF7a243e)),//dark purple
+          style: TextStyle(
+              fontWeight: FontWeight.w300,
+              color: greenSheen), //dark purple
         ),
         initialValue: _allergies,
         onSaved: (value) {

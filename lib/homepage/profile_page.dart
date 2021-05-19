@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/bookmark/bookmark_page.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +31,20 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Profile Information',
+          style: TextStyle(color: Colors.white),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[cream, radicalRed])),
+        ),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -40,8 +54,6 @@ class ProfilePage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        title: Text('Profile Information'),
-        backgroundColor: new Color(0xFF7a243e),
       ),
       body: Center(
         child: Column(
@@ -176,8 +188,7 @@ class ProfilePage extends StatelessWidget {
 // ignore: must_be_immutable
 class ProfileButtons extends StatelessWidget {
   //colours for the fields
-  Color lightPurple = Color(0xFFe62d1);
-  Color darkPurple = Color(0xFF7a243e);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -188,7 +199,7 @@ class ProfileButtons extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: darkPurple,
+            color: turquoiseGreen,
             border: Border.all(color: darkPurple)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,13 +209,13 @@ class ProfileButtons extends StatelessWidget {
               fillColor: Colors.white,
               shape: CircleBorder(side: BorderSide(color: darkPurple)),
               child: Icon(FontAwesomeIcons.globe,
-                  size: 20, color: Color(0xFF7a243e)),
+                  size: 20, color: darkPurple),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
-                shape: CircleBorder(),
+                shape: CircleBorder(side: BorderSide(color: darkPurple)),
                 child: Icon(
                   FontAwesomeIcons.solidBookmark,
                   size: 20,
@@ -240,9 +251,9 @@ _checkMod(BuildContext context) {
   return RawMaterialButton(
       padding: EdgeInsets.all(11),
       fillColor: Colors.white,
-      shape: CircleBorder(),
+      shape: CircleBorder(side: BorderSide(color: darkPurple)),
       child:
-          Icon(FontAwesomeIcons.plusCircle, size: 20, color: Color(0xFF7a243e)),
+          Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
       onPressed: () => {
             Navigator.push(
                 context,

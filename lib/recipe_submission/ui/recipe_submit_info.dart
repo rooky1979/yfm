@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_ingredients.dart';
@@ -166,10 +167,17 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         }
       },
       child: Scaffold(
+        backgroundColor: onyx,
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: darkPurple,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[turquoiseGreen, greenSheen])),
+          ),
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -189,7 +197,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
           title: Text('Submit your recipe!',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 25,
+                fontSize: 23,
               )),
         ),
         //container to hold the column
@@ -208,23 +216,20 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.recipeNameController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: Color(0xFF7a243e),
+                      color: Colors.white,
                       fontSize: 17,
                     ),
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
                       labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
-                          fontWeight: FontWeight.w500),
-                      fillColor: Color(0xFFe62d1),
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                      fillColor: ceruleanCrayola,
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                        borderSide: BorderSide(color: celadonBlue, width: 2),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 3),
+                        borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
                     ),
                   ),
@@ -237,23 +242,20 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.descriptionController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: Color(0xFF7a243e),
+                      color: Colors.white,
                       fontSize: 17,
                     ),
                     decoration: InputDecoration(
                       labelText: 'Enter a description of the finished dish.',
                       labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
-                          fontWeight: FontWeight.w500),
-                      fillColor: Color(0xFFe62d1),
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                      fillColor: ceruleanCrayola,
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                        borderSide: BorderSide(color: celadonBlue, width: 2),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 3),
+                        borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
                     ),
                   ),
@@ -264,32 +266,34 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                   //create a container and decorate
                   child: Container(
                     decoration: BoxDecoration(
-                      border:
-                          Border.all(color: Color(0xFF7a243e)), //dark purple
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: <Color>[celadonBlue, ceruleanCrayola],
+                      ),
+                      border: Border.all(color: celadonBlue), //dark purple
                       borderRadius: BorderRadius.circular(15),
-                      color: Color(0xFFe62d1), //light purple
+                      //color: Color(0xFFe62d1), //light purple
                     ),
                     //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
                     child: DropdownButtonFormField(
-                      iconEnabledColor: darkPurple,
+                      iconEnabledColor: Colors.blue[900],
                       isExpanded: true,
                       decoration: InputDecoration(
                         //enabledBorder: InputBorder.none,
                         labelText: 'Select recipe difficulty',
                         labelStyle: TextStyle(
-                            color: Color(0xFF7a243e),
-                            fontWeight: FontWeight.w500),
-                        fillColor: Color(0xFFe62d1),
+                            color: Colors.white, fontWeight: FontWeight.w500),
+                        fillColor: ceruleanCrayola,
                         filled: true,
                         enabledBorder: InputBorder.none,
                         focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xFF7a243e), width: 3),
+                          borderSide: BorderSide(color: celadonBlue, width: 3),
                         ),
                       ),
                       //dropdown menu labels
-                      dropdownColor: Colors.white,
+                      dropdownColor: celadonBlue,
                       value: DBControl.difficultyValue,
                       items: ["Easy", "Intermediate", "Hard"]
                           .map((label) => DropdownMenuItem(
@@ -298,7 +302,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                     label,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Color(0xFF7a243e),
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
@@ -324,23 +328,20 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           .digitsOnly //enables digits only for entry
                     ],
                     style: TextStyle(
-                      color: Color(0xFF7a243e),
+                      color: Colors.white,
                       fontSize: 17,
                     ),
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
                       labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
-                          fontWeight: FontWeight.w500),
-                      fillColor: lightPurple,
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                      fillColor: ceruleanCrayola,
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                        borderSide: BorderSide(color: celadonBlue, width: 2),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 3),
+                        borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
                     ),
                   ),
@@ -355,7 +356,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       Text(
                         'How long to prepare and cook?',
                         style: TextStyle(
-                            color: Color(0xFF7a243e),
+                            color: Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 23),
                       )
@@ -380,23 +381,23 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                            color: Color(0xFF7a243e),
+                            color: Colors.white,
                             fontSize: 17,
                           ),
                           decoration: InputDecoration(
                             labelText: 'Hours',
                             labelStyle: TextStyle(
-                                color: Color(0xFF7a243e),
+                                color: Colors.white,
                                 fontWeight: FontWeight.w500),
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: ceruleanCrayola,
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 3),
                             ),
                           ),
                         ),
@@ -416,23 +417,23 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                            color: Color(0xFF7a243e),
+                            color: Colors.white,
                             fontSize: 17,
                           ),
                           decoration: InputDecoration(
                             labelText: 'Minutes',
                             labelStyle: TextStyle(
-                                color: Color(0xFF7a243e),
+                                color: Colors.white,
                                 fontWeight: FontWeight.w500),
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: ceruleanCrayola,
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 3),
                             ),
                           ),
                         ),
@@ -454,28 +455,30 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                   //create a container and decorate
                   child: Container(
                     decoration: BoxDecoration(
-                      border:
-                          Border.all(color: Color(0xFF7a243e)), //dark purple
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: <Color>[celadonBlue, ceruleanCrayola]),
+                      border: Border.all(color: celadonBlue),
                       borderRadius: BorderRadius.circular(15),
-                      color: Color(0xFFe62d1), //light purple
                     ),
                     //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
                     child: DropdownButtonFormField(
-                      iconEnabledColor: Color(0xFF7a243e),
+                      iconEnabledColor: Colors.blue[900],
                       isExpanded: true,
                       decoration: InputDecoration(
                         //enabledBorder: InputBorder.none,
                         labelText: 'Recipe category:',
                         labelStyle: TextStyle(
-                            color: Color(0xFF7a243e),
+                            color: Colors.white,
                             fontWeight: FontWeight.w500),
-                        fillColor: Color(0xFFe62d1),
+                        //fillColor: Color(0xFFe62d1),
                         filled: true,
                         enabledBorder: InputBorder.none,
                       ),
                       //dropdown menu labels
-                      dropdownColor: Colors.purple[50],
+                      dropdownColor: celadonBlue,
                       value: DBControl.categoryValue,
                       items: ["Vegan", "Vegetarian", "Non-Vegetarian"]
                           .map((label) => DropdownMenuItem(
@@ -485,7 +488,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      color: Color(0xFF7a243e),
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -519,7 +522,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           height: 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF4ca5b5)),
+                                primary: greenSheen),
                             child: Text(
                               'DONE',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -558,13 +561,13 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         child: SizedBox(
                           width: 150,
                           height: 50,
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              primary: Color(0xFF4ca5b5), // background
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white, // background
                             ),
                             child: Text(
                               'CANCEL',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(color: greenSheen,fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {
                               if (DBControl.categoryValue != null) {
@@ -602,21 +605,21 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: darkPurple),
+          border: Border.all(color: celadonBlue),
           borderRadius: BorderRadius.circular(11.0)),
       child: MultiSelectFormField(
         autovalidate: false,
-        fillColor: lightPurple,
+        fillColor: ceruleanCrayola,
         chipBackGroundColor: darkPurple,
         chipLabelStyle: TextStyle(color: Colors.white),
-        checkBoxActiveColor: Color(0xFF7a243e),
+        checkBoxActiveColor: celadonBlue,
         checkBoxCheckColor: Colors.white,
         border: InputBorder.none,
         dialogShapeBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           title,
-          style: textStyle,
+          style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.w500),
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -625,7 +628,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         cancelButtonLabel: 'CANCEL', //clear checklist
         hintWidget: Text(
           'Please choose one or more',
-          style: TextStyle(fontWeight: FontWeight.bold, color: darkPurple),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         initialValue: DBControl.allergies,
         onSaved: (value) {
@@ -646,21 +649,21 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: darkPurple),
+          border: Border.all(color: celadonBlue),
           borderRadius: BorderRadius.circular(11.0)),
       child: MultiSelectFormField(
         autovalidate: false,
-        fillColor: lightPurple,
+        fillColor: ceruleanCrayola,
         chipBackGroundColor: darkPurple,
         chipLabelStyle: TextStyle(color: Colors.white),
-        checkBoxActiveColor: Color(0xFF7a243e),
+        checkBoxActiveColor: celadonBlue,
         checkBoxCheckColor: Colors.white,
         border: InputBorder.none,
         dialogShapeBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           title,
-          style: textStyle,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -669,7 +672,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         cancelButtonLabel: 'CANCEL', //clear checklist
         hintWidget: Text(
           'Please choose one or more',
-          style: TextStyle(fontWeight: FontWeight.bold, color: darkPurple),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         initialValue: DBControl.proteins,
         onSaved: (value) {

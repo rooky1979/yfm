@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_method.dart';
@@ -24,7 +25,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: Color(0xFF7a243e),
+    color: ceruleanCrayola,
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -65,10 +66,17 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
         }
       },
       child: Scaffold(
+        backgroundColor: onyx,
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: darkPurple,
+          flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[turquoiseGreen, greenSheen])),
+        ),
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -81,7 +89,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
           title: Text('Add the ingredients!',
               style: TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 fontSize: 25,
               )),
         ),
@@ -98,23 +106,23 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     controller: ingredientController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: Color(0xFF7a243e),
+                      color: Colors.white,
                       fontSize: 17,
                     ),
                     decoration: InputDecoration(
                       labelText: 'Ingredient',
                       labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
+                          color: Colors.white,
                           fontWeight: FontWeight.w500),
-                      fillColor: Color(0xFFe62d1),
+                      fillColor: ceruleanCrayola,
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                            BorderSide(color: celadonBlue, width: 2),
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xFF7a243e), width: 3),
+                            BorderSide(color: celadonBlue, width: 3),
                       ),
                     ),
                   ),
@@ -128,7 +136,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       child: Text(
                         'Measurements:',
                         style: TextStyle(
-                            color: Color(0xFF7a243e),
+                            color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w500),
                       ),
@@ -151,23 +159,23 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             signed: true,
                             decimal: true), //only shows a numerical keyboard
                         style: TextStyle(
-                          color: Color(0xFF7a243e),
+                          color: Colors.white,
                           fontSize: 17,
                         ),
                         decoration: InputDecoration(
                           labelText: 'Enter amount',
                           labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
+                              color: Colors.white,
                               fontWeight: FontWeight.w500),
-                          fillColor: Color(0xFFe62d1),
+                          fillColor: ceruleanCrayola,
                           filled: true,
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF7a243e), width: 2),
+                                BorderSide(color: celadonBlue, width: 2),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: Color(0xFF7a243e), width: 3),
+                                BorderSide(color: celadonBlue, width: 3),
                           ),
                         ),
                       ),
@@ -182,27 +190,27 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           right: 13.0,
                         ),
                         child: DropdownButtonFormField(
-                          iconEnabledColor: darkPurple,
+                          iconEnabledColor: Colors.blue[900],
                           isExpanded: true,
                           decoration: InputDecoration(
                             //enabledBorder: InputBorder.none,
                             labelText: 'Unit',
                             labelStyle: TextStyle(
-                                color: Color(0xFF7a243e),
+                                color: Colors.white,
                                 fontWeight: FontWeight.w500),
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: ceruleanCrayola,
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                                  color: celadonBlue, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                                  color: celadonBlue, width: 3),
                             ),
                           ),
                           //dropdown menu labels
-                          dropdownColor: Colors.white,
+                          dropdownColor: celadonBlue,
                           value: _measurementValue,
                           items: [
                             "",
@@ -226,7 +234,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                         label,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: Color(0xFF7a243e),
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w500),
                                       ),
                                     ),
@@ -259,7 +267,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             child: Text(
                               'PREVIOUS',
                               style: TextStyle(
-                                color: Color(0xFF4ca5b5),
+                                color: greenSheen,
                                 fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {
@@ -279,7 +287,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           height: 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF4ca5b5)),
+                                primary: greenSheen),
                             child: Text(
                               'NEXT',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -324,7 +332,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             child: Text(
                               'Added so far:',
                               style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -340,13 +348,13 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 children: [
                                   ListTile(
                                       leading: CircleAvatar(
-                                        backgroundColor: Color(0xFF7a243e),
+                                        backgroundColor: celadonBlue,
                                         radius: 10,
                                       ),
                                       title: Text(
                                         DBControl.ingredients[index].toString(),
                                         style: TextStyle(
-                                          color: Color(0xFF7a243e),
+                                          color: white,
                                         ),
                                       )),
                                   Divider(
@@ -354,7 +362,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                     thickness: 2,
                                     indent: 40,
                                     endIndent: 20,
-                                    color: Color(0xFF7a243e),
+                                    color: ceruleanCrayola,
                                   ),
                                 ],
                               );
@@ -376,7 +384,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           height: 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF4ca5b5),
+                              primary: greenSheen
                             ),
                             child: Text(
                               'DONE',
@@ -411,7 +419,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             child: Text(
                               'CANCEL',
                               style: TextStyle(
-                                color: Color(0xFF4ca5b5),
+                                color: greenSheen,
                                 fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {

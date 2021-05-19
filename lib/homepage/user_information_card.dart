@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 //card that displays the recipe information
 class UserInformationCard extends StatelessWidget {
@@ -40,8 +41,11 @@ class UserInformationCard extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * .90,
                     //height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                        color: Color(0xFFe62d1),
-                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[ceruleanCrayola, celadonBlue]),
+                        border: Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -52,7 +56,7 @@ class UserInformationCard extends StatelessWidget {
                             child: Text(
                               'Name: ',
                               style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
@@ -62,8 +66,7 @@ class UserInformationCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             '${snapshotData['name']}',
-                            style: TextStyle(
-                                color: Color(0xFF7a243e), fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -84,8 +87,12 @@ class UserInformationCard extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width * .90,
                     decoration: BoxDecoration(
-                        color: Color(0xFFe62d1),
-                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[ceruleanCrayola, celadonBlue]),
+                        //color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -96,7 +103,7 @@ class UserInformationCard extends StatelessWidget {
                             child: Text(
                               'Username: ',
                               style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
@@ -106,8 +113,7 @@ class UserInformationCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             '${snapshotData['username']}',
-                            style: TextStyle(
-                                color: Color(0xFF7a243e), fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -128,8 +134,12 @@ class UserInformationCard extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width * .90,
                     decoration: BoxDecoration(
-                        color: Color(0xFFe62d1),
-                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[ceruleanCrayola, celadonBlue]),
+                        //color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -140,7 +150,7 @@ class UserInformationCard extends StatelessWidget {
                             child: Text(
                               'Birthday: ',
                               style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
@@ -150,8 +160,7 @@ class UserInformationCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             '${snapshotData['birthday']}',
-                            style: TextStyle(
-                                color: Color(0xFF7a243e), fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -172,8 +181,12 @@ class UserInformationCard extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width * .90,
                     decoration: BoxDecoration(
-                        color: Color(0xFFe62d1),
-                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[ceruleanCrayola, celadonBlue]),
+                        //color: Color(0xFFe62d1),
+                        border: Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -184,7 +197,7 @@ class UserInformationCard extends StatelessWidget {
                             child: Text(
                               'Region: ',
                               style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
@@ -194,8 +207,7 @@ class UserInformationCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             '${snapshotData['region']}',
-                            style: TextStyle(
-                                color: Color(0xFF7a243e), fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         )
@@ -216,8 +228,13 @@ class UserInformationCard extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width * .90,
                     decoration: BoxDecoration(
-                        color: Color(0xFFe62d1),
-                        border: Border.all(color: Color(0xFF7a243e), width: 1.5),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[ceruleanCrayola, celadonBlue]),
+                        //color: Color(0xFFe62d1),
+                        border:
+                            Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -226,7 +243,7 @@ class UserInformationCard extends StatelessWidget {
                           padding: const EdgeInsets.all(5.0),
                           child: Text.rich(TextSpan(
                               style: TextStyle(
-                                color: Color(0xFF7a243e),
+                                color: Colors.white,
                                 fontSize: 20,
                               ),
                               children: <TextSpan>[
