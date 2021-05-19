@@ -23,14 +23,13 @@ class _HomePageState extends State<HomePage> {
     'All',
     'Beef',
     'Salads',
-    'Vegetarian',
+    'Poultry',
     'Fish',
     'Shellfish',
     'Pulses',
     'Eggs',
     'Dairy',
     'Pasta',
-    '',
     'Rice'
   ];
   @override

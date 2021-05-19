@@ -214,9 +214,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
                       labelStyle: TextStyle(
-                        color: Color(0xFF7a243e),
-                        fontWeight: FontWeight.w500
-                      ),
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
                       fillColor: Color(0xFFe62d1),
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
@@ -244,9 +243,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'Enter a description of the finished dish.',
                       labelStyle: TextStyle(
-                        color: Color(0xFF7a243e),
-                        fontWeight: FontWeight.w500
-                      ),
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
                       fillColor: Color(0xFFe62d1),
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
@@ -280,9 +278,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         //enabledBorder: InputBorder.none,
                         labelText: 'Select recipe difficulty',
                         labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
-                          fontWeight: FontWeight.w500
-                        ),
+                            color: Color(0xFF7a243e),
+                            fontWeight: FontWeight.w500),
                         fillColor: Color(0xFFe62d1),
                         filled: true,
                         enabledBorder: InputBorder.none,
@@ -301,9 +298,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                     label,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Color(0xFF7a243e),
-                                      fontWeight: FontWeight.w500
-                                    ),
+                                        color: Color(0xFF7a243e),
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ),
                                 value: label,
@@ -334,9 +330,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
                       labelStyle: TextStyle(
-                        color: Color(0xFF7a243e),
-                        fontWeight: FontWeight.w500
-                      ),
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
                       fillColor: lightPurple,
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
@@ -359,8 +354,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     children: [
                       Text(
                         'How long to prepare and cook?',
-                        style:
-                            TextStyle(color: Color(0xFF7a243e), 
+                        style: TextStyle(
+                            color: Color(0xFF7a243e),
                             fontWeight: FontWeight.w500,
                             fontSize: 23),
                       )
@@ -391,9 +386,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           decoration: InputDecoration(
                             labelText: 'Hours',
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
-                              fontWeight: FontWeight.w500
-                            ),
+                                color: Color(0xFF7a243e),
+                                fontWeight: FontWeight.w500),
                             fillColor: Color(0xFFe62d1),
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
@@ -428,9 +422,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           decoration: InputDecoration(
                             labelText: 'Minutes',
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
-                              fontWeight: FontWeight.w500
-                            ),
+                                color: Color(0xFF7a243e),
+                                fontWeight: FontWeight.w500),
                             fillColor: Color(0xFFe62d1),
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
@@ -515,7 +508,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     )),
                 //cancel and next buttons
                 Padding(
-                  padding: const EdgeInsets.only(bottom:25.0),
+                  padding: const EdgeInsets.only(bottom: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -534,7 +527,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                             onPressed: () {
                               if (DBControl.recipeNameController.text.isEmpty ||
                                   DBControl.servingsController.text.isEmpty ||
-                                  DBControl.descriptionController.text.isEmpty ||
+                                  DBControl
+                                      .descriptionController.text.isEmpty ||
                                   DBControl.hoursController.text.isEmpty ||
                                   DBControl.minutesController.text.isEmpty ||
                                   DBControl.difficultyValue == null ||
