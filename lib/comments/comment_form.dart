@@ -226,17 +226,18 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                             'reported': false
                           }).then((response) {
                             print(response.id);
-                            if (imgAttached == true) {
-                              _uploadImageToFirebase(response.id);
-                            }
                             final snackBar = SnackBar(
                               content: Text('Comment Posted'),
-                              duration: Duration(milliseconds: 1000),
+                              duration: Duration(milliseconds: 4000),
                               backgroundColor: Colors.green,
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             Navigator.pop(context);
+                            if (imgAttached == true) {
+                              _uploadImageToFirebase(response.id);
+                            }
+
                             descriptionInputController.clear();
                             _imgfile = null;
                             imgAttached = false;
@@ -244,7 +245,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         } else {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
-                            duration: Duration(milliseconds: 1000),
+                            duration: Duration(milliseconds: 3000),
                             backgroundColor: Colors.red,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
