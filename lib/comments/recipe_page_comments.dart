@@ -31,6 +31,7 @@ class _CommentBoardState extends State<CommentBoard> {
         .collection('recipe')
         .doc('$recipeId')
         .collection('comments')
+        .orderBy('likes', descending: true)
         .snapshots();
 
     return Scaffold(

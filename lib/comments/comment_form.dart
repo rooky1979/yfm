@@ -221,6 +221,12 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                       if (!filter
                           .hasProfanity(descriptionInputController.text)) {
                         if (descriptionInputController.text.isNotEmpty) {
+                          final snackBar = SnackBar(
+                            content: Text('Comment Posted'),
+                            duration: Duration(milliseconds: 2000),
+                            backgroundColor: Colors.green,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           print(imgAttached);
                           FirebaseFirestore.instance
                               .collection('recipe')
@@ -240,13 +246,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                             if (imgAttached == true) {
                               _uploadImageToFirebase(response.id);
                             }
-                            final snackBar = SnackBar(
-                              content: Text('Comment Posted'),
-                              duration: Duration(milliseconds: 1000),
-                              backgroundColor: Colors.green,
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+
                             Navigator.pop(context);
                             descriptionInputController.clear();
                             _imgfile = null;
