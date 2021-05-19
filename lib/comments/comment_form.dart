@@ -212,7 +212,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         if (descriptionInputController.text.isNotEmpty) {
                           final snackBar = SnackBar(
                             content: Text('Comment Posted'),
-                            duration: Duration(milliseconds: 8000),
+                            duration: Duration(milliseconds: 4000),
                             backgroundColor: Colors.green,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
