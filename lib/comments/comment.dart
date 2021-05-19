@@ -289,8 +289,8 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if ((widget.snapshot.docs[widget.index]['uid'] ==
-        user)) //Add mod feature before handover?
+    if ((widget.snapshot.docs[widget.index]['uid'] == user ||
+        user == 'insert current UID Here')) //Add mod feature before handover?
     {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
