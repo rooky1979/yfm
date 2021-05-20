@@ -63,45 +63,54 @@ class _CommentState extends State<Comment> {
               children: [
                 //tile contents
                 ListTile(
-                  title: Row(children: [
-                    //Future builder allows the app to get user data from db async
-                    FutureBuilder(
+                  title: Row(
+                    children: [
+                      //Future builder allows the app to get user data from db async
+                      FutureBuilder(
                         future: _getUserName(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             //return the image and make it cover the container
                             return Container(
-                              child: Text(snapshot.data,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15.0)),
+                              child: Text(
+                                snapshot.data,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 15.0),
+                              ),
                             );
                           } else {
                             return Container(child: Text('Incoming User Data'));
                           }
-                        }),
-                    Text(" - " + dateFormatted,
+                        },
+                      ),
+                      Text(
+                        " - " + dateFormatted,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12.0)),
-                  ]),
-                  subtitle: Text(snapshotData['description'],
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                            fontWeight: FontWeight.w400, fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(
+                    snapshotData['description'],
+                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
+                  ),
                   //Future builder allows the app to get user profile from db async
                   leading: FutureBuilder(
-                      future: _getUserImage(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          //return the image and make it cover the container
-                          return CircleAvatar(
-                            radius: 30.0,
-                            backgroundImage: NetworkImage(snapshot.data),
-                            backgroundColor: Colors.transparent,
-                          );
-                        } else {
-                          return const Icon(Icons.verified_user_rounded);
-                        }
-                      }),
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(snapshot.data),
+                          backgroundColor: Colors.transparent,
+                        );
+                      } else {
+                        return const Icon(Icons.verified_user_rounded);
+                      }
+                    },
+                  ),
                 ),
                 //This center contains the comment image
                 if (snapshotData['imgAttached'] == true)
@@ -110,35 +119,42 @@ class _CommentState extends State<Comment> {
                       margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
                       //Future builder allows the app to get comment data from db async
                       child: FutureBuilder(
-                          future: _getImageURL(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return GestureDetector(
-                                child: Image.network(
-                                  snapshot.data,
-                                  fit: BoxFit.cover,
-                                ),
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                    return GestureDetector(
-                                      child: Center(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
+                        future: _getImageURL(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return GestureDetector(
+                              child: Image.network(
+                                snapshot.data,
+                                fit: BoxFit.cover,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return GestureDetector(
+                                        child: Center(
+                                          child: Image.network(
+                                            snapshot.data,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                      ),
-                                      onTap: () => Navigator.pop(context),
-                                    );
-                                  }));
-                                },
-                              );
-                            } else {
-                              return Container(
-                                  child: Center(
-                                      child: CircularProgressIndicator()));
-                            }
-                          }),
+                                        onTap: () => Navigator.pop(context),
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          } else {
+                            return Container(
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 Container(
@@ -158,8 +174,9 @@ class _CommentState extends State<Comment> {
                           children: [
                             //Handles like comment logic
                             IconButton(
-                                onPressed: () async {
-                                  setState(() {
+                              onPressed: () async {
+                                setState(
+                                  () {
                                     if (!(likedUsers.contains(user))) {
                                       likeColor = Colors.blue;
                                       numLikes++;
@@ -168,17 +185,21 @@ class _CommentState extends State<Comment> {
                                           .doc(widget.recipeID)
                                           .collection('comments')
                                           .doc(docID)
-                                          .update({'likes': numLikes});
+                                          .update(
+                                        {'likes': numLikes},
+                                      );
                                       clickedLike = !clickedLike;
                                       FirebaseFirestore.instance
                                           .collection('recipe')
                                           .doc(widget.recipeID)
                                           .collection('comments')
                                           .doc(docID)
-                                          .update({
-                                        'likedUsers':
-                                            FieldValue.arrayUnion(list)
-                                      });
+                                          .update(
+                                        {
+                                          'likedUsers':
+                                              FieldValue.arrayUnion(list)
+                                        },
+                                      );
                                     } else {
                                       numLikes--;
                                       FirebaseFirestore.instance
@@ -186,7 +207,9 @@ class _CommentState extends State<Comment> {
                                           .doc(widget.recipeID)
                                           .collection('comments')
                                           .doc(docID)
-                                          .update({'likes': numLikes});
+                                          .update(
+                                        {'likes': numLikes},
+                                      );
                                       clickedLike = !clickedLike;
 
                                       FirebaseFirestore.instance
@@ -194,23 +217,29 @@ class _CommentState extends State<Comment> {
                                           .doc(widget.recipeID)
                                           .collection('comments')
                                           .doc(docID)
-                                          .update({
-                                        'likedUsers':
-                                            FieldValue.arrayRemove(list)
-                                      });
+                                          .update(
+                                        {
+                                          'likedUsers':
+                                              FieldValue.arrayRemove(list)
+                                        },
+                                      );
                                     }
-                                  });
-                                },
-                                icon: Icon(Icons.thumb_up,
-                                    color: clickedLike
-                                        ? Color(0xFF009e5fb)
-                                        : Colors.black)),
+                                  },
+                                );
+                              },
+                              icon: Icon(Icons.thumb_up,
+                                  color: clickedLike
+                                      ? Color(0xFF009e5fb)
+                                      : Colors.black),
+                            ),
                             Container(
                               padding: const EdgeInsets.only(
                                   top: 10, left: 1, right: 3, bottom: 10),
-                              child: Text(numLikes.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 17.0, color: Colors.black)),
+                              child: Text(
+                                numLikes.toString(),
+                                style: const TextStyle(
+                                    fontSize: 17.0, color: Colors.black),
+                              ),
                             ),
                             //Create Delete or Report Button
                             _checkUser(docID, widget.index, user),
@@ -255,11 +284,15 @@ class _CommentState extends State<Comment> {
             isEqualTo: widget.snapshot.docs[widget.index][
                 'uid']) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        imageName = doc["image"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            imageName = doc["image"];
+          },
+        );
+      },
+    );
 
     String downloadURL =
         await storage.ref('avatar_images/' + imageName).getDownloadURL();
@@ -277,11 +310,15 @@ class _CommentState extends State<Comment> {
             isEqualTo: widget.snapshot.docs[widget.index][
                 'uid']) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        username = doc["username"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            username = doc["username"];
+          },
+        );
+      },
+    );
     return username;
   }
 
@@ -300,14 +337,15 @@ class _CommentState extends State<Comment> {
             child: Row(
               children: [
                 IconButton(
-                    //delete the comment from the database
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      showDeleteAlert(context, docId);
-                    }),
+                  //delete the comment from the database
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    showDeleteAlert(context, docId);
+                  },
+                ),
               ],
             ),
           ),
@@ -321,14 +359,15 @@ class _CommentState extends State<Comment> {
             child: Row(
               children: [
                 IconButton(
-                    //delete the comment from the database
-                    icon: Icon(
-                      Icons.flag,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      showReportAlert(context, docId);
-                    }),
+                  //delete the comment from the database
+                  icon: Icon(
+                    Icons.flag,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    showReportAlert(context, docId);
+                  },
+                ),
               ],
             ),
           ),
@@ -396,7 +435,9 @@ class _CommentState extends State<Comment> {
                     .doc(widget.recipeID)
                     .collection('comments')
                     .doc(docId)
-                    .update({'reported': true});
+                    .update(
+                  {'reported': true},
+                );
                 final snackBar = SnackBar(
                   content: Text('Comment Reported'),
                   duration: Duration(milliseconds: 1000),

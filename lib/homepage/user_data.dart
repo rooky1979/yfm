@@ -72,13 +72,17 @@ class _UserDataState extends State<UserData> {
                           if (snapshot.hasData) {
                             //return the image and make it cover the container
                             return Container(
-                              child: Text(snapshot.data,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15.0)),
+                              child: Text(
+                                snapshot.data,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 15.0),
+                              ),
                             );
                           } else {
-                            return Container(child: Text('Incoming User Data'));
+                            return Container(
+                              child: Text('Incoming User Data'),
+                            );
                           }
                         }),
                     Text(" - " + dateFormatted,
@@ -90,19 +94,20 @@ class _UserDataState extends State<UserData> {
                           const TextStyle(fontSize: 17.0, color: Colors.black)),
                   //Future builder allows the app to get user profile from db async
                   leading: FutureBuilder(
-                      future: _getUserImage(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          //return the image and make it cover the container
-                          return CircleAvatar(
-                            radius: 30.0,
-                            backgroundImage: NetworkImage(snapshot.data),
-                            backgroundColor: Colors.transparent,
-                          );
-                        } else {
-                          return const Icon(Icons.verified_user_rounded);
-                        }
-                      }),
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(snapshot.data),
+                          backgroundColor: Colors.transparent,
+                        );
+                      } else {
+                        return const Icon(Icons.verified_user_rounded);
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -132,11 +137,15 @@ class _UserDataState extends State<UserData> {
             isEqualTo: widget.snapshot.docs[widget.index][
                 'uid']) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        username = doc["username"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            username = doc["username"];
+          },
+        );
+      },
+    );
     return username;
   }
 }

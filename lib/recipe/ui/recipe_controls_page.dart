@@ -17,16 +17,17 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: new Color(0xFFf0f1eb),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              RecipeThumbnail(),
-              RecipeButtons(),
-            ],
-          ),
-        ));
+      backgroundColor: new Color(0xFFf0f1eb),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 25),
+        child: Column(
+          children: [
+            RecipeThumbnail(),
+            RecipeButtons(),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -45,41 +46,47 @@ class RecipeThumbnail extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
           child: FutureBuilder(
-              future: _getImageURL(), //helper method
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  //return the image and make it cover the container
-                  return GestureDetector(
-                    child: Image.network(
-                      snapshot.data,
-                      fit: BoxFit.cover,
-                    ),
-                    onTap: () {
-                      //onTap makes the image go full size
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return GestureDetector(
-                          child: Center(
-                            child: Image.network(
-                              snapshot.data,
-                              fit: BoxFit.cover,
+            future: _getImageURL(), //helper method
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                //return the image and make it cover the container
+                return GestureDetector(
+                  child: Image.network(
+                    snapshot.data,
+                    fit: BoxFit.cover,
+                  ),
+                  onTap: () {
+                    //onTap makes the image go full size
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return GestureDetector(
+                            child: Center(
+                              child: Image.network(
+                                snapshot.data,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          onTap: () => Navigator.pop(
-                              context), //onTap the image pops off and returns to controls page
-                        );
-                      }));
-                    },
-                  );
-                } else {
-                  return Container(
-                      color: Color(0xFFf0f1eb),
-                      //while image is loading, display the circular indicator
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ));
-                }
-              }),
+                            onTap: () => Navigator.pop(
+                                context), //onTap the image pops off and returns to controls page
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return Container(
+                  color: Color(0xFFf0f1eb),
+                  //while image is loading, display the circular indicator
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            },
+          ),
         ),
         //back arrow
         IconButton(
@@ -91,7 +98,11 @@ class RecipeThumbnail extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             }),
-        Positioned(right: 10.0, bottom: 10.0, child: Favourites()),
+        Positioned(
+          right: 10.0,
+          bottom: 10.0,
+          child: Favourites(),
+        ),
       ],
     );
   }
@@ -125,62 +136,72 @@ class RecipeButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
-                padding: EdgeInsets.all(10), //ingredients button
-                fillColor: new Color(0xFFf0f1eb),
-                shape: CircleBorder(),
-                child: Icon(
-                  FontAwesomeIcons.info,
-                  size: 20,
-                  color: Color(0xFF7a243e),
-                ),
-                onPressed: () => {
-                      //pops any page currently loaded off the stack and pushes the required page onto the stack
-                      Navigator.pop(context),
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  IngredientsPage(
-                                      HomepageTile.idNumber.toString())))
-                    }),
+              padding: EdgeInsets.all(10), //ingredients button
+              fillColor: new Color(0xFFf0f1eb),
+              shape: CircleBorder(),
+              child: Icon(
+                FontAwesomeIcons.info,
+                size: 20,
+                color: Color(0xFF7a243e),
+              ),
+              onPressed: () => {
+                //pops any page currently loaded off the stack and pushes the required page onto the stack
+                Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => IngredientsPage(
+                      HomepageTile.idNumber.toString(),
+                    ),
+                  ),
+                )
+              },
+            ),
             RawMaterialButton(
-                // recipe method button
-                padding: EdgeInsets.all(10),
-                fillColor: new Color(0xFFf0f1eb),
-                shape: CircleBorder(),
-                child: Icon(
-                  FontAwesomeIcons.book,
-                  size: 20,
-                  color: Color(0xFF7a243e),
-                ),
-                onPressed: () => {
-                      //pops any page currently loaded off the stack and pushes the required page onto the stack
-                      Navigator.pop(context),
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  Method(HomepageTile.idNumber.toString())))
-                    }),
+              // recipe method button
+              padding: EdgeInsets.all(10),
+              fillColor: new Color(0xFFf0f1eb),
+              shape: CircleBorder(),
+              child: Icon(
+                FontAwesomeIcons.book,
+                size: 20,
+                color: Color(0xFF7a243e),
+              ),
+              onPressed: () => {
+                //pops any page currently loaded off the stack and pushes the required page onto the stack
+                Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Method(
+                      HomepageTile.idNumber.toString(),
+                    ),
+                  ),
+                )
+              },
+            ),
             RawMaterialButton(
-                padding: EdgeInsets.all(11),
-                fillColor: new Color(0xFFf0f1eb),
-                shape: CircleBorder(),
-                child: Icon(
-                  FontAwesomeIcons.comments, //comments button
-                  size: 20,
-                  color: Color(0xFF7a243e),
-                ),
-                onPressed: () => {
-                      //pops any page currently loaded off the stack and pushes the required page onto the stack
-                      Navigator.pop(context),
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => CommentBoard(
-                                    recipeID: HomepageTile.idNumber.toString(),
-                                  )))
-                    }),
+              padding: EdgeInsets.all(11),
+              fillColor: new Color(0xFFf0f1eb),
+              shape: CircleBorder(),
+              child: Icon(
+                FontAwesomeIcons.comments, //comments button
+                size: 20,
+                color: Color(0xFF7a243e),
+              ),
+              onPressed: () => {
+                //pops any page currently loaded off the stack and pushes the required page onto the stack
+                Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CommentBoard(
+                      recipeID: HomepageTile.idNumber.toString(),
+                    ),
+                  ),
+                )
+              },
+            ),
           ],
         ),
       ),
@@ -208,58 +229,65 @@ class _FavouritesState extends State<Favourites> {
           color: new Color(0xFFf0f1eb),
         ),
         FutureBuilder(
-            future: _getLiked(),
-            builder: (context, snapshot) {
-              widget.isLiked = snapshot.data;
-              if (snapshot.hasData) {
-                return IconButton(
-                    icon: Icon(Icons.favorite_rounded, //comments button
-                        size: 50,
-                        color: widget.isLiked
-                            ? new Color(0xFFe62d11)
-                            : Colors.grey),
-                    onPressed: () {
-                      if (widget.isLiked) {
-                        setState(() {
-                          widget.isLiked = !widget.isLiked;
-                          debugPrint(widget.isLiked.toString() +
+          future: _getLiked(),
+          builder: (context, snapshot) {
+            widget.isLiked = snapshot.data;
+            if (snapshot.hasData) {
+              return IconButton(
+                icon: Icon(Icons.favorite_rounded, //comments button
+                    size: 50,
+                    color:
+                        widget.isLiked ? new Color(0xFFe62d11) : Colors.grey),
+                onPressed: () {
+                  if (widget.isLiked) {
+                    setState(
+                      () {
+                        widget.isLiked = !widget.isLiked;
+                        debugPrint(
+                          widget.isLiked.toString() +
                               "This has been removed from favourites: " +
-                              HomepageTile.idNumber.toString());
-                          _getUserDocIdForDelete(HomepageTile.idNumber);
-                        });
-                      } else if (!widget.isLiked) {
-                        setState(() {
-                          widget.isLiked = !widget.isLiked;
-                          debugPrint(widget.isLiked.toString() +
-                              "This has been removed from favourites: " +
-                              HomepageTile.idNumber.toString());
-                          _getUserDocIdForAdd(HomepageTile.idNumber);
-                        });
-                      }
-                    });
-                // } else if (widget.isLiked == false) {
-                //   return IconButton(
-                //       icon: Icon(
-                //         Icons.favorite_outline_rounded,
-                //         size: 50,
-                //         color: new Color(0xFFe62d11),
-                //       ),
-                //       onPressed: () {
-                //         setState(() {
-                //           //if array contains recipeID, remove
-                //           widget.isLiked = !widget.isLiked;
-                //           debugPrint(widget.isLiked.toString() +
-                //               "This has been Added to favourites: " +
-                //               HomepageTile.idNumber.toString());
-                //           _getUserDocIdForAdd(HomepageTile.idNumber);
-                //         });
-                //         setState(() {});
-                //       });
-                // }
-              } else {
-                return CircularProgressIndicator();
-              }
-            }),
+                              HomepageTile.idNumber.toString(),
+                        );
+                        _getUserDocIdForDelete(HomepageTile.idNumber);
+                      },
+                    );
+                  } else if (!widget.isLiked) {
+                    setState(
+                      () {
+                        widget.isLiked = !widget.isLiked;
+                        debugPrint(widget.isLiked.toString() +
+                            "This has been removed from favourites: " +
+                            HomepageTile.idNumber.toString());
+                        _getUserDocIdForAdd(HomepageTile.idNumber);
+                      },
+                    );
+                  }
+                },
+              );
+              // } else if (widget.isLiked == false) {
+              //   return IconButton(
+              //       icon: Icon(
+              //         Icons.favorite_outline_rounded,
+              //         size: 50,
+              //         color: new Color(0xFFe62d11),
+              //       ),
+              //       onPressed: () {
+              //         setState(() {
+              //           //if array contains recipeID, remove
+              //           widget.isLiked = !widget.isLiked;
+              //           debugPrint(widget.isLiked.toString() +
+              //               "This has been Added to favourites: " +
+              //               HomepageTile.idNumber.toString());
+              //           _getUserDocIdForAdd(HomepageTile.idNumber);
+              //         });
+              //         setState(() {});
+              //       });
+              // }
+            } else {
+              return CircularProgressIndicator();
+            }
+          },
+        ),
       ],
     );
 
@@ -300,10 +328,12 @@ void _addFavouriteToDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance.collection('users').doc(id).update({
-    'favourites': FieldValue.arrayUnion(recipes),
-    'num_favourites': FieldValue.increment(1)
-  });
+  await FirebaseFirestore.instance.collection('users').doc(id).update(
+    {
+      'favourites': FieldValue.arrayUnion(recipes),
+      'num_favourites': FieldValue.increment(1)
+    },
+  );
   //clear the temp array
   recipes.clear();
 }
@@ -317,13 +347,17 @@ void _getUserDocIdForAdd(String recipeIdNumber) async {
           isEqualTo: _firebaseAuth.currentUser
               .uid) //first uid is the user ID of in the users table (not document id)
       .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
-      id = doc.id;
-      debugPrint(id);
-      _addFavouriteToDB(recipeIdNumber, id);
-    });
-  });
+      .then(
+    (QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach(
+        (doc) {
+          id = doc.id;
+          debugPrint(id);
+          _addFavouriteToDB(recipeIdNumber, id);
+        },
+      );
+    },
+  );
 }
 
 void _getUserDocIdForDelete(String recipeIdNumber) async {
@@ -335,13 +369,17 @@ void _getUserDocIdForDelete(String recipeIdNumber) async {
           isEqualTo: _firebaseAuth.currentUser
               .uid) //first uid is the user ID of in the users table (not document id)
       .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
-      id = doc.id;
-      debugPrint(id);
-      _removeFavouriteFromDB(recipeIdNumber, id);
-    });
-  });
+      .then(
+    (QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach(
+        (doc) {
+          id = doc.id;
+          debugPrint(id);
+          _removeFavouriteFromDB(recipeIdNumber, id);
+        },
+      );
+    },
+  );
 }
 
 //helper method to add the recipe ID to the firestore favourites array
@@ -350,10 +388,12 @@ void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance.collection('users').doc(id).update({
-    'favourites': FieldValue.arrayRemove(recipes),
-    'num_favourites': FieldValue.increment(-1)
-  });
+  await FirebaseFirestore.instance.collection('users').doc(id).update(
+    {
+      'favourites': FieldValue.arrayRemove(recipes),
+      'num_favourites': FieldValue.increment(-1)
+    },
+  );
   //clear the temp array
   recipes.clear();
 }
@@ -368,14 +408,18 @@ Future _getLiked() async {
           isEqualTo: _firebaseAuth.currentUser
               .uid) //first uid is the user ID of in the users table (not document id)
       .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
-      recipes = doc['favourites'];
-      if (recipes.contains(HomepageTile.idNumber.toString())) {
-        liked = true;
-      }
-    });
-  });
+      .then(
+    (QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach(
+        (doc) {
+          recipes = doc['favourites'];
+          if (recipes.contains(HomepageTile.idNumber.toString())) {
+            liked = true;
+          }
+        },
+      );
+    },
+  );
 
   return liked;
 }

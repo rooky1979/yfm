@@ -43,12 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 300,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xff4ca5b5),
-                          Colors.white.withOpacity(0.95)
-                        ]),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xff4ca5b5),
+                        Colors.white.withOpacity(0.95)
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -58,10 +59,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.35,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    fit: BoxFit.scaleDown,
-                    image: AssetImage('lib/logo/just-cook-logo.png'),
-                  )),
+                    image: DecorationImage(
+                      fit: BoxFit.scaleDown,
+                      image: AssetImage('lib/logo/just-cook-logo.png'),
+                    ),
+                  ),
                 ),
               ),
               Center(
@@ -133,19 +135,20 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12.0),
                           child: GetBuilder<DataController>(
-                              init: DataController(),
-                              builder: (val) {
-                                return ElevatedButton(
-                                  onPressed: () {
-                                    //check if email has been entered
-                                    if (emailInputController.text.isNotEmpty) {
-                                      //check if password has been entered
-                                      if (passwordInputController
-                                          .text.isNotEmpty) {
-                                        val
-                                            .emailQueryData(
-                                                emailInputController.text)
-                                            .then((value) {
+                            init: DataController(),
+                            builder: (val) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  //check if email has been entered
+                                  if (emailInputController.text.isNotEmpty) {
+                                    //check if password has been entered
+                                    if (passwordInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .emailQueryData(
+                                              emailInputController.text)
+                                          .then(
+                                        (value) {
                                           snapshotData = value;
                                           //check if email already exists
                                           if (snapshotData.docs.isEmpty) {
@@ -210,35 +213,36 @@ class _RegisterPageState extends State<RegisterPage> {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
                                           }
-                                        });
-                                      } else {
-                                        final snackBar = SnackBar(
-                                          content: Text('Password not entered'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Color(0xFFe62d11),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
+                                        },
+                                      );
                                     } else {
                                       final snackBar = SnackBar(
-                                        content: Text('email not entered'),
+                                        content: Text('Password not entered'),
                                         duration: Duration(milliseconds: 1000),
                                         backgroundColor: Color(0xFFe62d11),
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
-                                  },
-                                  child: Text("NEXT"),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 4,
-                                    primary: Color(0xFF4ca5b5), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                );
-                              }),
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: Text('email not entered'),
+                                      duration: Duration(milliseconds: 1000),
+                                      backgroundColor: Color(0xFFe62d11),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                child: Text("NEXT"),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  primary: Color(0xFF4ca5b5), // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       //button to cancel registration and go back to login page
@@ -253,7 +257,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 duration: Duration(milliseconds: 1000),
                                 backgroundColor: Color(0xFFe62d11),
                               );
-
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                               Navigator.push(

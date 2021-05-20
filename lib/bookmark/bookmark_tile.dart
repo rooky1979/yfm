@@ -25,31 +25,33 @@ class BookmarkTile extends StatelessWidget {
       height: 150, //MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
-          future: _getImageURL(docID),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              //return the image and make it cover the container
-              return GestureDetector(
-                child: Image.network(
-                  snapshot.data,
-                  fit: BoxFit.fill,
-                ),
-                onTap: () {
-                  idNumber = recipeID;
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              IngredientsPage(recipeID)));
-                },
-              );
-            } else {
-              return Container(
-                  child: Center(
+        future: _getImageURL(docID),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            //return the image and make it cover the container
+            return GestureDetector(
+              child: Image.network(
+                snapshot.data,
+                fit: BoxFit.fill,
+              ),
+              onTap: () {
+                idNumber = recipeID;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            IngredientsPage(recipeID)));
+              },
+            );
+          } else {
+            return Container(
+              child: Center(
                 child: CircularProgressIndicator(),
-              ));
-            }
-          }),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -59,8 +61,8 @@ class BookmarkTile extends StatelessWidget {
     final FirebaseStorage storage = FirebaseStorage.instanceFor(
         bucket: 'gs://youth-food-movement.appspot.com');
     //ref string will change so the parameter will be the jpg ID (maybe)
-      String downloadURL =
-          await storage.ref('recipe_images/$docID').getDownloadURL();
-      return downloadURL;
+    String downloadURL =
+        await storage.ref('recipe_images/$docID').getDownloadURL();
+    return downloadURL;
   }
 }

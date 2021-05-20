@@ -8,9 +8,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(
     new MaterialApp(
-      //theme: _appTheme,
       theme: ThemeData(
-        //brightness: Brightness.light,
         primaryColor: cream,
       ),
       home: LoginPage(),

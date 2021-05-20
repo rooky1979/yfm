@@ -156,20 +156,21 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     child: SizedBox(
                       height: 50,
                       child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: <Color>[turquoiseGreen, greenSheen]),
-                            borderRadius: BorderRadius.circular(15),
-                            color: celadonBlue,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Select Prefered Avatar",
-                            style: whiteText,
-                          )),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: <Color>[turquoiseGreen, greenSheen]),
+                          borderRadius: BorderRadius.circular(15),
+                          color: celadonBlue,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Select Prefered Avatar",
+                          style: whiteText,
+                        ),
+                      ),
                     ),
                   ),
                   //1st row of button with avatar image from database
@@ -179,89 +180,87 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                            padding:
-                                const EdgeInsets.only(left: 5.0, right: 5.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.25,
-                              margin: EdgeInsets.all(8.0),
-                              child: Card(
-                                child: FutureBuilder(
-                                    future: _getImage1URL(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        //this creates the pictures to be clickable
-                                        //and will take the user to the recipe page
-                                        return GestureDetector(
-                                          child: Image.network(
-                                            snapshot.data,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          onTap: () {
-                                            _imageSelected = "avatar1.jpg";
-                                            final snackBar = SnackBar(
-                                              content:
-                                                  Text('Avatar 1 selected'),
-                                              duration:
-                                                  Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.green,
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackBar);
-                                          },
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                future: _getImage1URL(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    //this creates the pictures to be clickable
+                                    //and will take the user to the recipe page
+                                    return GestureDetector(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      onTap: () {
+                                        _imageSelected = "avatar1.jpg";
+                                        final snackBar = SnackBar(
+                                          content: Text('Avatar 1 selected'),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor: Colors.green,
                                         );
-                                      } else {
-                                        return Container(
-                                          child: Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                        );
-                                      }
-                                    }),
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      },
+                                    );
+                                  } else {
+                                    return Container(
+                                      child: Center(
+                                          child: CircularProgressIndicator()),
+                                    );
+                                  }
+                                },
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
                         Padding(
-                            padding:
-                                const EdgeInsets.only(left: 5.0, right: 5.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.25,
-                              margin: EdgeInsets.all(8.0),
-                              child: Card(
-                                child: FutureBuilder(
-                                    future: _getImage2URL(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        //this creates the pictures to be clickable
-                                        //and will take the user to the recipe page
-                                        return GestureDetector(
-                                          child: Image.network(
-                                            snapshot.data,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          onTap: () {
-                                            _imageSelected = "avatar2.jpg";
-                                            final snackBar = SnackBar(
-                                              content:
-                                                  Text('Avatar 2 selected'),
-                                              duration:
-                                                  Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.green,
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackBar);
-                                          },
+                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            margin: EdgeInsets.all(8.0),
+                            child: Card(
+                              child: FutureBuilder(
+                                future: _getImage2URL(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    //this creates the pictures to be clickable
+                                    //and will take the user to the recipe page
+                                    return GestureDetector(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      onTap: () {
+                                        _imageSelected = "avatar2.jpg";
+                                        final snackBar = SnackBar(
+                                          content: Text('Avatar 2 selected'),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          backgroundColor: Colors.green,
                                         );
-                                      } else {
-                                        return Container(
-                                          child: Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                        );
-                                      }
-                                    }),
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      },
+                                    );
+                                  } else {
+                                    return Container(
+                                      child: Center(
+                                          child: CircularProgressIndicator()),
+                                    );
+                                  }
+                                },
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -270,83 +269,85 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            margin: EdgeInsets.all(8.0),
-                            child: Card(
-                              child: FutureBuilder(
-                                  future: _getImage3URL(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      //this creates the pictures to be clickable
-                                      //and will take the user to the recipe page
-                                      return GestureDetector(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onTap: () {
-                                          _imageSelected = "avatar3.jpg";
-                                          final snackBar = SnackBar(
-                                            content: Text('Avatar 3 selected'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.green,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        },
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          margin: EdgeInsets.all(8.0),
+                          child: Card(
+                            child: FutureBuilder(
+                              future: _getImage3URL(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  //this creates the pictures to be clickable
+                                  //and will take the user to the recipe page
+                                  return GestureDetector(
+                                    child: Image.network(
+                                      snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onTap: () {
+                                      _imageSelected = "avatar3.jpg";
+                                      final snackBar = SnackBar(
+                                        content: Text('Avatar 3 selected'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Colors.green,
                                       );
-                                    } else {
-                                      return Container(
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      );
-                                    }
-                                  }),
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                  );
+                                } else {
+                                  return Container(
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }
+                              },
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                       Padding(
-                          padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            margin: EdgeInsets.all(8.0),
-                            child: Card(
-                              child: FutureBuilder(
-                                  future: _getImage4URL(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      //this creates the pictures to be clickable
-                                      //and will take the user to the recipe page
-                                      return GestureDetector(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        onTap: () {
-                                          _imageSelected = "avatar4.jpg";
-                                          final snackBar = SnackBar(
-                                            content: Text('Avatar 4 selected'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Colors.green,
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        },
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          margin: EdgeInsets.all(8.0),
+                          child: Card(
+                            child: FutureBuilder(
+                              future: _getImage4URL(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  //this creates the pictures to be clickable
+                                  //and will take the user to the recipe page
+                                  return GestureDetector(
+                                    child: Image.network(
+                                      snapshot.data,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onTap: () {
+                                      _imageSelected = "avatar4.jpg";
+                                      final snackBar = SnackBar(
+                                        content: Text('Avatar 4 selected'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Colors.green,
                                       );
-                                    } else {
-                                      return Container(
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      );
-                                    }
-                                  }),
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                  );
+                                } else {
+                                  return Container(
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }
+                              },
                             ),
-                          )),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   //Textfield for name
@@ -412,81 +413,88 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
                             child: GetBuilder<DataController>(
-                                init: DataController(),
-                                builder: (val) {
-                                  return IconButton(
-                                      icon: Icon(Icons.check_circle,
-                                          size: 40, color: ceruleanCrayola),
-                                      onPressed: () {
-                                        if (!filter.hasProfanity(
-                                            usernameInputController
-                                                .text)) if (usernameInputController
-                                            .text.isNotEmpty) {
-                                          val
-                                              .usernameQueryData(
-                                                  usernameInputController.text)
-                                              .then((value) {
-                                            snapshotData = value;
-                                            if (snapshotData.docs.isEmpty) {
-                                              setState(() {
+                              init: DataController(),
+                              builder: (val) {
+                                return IconButton(
+                                  icon: Icon(Icons.check_circle,
+                                      size: 40, color: ceruleanCrayola),
+                                  onPressed: () {
+                                    if (!filter.hasProfanity(
+                                        usernameInputController
+                                            .text)) if (usernameInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .usernameQueryData(
+                                              usernameInputController.text)
+                                          .then(
+                                        (value) {
+                                          snapshotData = value;
+                                          if (snapshotData.docs.isEmpty) {
+                                            setState(
+                                              () {
                                                 usernameExists = false;
                                                 _username =
                                                     usernameInputController
                                                         .text;
                                                 debugPrint(
-                                                    usernameExists.toString());
-                                              });
-                                              final snackBar = SnackBar(
-                                                content: Text(
-                                                    'Username does not exist'),
-                                                duration: Duration(
-                                                    milliseconds: 1000),
-                                                backgroundColor: Colors.green,
-                                              );
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            } else {
-                                              setState(() {
+                                                  usernameExists.toString(),
+                                                );
+                                              },
+                                            );
+                                            final snackBar = SnackBar(
+                                              content: Text(
+                                                  'Username does not exist'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor: Colors.green,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          } else {
+                                            setState(
+                                              () {
                                                 usernameExists = true;
                                                 debugPrint(
-                                                    usernameExists.toString());
-                                              });
-                                              final snackBar = SnackBar(
-                                                  content:
-                                                      Text('Username exists'),
-                                                  duration: Duration(
-                                                      milliseconds: 1000),
-                                                  backgroundColor:
-                                                      Color(0xFFe62d11));
+                                                  usernameExists.toString(),
+                                                );
+                                              },
+                                            );
+                                            final snackBar = SnackBar(
+                                              content: Text('Username exists'),
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              backgroundColor:
+                                                  Color(0xFFe62d11),
+                                            );
 
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            }
-                                          });
-                                        } else {
-                                          final snackBar = SnackBar(
-                                            content:
-                                                Text('Username not entered'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Color(0xFFe62d11),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        }
-                                        else {
-                                          final snackBar = SnackBar(
-                                            content: Text(
-                                                'Please use appropriate language'),
-                                            duration:
-                                                Duration(milliseconds: 1000),
-                                            backgroundColor: Color(0xFFe62d11),
-                                          );
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
-                                        }
-                                      });
-                                }),
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+                                        },
+                                      );
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        content: Text('Username not entered'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Color(0xFFe62d11),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                    else {
+                                      final snackBar = SnackBar(
+                                        content: Text(
+                                            'Please use appropriate language'),
+                                        duration: Duration(milliseconds: 1000),
+                                        backgroundColor: Color(0xFFe62d11),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -505,127 +513,135 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           child: SizedBox(
                             height: 40,
                             child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: <Color>[
-                                        turquoiseGreen,
-                                        greenSheen
-                                      ]),
-                                  border: Border.all(color: Color(0xFFe62d1)),
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Color(0xFF7a243e),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: <Color>[
+                                      turquoiseGreen,
+                                      greenSheen
+                                    ]),
+                                border: Border.all(
+                                  color: Color(0xFFe62d1),
                                 ),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Enter Birthday",
-                                  style: whiteText,
-                                )),
+                                borderRadius: BorderRadius.circular(15),
+                                color: Color(0xFF7a243e),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Enter Birthday",
+                                style: whiteText,
+                              ),
+                            ),
                           ),
                         ),
                         //button to bring out datepicker for birthday
                         Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                //borderRadius: BorderRadius.circular(15),
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              //borderRadius: BorderRadius.circular(15),
 
-                                ),
-                            child: OutlinedButton.icon(
-                              icon: Icon(Icons.calendar_today,
-                                  color: Colors.black),
-                              onPressed: () => _selectDate(context),
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          side: BorderSide(width: 2)))),
-                              label: Text(
-                                formattedDate.format(today).toString(),
-                                style: TextStyle(
-                                  color: turquoiseGreen,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                              ),
+                          child: OutlinedButton.icon(
+                            icon:
+                                Icon(Icons.calendar_today, color: Colors.black),
+                            onPressed: () => _selectDate(context),
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  side: BorderSide(width: 2),
                                 ),
                               ),
-                            )),
+                            ),
+                            label: Text(
+                              formattedDate.format(today).toString(),
+                              style: TextStyle(
+                                color: turquoiseGreen,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   //dropdown button list to pick which region user lives in
                   Padding(
-                      padding:
-                          const EdgeInsets.only(left: 13, right: 13, top: 7),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: greenSheen), //dark purple
-                          borderRadius: BorderRadius.circular(15),
-                          color: turquoiseGreen, //light purple
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: DropdownButtonFormField(
-                            iconEnabledColor: greenSheen, //dark purple
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                              enabledBorder: InputBorder.none,
-                              labelText: 'Select Your Region',
-                              labelStyle: TextStyle(
-                                  color: greenSheen,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            dropdownColor: turquoiseGreen,
-                            value: _regionDropdownValue,
-                            items: [
-                              "Northland",
-                              "Auckland",
-                              "Waikato",
-                              "Bay of Plenty",
-                              "Gisborne",
-                              "Hawke's Bay",
-                              "Taranaki",
-                              "Manawatu-Whanganui",
-                              "Wellington",
-                              "Tasman",
-                              "Nelson",
-                              "Marlborough",
-                              "West Coast",
-                              "Canterbury",
-                              "Otago",
-                              "Southland"
-                            ]
-                                .map((label) => DropdownMenuItem(
-                                      child: Center(
-                                        child: Text(
-                                          label,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: greenSheen,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                      value: label,
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              setState(() => _regionDropdownValue = value);
-                            },
+                    padding: const EdgeInsets.only(left: 13, right: 13, top: 7),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: greenSheen), //dark purple
+                        borderRadius: BorderRadius.circular(15),
+                        color: turquoiseGreen, //light purple
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: DropdownButtonFormField(
+                          iconEnabledColor: greenSheen, //dark purple
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            enabledBorder: InputBorder.none,
+                            labelText: 'Select Your Region',
+                            labelStyle: TextStyle(
+                                color: greenSheen, fontWeight: FontWeight.w500),
                           ),
+                          dropdownColor: turquoiseGreen,
+                          value: _regionDropdownValue,
+                          items: [
+                            "Northland",
+                            "Auckland",
+                            "Waikato",
+                            "Bay of Plenty",
+                            "Gisborne",
+                            "Hawke's Bay",
+                            "Taranaki",
+                            "Manawatu-Whanganui",
+                            "Wellington",
+                            "Tasman",
+                            "Nelson",
+                            "Marlborough",
+                            "West Coast",
+                            "Canterbury",
+                            "Otago",
+                            "Southland"
+                          ]
+                              .map(
+                                (label) => DropdownMenuItem(
+                                  child: Center(
+                                    child: Text(
+                                      label,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: greenSheen,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  value: label,
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() => _regionDropdownValue = value);
+                          },
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
 
                   //multiselect form for allergy check list
                   Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: _allergiesCheckList(
-                        'Allergies affected',
-                        _allergiesList,
-                        TextStyle(color: greenSheen),
-                      )),
+                    padding: const EdgeInsets.all(13.0),
+                    child: _allergiesCheckList(
+                      'Allergies affected',
+                      _allergiesList,
+                      TextStyle(color: greenSheen),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -644,7 +660,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       _firebaseAuth.currentUser.delete();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
                       );
                     },
                     padding: const EdgeInsets.only(right: 120),
@@ -665,20 +683,24 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   formattedDate.format(DateTime.now())) {
                                 FirebaseFirestore.instance
                                     .collection('users')
-                                    .add({
-                                  'uid': _firebaseAuth.currentUser.uid,
-                                  'email': _firebaseAuth.currentUser.email,
-                                  'name': fullNameInputController.text,
-                                  'username': _username,
-                                  'image': _imageSelected,
-                                  'region': _regionDropdownValue,
-                                  'birthday': formattedDate.format(today),
-                                  'accountedCreatedTime':
-                                      formattedDate.format(new DateTime.now()),
-                                  'allergy': _allergies,
-                                  'favourites': [],
-                                  'isModerator': false
-                                });
+                                    .add(
+                                  {
+                                    'uid': _firebaseAuth.currentUser.uid,
+                                    'email': _firebaseAuth.currentUser.email,
+                                    'name': fullNameInputController.text,
+                                    'username': _username,
+                                    'image': _imageSelected,
+                                    'region': _regionDropdownValue,
+                                    'birthday': formattedDate.format(today),
+                                    'accountedCreatedTime':
+                                        formattedDate.format(
+                                      new DateTime.now(),
+                                    ),
+                                    'allergy': _allergies,
+                                    'favourites': [],
+                                    'isModerator': false
+                                  },
+                                );
                                 final snackBar = SnackBar(
                                   content: Text('Account Successfully Created'),
                                   duration: Duration(milliseconds: 1000),
@@ -689,7 +711,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
+                                    builder: (context) => LoginPage(),
+                                  ),
                                 );
                               } else {
                                 final snackBar = SnackBar(
@@ -764,8 +787,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
   ) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: greenSheen),
-          borderRadius: BorderRadius.circular(11.0)),
+        border: Border.all(color: greenSheen),
+        borderRadius: BorderRadius.circular(11.0),
+      ),
       child: MultiSelectFormField(
         autovalidate: false,
         fillColor: turquoiseGreen, //light-purple
@@ -775,8 +799,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
         checkBoxCheckColor: Colors.white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-            side: BorderSide(color: greenSheen)),
+          borderRadius: BorderRadius.circular(15),
+          side: BorderSide(color: greenSheen),
+        ),
         title: Text(
           title,
           style: textStyle, //dark purple
@@ -795,9 +820,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
         initialValue: _allergies,
         onSaved: (value) {
           if (value == null) return;
-          setState(() {
-            _allergies = value;
-          });
+          setState(
+            () {
+              _allergies = value;
+            },
+          );
         },
       ),
     );

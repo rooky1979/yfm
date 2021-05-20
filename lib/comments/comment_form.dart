@@ -246,7 +246,9 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                             descriptionInputController.clear();
                             _imgfile = null;
                             imgAttached = false;
-                          }).catchError((onError) => print(onError));
+                          }).catchError(
+                            (onError) => print(onError),
+                          );
                         } else {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
@@ -278,13 +280,14 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
-                    hintText: 'A Question, Comment, or Tip!',
-                    labelText: 'Type Here...',
-                    labelStyle: TextStyle(
-                      color: Color(0xFFe62d11),
-                      fontSize: 17,
-                    ),
-                    border: const OutlineInputBorder()),
+                  hintText: 'A Question, Comment, or Tip!',
+                  labelText: 'Type Here...',
+                  labelStyle: TextStyle(
+                    color: Color(0xFFe62d11),
+                    fontSize: 17,
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
                 controller: descriptionInputController,
               ),
             ),
