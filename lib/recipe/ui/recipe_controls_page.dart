@@ -16,7 +16,6 @@ class RecipeControlsPage extends StatefulWidget {
 class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
-    //main page setup
     return Scaffold(
         backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
@@ -41,7 +40,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: new Color(0xFFf0f1eb),
+          color: Color(0xFFf0f1eb),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -74,7 +73,7 @@ class RecipeThumbnail extends StatelessWidget {
                   );
                 } else {
                   return Container(
-                      color: new Color(0xFFf0f1eb),
+                      color: Color(0xFFf0f1eb),
                       //while image is loading, display the circular indicator
                       child: Center(
                         child: CircularProgressIndicator(),
@@ -87,7 +86,7 @@ class RecipeThumbnail extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 30,
-              color: new Color(0xFFe62d11),
+              color: Color(0xFFe62d11),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -117,76 +116,72 @@ class RecipeButtons extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
-        height: 90,
+        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: new Color(0xFFe62d11),
+          color: Color(0xFF7a243e),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RawMaterialButton(
-                  padding: EdgeInsets.all(10), //ingredients button
-                  fillColor: new Color(0xFFf0f1eb),
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.info,
-                    size: 40,
-                    color: new Color(0xFFe62d11),
-                  ),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    IngredientsPage(
-                                        HomepageTile.idNumber.toString())))
-                      }),
-              RawMaterialButton(
-                  // recipe method button
-                  padding: EdgeInsets.all(10),
-                  fillColor: new Color(0xFFf0f1eb),
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.book,
-                    size: 40,
-                    color: new Color(0xFFe62d11),
-                  ),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Method(HomepageTile.idNumber.toString())))
-                      }),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(11),
-                  fillColor: new Color(0xFFf0f1eb),
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.comments, //comments button
-                    size: 40,
-                    color: new Color(0xFFe62d11),
-                  ),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => CommentBoard(
-                                      recipeID:
-                                          HomepageTile.idNumber.toString(),
-                                    )))
-                      }),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            RawMaterialButton(
+                padding: EdgeInsets.all(10), //ingredients button
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.info,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  IngredientsPage(
+                                      HomepageTile.idNumber.toString())))
+                    }),
+            RawMaterialButton(
+                // recipe method button
+                padding: EdgeInsets.all(10),
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.book,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Method(HomepageTile.idNumber.toString())))
+                    }),
+            RawMaterialButton(
+                padding: EdgeInsets.all(11),
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.comments, //comments button
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => CommentBoard(
+                                    recipeID: HomepageTile.idNumber.toString(),
+                                  )))
+                    }),
+          ],
         ),
       ),
     );
@@ -305,10 +300,10 @@ void _addFavouriteToDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(id)
-      .update({'favourites': FieldValue.arrayUnion(recipes)});
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayUnion(recipes),
+    'num_favourites': FieldValue.increment(1)
+  });
   //clear the temp array
   recipes.clear();
 }
@@ -355,10 +350,10 @@ void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   List recipes = [recipeIdNumber];
 
   //add the temp array to the firestore
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(id)
-      .update({'favourites': FieldValue.arrayRemove(recipes)});
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayRemove(recipes),
+    'num_favourites': FieldValue.increment(-1)
+  });
   //clear the temp array
   recipes.clear();
 }

@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class UserDetailPage extends StatefulWidget {
   @override
@@ -107,11 +108,29 @@ class _UserDetailPageState extends State<UserDetailPage> {
     final filter = ProfanityFilter();
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+    var darkPurpleText = TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
 
     return Scaffold(
+<<<<<<< HEAD
       backgroundColor: new Color(0xFFf0f1eb),
+=======
+      backgroundColor: onyx,
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       appBar: AppBar(
-        backgroundColor: Color(0xFFe62d11),
+        centerTitle: true,
+        title: Text(
+          'Account Setup',
+          style: TextStyle(color: Colors.white),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[cream, radicalRed])),
+        ),
+        /*  backgroundColor: radicalRed,
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -124,17 +143,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
         title: Text('Account Set-Up',
             style: TextStyle(
               color: Colors.white,
-              //fontWeight: FontWeight.bold,
+
               fontSize: 20,
-            )),
+            )), */
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            children: [
-              Column(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: ListView(
+          children: [
+            SingleChildScrollView(
+              child: Column(
                 children: [
                   //Label for select avatars
                   Padding(
@@ -145,8 +164,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: <Color>[turquoiseGreen, greenSheen]),
                             borderRadius: BorderRadius.circular(15),
-                            color: Color(0xFF7a243e),
+                            color: celadonBlue,
                           ),
                           alignment: Alignment.center,
                           child: Text(
@@ -340,23 +363,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         left: 13, right: 13, top: 7, bottom: 10),
                     child: TextField(
                       controller: fullNameInputController,
-                      cursorColor: Color(0xFF7a243e),
+                      cursorColor: greenSheen,
                       decoration: InputDecoration(
                         //prefixIcon:
                         // Icon(Icons.mail_outline, color: Colors.black),
                         labelText: 'Full Name',
-                        fillColor: Color(0xFFe62d1),
+                        fillColor: turquoiseGreen, //light purple
                         filled: true,
                         labelStyle: TextStyle(
-                          color: Color(0xFF7a243e),
+                          color: greenSheen, //dark purple
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xFF7a243e), width: 2),
+                              BorderSide(color: greenSheen, width: 2),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Color(0xFF7a243e), width: 3),
+                              BorderSide(color: greenSheen, width: 3),
                         ),
                       ),
                     ),
@@ -370,28 +393,25 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width * 0.75,
-                            // width: 250,
-                            // padding: const EdgeInsets.only(
-                            //     left: 13, right: 13, top: 7, bottom: 10),
                             child: TextField(
                               controller: usernameInputController,
-                              cursorColor: Color(0xFF7a243e),
+                              cursorColor: greenSheen,
                               decoration: InputDecoration(
                                 //prefixIcon:
                                 // Icon(Icons.mail_outline, color: Colors.black),
                                 labelText: 'Username',
-                                fillColor: Color(0xFFe62d1),
+                                fillColor: turquoiseGreen,
                                 filled: true,
                                 labelStyle: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: greenSheen,
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xFF7a243e), width: 2),
+                                      color: greenSheen, width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color(0xFF7a243e), width: 3),
+                                      color: greenSheen, width: 3),
                                 ),
                               ),
                             ),
@@ -404,7 +424,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 builder: (val) {
                                   return IconButton(
                                       icon: Icon(Icons.check_circle,
-                                          size: 40, color: Color(0xFF4ca5b5)),
+                                          size: 40, color: ceruleanCrayola),
                                       onPressed: () {
                                         if (!filter.hasProfanity(
                                             usernameInputController
@@ -440,6 +460,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                     usernameExists.toString());
                                               });
                                               final snackBar = SnackBar(
+<<<<<<< HEAD
                                                 content:
                                                     Text('Username exists'),
                                                 duration: Duration(
@@ -447,6 +468,15 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 backgroundColor:
                                                     new Color(0xFFe62d11),
                                               );
+=======
+                                                  content:
+                                                      Text('Username exists'),
+                                                  duration: Duration(
+                                                      milliseconds: 1000),
+                                                  backgroundColor:
+                                                      Color(0xFFe62d11));
+
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
@@ -457,8 +487,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 Text('Username not entered'),
                                             duration:
                                                 Duration(milliseconds: 1000),
+<<<<<<< HEAD
                                             backgroundColor:
                                                 new Color(0xFFe62d11),
+=======
+                                            backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -469,8 +503,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 'Please use appropriate language'),
                                             duration:
                                                 Duration(milliseconds: 1000),
+<<<<<<< HEAD
                                             backgroundColor:
                                                 new Color(0xFFe62d11),
+=======
+                                            backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -486,7 +524,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 13, right: 13, top: 7, bottom: 10),
-                    child: Column(
+                    child: ListView(
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 7.0),
@@ -495,6 +535,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: <Color>[turquoiseGreen, greenSheen]),
+                                  border: Border.all(color: Color(0xFFe62d1)),
                                   borderRadius: BorderRadius.circular(15),
                                   color: Color(0xFF7a243e),
                                 ),
@@ -513,15 +558,20 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
                                 ),
                             child: OutlinedButton.icon(
-                              icon: Icon(Icons.calendar_today),
+                              icon: Icon(Icons.calendar_today,
+                                  color: Colors.black),
                               onPressed: () => _selectDate(context),
-                              // style: OutlinedButton.style(
-
-                              // ),
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          side: BorderSide(width: 2)))),
                               label: Text(
                                 formattedDate.format(today).toString(),
                                 style: TextStyle(
-                                  color: Color(0xFF7a243e),
+                                  color: turquoiseGreen,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -537,20 +587,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
+                          border: Border.all(
+                              color: greenSheen), //dark purple
                           borderRadius: BorderRadius.circular(15),
-                          color: Colors.red[400],
+                          color: turquoiseGreen, //light purple
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: DropdownButtonFormField(
-                            iconEnabledColor: Colors.white,
+                            iconEnabledColor: greenSheen, //dark purple
                             isExpanded: true,
                             decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
                               labelText: 'Select Your Region',
-                              labelStyle: whiteText,
+                              labelStyle: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
                             ),
-                            dropdownColor: Colors.red[300],
+                            dropdownColor: turquoiseGreen,
                             value: _regionDropdownValue,
                             items: [
                               "Northland",
@@ -575,7 +627,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         child: Text(
                                           label,
                                           textAlign: TextAlign.center,
-                                          style: whiteText,
+                                          style: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
                                         ),
                                       ),
                                       value: label,
@@ -594,34 +646,19 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: _allergiesCheckList(
                         'Allergies affected',
                         _allergiesList,
-                        whiteText,
+                        TextStyle(color: greenSheen),
                       )),
                 ],
               ),
-              //cancel button and save button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                      //button to clear the textfields
-                      onPressed: () {
-                        fullNameInputController.clear();
-                        usernameInputController.clear();
-                        _imageSelected = null;
-                        _regionDropdownValue = null;
-                        today = DateTime.now();
-                        _firebaseAuth.currentUser.delete();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
-                      },
-                      padding: const EdgeInsets.only(right: 120),
-                      icon: Icon(Icons.clear),
-                      iconSize: 30),
-                  IconButton(
-                    //button to check if datas are all entered and save data to the database
+            ),
+            //cancel button and save button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                    //button to clear the textfields
                     onPressed: () {
+<<<<<<< HEAD
                       if (fullNameInputController.text.isNotEmpty) {
                         if (usernameInputController.text.isNotEmpty) {
                           if (usernameExists == false) {
@@ -668,58 +705,140 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 }
+=======
+                      fullNameInputController.clear();
+                      usernameInputController.clear();
+                      _imageSelected = null;
+                      _regionDropdownValue = null;
+                      today = DateTime.now();
+                      _firebaseAuth.currentUser.delete();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    padding: const EdgeInsets.only(right: 120),
+                    icon: Icon(Icons.clear, color: Colors.white,),
+                    iconSize: 30),
+                IconButton(
+                  //button to check if datas are all entered and save data to the database
+                  onPressed: () {
+                    if (fullNameInputController.text.isNotEmpty) {
+                      if (usernameInputController.text.isNotEmpty) {
+                        if (usernameExists == false) {
+                          if (_imageSelected != null) {
+                            if (_regionDropdownValue != null) {
+                              if (formattedDate.format(today) !=
+                                  formattedDate.format(DateTime.now())) {
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .add({
+                                  'uid': _firebaseAuth.currentUser.uid,
+                                  'email': _firebaseAuth.currentUser.email,
+                                  'name': fullNameInputController.text,
+                                  'username': _username,
+                                  'image': _imageSelected,
+                                  'region': _regionDropdownValue,
+                                  'birthday': formattedDate.format(today),
+                                  'accountedCreatedTime':
+                                      formattedDate.format(new DateTime.now()),
+                                  'allergy': _allergies,
+                                  'favourites': [],
+                                  'isModerator': false
+                                });
+                                final snackBar = SnackBar(
+                                  content: Text('Account Successfully Created'),
+                                  duration: Duration(milliseconds: 1000),
+                                  backgroundColor: Colors.green,
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()),
+                                );
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                               } else {
                                 final snackBar = SnackBar(
-                                  content: Text('Region has not been selected'),
+                                  content:
+                                      Text('Birthday has not been selected'),
                                   duration: Duration(milliseconds: 1000),
+<<<<<<< HEAD
                                   backgroundColor: new Color(0xFFe62d11),
+=======
+                                  backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               }
                             } else {
                               final snackBar = SnackBar(
-                                content: Text('Image has not been selected'),
+                                content: Text('Region has not been selected'),
                                 duration: Duration(milliseconds: 1000),
+<<<<<<< HEAD
                                 backgroundColor: new Color(0xFFe62d11),
+=======
+                                backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                             }
                           } else {
                             final snackBar = SnackBar(
-                              content: Text(
-                                  'Username already exists or not checked'),
+                              content: Text('Image has not been selected'),
                               duration: Duration(milliseconds: 1000),
+<<<<<<< HEAD
                               backgroundColor: new Color(0xFFe62d11),
+=======
+                              backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           }
                         } else {
                           final snackBar = SnackBar(
-                            content: Text('Username is not entered'),
+                            content:
+                                Text('Username already exists or not checked'),
                             duration: Duration(milliseconds: 1000),
+<<<<<<< HEAD
                             backgroundColor: new Color(0xFFe62d11),
+=======
+                            backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       } else {
                         final snackBar = SnackBar(
-                          content: Text('Name is not entered'),
+                          content: Text('Username is not entered'),
                           duration: Duration(milliseconds: 1000),
+<<<<<<< HEAD
                           backgroundColor: new Color(0xFFe62d11),
+=======
+                          backgroundColor: Color(0xFFe62d11),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                    },
-                    icon: Icon(Icons.save),
-                    iconSize: 30,
-                  )
-                ],
-              ),
-            ],
-          ),
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text('Name is not entered'),
+                        duration: Duration(milliseconds: 1000),
+                        backgroundColor: Color(0xFFe62d11),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                  icon: Icon(Icons.save, color: Colors.white),
+                  iconSize: 30,
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -731,6 +850,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
     List checklistOptions,
     var textStyle,
   ) {
+<<<<<<< HEAD
     return MultiSelectFormField(
       autovalidate: false,
       fillColor: Colors.red[400],
@@ -753,14 +873,47 @@ class _UserDetailPageState extends State<UserDetailPage> {
       hintWidget: Text(
         'Select allergies',
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+=======
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: greenSheen),
+          borderRadius: BorderRadius.circular(11.0)),
+      child: MultiSelectFormField(
+        autovalidate: false,
+        fillColor: turquoiseGreen, //light-purple
+        chipBackGroundColor: greenSheen, //dark purple
+        chipLabelStyle: TextStyle(color: Colors.white),
+        checkBoxActiveColor: greenSheen,
+        checkBoxCheckColor: Colors.white,
+        border: InputBorder.none,
+        dialogShapeBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: BorderSide(color: greenSheen)),
+        title: Text(
+          title,
+          style: textStyle, //dark purple
+        ),
+        dataSource: checklistOptions,
+        textField: 'display',
+        valueField: 'value',
+        okButtonLabel: 'OK',
+        cancelButtonLabel: 'CANCEL',
+        //clear checklist
+        hintWidget: Text(
+          'Select allergies',
+          style: TextStyle(
+              fontWeight: FontWeight.w300,
+              color: greenSheen), //dark purple
+        ),
+        initialValue: _allergies,
+        onSaved: (value) {
+          if (value == null) return;
+          setState(() {
+            _allergies = value;
+          });
+        },
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       ),
-      initialValue: _allergies,
-      onSaved: (value) {
-        if (value == null) return;
-        setState(() {
-          _allergies = value;
-        });
-      },
     );
   }
 

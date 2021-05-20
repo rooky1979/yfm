@@ -81,6 +81,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   Widget _decideImageView() {
     if (_imgfile == null) {
       return Container(
+<<<<<<< HEAD
         alignment: Alignment.center,
         child: Column(
           children: [
@@ -119,6 +120,21 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
             )
           ],
         ),
+=======
+        decoration: BoxDecoration(
+            //border: Border.all(width: 1),
+            borderRadius: BorderRadius.circular(2)),
+        width: double.infinity,
+        child: ElevatedButton.icon(
+            onPressed: () {
+              _showChoiceDialog(context);
+            },
+            icon: Icon(
+              Icons.image,
+              size: 25,
+            ),
+            label: Text("Add Image", style: TextStyle(fontSize: 25))),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       );
     } else {
       setState(() {});
@@ -127,36 +143,43 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
         child: Column(
           children: [
             Container(
+<<<<<<< HEAD
               decoration: BoxDecoration(
                   border: Border.all(
                     width: 1,
                     color: new Color(0xFF7a243e),
                   ),
                   borderRadius: BorderRadius.circular(2)),
+=======
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(2)),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
               width: double.infinity,
               child: IntrinsicHeight(
-                child: Row(children: [
-                  FittedBox(
-                    child: Image.file(
-                      _imgfile,
-                      fit: BoxFit.cover,
-                      height: 85,
-                      width: 85,
-                    ),
-                  ),
-                  Container(
-                    width: 10,
-                    color: Colors.black38,
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        _showChoiceDialog(context);
-                      },
-                      child:
-                          Text("Change Image", style: TextStyle(fontSize: 18)))
-                ]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FittedBox(
+                        child: Image.file(
+                          _imgfile,
+                          fit: BoxFit.cover,
+                          height: 125,
+                          width: 85,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                          onPressed: () {
+                            _showChoiceDialog(context);
+                          },
+                          icon: Icon(
+                            Icons.image,
+                            size: 25,
+                          ),
+                          label: Text("Change Image",
+                              style: TextStyle(fontSize: 25))),
+                    ]),
               ),
             ),
+            Container(padding: EdgeInsets.all(6.0))
           ],
         ),
       );
@@ -300,11 +323,12 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
             Expanded(
               child: TextField(
                 keyboardType: TextInputType.multiline,
-                minLines: 15,
-                maxLines: 20,
+                minLines: 30,
+                maxLines: 60,
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
+<<<<<<< HEAD
                   hintText: 'A Question, Comment, or Tip!',
                   labelText: 'Type Here...',
                   labelStyle: TextStyle(
@@ -313,6 +337,15 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                   ),
                   border: const OutlineInputBorder(),
                 ),
+=======
+                    hintText: 'A Question, Comment, or Tip!',
+                    labelText: 'Type Here...',
+                    labelStyle: TextStyle(
+                      color: Color(0xFFe62d11),
+                      fontSize: 17,
+                    ),
+                    border: const OutlineInputBorder()),
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                 controller: descriptionInputController,
               ),
             ),

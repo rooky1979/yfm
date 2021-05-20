@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_image.dart';
@@ -21,13 +22,13 @@ class _MethodSubmissionState extends State<MethodSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: Colors.black,
+    color: ceruleanCrayola,
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
   var snackbar = SnackBar(
       duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Color(0xFFe62d11),
       content: Text("Please fill out the field before proceeding",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,6 +37,10 @@ class _MethodSubmissionState extends State<MethodSubmission> {
           )));
   //text controller for the textfield
   TextEditingController methodController;
+
+  //colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
 
   @override
   void initState() {
@@ -46,11 +51,21 @@ class _MethodSubmissionState extends State<MethodSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       backgroundColor: new Color(0xFFf0f1eb),
+=======
+      backgroundColor: onyx,
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
-        backgroundColor: new Color(0xFFe62d11),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[turquoiseGreen, greenSheen])),
+        ),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -63,7 +78,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
         title: Text('Method',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 25,
             )),
       ),
@@ -78,7 +93,10 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         const EdgeInsets.only(top: 13.0, left: 30, bottom: 8.0),
                     child: Text(
                       'Add method instructions:',
-                      style: blackText,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20),
                     ),
                   )
                 ],
@@ -87,33 +105,37 @@ class _MethodSubmissionState extends State<MethodSubmission> {
               Padding(
                 padding: const EdgeInsets.all(13.0),
                 //text field to enter the name of the recipe
-                child: TextField(
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: methodController,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                  decoration: InputDecoration(
-                    labelText: 'Enter step',
-                    labelStyle: whiteText,
-                    fillColor: new Color(0xFFe62d11),
-                    filled: true,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.greenAccent, width: 3.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: <Color>[ceruleanCrayola, celadonBlue]),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: celadonBlue)),
+                          
+                  child: Padding(
+                    padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                    child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: methodController,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                      decoration: InputDecoration(
+                        labelText: 'Enter step',
+                        labelStyle: TextStyle(
+                            color: white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+
+                        enabledBorder: InputBorder.none
+                      ),
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: new Color(0xFFe62d11), width: 3.0),
-                        borderRadius: BorderRadius.circular(15)),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 13.0),
-                child: divider,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -124,11 +146,13 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                        ),
                         child: Text(
-                          'Previous',
+                          'PREVIOUS',
                           style: TextStyle(
-                              color: new Color(0xFFe62d11),
+                              color: greenSheen,
                               fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
@@ -147,13 +171,12 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style:
-                            ElevatedButton.styleFrom(primary: Colors.red[100]),
+                        style: ElevatedButton.styleFrom(
+                            primary: greenSheen),
                         child: Text(
-                          'Next',
+                          'NEXT',
                           style: TextStyle(
-                              color: new Color(0xFFe62d11),
-                              fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (methodController.text.isEmpty) {
@@ -184,7 +207,11 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               top: 8.0, left: 30, bottom: 8.0),
                           child: Text(
                             'Added so far:',
-                            style: blackText,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: white,
+                              fontSize: 20,
+                            ),
                           ),
                         )
                       ],
@@ -198,21 +225,22 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: new Color(0xFFe62d11),
+                                    backgroundColor: celadonBlue,
                                     radius: 10,
                                   ),
                                   title: Text(
                                       DBControl.methodSteps[index].toString(),
                                       style: TextStyle(
                                           fontSize: 20,
-                                          fontWeight: FontWeight.bold)),
+                                          fontWeight: FontWeight.w500,
+                                          color: white)),
                                 ),
                                 Divider(
                                   height: 10,
                                   thickness: 2,
                                   indent: 40,
                                   endIndent: 20,
-                                  color: Colors.red[200],
+                                  color: ceruleanCrayola,
                                 ),
                               ],
                             );
@@ -223,6 +251,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
               ),
               divider,
               //cancel and done buttons to move to next page or go to previous page
+<<<<<<< HEAD
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -237,49 +266,71 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           'Cancel',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
+=======
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(13.0),
+                      child: SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: greenSheen,
+                          ),
+                          child: Text(
+                            'DONE',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            if (DBControl.methodSteps.isEmpty) {
+                              //snackbar shown if any of the fields are empty
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbar);
+                            } else {
+                              //Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ImageSubmission()));
+                            }
+                          },
+>>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         ),
-                        onPressed: () {
-                          DBControl.clearDBVariables();
-                          methodController.clear();
-                          DBControl.popPage(3, context);
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => ProfilePage());
-                        },
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: new Color(0xFFe62d11),
+                    Padding(
+                      padding: const EdgeInsets.all(13.0),
+                      child: SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                          ),
+                          child: Text(
+                            'CANCEL',
+                            style: TextStyle(
+                                color: greenSheen,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            DBControl.clearDBVariables();
+                            methodController.clear();
+                            DBControl.popPage(3, context);
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ProfilePage());
+                          },
                         ),
-                        child: Text(
-                          'Done',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          if (DBControl.methodSteps.isEmpty) {
-                            //snackbar shown if any of the fields are empty
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackbar);
-                          } else {
-                            //Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ImageSubmission()));
-                          }
-                        },
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
             ],
           )),

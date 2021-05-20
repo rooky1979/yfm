@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
@@ -19,8 +18,6 @@ class MethodCard extends StatelessWidget {
 
     return Column(
       children: [
-        RecipeThumbnail(),
-        RecipeButtons(),
         Padding(
           //widget for the recipe info title
           padding: const EdgeInsets.all(3.0),
