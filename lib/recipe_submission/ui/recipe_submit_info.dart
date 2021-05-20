@@ -141,20 +141,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   @override
   Widget build(BuildContext context) {
     //refactored textstyle used in buttons/textfields
-    var whiteText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
-    var blackText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black);
     var darkPurpleText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
     //refactored dividers for continual use
-    var divider = Divider(
-      height: 10,
-      thickness: 3,
-      indent: 20,
-      endIndent: 20,
-      color: Colors.black,
-    );
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,

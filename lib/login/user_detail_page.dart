@@ -108,8 +108,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
     final filter = ProfanityFilter();
     var whiteText = TextStyle(
         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
-    var darkPurpleText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
 
     return Scaffold(
       backgroundColor: onyx,

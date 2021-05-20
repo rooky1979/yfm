@@ -381,35 +381,3 @@ Future _getLiked() async {
 }
 
 //method to check if the recipe ID is in the users array
-_checkRecipeFavourited(String idNumber) async {
-  var firestoreDB = FirebaseFirestore.instance
-      .collection('users')
-      .doc('0dT614naJKZgbjRZCGMj')
-      .snapshots();
-
-  List recipes = [];
-  bool checkMatch = false;
-
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  await FirebaseFirestore.instance
-      .collection('users') // Users table in firestore
-      .where('uid',
-          isEqualTo: _firebaseAuth.currentUser
-              .uid) //first uid is the user ID of in the users table (not document id)
-      .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
-      debugPrint(doc['favourites'].toString() + "again");
-      recipes.add(doc['favourites']);
-      debugPrint(recipes.toString() + "Saved local");
-      return true;
-    });
-  });
-
-  if (recipes.contains(idNumber)) {
-    // ignore: unnecessary_statements
-    checkMatch == true;
-  }
-
-  return checkMatch;
-}
