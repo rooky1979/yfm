@@ -277,11 +277,15 @@ class _FavouritesState extends State<Favourites> {
               //           widget.isLiked = !widget.isLiked;
               //           debugPrint(widget.isLiked.toString() +
               //               "This has been Added to favourites: " +
-              //               HomepageTile.idNumber.toString());
+              //               HomepageTile.idNumber.toString(),
+              // );
               //           _getUserDocIdForAdd(HomepageTile.idNumber);
-              //         });
-              //         setState(() {});
-              //       });
+              //         },
+              // );
+              //         setState(() {},
+              // );
+              //       },
+              // );
               // }
             } else {
               return CircularProgressIndicator();
@@ -291,34 +295,39 @@ class _FavouritesState extends State<Favourites> {
       ],
     );
 
-    //   if (!_isFavorite) {
-    //     return IconButton(
-    //         icon: Icon(
-    //           Icons.favorite_outline_rounded, //comments button
-    //           size: 50,
-    //           color: new Color(0xFFe62d11),
-    //         ),
-    //         onPressed: () {
-    //           setState(() {
-    //             _isFavorite = !_isFavorite;
-    //             //add recipe ID to favourites array
-    //             _getUserDocIdForAdd(HomepageTile.idNumber.toString());
-    //           });
-    //         });
-    //   } else {
-    //     return IconButton(
-    //         icon: Icon(
-    //           Icons.favorite_rounded,
-    //           size: 50,
-    //           color: new Color(0xFFe62d11),
-    //         ),
-    //         onPressed: () {
-    //           setState(() {
-    //             _isFavorite = !_isFavorite;
-    //             //if array contains recipeID, remove
-    //             _getUserDocIdForDelete(HomepageTile.idNumber);
-    //           });
-    //         });
+    // if (!_isFavorite) {
+    //   return IconButton(
+    //       icon: Icon(
+    //         Icons.favorite_outline_rounded, //comments button
+    //         size: 50,
+    //         color: new Color(0xFFe62d11),
+    //       ),
+    //       onPressed: () {
+    //         setState(() {
+    //           _isFavorite = !_isFavorite;
+    //           //add recipe ID to favourites array
+    //           _getUserDocIdForAdd(HomepageTile.idNumber.toString(),
+    //           );
+    //         },
+    //         );
+    //       },
+    //       );
+    // } else {
+    //   return IconButton(
+    //       icon: Icon(
+    //         Icons.favorite_rounded,
+    //         size: 50,
+    //         color: new Color(0xFFe62d11),
+    //       ),
+    //       onPressed: () {
+    //         setState(() {
+    //           _isFavorite = !_isFavorite;
+    //           //if array contains recipeID, remove
+    //           _getUserDocIdForDelete(HomepageTile.idNumber);
+    //         },
+    //         );
+    //       },
+    //       );
   }
 }
 
