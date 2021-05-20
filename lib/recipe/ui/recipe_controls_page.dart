@@ -5,7 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:youth_food_movement/recipe/ui/method_page.dart';
-import 'package:youth_food_movement/recipe/ui/test_grid_tile.dart';
+import 'package:youth_food_movement/homepage/homepage_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipeControlsPage extends StatefulWidget {
   @override
@@ -15,17 +16,17 @@ class RecipeControlsPage extends StatefulWidget {
 class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
-    //main page setup
     return Scaffold(
+        backgroundColor: new Color(0xFFf0f1eb),
         body: Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: Column(
-        children: [
-          RecipeThumbnail(),
-          RecipeButtons(),
-        ],
-      ),
-    ));
+          padding: const EdgeInsets.only(top: 25),
+          child: Column(
+            children: [
+              RecipeThumbnail(),
+              RecipeButtons(),
+            ],
+          ),
+        ));
   }
 }
 
@@ -34,12 +35,12 @@ class RecipeThumbnail extends StatelessWidget {
 //declare and instantiate the firebase storage bucket
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
+          color: Color(0xFFf0f1eb),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -72,10 +73,11 @@ class RecipeThumbnail extends StatelessWidget {
                   );
                 } else {
                   return Container(
+                      color: Color(0xFFf0f1eb),
                       //while image is loading, display the circular indicator
                       child: Center(
-                    child: CircularProgressIndicator(),
-                  ));
+                        child: CircularProgressIndicator(),
+                      ));
                 }
               }),
         ),
@@ -84,7 +86,7 @@ class RecipeThumbnail extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 30,
-              color: Colors.red,
+              color: Color(0xFFe62d11),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -97,7 +99,7 @@ class RecipeThumbnail extends StatelessWidget {
 //ansynchronous method to get the image URL
   Future _getImageURL() async {
     String downloadURL = await storage
-        .ref('recipe_images/' + TestGridTile.idNumber.toString())
+        .ref('recipe_images/' + HomepageTile.idNumber.toString())
         .getDownloadURL();
     return downloadURL;
   }
@@ -106,7 +108,7 @@ class RecipeThumbnail extends StatelessWidget {
 //creates the buttons on the screen to take the user to each section
 // ignore: must_be_immutable
 class RecipeButtons extends StatelessWidget {
-  String docID = TestGridTile.idNumber.toString();
+  String docID = HomepageTile.idNumber.toString();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,71 +116,72 @@ class RecipeButtons extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
-        height: 90,
-        //color: Colors.red[400],
+        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.red[400],
+          color: Color(0xFF7a243e),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RawMaterialButton(
-                  padding: EdgeInsets.all(10), //ingredients button
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.info,
-                    size: 40,
-                    color: Colors.red,
-                  ),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    IngredientsPage(
-                                        TestGridTile.idNumber.toString())))
-                      }),
-              RawMaterialButton(
-                  // recipe method button
-                  padding: EdgeInsets.all(10),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child:
-                      Icon(FontAwesomeIcons.book, size: 40, color: Colors.red),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Method(TestGridTile.idNumber.toString())))
-                      }),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(11),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(FontAwesomeIcons.comments, //comments button
-                      size: 40,
-                      color: Colors.red),
-                  onPressed: () => {
-                        //pops any page currently loaded off the stack and pushes the required page onto the stack
-                        Navigator.pop(context),
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => CommentBoard(
-                                      recipeID: TestGridTile.idNumber.toString(),
-                                    )))
-                      }),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            RawMaterialButton(
+                padding: EdgeInsets.all(10), //ingredients button
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.info,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  IngredientsPage(
+                                      HomepageTile.idNumber.toString())))
+                    }),
+            RawMaterialButton(
+                // recipe method button
+                padding: EdgeInsets.all(10),
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.book,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Method(HomepageTile.idNumber.toString())))
+                    }),
+            RawMaterialButton(
+                padding: EdgeInsets.all(11),
+                fillColor: new Color(0xFFf0f1eb),
+                shape: CircleBorder(),
+                child: Icon(
+                  FontAwesomeIcons.comments, //comments button
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      //pops any page currently loaded off the stack and pushes the required page onto the stack
+                      Navigator.pop(context),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => CommentBoard(
+                                    recipeID: HomepageTile.idNumber.toString(),
+                                  )))
+                    }),
+          ],
         ),
       ),
     );
@@ -186,77 +189,149 @@ class RecipeButtons extends StatelessWidget {
 }
 
 //favourites button that toggles solid for favourited and outline for unfavourited
+// ignore: must_be_immutable
 class Favourites extends StatefulWidget {
-  var firestoreDb = FirebaseFirestore.instance
-      .collection('recipe')
-      .doc('0ZWT2Ljrk8SS5wmh7zwD')
-      .snapshots();
+  bool isLiked;
+
   @override
   _FavouritesState createState() => _FavouritesState();
 }
 
 class _FavouritesState extends State<Favourites> {
-  bool _isFavorite = false;
+  //bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
-    if (!_isFavorite) {
-      return IconButton(
-          icon: Icon(
-            Icons.favorite_outline_rounded, //comments button
-            size: 50,
-            color: Colors.red,
-          ),
-          onPressed: () {
-            setState(() {
-              _isFavorite = !_isFavorite;
-              //add recipe ID to favourites array
-              _favouriteToDB(TestGridTile.idNumber.toString());
-            });
-          });
-    } else {
-      return IconButton(
-          icon: Icon(
-            Icons.favorite_rounded,
-            size: 50,
-            color: Colors.red,
-          ),
-          onPressed: () {
-            setState(() {
-              _isFavorite = !_isFavorite;
-              //if array contains recipeID, remove
-              _removeFavouriteFromDB(TestGridTile.idNumber);
-            });
-          });
-    }
+    return Column(
+      children: [
+        Container(
+          color: new Color(0xFFf0f1eb),
+        ),
+        FutureBuilder(
+            future: _getLiked(),
+            builder: (context, snapshot) {
+              widget.isLiked = snapshot.data;
+              if (snapshot.hasData) {
+                return IconButton(
+                    icon: Icon(Icons.favorite_rounded, //comments button
+                        size: 50,
+                        color: widget.isLiked
+                            ? new Color(0xFFe62d11)
+                            : Colors.grey),
+                    onPressed: () {
+                      if (widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          _getUserDocIdForDelete(HomepageTile.idNumber);
+                        });
+                      } else if (!widget.isLiked) {
+                        setState(() {
+                          widget.isLiked = !widget.isLiked;
+                          _getUserDocIdForAdd(HomepageTile.idNumber);
+                        });
+                      }
+                    });
+              } else {
+                return CircularProgressIndicator();
+              }
+            }),
+      ],
+    );
   }
+}
+
 //helper method to add the recipe ID to the firestore favourites array
-  void _favouriteToDB(String idNumber) async {
-    //instantiate a local list to hold temp ID
-    List recipes = [];
-    //add the idNumber to the temp array
-    recipes.add(idNumber);
-    //add the temp array to the firestore
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc('0ZWT2Ljrk8SS5wmh7zwD')
-        .update({'favourites': FieldValue.arrayUnion(recipes)});
-        //clear the temp array
-        recipes.clear();
-  }
-//helper method to add the recipe ID to the firestore favourites array
-  void _removeFavouriteFromDB(String idNumber) async {
-        //instantiate a local list to hold temp ID
-    List recipes = [];
-        //add the idNumber to the temp array
-    recipes.add(idNumber);
-        //add the temp array to the firestore
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc('0ZWT2Ljrk8SS5wmh7zwD')
-        .update({'favourites': FieldValue.arrayRemove(recipes)});
-        //clear the temp array
-        recipes.clear();
-  }
-  
+void _addFavouriteToDB(String recipeIdNumber, String id) async {
+  //instantiate a local list to hold temp ID
+  List recipes = [recipeIdNumber];
+
+  //add the temp array to the firestore
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayUnion(recipes),
+    'num_favourites': FieldValue.increment(1)
+  });
+  //clear the temp array
+  recipes.clear();
+}
+
+/*
+    This method gets the current user and recipe ID and feeds it to
+    the method for adding a recipe to the database
+ */
+void _getUserDocIdForAdd(String recipeIdNumber) async {
+  String id;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      id = doc.id;
+      debugPrint(id);
+      _addFavouriteToDB(recipeIdNumber, id);
+    });
+  });
+}
+
+/*
+    This method gets the current user and recipe ID and feeds it to
+    the method for removing a recipe from the database
+ */
+void _getUserDocIdForDelete(String recipeIdNumber) async {
+  String id;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid', isEqualTo: _firebaseAuth.currentUser.uid)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      id = doc.id;
+      debugPrint(id);
+      _removeFavouriteFromDB(recipeIdNumber, id);
+    });
+  });
+}
+
+//helper method to remove the recipe ID from the firestore favourites array
+void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
+  //instantiate a local list to hold temp ID
+  List recipes = [recipeIdNumber];
+
+  //add the temp array to the firestore
+  await FirebaseFirestore.instance.collection('users').doc(id).update({
+    'favourites': FieldValue.arrayRemove(recipes),
+    'num_favourites': FieldValue.increment(-1)
+  });
+  //clear the temp array
+  recipes.clear();
+}
+
+/*
+ * This method checks if the open recipe has been liked by the user
+ * and returns true or false.
+ */
+Future _getLiked() async {
+  bool liked = false;
+  List recipes = [];
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  await FirebaseFirestore.instance
+      .collection('users') // Users table in firestore
+      .where('uid',
+          isEqualTo: _firebaseAuth.currentUser
+              .uid) //first uid is the user ID of in the users table (not document id)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      recipes = doc['favourites'];
+      if (recipes.contains(HomepageTile.idNumber.toString())) {
+        liked = true;
+      }
+    });
+  });
+
+  return liked;
 }

@@ -24,13 +24,13 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: Colors.black,
+    color: Color(0xFF7a243e),
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
   var snackbar = SnackBar(
       duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Color(0xFFe62d11),
       content: Text("Please fill out all fields before proceeding",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -42,8 +42,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
   TextEditingController amountController;
   //string to hold the measurement unit
   String unit = '';
-  //list to hold ingredient strings
-  //List ingredients = [];
+//colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
   @override
   void initState() {
     super.initState();
@@ -67,7 +68,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: darkPurple,
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -97,25 +98,27 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     controller: ingredientController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Ingredient',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      labelStyle: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
+                      fillColor: Color(0xFFe62d1),
                       filled: true,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                            BorderSide(color: Color(0xFF7a243e), width: 3),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
                 ),
-                divider,
                 //textbox for measurement entries
                 Row(
                   children: [
@@ -124,7 +127,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           top: 8.0, left: 30, bottom: 8.0),
                       child: Text(
                         'Measurements:',
-                        style: blackText,
+                        style: TextStyle(
+                            color: Color(0xFF7a243e),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
                       ),
                     )
                   ],
@@ -137,38 +143,38 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: TextField(
                         controller: amountController,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9\.]")),],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9\.]")),
+                        ],
                         textAlign: TextAlign.start,
                         keyboardType: TextInputType.numberWithOptions(
                             signed: true,
                             decimal: true), //only shows a numerical keyboard
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                          color: Color(0xFF7a243e),
+                          fontSize: 17,
+                        ),
                         decoration: InputDecoration(
                           labelText: 'Enter amount',
-                          labelStyle: whiteText,
-                          fillColor: Colors.red[400],
+                          labelStyle: TextStyle(
+                              color: Color(0xFF7a243e),
+                              fontWeight: FontWeight.w500),
+                          fillColor: Color(0xFFe62d1),
                           filled: true,
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 3.0),
-                          ),
                           enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 3.0),
-                              borderRadius: BorderRadius.circular(15)),
+                            borderSide:
+                                BorderSide(color: Color(0xFF7a243e), width: 2),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Color(0xFF7a243e), width: 3),
+                          ),
                         ),
                       ),
                     ),
                     //dropdown menu for the measurement unit
                     Container(
                       width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.red[400],
-                      ),
                       //create a drop down menu and remove the underline
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -176,15 +182,27 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           right: 13.0,
                         ),
                         child: DropdownButtonFormField(
-                          iconEnabledColor: Colors.white,
+                          iconEnabledColor: darkPurple,
                           isExpanded: true,
                           decoration: InputDecoration(
-                            enabledBorder: InputBorder.none,
+                            //enabledBorder: InputBorder.none,
                             labelText: 'Unit',
-                            labelStyle: whiteText,
+                            labelStyle: TextStyle(
+                                color: Color(0xFF7a243e),
+                                fontWeight: FontWeight.w500),
+                            fillColor: Color(0xFFe62d1),
+                            filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 3),
+                            ),
                           ),
                           //dropdown menu labels
-                          dropdownColor: Colors.red[300],
+                          dropdownColor: Colors.white,
                           value: _measurementValue,
                           items: [
                             "",
@@ -207,7 +225,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                       child: Text(
                                         label,
                                         textAlign: TextAlign.center,
-                                        style: whiteText,
+                                        style: TextStyle(
+                                            color: Color(0xFF7a243e),
+                                            fontWeight: FontWeight.w500),
                                       ),
                                     ),
                                     value: label,
@@ -223,72 +243,73 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 13.0),
-                  child: divider,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
-                          child: Text(
-                            'Previous',
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            setState(() {});
-                            if (DBControl.ingredients.isNotEmpty) {
-                              DBControl.ingredients.removeLast();
-                            } else {} //remove last ingredient from the list
-                            //if list is empty, do nothing
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.red[100]),
-                          child: Text(
-                            'Next',
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            if (ingredientController.text.isEmpty ||
-                                amountController.text.isEmpty ||
-                                _measurementValue == null) {
-                              //snackbar shown if any of the fields are empty
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            } else {
-                              //if not empty, add to the list
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            child: Text(
+                              'PREVIOUS',
+                              style: TextStyle(
+                                color: Color(0xFF4ca5b5),
+                                fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
                               setState(() {});
-                              DBControl.ingredients.add(amountController.text +
-                                  ' ' +
-                                  unit +
-                                  ' ' +
-                                  ingredientController.text);
-                              amountController.clear();
-                              ingredientController.clear();
-                              _measurementValue = null;
-                            }
-                          },
+                              if (DBControl.ingredients.isNotEmpty) {
+                                DBControl.ingredients.removeLast();
+                              } else {} //remove last ingredient from the list
+                              //if list is empty, do nothing
+                            },
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xFF4ca5b5)),
+                            child: Text(
+                              'NEXT',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              if (ingredientController.text.isEmpty ||
+                                  amountController.text.isEmpty ||
+                                  _measurementValue == null) {
+                                //snackbar shown if any of the fields are empty
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackbar);
+                              } else {
+                                //if not empty, add to the list
+                                setState(() {});
+                                DBControl.ingredients.add(
+                                    amountController.text +
+                                        ' ' +
+                                        unit +
+                                        ' ' +
+                                        ingredientController.text);
+                                amountController.clear();
+                                ingredientController.clear();
+                                _measurementValue = null;
+                              }
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 divider,
                 //List to show what has been added so far
@@ -302,7 +323,10 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 top: 8.0, left: 30, bottom: 8.0),
                             child: Text(
                               'Added so far:',
-                              style: blackText,
+                              style: TextStyle(
+                                  color: Color(0xFF7a243e),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
                             ),
                           )
                         ],
@@ -315,22 +339,22 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               return Column(
                                 children: [
                                   ListTile(
-                                    leading: CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                      radius: 10,
-                                    ),
-                                    title: Text(
+                                      leading: CircleAvatar(
+                                        backgroundColor: Color(0xFF7a243e),
+                                        radius: 10,
+                                      ),
+                                      title: Text(
                                         DBControl.ingredients[index].toString(),
                                         style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
+                                          color: Color(0xFF7a243e),
+                                        ),
+                                      )),
                                   Divider(
                                     height: 10,
                                     thickness: 2,
                                     indent: 40,
                                     endIndent: 20,
-                                    color: Colors.red[200],
+                                    color: Color(0xFF7a243e),
                                   ),
                                 ],
                               );
@@ -339,69 +363,73 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     ],
                   ),
                 ),
-                divider,
                 //cancel and done buttons to move to next page or go to previous page
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFF4ca5b5),
+                            ),
+                            child: Text(
+                              'DONE',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              if (DBControl.ingredients.isEmpty) {
+                                //snackbar shown if any of the fields are empty
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackbar);
+                              } else {
+                                //Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            MethodSubmission()));
+                              }
+                            },
                           ),
-                          onPressed: () {
-                            //clears the controllers and variables
-                            amountController.clear();
-                            ingredientController.clear();
-                            _measurementValue = null;
-                            DBControl.clearDBVariables();
-                            DBControl.popPage(2, context);
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ProfilePage());
-                          },
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          child: Text(
-                            'Done',
-                            style: TextStyle(
-                                color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                            ),
+                            child: Text(
+                              'CANCEL',
+                              style: TextStyle(
+                                color: Color(0xFF4ca5b5),
                                 fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              //clears the controllers and variables
+                              amountController.clear();
+                              ingredientController.clear();
+                              _measurementValue = null;
+                              DBControl.clearDBVariables();
+                              DBControl.popPage(2, context);
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ProfilePage());
+                            },
                           ),
-                          onPressed: () {
-                            if (DBControl.ingredients.isEmpty) {
-                              //snackbar shown if any of the fields are empty
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            } else {
-                              //Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MethodSubmission()));
-                            }
-                          },
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ],
             )),

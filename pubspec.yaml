@@ -23,6 +23,7 @@ environment:
 dependencies:
 
   image_picker: ^0.7.3
+  profanity_filter: ^1.0.4
   flutter:
     sdk: flutter
 
@@ -44,7 +45,7 @@ dev_dependencies:
   firebase_storage: any
   firebase_core: ^1.0.0
   firebase_auth: ^1.0.1
-
+  
   provider: ^5.0.0
   cloud_firestore: any
   url_launcher: ^5.4.0
@@ -64,9 +65,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/logo/just-cook-logo.png
+    - lib/logo/just-cook-logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

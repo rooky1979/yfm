@@ -64,8 +64,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "value": "Vegan",
     }
   ];
-//list for the proteins
-  List<dynamic> _proteinList = [
+//list for the recipe tags
+  List<dynamic> _tagsList = [
     {
       "display": "Beef",
       "value": "Beef",
@@ -98,13 +98,28 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "display": "Eggs",
       "value": "Eggs",
     },
+    {
+      "display": "Pasta",
+      "value": "Pasta",
+    },
+    {
+      "display": "Salad",
+      "value": "Salad",
+    },
+    {
+      "display": "Rice",
+      "value": "Rice",
+    },
   ];
 
+  //colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
   //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
   var snackbar = SnackBar(
       duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Color(0xFFe62d11),
       content: Text("Please fill out all fields before proceeding",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -125,18 +140,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   @override
   Widget build(BuildContext context) {
     //refactored textstyle used in buttons/textfields
-    var whiteText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
-    var blackText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black);
-    //refactored dividers for continual use
-    var divider = Divider(
-      height: 10,
-      thickness: 3,
-      indent: 20,
-      endIndent: 20,
-      color: Colors.black,
-    );
+    var darkPurpleText = TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -151,7 +157,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: darkPurple,
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -171,7 +177,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
           title: Text('Submit your recipe!',
               style: TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
                 fontSize: 25,
               )),
         ),
@@ -191,25 +196,27 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.recipeNameController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      labelStyle: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
+                      fillColor: Color(0xFFe62d1),
                       filled: true,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                            BorderSide(color: Color(0xFF7a243e), width: 3),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
                 ),
-                divider,
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //text field to enter the name of the recipe
@@ -218,69 +225,80 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     controller: DBControl.descriptionController,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
-                      labelText: 'Enter a description of the finished dish',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      labelText: 'Enter a description of the finished dish.',
+                      labelStyle: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
+                      fillColor: Color(0xFFe62d1),
                       filled: true,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                            BorderSide(color: Color(0xFF7a243e), width: 3),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
                 ),
-                divider,
                 //dropdown menu for difficulty selection
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //create a container and decorate
                   child: Container(
-                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Color(0xFF7a243e)), //dark purple
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
+                      color: Color(0xFFe62d1), //light purple
                     ),
+                    //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: DropdownButtonFormField(
-                        iconEnabledColor: Colors.white,
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          labelText: 'Select recipe difficulty',
-                          labelStyle: whiteText,
+                    child: DropdownButtonFormField(
+                      iconEnabledColor: darkPurple,
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        //enabledBorder: InputBorder.none,
+                        labelText: 'Select recipe difficulty',
+                        labelStyle: TextStyle(
+                            color: Color(0xFF7a243e),
+                            fontWeight: FontWeight.w500),
+                        fillColor: Color(0xFFe62d1),
+                        filled: true,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF7a243e), width: 3),
                         ),
-                        //dropdown menu labels
-                        dropdownColor: Colors.red[300],
-                        value: DBControl.difficultyValue,
-                        items: ["Easy", "Intermediate", "Hard"]
-                            .map((label) => DropdownMenuItem(
-                                  child: Center(
-                                    child: Text(
-                                      label,
-                                      textAlign: TextAlign.center,
-                                      style: whiteText,
-                                    ),
-                                  ),
-                                  value: label,
-                                ))
-                            .toList(),
-                        onChanged: (value) {
-                          setState(() => DBControl.difficultyValue = value);
-                        },
                       ),
+                      //dropdown menu labels
+                      dropdownColor: Colors.white,
+                      value: DBControl.difficultyValue,
+                      items: ["Easy", "Intermediate", "Hard"]
+                          .map((label) => DropdownMenuItem(
+                                child: Center(
+                                  child: Text(
+                                    label,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Color(0xFF7a243e),
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                value: label,
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() => DBControl.difficultyValue = value);
+                      },
                     ),
                   ),
                 ),
-                divider,
                 //textfield for the user to enter the number of servings
                 Padding(
                   padding: const EdgeInsets.all(13.0),
@@ -294,25 +312,27 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           .digitsOnly //enables digits only for entry
                     ],
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF7a243e),
+                      fontSize: 17,
+                    ),
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
-                      labelStyle: whiteText,
-                      fillColor: Colors.red[400],
+                      labelStyle: TextStyle(
+                          color: Color(0xFF7a243e),
+                          fontWeight: FontWeight.w500),
+                      fillColor: lightPurple,
                       filled: true,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF7a243e), width: 2),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.greenAccent, width: 3.0),
+                            BorderSide(color: Color(0xFF7a243e), width: 3),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red, width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
                     ),
                   ),
                 ),
-                divider,
                 //preptime
                 Padding(
                   padding: const EdgeInsets.only(
@@ -322,7 +342,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     children: [
                       Text(
                         'How long to prepare and cook?',
-                        style: blackText,
+                        style: TextStyle(
+                            color: Color(0xFF7a243e),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 23),
                       )
                     ],
                   ),
@@ -345,22 +368,24 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Color(0xFF7a243e),
+                            fontSize: 17,
+                          ),
                           decoration: InputDecoration(
                             labelText: 'Hours',
-                            labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            labelStyle: TextStyle(
+                                color: Color(0xFF7a243e),
+                                fontWeight: FontWeight.w500),
+                            fillColor: Color(0xFFe62d1),
                             filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.greenAccent, width: 3.0),
+                                  color: Color(0xFF7a243e), width: 3),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
                       ),
@@ -373,171 +398,181 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         child: TextField(
                           controller: DBControl.minutesController,
                           textAlign: TextAlign.start,
-                          keyboardType: TextInputType.number, 
+                          keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter
                                 .digitsOnly //enables digits only for entry
                           ],
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Color(0xFF7a243e),
+                            fontSize: 17,
+                          ),
                           decoration: InputDecoration(
                             labelText: 'Minutes',
-                            labelStyle: whiteText,
-                            fillColor: Colors.red[400],
+                            labelStyle: TextStyle(
+                                color: Color(0xFF7a243e),
+                                fontWeight: FontWeight.w500),
+                            fillColor: Color(0xFFe62d1),
                             filled: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(0xFF7a243e), width: 2),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.greenAccent, width: 3.0),
+                                  color: Color(0xFF7a243e), width: 3),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                divider,
                 //allergies
                 Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: _allergiesCheckList(
                       'Allergies affected',
                       _allergiesList,
-                      whiteText,
+                      darkPurpleText,
                     )),
-                divider,
                 //category (vegan, vegetarian or non-vegetarian)
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   //create a container and decorate
                   child: Container(
-                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Color(0xFF7a243e)), //dark purple
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.red[400],
+                      color: Color(0xFFe62d1), //light purple
                     ),
+                    //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: DropdownButtonFormField(
-                        iconEnabledColor: Colors.white,
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          labelText: 'Recipe category:',
-                          labelStyle: whiteText,
-                        ),
-                        //dropdown menu labels
-                        dropdownColor: Colors.red[300],
-                        value: DBControl.categoryValue,
-                        items: ["Vegan", "Vegetarian", "Non-Vegetarian"]
-                            .map((label) => DropdownMenuItem(
-                                  child: Center(
-                                    child: Text(
-                                      label,
-                                      textAlign: TextAlign.center,
-                                      style: whiteText,
+                    child: DropdownButtonFormField(
+                      iconEnabledColor: Color(0xFF7a243e),
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        //enabledBorder: InputBorder.none,
+                        labelText: 'Recipe category:',
+                        labelStyle: TextStyle(
+                            color: Color(0xFF7a243e),
+                            fontWeight: FontWeight.w500),
+                        fillColor: Color(0xFFe62d1),
+                        filled: true,
+                        enabledBorder: InputBorder.none,
+                      ),
+                      //dropdown menu labels
+                      dropdownColor: Colors.purple[50],
+                      value: DBControl.categoryValue,
+                      items: ["Vegan", "Vegetarian", "Non-Vegetarian"]
+                          .map((label) => DropdownMenuItem(
+                                child: Center(
+                                  child: Text(
+                                    label,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF7a243e),
                                     ),
                                   ),
-                                  value: label,
-                                ))
-                            .toList(),
-                        onChanged: (value) {
-                          setState(() => DBControl.categoryValue = value);
-                        },
-                      ),
+                                ),
+                                value: label,
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() => DBControl.categoryValue = value);
+                      },
                     ),
                   ),
                 ),
-                divider,
                 //proteins
                 Padding(
                     padding: const EdgeInsets.all(13.0),
-                    child: _proteinsCheckList(
-                      'Protein:',
-                      _proteinList,
-                      whiteText,
+                    child: _recipeTagsCheckList(
+                      'Recipe Tags:',
+                      _tagsList,
+                      darkPurpleText,
                     )),
-                divider,
                 //cancel and next buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.red[50]),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xFF4ca5b5)),
+                            child: Text(
+                              'DONE',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              if (DBControl.recipeNameController.text.isEmpty ||
+                                  DBControl.servingsController.text.isEmpty ||
+                                  DBControl
+                                      .descriptionController.text.isEmpty ||
+                                  DBControl.hoursController.text.isEmpty ||
+                                  DBControl.minutesController.text.isEmpty ||
+                                  DBControl.difficultyValue == null ||
+                                  DBControl.categoryValue == null ||
+                                  DBControl.allergies == null ||
+                                  DBControl.proteins == null) {
+                                //snackbar shown if any of the fields are empty
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackbar);
+                              } else {
+                                //if not empty, add to the list
+                                _setPrepTime(DBControl.hoursController.text,
+                                    DBControl.minutesController.text);
+                                //Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            IngredientsSubmission()));
+                              }
+                            },
                           ),
-                          onPressed: () {
-                            if (DBControl.categoryValue != null) {
-                              DBControl.categoryValue = null;
-                            }
-                            if (DBControl.difficultyValue != null) {
-                              DBControl.difficultyValue = null;
-                            }
-                            DBControl.clearDBVariables();
-                            DBControl.popPage(1, context);
-                            //Navigator.pop(context);
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ProfilePage());
-                          },
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          child: Text(
-                            'Done',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            if (DBControl.recipeNameController.text.isEmpty ||
-                                DBControl.servingsController.text.isEmpty ||
-                                DBControl.descriptionController.text.isEmpty ||
-                                DBControl.hoursController.text.isEmpty ||
-                                DBControl.minutesController.text.isEmpty ||
-                                DBControl.difficultyValue == null ||
-                                DBControl.categoryValue == null ||
-                                DBControl.allergies == null ||
-                                DBControl.proteins == null) {
-                              //snackbar shown if any of the fields are empty
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            } else {
-                              //if not empty, add to the list
-                              _setPrepTime(DBControl.hoursController.text,
-                                  DBControl.minutesController.text);
+                      Padding(
+                        padding: const EdgeInsets.all(13.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              primary: Color(0xFF4ca5b5), // background
+                            ),
+                            child: Text(
+                              'CANCEL',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {
+                              if (DBControl.categoryValue != null) {
+                                DBControl.categoryValue = null;
+                              }
+                              if (DBControl.difficultyValue != null) {
+                                DBControl.difficultyValue = null;
+                              }
+                              DBControl.clearDBVariables();
+                              DBControl.popPage(1, context);
                               //Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          IngredientsSubmission()));
-                            }
-                          },
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ProfilePage());
+                            },
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 )
               ]),
             ),
@@ -553,73 +588,85 @@ class _InformationSubmissionState extends State<InformationSubmission> {
     List checklistOptions,
     var textStyle,
   ) {
-    return MultiSelectFormField(
-      autovalidate: false,
-      fillColor: Colors.red[400],
-      chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
-      checkBoxCheckColor: Colors.white,
-      dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      title: Text(
-        title,
-        style: textStyle,
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: darkPurple),
+          borderRadius: BorderRadius.circular(11.0)),
+      child: MultiSelectFormField(
+        autovalidate: false,
+        fillColor: lightPurple,
+        chipBackGroundColor: darkPurple,
+        chipLabelStyle: TextStyle(color: Colors.white),
+        checkBoxActiveColor: Color(0xFF7a243e),
+        checkBoxCheckColor: Colors.white,
+        border: InputBorder.none,
+        dialogShapeBorder:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: Text(
+          title,
+          style: textStyle,
+        ),
+        dataSource: checklistOptions,
+        textField: 'display',
+        valueField: 'value',
+        okButtonLabel: 'OK',
+        cancelButtonLabel: 'CANCEL', //clear checklist
+        hintWidget: Text(
+          'Please choose one or more',
+          style: TextStyle(fontWeight: FontWeight.bold, color: darkPurple),
+        ),
+        initialValue: DBControl.allergies,
+        onSaved: (value) {
+          if (value == null) return;
+          setState(() {
+            DBControl.allergies = value;
+          });
+        },
       ),
-      dataSource: checklistOptions,
-      textField: 'display',
-      valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
-      hintWidget: Text(
-        'Please choose one or more',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-      ),
-      initialValue: DBControl.allergies,
-      onSaved: (value) {
-        if (value == null) return;
-        setState(() {
-          DBControl.allergies = value;
-        });
-      },
     );
   }
 
   //helper method for the protein checkboxes
-  Widget _proteinsCheckList(
+  Widget _recipeTagsCheckList(
     String title,
     List checklistOptions,
     var textStyle,
   ) {
-    return MultiSelectFormField(
-      autovalidate: false,
-      fillColor: Colors.red[400],
-      chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: Colors.red,
-      checkBoxCheckColor: Colors.white,
-      dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      title: Text(
-        title,
-        style: textStyle,
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: darkPurple),
+          borderRadius: BorderRadius.circular(11.0)),
+      child: MultiSelectFormField(
+        autovalidate: false,
+        fillColor: lightPurple,
+        chipBackGroundColor: darkPurple,
+        chipLabelStyle: TextStyle(color: Colors.white),
+        checkBoxActiveColor: Color(0xFF7a243e),
+        checkBoxCheckColor: Colors.white,
+        border: InputBorder.none,
+        dialogShapeBorder:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: Text(
+          title,
+          style: textStyle,
+        ),
+        dataSource: checklistOptions,
+        textField: 'display',
+        valueField: 'value',
+        okButtonLabel: 'OK',
+        cancelButtonLabel: 'CANCEL', //clear checklist
+        hintWidget: Text(
+          'Please choose one or more',
+          style: TextStyle(fontWeight: FontWeight.bold, color: darkPurple),
+        ),
+        initialValue: DBControl.proteins,
+        onSaved: (value) {
+          if (value == null) return;
+          setState(() {
+            DBControl.proteins = value;
+          });
+        },
       ),
-      dataSource: checklistOptions,
-      textField: 'display',
-      valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
-      hintWidget: Text(
-        'Please choose one or more',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-      ),
-      initialValue: DBControl.proteins,
-      onSaved: (value) {
-        if (value == null) return;
-        setState(() {
-          DBControl.proteins = value;
-        });
-      },
     );
   }
 

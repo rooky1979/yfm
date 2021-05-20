@@ -42,7 +42,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
 //snackbar for if no image is selected
   var snackbar = SnackBar(
       duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Color(0xFFe62d11),
       content: Text("Please select an image",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -50,11 +50,15 @@ class _ImageSubmissionState extends State<ImageSubmission> {
             fontSize: 20,
           )));
 
+  //colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: darkPurple,
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -84,7 +88,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Colors.red[400],
+                          fillColor: Color(0xFF7a243e),
                           child: Icon(
                             FontAwesomeIcons.solidImage,
                             size: 40,
@@ -109,7 +113,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Colors.red[400],
+                          fillColor: Color(0xFF7a243e),
                           child: Icon(
                             FontAwesomeIcons.camera,
                             size: 40,
@@ -143,11 +147,14 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                        ),
                         child: Text(
-                          'Cancel',
+                          'CANCEL',
                           style: TextStyle(
-                              color: Colors.red, fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF4ca5b5)),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -164,11 +171,11 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF4ca5b5)),
                         child: Text(
-                          'Finish',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                          'FINISH',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (DBControl.image == null) {
@@ -200,8 +207,8 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        color: darkPurple,
                       ),
                     ),
                   )
