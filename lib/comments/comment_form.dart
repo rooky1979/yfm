@@ -32,22 +32,26 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
 // This method opens the gallery and saves the file path/sets the image attached string to true
   _openGallery(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _imgfile = File(imgfile.path);
-      imgAttached = true;
-      debugPrint(_imgfile.path);
-    });
+    setState(
+      () {
+        _imgfile = File(imgfile.path);
+        imgAttached = true;
+        debugPrint(_imgfile.path);
+      },
+    );
     Navigator.of(context).pop();
   }
 
   //This method opens the camera and saves the file path/sets the image attached string to true
   _openCamera(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
-    setState(() {
-      _imgfile = File(imgfile.path);
-      imgAttached = true;
-      // debugPrint(_imgfile.path.toString());
-    });
+    setState(
+      () {
+        _imgfile = File(imgfile.path);
+        imgAttached = true;
+        // debugPrint(_imgfile.path.toString());
+      },
+    );
     Navigator.of(context).pop();
   }
 
@@ -95,27 +99,28 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
               width: double.infinity,
               child: IntrinsicHeight(
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FittedBox(
-                        child: Image.file(
-                          _imgfile,
-                          fit: BoxFit.cover,
-                          height: 125,
-                          width: 85,
-                        ),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FittedBox(
+                      child: Image.file(
+                        _imgfile,
+                        fit: BoxFit.cover,
+                        height: 125,
+                        width: 85,
                       ),
-                      ElevatedButton.icon(
-                          onPressed: () {
-                            _showChoiceDialog(context);
-                          },
-                          icon: Icon(
-                            Icons.image,
-                            size: 25,
-                          ),
-                          label: Text("Change Image",
-                              style: TextStyle(fontSize: 25))),
-                    ]),
+                    ),
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          _showChoiceDialog(context);
+                        },
+                        icon: Icon(
+                          Icons.image,
+                          size: 25,
+                        ),
+                        label: Text("Change Image",
+                            style: TextStyle(fontSize: 25))),
+                  ],
+                ),
               ),
             ),
             Container(padding: EdgeInsets.all(6.0))
@@ -129,33 +134,34 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   // Once picked either _openGallery or _openCamera are called.
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Make a Choice!"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text("Gallery"),
-                    onTap: () {
-                      _openGallery(context);
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                  ),
-                  GestureDetector(
-                    child: Text("Camera"),
-                    onTap: () {
-                      _openCamera(context);
-                    },
-                  ),
-                ],
-              ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Make a Choice!"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text("Gallery"),
+                  onTap: () {
+                    _openGallery(context);
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                ),
+                GestureDetector(
+                  child: Text("Camera"),
+                  onTap: () {
+                    _openCamera(context);
+                  },
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
 //This is the main widget that has the body of the comment Form
