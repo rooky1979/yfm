@@ -31,11 +31,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: new Color(0xFFf0f1eb),
-=======
       backgroundColor: onyx,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -212,8 +208,7 @@ class ProfileButtons extends StatelessWidget {
               padding: EdgeInsets.all(10),
               fillColor: Colors.white,
               shape: CircleBorder(side: BorderSide(color: darkPurple)),
-              child: Icon(FontAwesomeIcons.globe,
-                  size: 20, color: darkPurple),
+              child: Icon(FontAwesomeIcons.globe, size: 20, color: darkPurple),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
@@ -251,34 +246,16 @@ _launchURL() async {
 
 //currently unused method to validate if the user is a moderator or not
 _checkMod(BuildContext context) {
-<<<<<<< HEAD
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  //if (_firebaseAuth.currentUser.uid == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2') {
-  return RawMaterialButton(
-      padding: EdgeInsets.all(11),
-      fillColor: Colors.white,
-      shape: CircleBorder(),
-      child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
-=======
   //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   return RawMaterialButton(
       padding: EdgeInsets.all(11),
       fillColor: Colors.white,
       shape: CircleBorder(side: BorderSide(color: darkPurple)),
-      child:
-          Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
+      child: Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
       onPressed: () => {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (BuildContext context) => InformationSubmission()))
           });
-<<<<<<< HEAD
-} //else {
-//   return Container();
-//}
-//}
-=======
 }
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35

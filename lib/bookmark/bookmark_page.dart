@@ -17,16 +17,10 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: new Color(0xFFf0f1eb),
-      //app bar that contains the search bar and profile settings page
-      appBar: AppBar(
-        backgroundColor: new Color(0xFFe62d11),
-=======
       backgroundColor: onyx,
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
-       flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -34,7 +28,6 @@ class _BookmarkPageState extends State<BookmarkPage> {
                   colors: <Color>[ceruleanCrayola, celadonBlue])),
         ),
         //backgroundColor: Color(0xFF7a243e),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,

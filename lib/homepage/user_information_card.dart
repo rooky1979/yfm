@@ -32,88 +32,6 @@ class UserInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-<<<<<<< HEAD
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: new Color(0xFFe62d11),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Name: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                '${snapshotData['name']}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: new Color(0xFFe62d11),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Birthday: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-=======
               padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -142,7 +60,6 @@ class UserInformationCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             ),
                           ),
                         ),
@@ -162,38 +79,6 @@ class UserInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-<<<<<<< HEAD
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: new Color(0xFFe62d11),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Username: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-=======
               padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -222,7 +107,6 @@ class UserInformationCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             ),
                           ),
                         ),
@@ -242,38 +126,6 @@ class UserInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-<<<<<<< HEAD
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-                elevation: 1,
-                shadowColor: new Color(0xFFe62d11),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        //height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              Colors.redAccent[700],
-                              Colors.red[400]
-                            ]),
-                            border: Border.all(color: Colors.red[800]),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Region: ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25),
-                                textAlign: TextAlign.center,
-                              ),
-=======
               padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -302,7 +154,6 @@ class UserInformationCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                               textAlign: TextAlign.center,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             ),
                           ),
                         ),
@@ -322,15 +173,8 @@ class UserInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-<<<<<<< HEAD
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              elevation: 1,
-              shadowColor: new Color(0xFFe62d11),
-=======
               padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
               width: MediaQuery.of(context).size.width,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -389,8 +233,7 @@ class UserInformationCard extends StatelessWidget {
                             end: Alignment.bottomCenter,
                             colors: <Color>[ceruleanCrayola, celadonBlue]),
                         //color: Color(0xFFe62d1),
-                        border:
-                            Border.all(color: Colors.blue[900], width: 1.5),
+                        border: Border.all(color: Colors.blue[900], width: 1.5),
                         borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,

@@ -51,11 +51,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: new Color(0xFFf0f1eb),
-=======
       backgroundColor: onyx,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
@@ -111,11 +107,10 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: <Color>[ceruleanCrayola, celadonBlue]),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: celadonBlue)),
-                          
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: celadonBlue)),
                   child: Padding(
-                    padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: TextField(
                       textCapitalization: TextCapitalization.sentences,
                       controller: methodController,
@@ -125,14 +120,12 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           fontSize: 20,
                           fontWeight: FontWeight.w500),
                       decoration: InputDecoration(
-                        labelText: 'Enter step',
-                        labelStyle: TextStyle(
-                            color: white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),
-
-                        enabledBorder: InputBorder.none
-                      ),
+                          labelText: 'Enter step',
+                          labelStyle: TextStyle(
+                              color: white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                          enabledBorder: InputBorder.none),
                     ),
                   ),
                 ),
@@ -152,8 +145,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'PREVIOUS',
                           style: TextStyle(
-                              color: greenSheen,
-                              fontWeight: FontWeight.bold),
+                              color: greenSheen, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           setState(() {});
@@ -171,8 +163,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: greenSheen),
+                        style: ElevatedButton.styleFrom(primary: greenSheen),
                         child: Text(
                           'NEXT',
                           style: TextStyle(
@@ -251,22 +242,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
               ),
               divider,
               //cancel and done buttons to move to next page or go to previous page
-<<<<<<< HEAD
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.white),
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-=======
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
                 child: Row(
@@ -299,7 +274,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                                           ImageSubmission()));
                             }
                           },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         ),
                       ),
                     ),
@@ -315,8 +289,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           child: Text(
                             'CANCEL',
                             style: TextStyle(
-                                color: greenSheen,
-                                fontWeight: FontWeight.bold),
+                                color: greenSheen, fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {
                             DBControl.clearDBVariables();

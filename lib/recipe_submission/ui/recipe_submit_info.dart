@@ -171,9 +171,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-<<<<<<< HEAD
-          backgroundColor: new Color(0xFFe62d11),
-=======
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -181,7 +178,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     end: Alignment.bottomCenter,
                     colors: <Color>[turquoiseGreen, greenSheen])),
           ),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -225,14 +221,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                     decoration: InputDecoration(
                       labelText: 'What is the name of your recipe?',
-<<<<<<< HEAD
-                      labelStyle: whiteText,
-                      fillColor: new Color(0xFFe62d11),
-=======
                       labelStyle: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500),
                       fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 2),
@@ -240,13 +231,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
-<<<<<<< HEAD
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: new Color(0xFFe62d11), width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                   ),
                 ),
@@ -262,16 +246,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       fontSize: 17,
                     ),
                     decoration: InputDecoration(
-<<<<<<< HEAD
-                      labelText: 'Enter a description of the finished dish',
-                      labelStyle: whiteText,
-                      fillColor: new Color(0xFFe62d11),
-=======
                       labelText: 'Enter a description of the finished dish.',
                       labelStyle: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500),
                       fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 2),
@@ -279,13 +257,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
-<<<<<<< HEAD
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: new Color(0xFFe62d11), width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                   ),
                 ),
@@ -302,11 +273,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       ),
                       border: Border.all(color: celadonBlue), //dark purple
                       borderRadius: BorderRadius.circular(15),
-<<<<<<< HEAD
-                      color: new Color(0xFFe62d11),
-=======
                       //color: Color(0xFFe62d1), //light purple
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                     //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
@@ -366,14 +333,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     ),
                     decoration: InputDecoration(
                       labelText: 'How many servings does it make?',
-<<<<<<< HEAD
-                      labelStyle: whiteText,
-                      fillColor: new Color(0xFFe62d11),
-=======
                       labelStyle: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500),
                       fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 2),
@@ -381,13 +343,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
-<<<<<<< HEAD
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: new Color(0xFFe62d11), width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                   ),
                 ),
@@ -431,15 +386,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           ),
                           decoration: InputDecoration(
                             labelText: 'Hours',
-<<<<<<< HEAD
-                            labelStyle: whiteText,
-                            fillColor: new Color(0xFFe62d11),
-=======
                             labelStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
                             fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
@@ -449,13 +399,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               borderSide:
                                   BorderSide(color: celadonBlue, width: 3),
                             ),
-<<<<<<< HEAD
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: new Color(0xFFe62d11), width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       ),
@@ -479,15 +422,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           ),
                           decoration: InputDecoration(
                             labelText: 'Minutes',
-<<<<<<< HEAD
-                            labelStyle: whiteText,
-                            fillColor: new Color(0xFFe62d11),
-=======
                             labelStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
                             fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
@@ -497,13 +435,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               borderSide:
                                   BorderSide(color: celadonBlue, width: 3),
                             ),
-<<<<<<< HEAD
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: new Color(0xFFe62d11), width: 3.0),
-                                borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       ),
@@ -530,10 +461,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           colors: <Color>[celadonBlue, ceruleanCrayola]),
                       border: Border.all(color: celadonBlue),
                       borderRadius: BorderRadius.circular(15),
-<<<<<<< HEAD
-                      color: new Color(0xFFe62d11),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                     //width: MediaQuery.of(context).size.width,
                     //create a drop down menu and remove the underline
@@ -544,8 +471,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                         //enabledBorder: InputBorder.none,
                         labelText: 'Recipe category:',
                         labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
+                            color: Colors.white, fontWeight: FontWeight.w500),
                         //fillColor: Color(0xFFe62d1),
                         filled: true,
                         enabledBorder: InputBorder.none,
@@ -583,24 +509,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       darkPurpleText,
                     )),
                 //cancel and next buttons
-<<<<<<< HEAD
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.red[50]),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                                color: new Color(0xFFe62d11),
-                                fontWeight: FontWeight.bold),
-=======
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25.0),
                   child: Row(
@@ -612,8 +520,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                           width: 150,
                           height: 50,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: greenSheen),
+                            style:
+                                ElevatedButton.styleFrom(primary: greenSheen),
                             child: Text(
                               'DONE',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -644,43 +552,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                             IngredientsSubmission()));
                               }
                             },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       ),
-<<<<<<< HEAD
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 100,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: new Color(0xFFe62d11),
-                          ),
-                          child: Text(
-                            'Done',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            if (DBControl.recipeNameController.text.isEmpty ||
-                                DBControl.servingsController.text.isEmpty ||
-                                DBControl.descriptionController.text.isEmpty ||
-                                DBControl.hoursController.text.isEmpty ||
-                                DBControl.minutesController.text.isEmpty ||
-                                DBControl.difficultyValue == null ||
-                                DBControl.categoryValue == null ||
-                                DBControl.allergies == null ||
-                                DBControl.proteins == null) {
-                              //snackbar shown if any of the fields are empty
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            } else {
-                              //if not empty, add to the list
-                              _setPrepTime(DBControl.hoursController.text,
-                                  DBControl.minutesController.text);
-=======
                       Padding(
                         padding: const EdgeInsets.all(13.0),
                         child: SizedBox(
@@ -692,7 +566,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                             ),
                             child: Text(
                               'CANCEL',
-                              style: TextStyle(color: greenSheen,fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: greenSheen,
+                                  fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {
                               if (DBControl.categoryValue != null) {
@@ -703,7 +579,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                               }
                               DBControl.clearDBVariables();
                               DBControl.popPage(1, context);
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                               //Navigator.pop(context);
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
@@ -729,29 +604,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
     List checklistOptions,
     var textStyle,
   ) {
-<<<<<<< HEAD
-    return MultiSelectFormField(
-      autovalidate: false,
-      fillColor: new Color(0xFFe62d11),
-      chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: new Color(0xFFe62d11),
-      checkBoxCheckColor: Colors.white,
-      dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      title: Text(
-        title,
-        style: textStyle,
-      ),
-      dataSource: checklistOptions,
-      textField: 'display',
-      valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
-      hintWidget: Text(
-        'Please choose one or more',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-=======
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: celadonBlue),
@@ -768,7 +620,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           title,
-          style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.w500),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -786,7 +639,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
             DBControl.allergies = value;
           });
         },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       ),
     );
   }
@@ -797,29 +649,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
     List checklistOptions,
     var textStyle,
   ) {
-<<<<<<< HEAD
-    return MultiSelectFormField(
-      autovalidate: false,
-      fillColor: new Color(0xFFe62d11),
-      chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: new Color(0xFFe62d11),
-      checkBoxCheckColor: Colors.white,
-      dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      title: Text(
-        title,
-        style: textStyle,
-      ),
-      dataSource: checklistOptions,
-      textField: 'display',
-      valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL', //clear checklist
-      hintWidget: Text(
-        'Please choose one or more',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-=======
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: celadonBlue),
@@ -836,7 +665,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           title,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -854,7 +684,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
             DBControl.proteins = value;
           });
         },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       ),
     );
   }

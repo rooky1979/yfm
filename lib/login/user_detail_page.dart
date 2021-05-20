@@ -112,11 +112,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF7a243e));
 
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: new Color(0xFFf0f1eb),
-=======
       backgroundColor: onyx,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -374,12 +370,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           color: greenSheen, //dark purple
                         ),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: greenSheen, width: 2),
+                          borderSide: BorderSide(color: greenSheen, width: 2),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: greenSheen, width: 3),
+                          borderSide: BorderSide(color: greenSheen, width: 3),
                         ),
                       ),
                     ),
@@ -406,12 +400,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   color: greenSheen,
                                 ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: greenSheen, width: 2),
+                                  borderSide:
+                                      BorderSide(color: greenSheen, width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: greenSheen, width: 3),
+                                  borderSide:
+                                      BorderSide(color: greenSheen, width: 3),
                                 ),
                               ),
                             ),
@@ -460,15 +454,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                     usernameExists.toString());
                                               });
                                               final snackBar = SnackBar(
-<<<<<<< HEAD
-                                                content:
-                                                    Text('Username exists'),
-                                                duration: Duration(
-                                                    milliseconds: 1000),
-                                                backgroundColor:
-                                                    new Color(0xFFe62d11),
-                                              );
-=======
                                                   content:
                                                       Text('Username exists'),
                                                   duration: Duration(
@@ -476,7 +461,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                   backgroundColor:
                                                       Color(0xFFe62d11));
 
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
@@ -487,12 +471,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 Text('Username not entered'),
                                             duration:
                                                 Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                                            backgroundColor:
-                                                new Color(0xFFe62d11),
-=======
                                             backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -503,12 +482,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                 'Please use appropriate language'),
                                             duration:
                                                 Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                                            backgroundColor:
-                                                new Color(0xFFe62d11),
-=======
                                             backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                           );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(snackBar);
@@ -536,9 +510,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: <Color>[turquoiseGreen, greenSheen]),
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        turquoiseGreen,
+                                        greenSheen
+                                      ]),
                                   border: Border.all(color: Color(0xFFe62d1)),
                                   borderRadius: BorderRadius.circular(15),
                                   color: Color(0xFF7a243e),
@@ -587,8 +564,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                              color: greenSheen), //dark purple
+                          border: Border.all(color: greenSheen), //dark purple
                           borderRadius: BorderRadius.circular(15),
                           color: turquoiseGreen, //light purple
                         ),
@@ -600,7 +576,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
                               labelText: 'Select Your Region',
-                              labelStyle: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
+                              labelStyle: TextStyle(
+                                  color: greenSheen,
+                                  fontWeight: FontWeight.w500),
                             ),
                             dropdownColor: turquoiseGreen,
                             value: _regionDropdownValue,
@@ -627,7 +605,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         child: Text(
                                           label,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(color: greenSheen, fontWeight: FontWeight.w500),
+                                          style: TextStyle(
+                                              color: greenSheen,
+                                              fontWeight: FontWeight.w500),
                                         ),
                                       ),
                                       value: label,
@@ -658,54 +638,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 IconButton(
                     //button to clear the textfields
                     onPressed: () {
-<<<<<<< HEAD
-                      if (fullNameInputController.text.isNotEmpty) {
-                        if (usernameInputController.text.isNotEmpty) {
-                          if (usernameExists == false) {
-                            if (_imageSelected != null) {
-                              if (_regionDropdownValue != null) {
-                                if (formattedDate.format(today) !=
-                                    formattedDate.format(DateTime.now())) {
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .add({
-                                    'uid': _firebaseAuth.currentUser.uid,
-                                    'email': _firebaseAuth.currentUser.email,
-                                    'name': fullNameInputController.text,
-                                    'username': _username,
-                                    'image': _imageSelected,
-                                    'region': _regionDropdownValue,
-                                    'birthday': formattedDate.format(today),
-                                    'accountedCreatedTime': formattedDate
-                                        .format(new DateTime.now()),
-                                    'allergy': _allergies,
-                                    'favourites': [],
-                                    'isModerator': false
-                                  });
-                                  final snackBar = SnackBar(
-                                    content:
-                                        Text('Account Successfully Created'),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor: Colors.green,
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()),
-                                  );
-                                } else {
-                                  final snackBar = SnackBar(
-                                    content:
-                                        Text('Birthday has not been selected'),
-                                    duration: Duration(milliseconds: 1000),
-                                    backgroundColor: new Color(0xFFe62d11),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-=======
                       fullNameInputController.clear();
                       usernameInputController.clear();
                       _imageSelected = null;
@@ -718,7 +650,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       );
                     },
                     padding: const EdgeInsets.only(right: 120),
-                    icon: Icon(Icons.clear, color: Colors.white,),
+                    icon: Icon(
+                      Icons.clear,
+                      color: Colors.white,
+                    ),
                     iconSize: 30),
                 IconButton(
                   //button to check if datas are all entered and save data to the database
@@ -758,17 +693,12 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()),
                                 );
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                               } else {
                                 final snackBar = SnackBar(
                                   content:
                                       Text('Birthday has not been selected'),
                                   duration: Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                                  backgroundColor: new Color(0xFFe62d11),
-=======
                                   backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
@@ -777,11 +707,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               final snackBar = SnackBar(
                                 content: Text('Region has not been selected'),
                                 duration: Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                                backgroundColor: new Color(0xFFe62d11),
-=======
                                 backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
@@ -790,11 +716,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             final snackBar = SnackBar(
                               content: Text('Image has not been selected'),
                               duration: Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                              backgroundColor: new Color(0xFFe62d11),
-=======
                               backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -804,11 +726,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             content:
                                 Text('Username already exists or not checked'),
                             duration: Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                            backgroundColor: new Color(0xFFe62d11),
-=======
                             backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
@@ -816,11 +734,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         final snackBar = SnackBar(
                           content: Text('Username is not entered'),
                           duration: Duration(milliseconds: 1000),
-<<<<<<< HEAD
-                          backgroundColor: new Color(0xFFe62d11),
-=======
                           backgroundColor: Color(0xFFe62d11),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -850,30 +764,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
     List checklistOptions,
     var textStyle,
   ) {
-<<<<<<< HEAD
-    return MultiSelectFormField(
-      autovalidate: false,
-      fillColor: Colors.red[400],
-      chipBackGroundColor: Colors.white,
-      chipLabelStyle: TextStyle(color: Colors.red),
-      checkBoxActiveColor: new Color(0xFFe62d11),
-      checkBoxCheckColor: Colors.white,
-      dialogShapeBorder:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      title: Text(
-        title,
-        style: textStyle,
-      ),
-      dataSource: checklistOptions,
-      textField: 'display',
-      valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
-      //clear checklist
-      hintWidget: Text(
-        'Select allergies',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-=======
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: greenSheen),
@@ -902,8 +792,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         hintWidget: Text(
           'Select allergies',
           style: TextStyle(
-              fontWeight: FontWeight.w300,
-              color: greenSheen), //dark purple
+              fontWeight: FontWeight.w300, color: greenSheen), //dark purple
         ),
         initialValue: _allergies,
         onSaved: (value) {
@@ -912,7 +801,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
             _allergies = value;
           });
         },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
       ),
     );
   }

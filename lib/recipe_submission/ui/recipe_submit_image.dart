@@ -58,11 +58,6 @@ class _ImageSubmissionState extends State<ImageSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: new Color(0xFFf0f1eb),
-      appBar: AppBar(
-        backgroundColor: new Color(0xFFe62d11),
-=======
       backgroundColor: onyx,
       appBar: AppBar(
         flexibleSpace: Container(
@@ -72,7 +67,6 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                   end: Alignment.bottomCenter,
                   colors: <Color>[turquoiseGreen, greenSheen])),
         ),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -119,8 +113,9 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Camera Roll',
                               style: TextStyle(
-                                color: white,
-                                  fontWeight: FontWeight.w500, fontSize: 16)),
+                                  color: white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16)),
                         ),
                       ],
                     ),
@@ -145,8 +140,9 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Take photo',
                               style: TextStyle(
-                                color: white,
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                                  color: white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16)),
                         ),
                       ],
                     ),
@@ -169,13 +165,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                         child: Text(
                           'CANCEL',
                           style: TextStyle(
-<<<<<<< HEAD
-                              color: new Color(0xFFe62d11),
-                              fontWeight: FontWeight.bold),
-=======
-                              fontWeight: FontWeight.bold,
-                              color: greenSheen),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
+                              fontWeight: FontWeight.bold, color: greenSheen),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -192,8 +182,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: greenSheen),
+                        style: ElevatedButton.styleFrom(primary: greenSheen),
                         child: Text(
                           'FINISH',
                           style: TextStyle(fontWeight: FontWeight.bold),

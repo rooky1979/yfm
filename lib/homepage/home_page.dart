@@ -38,9 +38,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: cream,
       appBar: AppBar(
-<<<<<<< HEAD
-        backgroundColor: new Color(0xFFe62d11),
-=======
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -48,7 +45,6 @@ class _HomePageState extends State<HomePage> {
                   end: Alignment.bottomCenter,
                   colors: <Color>[ceruleanCrayola, celadonBlue])),
         ),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
         actions: [
           GetBuilder<DataController>(
               init: DataController(),
@@ -57,7 +53,10 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     //search function
                     IconButton(
-                        icon: Icon(Icons.search, color: Colors.white,),
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
                         onPressed: () {
                           val
                               .foodTitleQueryData(searchController.text)
@@ -74,7 +73,10 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => ProfilePage()),
                           );
                         },
-                        icon: Icon(Icons.settings, color: Colors.white,)),
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        )),
                   ],
                 );
               })
@@ -122,15 +124,10 @@ class _HomePageState extends State<HomePage> {
                     //height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-<<<<<<< HEAD
-                            colors: [Colors.redAccent[700], Colors.red[400]]),
-                        border: Border.all(color: new Color(0xFFe62d11)),
-=======
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [turquoiseGreen, greenSheen]),
                         border: Border.all(color: Colors.green[50]),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),

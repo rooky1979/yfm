@@ -70,17 +70,13 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
         resizeToAvoidBottomInset: false,
         //appbar with title and back arrow
         appBar: AppBar(
-<<<<<<< HEAD
-          backgroundColor: new Color(0xFFe62d11),
-=======
           flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[turquoiseGreen, greenSheen])),
-        ),
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[turquoiseGreen, greenSheen])),
+          ),
           leading: IconButton(
               icon: Icon(
                 FontAwesomeIcons.arrowLeft,
@@ -115,31 +111,16 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                     ),
                     decoration: InputDecoration(
                       labelText: 'Ingredient',
-<<<<<<< HEAD
-                      labelStyle: whiteText,
-                      fillColor: new Color(0xFFe62d11),
-=======
                       labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
+                          color: Colors.white, fontWeight: FontWeight.w500),
                       fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                       filled: true,
                       enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: celadonBlue, width: 2),
+                        borderSide: BorderSide(color: celadonBlue, width: 2),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: celadonBlue, width: 3),
+                        borderSide: BorderSide(color: celadonBlue, width: 3),
                       ),
-<<<<<<< HEAD
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: new Color(0xFFe62d11), width: 3.0),
-                          borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                     ),
                   ),
                 ),
@@ -180,15 +161,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         ),
                         decoration: InputDecoration(
                           labelText: 'Enter amount',
-<<<<<<< HEAD
-                          labelStyle: whiteText,
-                          fillColor: new Color(0xFFe62d11),
-=======
                           labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                              color: Colors.white, fontWeight: FontWeight.w500),
                           fillColor: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           filled: true,
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
@@ -198,26 +173,12 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             borderSide:
                                 BorderSide(color: celadonBlue, width: 3),
                           ),
-<<<<<<< HEAD
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: new Color(0xFFe62d11), width: 3.0),
-                              borderRadius: BorderRadius.circular(15)),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                         ),
                       ),
                     ),
                     //dropdown menu for the measurement unit
                     Container(
                       width: MediaQuery.of(context).size.width / 2.5,
-<<<<<<< HEAD
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: new Color(0xFFe62d11),
-                      ),
-=======
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                       //create a drop down menu and remove the underline
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -236,20 +197,16 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             fillColor: ceruleanCrayola,
                             filled: true,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: celadonBlue, width: 2),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: celadonBlue, width: 3),
+                              borderSide:
+                                  BorderSide(color: celadonBlue, width: 3),
                             ),
                           ),
                           //dropdown menu labels
-<<<<<<< HEAD
-                          dropdownColor: new Color(0xFFe62d11),
-=======
                           dropdownColor: celadonBlue,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           value: _measurementValue,
                           items: [
                             "",
@@ -290,27 +247,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                   ],
                 ),
                 Padding(
-<<<<<<< HEAD
-                  padding: const EdgeInsets.only(top: 13.0),
-                  child: divider,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
-                          child: Text(
-                            'Previous',
-                            style: TextStyle(
-                                color: new Color(0xFFe62d11),
-                                fontWeight: FontWeight.bold),
-=======
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -327,8 +263,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             child: Text(
                               'PREVIOUS',
                               style: TextStyle(
-                                color: greenSheen,
-                                fontWeight: FontWeight.bold),
+                                  color: greenSheen,
+                                  fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {
                               setState(() {});
@@ -337,34 +273,17 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               } else {} //remove last ingredient from the list
                               //if list is empty, do nothing
                             },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       ),
-<<<<<<< HEAD
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: new Color(0xFFe62d11)),
-                          child: Text(
-                            'Next',
-                            style: TextStyle(
-                                color: new Color(0xFFe62d11),
-                                fontWeight: FontWeight.bold),
-=======
                       Padding(
                         padding: const EdgeInsets.all(13.0),
                         child: SizedBox(
                           width: 150,
                           height: 50,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: greenSheen),
+                            style:
+                                ElevatedButton.styleFrom(primary: greenSheen),
                             child: Text(
                               'NEXT',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -390,7 +309,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 _measurementValue = null;
                               }
                             },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       )
@@ -425,19 +343,11 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               return Column(
                                 children: [
                                   ListTile(
-<<<<<<< HEAD
-                                    leading: CircleAvatar(
-                                      backgroundColor: new Color(0xFFe62d11),
-                                      radius: 10,
-                                    ),
-                                    title: Text(
-=======
                                       leading: CircleAvatar(
                                         backgroundColor: celadonBlue,
                                         radius: 10,
                                       ),
                                       title: Text(
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                         DBControl.ingredients[index].toString(),
                                         style: TextStyle(
                                           color: white,
@@ -448,11 +358,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                     thickness: 2,
                                     indent: 40,
                                     endIndent: 20,
-<<<<<<< HEAD
-                                    color: new Color(0xFFe62d11),
-=======
                                     color: ceruleanCrayola,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                                   ),
                                 ],
                               );
@@ -462,24 +368,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                   ),
                 ),
                 //cancel and done buttons to move to next page or go to previous page
-<<<<<<< HEAD
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                                color: new Color(0xFFe62d11),
-                                fontWeight: FontWeight.bold),
-=======
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25.0),
                   child: Row(
@@ -491,9 +379,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                           width: 150,
                           height: 50,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: greenSheen
-                            ),
+                            style:
+                                ElevatedButton.styleFrom(primary: greenSheen),
                             child: Text(
                               'DONE',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -512,25 +399,9 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                             MethodSubmission()));
                               }
                             },
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
                           ),
                         ),
                       ),
-<<<<<<< HEAD
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: new Color(0xFFe62d11)),
-                          child: Text(
-                            'Done',
-                            style: TextStyle(
-                                color: Colors.white,
-=======
                       Padding(
                         padding: const EdgeInsets.all(13.0),
                         child: SizedBox(
@@ -543,9 +414,8 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                             child: Text(
                               'CANCEL',
                               style: TextStyle(
-                                color: greenSheen,
->>>>>>> d52dabf693938741cd35925b142d634cae66eb35
-                                fontWeight: FontWeight.bold),
+                                  color: greenSheen,
+                                  fontWeight: FontWeight.bold),
                             ),
                             onPressed: () {
                               //clears the controllers and variables
