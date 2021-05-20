@@ -43,6 +43,8 @@
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to photo library</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow access to camera to capture photos</string>
 </dict>

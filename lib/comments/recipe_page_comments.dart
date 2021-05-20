@@ -64,20 +64,20 @@ class _CommentBoardState extends State<CommentBoard> {
                 padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(width: 1),
-                      borderRadius: BorderRadius.circular(2)),
+                      color: Color(0xFF4ca5b5),
+                      border: Border.all(width: 2),
+                      borderRadius: BorderRadius.circular(15)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: TextButton(
-                            onPressed: () async {
-                              await _dialogCall(context, widget.recipeID);
-                            },
-                            child: Text("Leave a comment!",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.black87))),
-                      ),
+                          child: TextButton(
+                              onPressed: () async {
+                                await _dialogCall(context, widget.recipeID);
+                              },
+                              child: Text("COMMENT!",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)))),
                     ],
                   ),
                 ),
@@ -87,9 +87,6 @@ class _CommentBoardState extends State<CommentBoard> {
         ));
   }
 
-/*
- * This dialogCall method produces the comment entry form
- */
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(
         context: context,

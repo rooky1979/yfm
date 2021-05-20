@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youth_food_movement/bookmark/bookmark_tile.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class BookmarkPage extends StatefulWidget {
   @override
@@ -16,9 +17,17 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       //app bar that contains the search bar and profile settings page
       appBar: AppBar(
-        backgroundColor: Colors.red[800],
+       flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[ceruleanCrayola, celadonBlue])),
+        ),
+        //backgroundColor: Color(0xFF7a243e),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -31,7 +40,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
         title: Text('Favourite Recipes',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 25,
             )),
       ),
@@ -43,7 +52,6 @@ class _BookmarkPageState extends State<BookmarkPage> {
           ) {
             if (!snapshot.hasData) return CircularProgressIndicator();
             return GridView.builder(
-                //scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data.docs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),

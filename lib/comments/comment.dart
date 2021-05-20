@@ -4,8 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-//import 'package:youth_food_movement/recipe/ui/comment_update_form.dart';
-
 class Comment extends StatefulWidget {
   @override
   _CommentState createState() => _CommentState();
@@ -204,7 +202,7 @@ class _CommentState extends State<Comment> {
                                 },
                                 icon: Icon(Icons.thumb_up,
                                     color: clickedLike
-                                        ? Colors.blue
+                                        ? Color(0xFF009e5fb)
                                         : Colors.black)),
                             Container(
                               padding: const EdgeInsets.only(

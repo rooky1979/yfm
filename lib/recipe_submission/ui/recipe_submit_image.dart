@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_success.dart';
@@ -42,7 +43,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
 //snackbar for if no image is selected
   var snackbar = SnackBar(
       duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Color(0xFFe62d11),
       content: Text("Please select an image",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -50,11 +51,22 @@ class _ImageSubmissionState extends State<ImageSubmission> {
             fontSize: 20,
           )));
 
+  //colours for the fields
+  Color lightPurple = Color(0xFFe62d1);
+  Color darkPurple = Color(0xFF7a243e);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[turquoiseGreen, greenSheen])),
+        ),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -67,7 +79,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
         title: Text('Upload an image!',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 25,
             )),
       ),
@@ -84,7 +96,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Color(0xFF7a243e),
+                          fillColor: celadonBlue,
                           child: Icon(
                             FontAwesomeIcons.solidImage,
                             size: 40,
@@ -101,7 +113,8 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Camera Roll',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
+                                color: white,
+                                  fontWeight: FontWeight.w500, fontSize: 16)),
                         ),
                       ],
                     ),
@@ -109,7 +122,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     Column(
                       children: [
                         RawMaterialButton(
-                          fillColor: Color(0xFF7a243e),
+                          fillColor: celadonBlue,
                           child: Icon(
                             FontAwesomeIcons.camera,
                             size: 40,
@@ -126,6 +139,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text('Take photo',
                               style: TextStyle(
+                                color: white,
                                   fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ],
@@ -142,15 +156,15 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                     child: SizedBox(
                       width: 150,
                       height: 50,
-                      child: OutlinedButton(
-                        style:
-                        OutlinedButton.styleFrom(
-                          primary: Color(0xFF4ca5b5),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
                         ),
                         child: Text(
                           'CANCEL',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,
+                              color: greenSheen),
                         ),
                         onPressed: () {
                           DBControl.clearDBVariables();
@@ -167,11 +181,11 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF4ca5b5)),
+                        style: ElevatedButton.styleFrom(
+                            primary: greenSheen),
                         child: Text(
                           'FINISH',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           if (DBControl.image == null) {
@@ -203,8 +217,8 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        color: white,
                       ),
                     ),
                   )
@@ -222,6 +236,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                             child: Center(
                                 child: Text(
                               'No Image Selected',
+                              style: TextStyle(color: Colors.lightBlue[50]),
                               textAlign: TextAlign.center,
                             )),
                           )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:youth_food_movement/bookmark/bookmark_page.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/user_information_card.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,7 @@ import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//a temp page to hold the user information and to display all the information
+//a profile page to hold the user information and to display all the information
 //related to the user that they may want to see/edit
 
 @override
@@ -30,72 +31,88 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
-        backgroundColor: new Color(0xFFe62d11),
-        title: Container(
-            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.all(Radius.zero)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 0,
-                  child: Row(),
-                ),
-              ],
-            )),
+        centerTitle: true,
+        title: Text(
+          'Profile Information',
+          style: TextStyle(color: Colors.white),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[cream, radicalRed])),
+        ),
+        leading: IconButton(
+            icon: Icon(
+              FontAwesomeIcons.arrowLeft,
+              size: 25,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Card(
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                decoration: new BoxDecoration(),
-                child: FutureBuilder(
-                  future: _getUserImage(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      //return the image and make it cover the container
-                      return GestureDetector(
-                        child: Image.network(
-                          snapshot.data,
-                          fit: BoxFit.cover,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                  child: Center(
-                                    child: Image.network(
-                                      snapshot.data,
-                                      fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                child: Container(
+                  width: 200.0,
+                  height: 180.0,
+                  decoration: new BoxDecoration(),
+                  child: FutureBuilder(
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return GestureDetector(
+                          child: Image.network(
+                            snapshot.data,
+                            fit: BoxFit.cover,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  //make the picture full screen onTap
+                                  return GestureDetector(
+                                    child: Center(
+                                      child: Image.network(
+                                        snapshot.data,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  onTap: () => Navigator.pop(context),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return Container(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                  },
+                                    onTap: () => Navigator.pop(context),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
             ProfileButtons(),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 13.0, right: 13.0, top: 12.0, bottom: 1.0),
+            ),
             StreamBuilder(
               stream: firestoreDb,
               builder: (
@@ -105,35 +122,38 @@ class ProfilePage extends StatelessWidget {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: 1, //snapshot.data.docs.length,
+                      itemCount: 1,
                       itemBuilder: (context, int index) {
                         return UserInformationCard(
                           snapshot: snapshot.data,
-                          index:
-                              1, //this changes depending on what user is selected
-                          //index will be used
+                          index: 1,
                         );
                       }),
                 );
               },
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                    return new Color(0xFFe62d11);
+            //sign out of the account button
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Container(
+                width: MediaQuery.of(context).size.width * .90,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 4,
+                    primary: Color(0xFFe62d11), // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    context.read<AuthenticationService>().signOut();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginPage()));
                   },
+                  child: Text("SIGN OUT"),
                 ),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-                context.read<AuthenticationService>().signOut();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage()));
-              },
-              child: Text("Sign Out"),
             ),
           ],
         ),
@@ -142,7 +162,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   //method to get the image URL
-
   Future _getUserImage() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     String imageName;
@@ -166,51 +185,51 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ProfileButtons extends StatelessWidget {
+  //colours for the fields
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
+      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: 90,
+        width: MediaQuery.of(context).size.width * .90,
+        height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: new Color(0xFFe62d11),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RawMaterialButton(
+            borderRadius: BorderRadius.circular(10),
+            color: turquoiseGreen,
+            border: Border.all(color: darkPurple)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            RawMaterialButton(
+              padding: EdgeInsets.all(10),
+              fillColor: Colors.white,
+              shape: CircleBorder(side: BorderSide(color: darkPurple)),
+              child: Icon(FontAwesomeIcons.globe,
+                  size: 20, color: darkPurple),
+              onPressed: _launchURL,
+            ),
+            RawMaterialButton(
                 padding: EdgeInsets.all(10),
                 fillColor: Colors.white,
-                shape: CircleBorder(),
-                child: Icon(FontAwesomeIcons.globe,
-                    size: 40, color: new Color(0xFFe62d11)),
-                onPressed: _launchURL,
-              ),
-              RawMaterialButton(
-                  padding: EdgeInsets.all(10),
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  child: Icon(
-                    FontAwesomeIcons.solidBookmark,
-                    size: 40,
-                    color: new Color(0xFFe62d11),
-                  ),
-                  onPressed: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    BookmarkPage()))
-                      }),
-              _checkMod(context)
-            ],
-          ),
+                shape: CircleBorder(side: BorderSide(color: darkPurple)),
+                child: Icon(
+                  FontAwesomeIcons.solidBookmark,
+                  size: 20,
+                  color: Color(0xFF7a243e),
+                ),
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  BookmarkPage()))
+                    }),
+            _checkMod(context)
+          ],
         ),
       ),
     );
@@ -218,7 +237,7 @@ class ProfileButtons extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'http://justcook.co.nz/about-us';
+  const url = 'https://nutritionfoundation.org.nz/about-us';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -226,22 +245,19 @@ _launchURL() async {
   }
 }
 
+//currently unused method to validate if the user is a moderator or not
 _checkMod(BuildContext context) {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  if (_firebaseAuth.currentUser.uid == 'rrFOtlLNLdedqQG9cwsZt3CCjmQ2') {
-    return RawMaterialButton(
-        padding: EdgeInsets.all(11),
-        fillColor: Colors.white,
-        shape: CircleBorder(),
-        child: Icon(FontAwesomeIcons.plusCircle, size: 40, color: Colors.red),
-        onPressed: () => {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          InformationSubmission()))
-            });
-  } else {
-    return Container();
-  }
+  //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  return RawMaterialButton(
+      padding: EdgeInsets.all(11),
+      fillColor: Colors.white,
+      shape: CircleBorder(side: BorderSide(color: darkPurple)),
+      child:
+          Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
+      onPressed: () => {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => InformationSubmission()))
+          });
 }
