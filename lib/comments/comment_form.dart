@@ -9,19 +9,15 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class CommentEntryDialog extends StatefulWidget {
   @override
   _CommentEntryDialogState createState() => _CommentEntryDialogState();
-
   const CommentEntryDialog({Key key, this.recipeID}) : super(key: key);
-
   final String recipeID;
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
   CollectionReference imgRef;
   firebase_storage.Reference ref;
-
   //controllers for the editable text field
   TextEditingController descriptionInputController;
-
   @override
   void initState() {
     super.initState();
@@ -33,10 +29,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   final imagePicker = ImagePicker();
   bool imgAttached = false;
   var url;
-
-/*
- * This method opens the gallery and saves the file path/sets the image attached string to true
- */
+// This method opens the gallery and saves the file path/sets the image attached string to true
   _openGallery(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -47,9 +40,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     Navigator.of(context).pop();
   }
 
-/*
- * This method opens the camera and saves the file path/sets the image attached string to true
- */
+  //This method opens the camera and saves the file path/sets the image attached string to true
   _openCamera(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
     setState(() {
@@ -60,24 +51,22 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     Navigator.of(context).pop();
   }
 
-/*
- * This method adds the image to the firebase storage with the same ID as the newly created comment.
- */
+// This method adds the image to the firebase storage with the same ID as the newly created comment.
   Future _uploadImageToFirebase(String commentId) async {
     if (_imgfile != null) {
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('/comment_images/' + commentId);
-      await ref.putFile(_imgfile).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {});
-      });
+      await ref.putFile(_imgfile).whenComplete(
+        () async {
+          await ref.getDownloadURL().then((value) {});
+        },
+      );
     }
   }
 
-/*
- * This widget creates the image button, if an image is attached it shows the image, and changes the text to "Change image"
- * It also calls the _showChoiceDialog alert box when the button is pressed.
- */
+// This widget creates the image button, if an image is attached it shows the image, and changes the text to "Change image"
+// It also calls the _showChoiceDialog alert box when the button is pressed.
   Widget _decideImageView() {
     if (_imgfile == null) {
       return Container(
@@ -136,10 +125,8 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     }
   }
 
-/*
-  This method creates an AlertDialog which allows the user to pick between gallery and camera for the image source.
-  Once picked either _openGallery or _openCamera are called.
-*/
+  // This method creates an AlertDialog which allows the user to pick between gallery and camera for the image source.
+  // Once picked either _openGallery or _openCamera are called.
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -171,16 +158,13 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
         });
   }
 
-/*
- * This is the main widget that has the body of the comment form
- * It contains the text entry field, button to cancel and send the comment,
- * and image add button.
- */
+//This is the main widget that has the body of the comment Form
+//It contains the text entry field, button to cancel and send the comment,
+//and image add button.
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     final filter = ProfanityFilter();
-
     String recipeID = widget.recipeID;
     return Scaffold(
       backgroundColor: new Color(0xFFf0f1eb),
@@ -221,32 +205,36 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                               .collection('recipe')
                               .doc('$recipeID')
                               .collection('comments')
-                              .add({
-                            'user': _firebaseAuth.currentUser.uid,
-                            'uid': _firebaseAuth.currentUser.uid,
-                            'imgAttached': imgAttached,
-                            'description': descriptionInputController.text,
-                            'timestamp': new DateTime.now(),
-                            'likes': 0,
-                            'likedUsers': [],
-                            'reported': false
-                          }).then((response) {
-                            print(response.id);
-                            if (imgAttached == true) {
-                              _uploadImageToFirebase(response.id);
-                            }
-                            final snackBar = SnackBar(
-                              content: Text('Comment Posted'),
-                              duration: Duration(milliseconds: 1000),
-                              backgroundColor: Colors.green,
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            Navigator.pop(context);
-                            descriptionInputController.clear();
-                            _imgfile = null;
-                            imgAttached = false;
-                          }).catchError(
+                              .add(
+                            {
+                              'user': _firebaseAuth.currentUser.uid,
+                              'uid': _firebaseAuth.currentUser.uid,
+                              'imgAttached': imgAttached,
+                              'description': descriptionInputController.text,
+                              'timestamp': new DateTime.now(),
+                              'likes': 0,
+                              'likedUsers': [],
+                              'reported': false
+                            },
+                          ).then(
+                            (response) {
+                              print(response.id);
+                              if (imgAttached == true) {
+                                _uploadImageToFirebase(response.id);
+                              }
+                              final snackBar = SnackBar(
+                                content: Text('Comment Posted'),
+                                duration: Duration(milliseconds: 1000),
+                                backgroundColor: Colors.green,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              Navigator.pop(context);
+                              descriptionInputController.clear();
+                              _imgfile = null;
+                              imgAttached = false;
+                            },
+                          ).catchError(
                             (onError) => print(onError),
                           );
                         } else {
