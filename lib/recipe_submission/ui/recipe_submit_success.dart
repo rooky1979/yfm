@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 
@@ -6,12 +7,19 @@ class SuccessSubmission extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
-        backgroundColor: Color(0xFF7a243e),//dark purple
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[turquoiseGreen, greenSheen])),
+        ),
         title: Text('Successful!',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 25,
             )),
       ),
@@ -33,8 +41,8 @@ class SuccessSubmission extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            color: white,
                           ),
                         ),
                       ),
@@ -48,10 +56,10 @@ class SuccessSubmission extends StatelessWidget {
                             width: 200,
                             height: 50,
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.green),
+                              style:
+                                  ElevatedButton.styleFrom(primary: greenSheen),
                               child: Text(
-                                'Finished',
+                                'FINISHED',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),

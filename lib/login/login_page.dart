@@ -65,6 +65,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
@@ -87,12 +88,13 @@ class _LogInState extends State<LogIn> {
                   height: 300,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xff4ca5b5),
-                          Colors.white.withOpacity(0.95)
-                        ]),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xff4ca5b5),
+                        Colors.white.withOpacity(0.95)
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -102,10 +104,11 @@ class _LogInState extends State<LogIn> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.35,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    fit: BoxFit.scaleDown,
-                    image: AssetImage('lib/logo/just-cook-logo.png'),
-                  )),
+                    image: DecorationImage(
+                      fit: BoxFit.scaleDown,
+                      image: AssetImage('lib/logo/just-cook-logo.png'),
+                    ),
+                  ),
                 ),
               ),
               Center(
@@ -174,7 +177,6 @@ class _LogInState extends State<LogIn> {
                           ),
                         ),
                       ),
-
                       //sign in button
                       Container(
                         width: 180,
@@ -182,24 +184,25 @@ class _LogInState extends State<LogIn> {
                           padding: const EdgeInsets.only(top: 12.0),
                           //call for data controller to search for email in database
                           child: GetBuilder<DataController>(
-                              init: DataController(),
-                              builder: (val) {
-                                return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 4,
-                                    primary: Color(0xFF4ca5b5), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                  onPressed: () {
-                                    //check if email has been entered
-                                    if (emailInputController.text.isNotEmpty) {
-                                      //check if password has been entered
-                                      if (passwordInputController
-                                          .text.isNotEmpty) {
-                                        val
-                                            .emailQueryData(
-                                                emailInputController.text)
-                                            .then((value) {
+                            init: DataController(),
+                            builder: (val) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  primary: Color(0xFF4ca5b5), // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                                onPressed: () {
+                                  //check if email has been entered
+                                  if (emailInputController.text.isNotEmpty) {
+                                    //check if password has been entered
+                                    if (passwordInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .emailQueryData(
+                                              emailInputController.text)
+                                          .then(
+                                        (value) {
                                           snapshotData = value;
                                           //check if email exist in database
                                           if (snapshotData.docs.isNotEmpty) {
@@ -227,32 +230,33 @@ class _LogInState extends State<LogIn> {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
                                           }
-                                        });
-                                      } else {
-                                        // snackbar for when password is not entered
-                                        final snackBar = SnackBar(
-                                          content: Text('Password not entered'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Color(0xFFe62d11),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
+                                        },
+                                      );
+                                      
                                     } else {
                                       //snackbar for when email is not entered
                                       final snackBar = SnackBar(
-                                        content: Text('Email not entered'),
+                                        content: Text('Password not entered'),
                                         duration: Duration(milliseconds: 1000),
                                         backgroundColor: Color(0xFFe62d11),
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
-                                  },
-                                  child: Text("LOGIN"),
-                                );
-                              }),
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: Text('Email not entered'),
+                                      duration: Duration(milliseconds: 1000),
+                                      backgroundColor: Color(0xFFe62d11),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                child: Text("LOGIN"),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       //register button
@@ -261,17 +265,19 @@ class _LogInState extends State<LogIn> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 6.0),
                           child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterPage()),
-                                );
-                              },
-                              child: Text("REGISTER"),
-                              style: OutlinedButton.styleFrom(
-                                primary: Color(0xFF4ca5b5),
-                              )),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ),
+                              );
+                            },
+                            child: Text("REGISTER"),
+                            style: OutlinedButton.styleFrom(
+                              primary: Color(0xFF4ca5b5),
+                            ),
+                          ),
                         ),
                       ),
                     ],

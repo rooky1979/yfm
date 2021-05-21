@@ -9,19 +9,15 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class CommentEntryDialog extends StatefulWidget {
   @override
   _CommentEntryDialogState createState() => _CommentEntryDialogState();
-
   const CommentEntryDialog({Key key, this.recipeID}) : super(key: key);
-
   final String recipeID;
 }
 
 class _CommentEntryDialogState extends State<CommentEntryDialog> {
   CollectionReference imgRef;
   firebase_storage.Reference ref;
-
   //controllers for the editable text field
   TextEditingController descriptionInputController;
-
   @override
   void initState() {
     super.initState();
@@ -33,51 +29,48 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
   final imagePicker = ImagePicker();
   bool imgAttached = false;
   var url;
-
-/*
- * This method opens the gallery and saves the file path/sets the image attached string to true
- */
+// This method opens the gallery and saves the file path/sets the image attached string to true
   _openGallery(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _imgfile = File(imgfile.path);
-      imgAttached = true;
-      debugPrint(_imgfile.path);
-    });
+    setState(
+      () {
+        _imgfile = File(imgfile.path);
+        imgAttached = true;
+        debugPrint(_imgfile.path);
+      },
+    );
     Navigator.of(context).pop();
   }
 
-/*
- * This method opens the camera and saves the file path/sets the image attached string to true
- */
+  //This method opens the camera and saves the file path/sets the image attached string to true
   _openCamera(BuildContext context) async {
     final imgfile = await imagePicker.getImage(source: ImageSource.camera);
-    setState(() {
-      _imgfile = File(imgfile.path);
-      imgAttached = true;
-      // debugPrint(_imgfile.path.toString());
-    });
+    setState(
+      () {
+        _imgfile = File(imgfile.path);
+        imgAttached = true;
+        // debugPrint(_imgfile.path.toString());
+      },
+    );
     Navigator.of(context).pop();
   }
 
-/*
- * This method adds the image to the firebase storage with the same ID as the newly created comment.
- */
+// This method adds the image to the firebase storage with the same ID as the newly created comment.
   Future _uploadImageToFirebase(String commentId) async {
     if (_imgfile != null) {
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('/comment_images/' + commentId);
-      await ref.putFile(_imgfile).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {});
-      });
+      await ref.putFile(_imgfile).whenComplete(
+        () async {
+          await ref.getDownloadURL().then((value) {});
+        },
+      );
     }
   }
 
-/*
- * This widget creates the image button, if an image is attached it shows the image, and changes the text to "Change image"
- * It also calls the _showChoiceDialog alert box when the button is pressed.
- */
+// This widget creates the image button, if an image is attached it shows the image, and changes the text to "Change image"
+// It also calls the _showChoiceDialog alert box when the button is pressed.
   Widget _decideImageView() {
     if (_imgfile == null) {
       return Container(
@@ -106,27 +99,28 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
               width: double.infinity,
               child: IntrinsicHeight(
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FittedBox(
-                        child: Image.file(
-                          _imgfile,
-                          fit: BoxFit.cover,
-                          height: 125,
-                          width: 85,
-                        ),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FittedBox(
+                      child: Image.file(
+                        _imgfile,
+                        fit: BoxFit.cover,
+                        height: 125,
+                        width: 85,
                       ),
-                      ElevatedButton.icon(
-                          onPressed: () {
-                            _showChoiceDialog(context);
-                          },
-                          icon: Icon(
-                            Icons.image,
-                            size: 25,
-                          ),
-                          label: Text("Change Image",
-                              style: TextStyle(fontSize: 25))),
-                    ]),
+                    ),
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          _showChoiceDialog(context);
+                        },
+                        icon: Icon(
+                          Icons.image,
+                          size: 25,
+                        ),
+                        label: Text("Change Image",
+                            style: TextStyle(fontSize: 25))),
+                  ],
+                ),
               ),
             ),
             Container(padding: EdgeInsets.all(6.0))
@@ -136,60 +130,62 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     }
   }
 
-/*
-  This method creates an AlertDialog which allows the user to pick between gallery and camera for the image source.
-  Once picked either _openGallery or _openCamera are called.
-*/
+  // This method creates an AlertDialog which allows the user to pick between gallery and camera for the image source.
+  // Once picked either _openGallery or _openCamera are called.
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Make a Choice!"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text("Gallery"),
-                    onTap: () {
-                      _openGallery(context);
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                  ),
-                  GestureDetector(
-                    child: Text("Camera"),
-                    onTap: () {
-                      _openCamera(context);
-                    },
-                  ),
-                ],
-              ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Make a Choice!"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text("Gallery"),
+                  onTap: () {
+                    _openGallery(context);
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                ),
+                GestureDetector(
+                  child: Text("Camera"),
+                  onTap: () {
+                    _openCamera(context);
+                  },
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
-/*
- * This is the main widget that has the body of the comment form
- * It contains the text entry field, button to cancel and send the comment,
- * and image add button.
- */
+//This is the main widget that has the body of the comment Form
+//It contains the text entry field, button to cancel and send the comment,
+//and image add button.
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     final filter = ProfanityFilter();
-
     String recipeID = widget.recipeID;
     return Scaffold(
+      backgroundColor: new Color(0xFFf0f1eb),
       body: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 0),
+        padding:
+            const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
         child: Column(
           children: [
             Text(
               'Comment',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(
+                fontSize: 20,
+                color: new Color(0xFF7a243e),
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Divider(thickness: 2),
             Row(
@@ -201,7 +197,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                       descriptionInputController.clear();
                       Navigator.pop(context);
                     },
-                    padding: const EdgeInsets.only(right: 120),
+                    padding: const EdgeInsets.all(20),
                     icon: Icon(Icons.clear),
                     iconSize: 30),
                 IconButton(
@@ -221,39 +217,43 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                               .collection('recipe')
                               .doc('$recipeID')
                               .collection('comments')
-                              .add({
-                            'user': _firebaseAuth.currentUser.uid,
-                            'uid': _firebaseAuth.currentUser.uid,
-                            'imgAttached': imgAttached,
-                            'description': descriptionInputController.text,
-                            'timestamp': new DateTime.now(),
-                            'likes': 0,
-                            'likedUsers': [],
-                            'reported': false
-                          }).then((response) {
-                            print(response.id);
-
-                            Navigator.pop(context);
-                            final snackBar = SnackBar(
-                              content: Text('Comment Posted'),
-                              duration: Duration(milliseconds: 8000),
-                              backgroundColor: Colors.green,
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            if (imgAttached == true) {
-                              _uploadImageToFirebase(response.id);
-                            }
-
-                            descriptionInputController.clear();
-                            _imgfile = null;
-                            imgAttached = false;
-                          }).catchError((onError) => print(onError));
+                              .add(
+                            {
+                              'user': _firebaseAuth.currentUser.uid,
+                              'uid': _firebaseAuth.currentUser.uid,
+                              'imgAttached': imgAttached,
+                              'description': descriptionInputController.text,
+                              'timestamp': new DateTime.now(),
+                              'likes': 0,
+                              'likedUsers': [],
+                              'reported': false
+                            },
+                          ).then(
+                            (response) {
+                              print(response.id);
+                              if (imgAttached == true) {
+                                _uploadImageToFirebase(response.id);
+                              }
+                              final snackBar = SnackBar(
+                                content: Text('Comment Posted'),
+                                duration: Duration(milliseconds: 1000),
+                                backgroundColor: Colors.green,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              Navigator.pop(context);
+                              descriptionInputController.clear();
+                              _imgfile = null;
+                              imgAttached = false;
+                            },
+                          ).catchError(
+                            (onError) => print(onError),
+                          );
                         } else {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
-                            duration: Duration(milliseconds: 3000),
-                            backgroundColor: Colors.red,
+                            duration: Duration(milliseconds: 1000),
+                            backgroundColor: new Color(0xFFe62d11),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
@@ -261,7 +261,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         final snackBar = SnackBar(
                           content: Text('Please use appropriate language'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: Colors.red,
+                          backgroundColor: new Color(0xFFe62d11),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -280,17 +280,18 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
-                    hintText: 'A Question, Comment, or Tip!',
-                    labelText: 'Type Here...',
-                    labelStyle: TextStyle(
-                      color: Color(0xFFe62d11),
-                      fontSize: 17,
-                    ),
-                    border: const OutlineInputBorder()),
+                  hintText: 'A Question, Comment, or Tip!',
+                  labelText: 'Type Here...',
+                  labelStyle: TextStyle(
+                    color: Color(0xFFe62d11),
+                    fontSize: 17,
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
                 controller: descriptionInputController,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             _decideImageView(),
           ],
         ),

@@ -25,11 +25,13 @@ class MethodCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text('Method:',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    )),
+                child: Text(
+                  'Method:',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -53,9 +55,10 @@ class MethodCard extends StatelessWidget {
                     ),
                   ),
                   //each tile prints each element of the array
-                  title: Text(methodList[index].toString(),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  title: Text(
+                    methodList[index].toString(),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Divider(
                   height: 10,
