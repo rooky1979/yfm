@@ -16,9 +16,8 @@ class CommentBoard extends StatefulWidget {
   final int index;
 }
 
-/*
- * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
- */
+// This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
+
 class _CommentBoardState extends State<CommentBoard> {
   @override
   Widget build(BuildContext context) {
@@ -95,10 +94,8 @@ class _CommentBoardState extends State<CommentBoard> {
     );
   }
 
-  /*
-   * This Method creates the comment entry form
-   * It takes the recipeID so the Comment is saved to the correct recipe
-   */
+  // This Method creates the comment entry form
+  // It takes the recipeID so the Comment is saved to the correct recipe
 
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(

@@ -290,10 +290,9 @@ void _addFavouriteToDB(String recipeIdNumber, String id) async {
   recipes.clear();
 }
 
-/*
-    This method gets the current user and recipe ID and feeds it to
-    the method for adding a recipe to the database
- */
+//   This method gets the current user and recipe ID and feeds it to
+//   the method for adding a recipe to the database
+
 void _getUserDocIdForAdd(String recipeIdNumber) async {
   String id;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -316,10 +315,9 @@ void _getUserDocIdForAdd(String recipeIdNumber) async {
   );
 }
 
-/*
-    This method gets the current user and recipe ID and feeds it to
-    the method for removing a recipe from the database
- */
+//  This method gets the current user and recipe ID and feeds it to
+//  the method for removing a recipe from the database
+
 void _getUserDocIdForDelete(String recipeIdNumber) async {
   String id;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -356,10 +354,9 @@ void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   recipes.clear();
 }
 
-/*
- * This method checks if the open recipe has been liked by the user
- * and returns true or false.
- */
+// This method checks if the open recipe has been liked by the user
+// and returns true or false.
+
 Future _getLiked() async {
   bool liked = false;
   List recipes = [];

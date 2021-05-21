@@ -264,9 +264,8 @@ class _CommentState extends State<Comment> {
     );
   }
 
-  /*
-   * This method gets the image associated with a comment from the database
-   */
+  //This method gets the image associated with a comment from the database
+
   Future _getImageURL() async {
     String downloadURL = await storage
         .ref('comment_images/' + widget.snapshot.docs[widget.index].id)
@@ -274,11 +273,9 @@ class _CommentState extends State<Comment> {
     return downloadURL;
   }
 
-  /*
-   * This method pulls the user avatar from the database 
-   * based on the image name saved
-   * 
-   */
+  // This method pulls the user avatar from the database
+  // based on the image name saved
+
   Future _getUserImage() async {
     String imageName;
 
@@ -301,10 +298,9 @@ class _CommentState extends State<Comment> {
     return downloadURL;
   }
 
-  /*
-   * This method pulls the username associated with the comment
-   * and returns it to the Future Builder
-   */
+  // This method pulls the username associated with the comment
+  // and returns it to the Future Builder
+
   Future _getUserName() async {
     String username;
     await FirebaseFirestore.instance
@@ -325,10 +321,9 @@ class _CommentState extends State<Comment> {
     return username;
   }
 
-  /*
-   * This method compares the current active user to the user associated with the comment,
-   * If the users match it creates the delete button. Otherwise it creates a report button.
-   */
+  // This method compares the current active user to the user associated with the comment,
+  // If the users match it creates the delete button. Otherwise it creates a report button.
+
   _checkUser(String docId, int id, String user) {
     if ((widget.snapshot.docs[widget.index]['uid'] == user ||
         user == 'insert current UID Here')) //Add mod feature before handover?
@@ -379,9 +374,8 @@ class _CommentState extends State<Comment> {
     }
   }
 
-/*
- * This method creates the sequence for comment delete confirmation.
- */
+  // This method creates the sequence for comment delete confirmation.
+
   showDeleteAlert(BuildContext context, var docId) {
     showDialog(
       context: context,
@@ -420,9 +414,8 @@ class _CommentState extends State<Comment> {
     );
   }
 
-/*
- * This method creates the alert dialog sequence for confirming reporting of a comment.
- */
+  // This method creates the alert dialog sequence for confirming reporting of a comment.
+
   showReportAlert(BuildContext context, var docId) {
     showDialog(
       context: context,

@@ -123,18 +123,16 @@ class _UserDataState extends State<UserData> {
     );
   }
 
-  /*
-   * This method pulls the user avatar from the database 
-   * (Needs to change to use the string stored in db)
-   */
+  // This method pulls the user avatar from the database
+  // (Needs to change to use the string stored in db)
+
   Future _getUserImage() async {
     String downloadURL = await storage.ref('avatar1.png').getDownloadURL();
     return downloadURL;
   }
 
-  /*
-   * This method pulls the username associated with the comment
-   */
+  // This method pulls the username associated with the comment
+
   Future _getUserName() async {
     String username;
     await FirebaseFirestore.instance
