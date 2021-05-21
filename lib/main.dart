@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
@@ -8,10 +9,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(
     new MaterialApp(
-      //theme: _appTheme,
       theme: ThemeData(
-        //brightness: Brightness.light,
-        primaryColor: new Color(0xFFe62d11),
+        primaryColor: cream,
       ),
       home: LoginPage(),
     ),
