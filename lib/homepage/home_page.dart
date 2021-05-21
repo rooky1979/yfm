@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
