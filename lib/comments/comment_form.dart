@@ -193,7 +193,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
               'Comment',
               style: TextStyle(
                 fontSize: 20,
-                color: darkPurple,
+                color: black,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -218,18 +218,15 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         if (descriptionInputController.text.isNotEmpty) {
                           final snackBar = SnackBar(
                             content: Text('Comment Posted'),
-
                             duration: Duration(milliseconds: 8000),
                             backgroundColor: green,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-
                           FirebaseFirestore.instance
                               .collection('recipe')
                               .doc('$recipeID')
                               .collection('comments')
-
                               .add(
                             {
                               'user': _firebaseAuth.currentUser.uid,
@@ -262,7 +259,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           ).catchError(
                             (onError) => print(onError),
                           );
-
                         } else {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
@@ -294,14 +290,13 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
-                  hintText: 'A Question, Comment, or Tip!',
-                  labelText: 'Type Here...',
-                  labelStyle: TextStyle(
-                    color: orangeRed,
-                    fontSize: 17,
-                  ),
-                  border: const OutlineInputBorder(),
-                ),
+                    hintText: 'A Question, Comment, or Tip!',
+                    labelText: 'Type Here...',
+                    labelStyle: TextStyle(
+                      color: orangeRed,
+                      fontSize: 17,
+                    ),
+                    border: const OutlineInputBorder()),
                 controller: descriptionInputController,
               ),
             ),

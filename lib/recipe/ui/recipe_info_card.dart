@@ -39,7 +39,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   //display the recipe title
                   Padding(
@@ -96,7 +96,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget for the recipe info subheading
@@ -146,7 +146,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget to show the serving size
@@ -180,7 +180,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget to display the prep time
@@ -242,7 +242,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget to show what allergies the recipes affects
@@ -278,7 +278,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
@@ -318,7 +318,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: darkPurple,
+                    color: dividerColor,
                   ),
                   Padding(
                     //widget showing vege, non-vege or vegan
@@ -357,7 +357,7 @@ class RecipeInformationCard extends StatelessWidget {
                   thickness: 3,
                   indent: 10,
                   endIndent: 10,
-                  color: darkPurple,
+                  color: dividerColor,
                 ),
                 Padding(
                   //widget for the recipe info title
@@ -385,7 +385,7 @@ class RecipeInformationCard extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: darkPurple,
+                            backgroundColor: dividerColor,
                             radius: 10,
                           ),
                           title: Text(ingredientsList[index].toString(),

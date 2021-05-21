@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: cream,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -204,15 +204,16 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
+      padding:
+          const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0, bottom: 2.0),
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .90,
-        height: 50,
+        height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: turquoiseGreen,
-          border: Border.all(color: darkPurple),
+          border: Border.all(color: buttonPrimary, width: 2),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -221,7 +222,7 @@ class ProfileButtons extends StatelessWidget {
               padding: EdgeInsets.all(10),
               fillColor: white,
               shape: CircleBorder(
-                side: BorderSide(color: darkPurple),
+                side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(FontAwesomeIcons.globe, size: 20, color: darkPurple),
               onPressed: _launchURL,
@@ -230,12 +231,12 @@ class ProfileButtons extends StatelessWidget {
               padding: EdgeInsets.all(10),
               fillColor: white,
               shape: CircleBorder(
-                side: BorderSide(color: darkPurple),
+                side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(
                 FontAwesomeIcons.solidBookmark,
                 size: 20,
-                color: darkPurple,
+                color: buttonPrimary,
               ),
               onPressed: () => {
                 Navigator.push(

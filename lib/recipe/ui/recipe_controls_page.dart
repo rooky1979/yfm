@@ -92,9 +92,9 @@ class RecipeThumbnail extends StatelessWidget {
         //back arrow
         IconButton(
             icon: Icon(
-              FontAwesomeIcons.arrowLeft,
-              size: 30,
-              color: orangeRed,
+              Icons.arrow_back_outlined,
+              size: 45,
+              color: cadetBlue,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -127,19 +127,21 @@ class RecipeButtons extends StatelessWidget {
       padding: const EdgeInsets.only(top: 6.0, left: 3.0, right: 3.0),
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: 50,
+        width: MediaQuery.of(context).size.width * .95,
+        height: 55,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: darkPurple,
-        ),
+            borderRadius: BorderRadius.circular(10),
+            color: turquoiseGreen,
+            border: Border.all(color: buttonPrimary, width: 2)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10), //ingredients button
               fillColor: cream,
-              shape: CircleBorder(),
+              shape: CircleBorder(
+                side: BorderSide(color: buttonPrimary),
+              ),
               child: Icon(
                 FontAwesomeIcons.info,
                 size: 20,
@@ -162,7 +164,9 @@ class RecipeButtons extends StatelessWidget {
               // recipe method button
               padding: EdgeInsets.all(10),
               fillColor: cream,
-              shape: CircleBorder(),
+              shape: CircleBorder(
+                side: BorderSide(color: buttonPrimary),
+              ),
               child: Icon(
                 FontAwesomeIcons.book,
                 size: 20,
@@ -184,7 +188,9 @@ class RecipeButtons extends StatelessWidget {
             RawMaterialButton(
               padding: EdgeInsets.all(11),
               fillColor: cream,
-              shape: CircleBorder(),
+              shape: CircleBorder(
+                side: BorderSide(color: buttonPrimary),
+              ),
               child: Icon(
                 FontAwesomeIcons.comments, //comments button
                 size: 20,

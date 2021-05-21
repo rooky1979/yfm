@@ -47,7 +47,7 @@ class MethodCard extends StatelessWidget {
               children: [
                 ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: darkPurple,
+                    backgroundColor: dividerColor,
                     child: Text(
                       (index + 1).toString(),
                       style:
@@ -65,7 +65,7 @@ class MethodCard extends StatelessWidget {
                   thickness: 2,
                   indent: 40,
                   endIndent: 20,
-                  color: darkPurple,
+                  color: dividerColor,
                 ),
               ],
             );

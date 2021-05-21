@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/comments/comment.dart';
 import 'package:youth_food_movement/comments/comment_form.dart';
@@ -66,7 +67,7 @@ class _CommentBoardState extends State<CommentBoard> {
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFF4ca5b5),
+                  color: buttonPrimary,
                   border: Border.all(width: 2),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -80,7 +81,7 @@ class _CommentBoardState extends State<CommentBoard> {
                         },
                         child: Text(
                           "COMMENT!",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20, color: white),
                         ),
                       ),
                     ),

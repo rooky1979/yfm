@@ -81,22 +81,22 @@ class _RegisterPageState extends State<RegisterPage> {
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: emailInputController,
-                          cursorColor: darkPurple,
+                          cursorColor: gradientColourB,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.mail_outline, color: black),
                             labelText: 'Email',
-                            fillColor: lightPurple,
+                            fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
                               color: darkPurple,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: darkPurple, width: 2),
+                                  BorderSide(color: gradientColourB, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: darkPurple, width: 3),
+                                  BorderSide(color: gradientColourB, width: 3),
                             ),
                           ),
                         ),
@@ -108,27 +108,27 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: TextField(
                           controller: passwordInputController,
                           obscureText: true,
-                          cursorColor: darkPurple,
+                          cursorColor: gradientColourB,
                           decoration: InputDecoration(
                             prefixIcon:
                                 Icon(Icons.lock_outline_rounded, color: black),
                             focusColor: orangeRed,
                             labelText: 'Password',
-                            fillColor: lightPurple,
+                            fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: darkPurple,
+                              color: gradientColourB,
                             ),
                             hintStyle: TextStyle(
-                              color: Color(0xFE7a243e),
+                              color: gradientColourB,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: darkPurple, width: 2),
+                                  BorderSide(color: gradientColourB, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: darkPurple, width: 3),
+                                  BorderSide(color: gradientColourB, width: 3),
                             ),
                           ),
                         ),
@@ -231,7 +231,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     }
                                   } else {
                                     final snackBar = SnackBar(
-                                      content: Text('email not entered'),
+                                      content: Text('Email not entered'),
                                       duration: Duration(milliseconds: 1000),
                                       backgroundColor: orangeRed,
                                     );
@@ -242,7 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: Text("NEXT"),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 4,
-                                  primary: cadetBlue, // background
+                                  primary: buttonPrimary, // background
                                   onPrimary: white, // foreground
                                 ),
                               );
@@ -273,7 +273,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                             child: Text("BACK"),
                             style: OutlinedButton.styleFrom(
-                              primary: cadetBlue,
+                              primary: buttonPrimary,
                             ),
                           ),
                         ),

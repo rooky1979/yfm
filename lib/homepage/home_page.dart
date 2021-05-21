@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[turquoiseGreen, greenSheen],
+              colors: <Color>[gradientColourA, gradientColourB],
             ),
           ),
         ),
@@ -51,10 +51,11 @@ class _HomePageState extends State<HomePage> {
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: "Search",
+            fillColor: textfieldBackground,
             hintStyle: TextStyle(
               color: white,
-              fontWeight: FontWeight.w500,
-              fontSize: 25,
+              //fontWeight: FontWeight.w500,
+              fontSize: 20,
             ),
           ),
         ),
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [turquoiseGreen, greenSheen],
+                          colors: [gradientColourA, gradientColourB],
                         ),
                         border: Border.all(
                           color: Colors.green[50],
