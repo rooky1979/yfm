@@ -197,13 +197,16 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       Padding(
                         padding: const EdgeInsets.only(
                             top: 8.0, left: 30, bottom: 8.0),
+
                         child: Text(
                           'Added so far:',
                           style: TextStyle(
+
                             fontWeight: FontWeight.w500,
                             color: white,
                             fontSize: 20,
                           ),
+
                         ),
                       )
                     ],
@@ -282,20 +285,24 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       ),
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: SizedBox(
                       width: 150,
                       height: 50,
+
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: white,
+
                         ),
                         child: Text(
                           'CANCEL',
                           style: TextStyle(
+
                               color: greenSheen, fontWeight: FontWeight.bold),
-                        ),
+
                         onPressed: () {
                           DBControl.clearDBVariables();
                           methodController.clear();
@@ -307,6 +314,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       ),
                     ),
                   ),
+
+
                 ],
               ),
             ),

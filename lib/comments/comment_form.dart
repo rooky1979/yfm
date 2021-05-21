@@ -218,15 +218,18 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         if (descriptionInputController.text.isNotEmpty) {
                           final snackBar = SnackBar(
                             content: Text('Comment Posted'),
+
                             duration: Duration(milliseconds: 8000),
                             backgroundColor: green,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
+
                           FirebaseFirestore.instance
                               .collection('recipe')
                               .doc('$recipeID')
                               .collection('comments')
+
                               .add(
                             {
                               'user': _firebaseAuth.currentUser.uid,
@@ -259,6 +262,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           ).catchError(
                             (onError) => print(onError),
                           );
+
                         } else {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
