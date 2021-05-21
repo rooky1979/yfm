@@ -22,6 +22,7 @@ class IngredientsPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 25),
           child: Column(
             children: [
+              //RecipeControlsPage(),
               RecipeThumbnail(),
               RecipeButtons(),
               StreamBuilder(

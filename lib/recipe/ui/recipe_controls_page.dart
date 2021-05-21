@@ -125,7 +125,7 @@ class RecipeButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
-                padding: EdgeInsets.all(10), //ingredients button
+                padding: EdgeInsets.all(10), //recipe information/ingredients button
                 fillColor: new Color(0xFFf0f1eb),
                 shape: CircleBorder(),
                 child: Icon(
