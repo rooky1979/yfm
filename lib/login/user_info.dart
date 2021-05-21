@@ -10,14 +10,22 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: linen,
+      backgroundColor: cream,
       appBar: AppBar(
-        backgroundColor: orangeRed,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[turquoiseGreen, greenSheen],
+            ),
+          ),
+        ),
         title: Text(
           'Profile Information',
           style: TextStyle(
             color: white,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             fontSize: 25,
           ),
         ),

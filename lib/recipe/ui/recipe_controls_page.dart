@@ -18,7 +18,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: linen,
+      backgroundColor: cream,
       body: Padding(
         padding: const EdgeInsets.only(top: 25),
         child: Column(

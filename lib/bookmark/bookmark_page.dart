@@ -19,16 +19,26 @@ class _BookmarkPageState extends State<BookmarkPage> {
     return Scaffold(
       backgroundColor: onyx,
       //app bar that contains the search bar and profile settings page
+
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[ceruleanCrayola, celadonBlue],
+              colors: <Color>[turquoiseGreen, greenSheen],
             ),
           ),
         ),
+        title: Text(
+          'Favourite Recipes',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
+          ),
+        ),
+
         //backgroundColor: Color(0xFF7a243e),
         leading: IconButton(
           icon: Icon(
@@ -39,14 +49,6 @@ class _BookmarkPageState extends State<BookmarkPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-        ),
-        title: Text(
-          'Favourite Recipes',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-          ),
         ),
       ),
       body: StreamBuilder(

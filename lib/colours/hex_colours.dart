@@ -17,3 +17,4 @@ Color grey = Colors.grey;
 Color linen = Color(0xFFf0f1eb);
 Color lightBlue = Colors.lightBlue[50];
 Color blue = Colors.blue[900];
+Color green = Colors.green;

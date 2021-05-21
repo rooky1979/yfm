@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:profanity_filter/profanity_filter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class CommentEntryDialog extends StatefulWidget {
   @override
@@ -182,7 +183,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final filter = ProfanityFilter();
     String recipeID = widget.recipeID;
     return Scaffold(
-      backgroundColor: new Color(0xFFf0f1eb),
+      backgroundColor: linen,
       body: Padding(
         padding:
             const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
@@ -192,7 +193,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
               'Comment',
               style: TextStyle(
                 fontSize: 20,
-                color: new Color(0xFF7a243e),
+                color: darkPurple,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -218,7 +219,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           final snackBar = SnackBar(
                             content: Text('Comment Posted'),
                             duration: Duration(milliseconds: 8000),
-                            backgroundColor: Colors.green,
+                            backgroundColor: green,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
@@ -246,7 +247,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                               final snackBar = SnackBar(
                                 content: Text('Comment Posted'),
                                 duration: Duration(milliseconds: 1000),
-                                backgroundColor: Colors.green,
+                                backgroundColor: greenSheen,
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
@@ -262,7 +263,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                           final snackBar = SnackBar(
                             content: Text('Please Write Your Comment...'),
                             duration: Duration(milliseconds: 1000),
-                            backgroundColor: new Color(0xFFe62d11),
+                            backgroundColor: orangeRed,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
@@ -270,7 +271,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                         final snackBar = SnackBar(
                           content: Text('Please use appropriate language'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: new Color(0xFFe62d11),
+                          backgroundColor: orangeRed,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -292,7 +293,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                   hintText: 'A Question, Comment, or Tip!',
                   labelText: 'Type Here...',
                   labelStyle: TextStyle(
-                    color: Color(0xFFe62d11),
+                    color: orangeRed,
                     fontSize: 17,
                   ),
                   border: const OutlineInputBorder(),

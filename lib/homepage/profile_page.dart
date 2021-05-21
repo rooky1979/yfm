@@ -33,18 +33,21 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: onyx,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Profile Information',
-          style: TextStyle(color: white),
-        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[cream, radicalRed],
+              colors: <Color>[turquoiseGreen, greenSheen],
             ),
+          ),
+        ),
+        title: Text(
+          'Profile Information',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
           ),
         ),
         leading: IconButton(
