@@ -59,7 +59,6 @@ class _CommentBoardState extends State<CommentBoard> {
                             recipeID: widget.recipeID);
                       },
                     ),
-
                   ),
                 );
               },

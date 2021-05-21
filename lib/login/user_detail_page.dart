@@ -89,9 +89,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
         firstDate: DateTime(1900),
         lastDate: DateTime.now());
     if (pickedDate != null && pickedDate != today)
-      setState(() {
-        today = pickedDate;
-      });
+      setState(
+        () {
+          today = pickedDate;
+        },
+      );
   }
 
   @override
@@ -106,8 +108,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Widget build(BuildContext context) {
     //refactored textstyle used buttons/textfields
     final filter = ProfanityFilter();
-    var whiteText = TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+    var whiteText =
+        TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: white);
 
     return Scaffold(
       backgroundColor: onyx,
@@ -115,31 +117,17 @@ class _UserDetailPageState extends State<UserDetailPage> {
         centerTitle: true,
         title: Text(
           'Account Setup',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: white),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[cream, radicalRed])),
-        ),
-        /*  backgroundColor: radicalRed,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              size: 20,
-              color: Colors.white,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[cream, radicalRed],
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        title: Text('Account Set-Up',
-            style: TextStyle(
-              color: Colors.white,
-
-              fontSize: 20,
-            )), */
+          ),
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -160,9 +148,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: <Color>[turquoiseGreen, greenSheen]),
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: <Color>[turquoiseGreen, greenSheen],
+                          ),
                           borderRadius: BorderRadius.circular(15),
                           color: celadonBlue,
                         ),
@@ -205,7 +194,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           content: Text('Avatar 1 selected'),
                                           duration:
                                               Duration(milliseconds: 1000),
-                                          backgroundColor: Colors.green,
+                                          backgroundColor: greenSheen,
                                         );
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
@@ -214,7 +203,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   } else {
                                     return Container(
                                       child: Center(
-                                          child: CircularProgressIndicator()),
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     );
                                   }
                                 },
@@ -246,7 +236,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           content: Text('Avatar 2 selected'),
                                           duration:
                                               Duration(milliseconds: 1000),
-                                          backgroundColor: Colors.green,
+                                          backgroundColor: greenSheen,
                                         );
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
@@ -255,7 +245,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                   } else {
                                     return Container(
                                       child: Center(
-                                          child: CircularProgressIndicator()),
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     );
                                   }
                                 },
@@ -293,7 +284,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       final snackBar = SnackBar(
                                         content: Text('Avatar 3 selected'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: greenSheen,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -302,7 +293,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 } else {
                                   return Container(
                                     child: Center(
-                                        child: CircularProgressIndicator()),
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   );
                                 }
                               },
@@ -333,7 +325,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       final snackBar = SnackBar(
                                         content: Text('Avatar 4 selected'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: greenSheen,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -362,7 +354,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       cursorColor: greenSheen,
                       decoration: InputDecoration(
                         //prefixIcon:
-                        // Icon(Icons.mail_outline, color: Colors.black),
                         labelText: 'Full Name',
                         fillColor: turquoiseGreen, //light purple
                         filled: true,
@@ -446,7 +437,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                   'Username does not exist'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor: Colors.green,
+                                              backgroundColor: greenSheen,
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
@@ -463,8 +454,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                               content: Text('Username exists'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor:
-                                                  Color(0xFFe62d11),
+                                              backgroundColor: orangeRed,
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
@@ -475,7 +465,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       final snackBar = SnackBar(
                                         content: Text('Username not entered'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Color(0xFFe62d11),
+                                        backgroundColor: orangeRed,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -485,7 +475,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                         content: Text(
                                             'Please use appropriate language'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Color(0xFFe62d11),
+                                        backgroundColor: orangeRed,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -522,10 +512,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       greenSheen
                                     ]),
                                 border: Border.all(
-                                  color: Color(0xFFe62d1),
+                                  color: lightPurple,
                                 ),
                                 borderRadius: BorderRadius.circular(15),
-                                color: Color(0xFF7a243e),
+                                color: darkPurple,
                               ),
                               alignment: Alignment.center,
                               child: Text(
@@ -543,8 +533,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
 
                               ),
                           child: OutlinedButton.icon(
-                            icon:
-                                Icon(Icons.calendar_today, color: Colors.black),
+                            icon: Icon(Icons.calendar_today, color: black),
                             onPressed: () => _selectDate(context),
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<
@@ -667,7 +656,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     padding: const EdgeInsets.only(right: 120),
                     icon: Icon(
                       Icons.clear,
-                      color: Colors.white,
+                      color: white,
                     ),
                     iconSize: 30),
                 IconButton(
@@ -703,7 +692,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 final snackBar = SnackBar(
                                   content: Text('Account Successfully Created'),
                                   duration: Duration(milliseconds: 1000),
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: greenSheen,
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
@@ -713,61 +702,67 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     builder: (context) => LoginPage(),
                                   ),
                                 );
-                              } else { //snackbar for when birthday is set to today's date(default)
+                              } else {
+                                //snackbar for when birthday is set to today's date(default)
                                 final snackBar = SnackBar(
                                   content:
                                       Text('Birthday has not been selected'),
                                   duration: Duration(milliseconds: 1000),
-                                  backgroundColor: Color(0xFFe62d11),
+                                  backgroundColor: orangeRed,
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               }
-                            } else { //snackbar for when region is not entered
+                            } else {
+                              //snackbar for when region is not entered
                               final snackBar = SnackBar(
                                 content: Text('Region has not been selected'),
                                 duration: Duration(milliseconds: 1000),
-                                backgroundColor: Color(0xFFe62d11),
+                                backgroundColor: orangeRed,
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                             }
-                          } else { //snackbar for when avatar image is not selected
+                          } else {
+                            //snackbar for when avatar image is not selected
                             final snackBar = SnackBar(
                               content: Text('Image has not been selected'),
                               duration: Duration(milliseconds: 1000),
-                              backgroundColor: Color(0xFFe62d11),
+                              backgroundColor: orangeRed,
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           }
-                        } else { //snack for when username is not checked or it already exists
+                        } else {
+                          //snack for when username is not checked or it already exists
                           final snackBar = SnackBar(
                             content:
                                 Text('Username already exists or not checked'),
                             duration: Duration(milliseconds: 1000),
-                            backgroundColor: Color(0xFFe62d11),
+                            backgroundColor: orangeRed,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
-                      } else { //snacbar for when username is not entered
+                      } else {
+                        //snacbar for when username is not entered
                         final snackBar = SnackBar(
                           content: Text('Username is not entered'),
                           duration: Duration(milliseconds: 1000),
-                          backgroundColor: Color(0xFFe62d11),
+                          backgroundColor: orangeRed,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                    } else { //snackbar for when name is not entered
+                    } else {
+                      //snackbar for when name is not entered
                       final snackBar = SnackBar(
                         content: Text('Name is not entered'),
                         duration: Duration(milliseconds: 1000),
-                        backgroundColor: Color(0xFFe62d11),
+                        backgroundColor: orangeRed,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
-                  icon: Icon(Icons.save, color: Colors.white),
+                  icon: Icon(Icons.save, color: white),
                   iconSize: 30,
                 )
               ],
@@ -791,11 +786,11 @@ class _UserDetailPageState extends State<UserDetailPage> {
       ),
       child: MultiSelectFormField(
         autovalidate: false,
-        fillColor: turquoiseGreen, //light-purple
-        chipBackGroundColor: greenSheen, //dark purple
-        chipLabelStyle: TextStyle(color: Colors.white),
+        fillColor: turquoiseGreen,
+        chipBackGroundColor: greenSheen,
+        chipLabelStyle: TextStyle(color: white),
         checkBoxActiveColor: greenSheen,
-        checkBoxCheckColor: Colors.white,
+        checkBoxCheckColor: white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -803,7 +798,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         ),
         title: Text(
           title,
-          style: textStyle, //dark purple
+          style: textStyle,
         ),
         dataSource: checklistOptions,
         textField: 'display',
@@ -813,8 +808,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         //clear checklist
         hintWidget: Text(
           'Select allergies',
-          style: TextStyle(
-              fontWeight: FontWeight.w300, color: greenSheen), //dark purple
+          style: TextStyle(fontWeight: FontWeight.w300, color: greenSheen),
         ),
         initialValue: _allergies,
         onSaved: (value) {

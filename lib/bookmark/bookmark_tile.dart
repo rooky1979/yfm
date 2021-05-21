@@ -37,10 +37,12 @@ class BookmarkTile extends StatelessWidget {
               onTap: () {
                 idNumber = recipeID;
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            IngredientsPage(recipeID)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        IngredientsPage(recipeID),
+                  ),
+                );
               },
             );
           } else {

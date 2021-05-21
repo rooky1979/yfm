@@ -49,7 +49,6 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
       () {
         _imgfile = File(imgfile.path);
         imgAttached = true;
-        // debugPrint(_imgfile.path.toString());
       },
     );
     Navigator.of(context).pop();
@@ -63,7 +62,9 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
           .child('/comment_images/' + commentId);
       await ref.putFile(_imgfile).whenComplete(
         () async {
-          await ref.getDownloadURL().then((value) {});
+          await ref.getDownloadURL().then(
+                (value) {},
+              );
         },
       );
     }
@@ -75,18 +76,23 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     if (_imgfile == null) {
       return Container(
         decoration: BoxDecoration(
-            //border: Border.all(width: 1),
-            borderRadius: BorderRadius.circular(2)),
+          //border: Border.all(width: 1),
+          borderRadius: BorderRadius.circular(2),
+        ),
         width: double.infinity,
         child: ElevatedButton.icon(
-            onPressed: () {
-              _showChoiceDialog(context);
-            },
-            icon: Icon(
-              Icons.image,
-              size: 25,
-            ),
-            label: Text("Add Image", style: TextStyle(fontSize: 25))),
+          onPressed: () {
+            _showChoiceDialog(context);
+          },
+          icon: Icon(
+            Icons.image,
+            size: 25,
+          ),
+          label: Text(
+            "Add Image",
+            style: TextStyle(fontSize: 25),
+          ),
+        ),
       );
     } else {
       setState(() {});
@@ -110,15 +116,18 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                       ),
                     ),
                     ElevatedButton.icon(
-                        onPressed: () {
-                          _showChoiceDialog(context);
-                        },
-                        icon: Icon(
-                          Icons.image,
-                          size: 25,
-                        ),
-                        label: Text("Change Image",
-                            style: TextStyle(fontSize: 25))),
+                      onPressed: () {
+                        _showChoiceDialog(context);
+                      },
+                      icon: Icon(
+                        Icons.image,
+                        size: 25,
+                      ),
+                      label: Text(
+                        "Change Image",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_controls_page.dart';
 import 'package:youth_food_movement/recipe/ui/recipe_method_card.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class Method extends StatelessWidget {
         .collection('method')
         .snapshots();
     return Scaffold(
-      backgroundColor: new Color(0xFFf0f1eb),
+      backgroundColor: linen,
       body: Padding(
         padding: const EdgeInsets.only(top: 25),
         child: Column(

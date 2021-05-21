@@ -79,7 +79,9 @@ class _CommentState extends State<Comment> {
                               ),
                             );
                           } else {
-                            return Container(child: Text('Incoming User Data'));
+                            return Container(
+                              child: Text('Incoming User Data'),
+                            );
                           }
                         },
                       ),
@@ -158,94 +160,96 @@ class _CommentState extends State<Comment> {
                 Container(
                   padding: const EdgeInsets.only(
                       top: 5, left: 10, right: 15, bottom: 5),
-                  child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(width: 2),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                            top: 5, left: 10, right: 10, bottom: 5),
-                        child: Row(
-                          children: [
-                            //Handles logic for liking comments
-                            IconButton(
-                              onPressed: () async {
-                                setState(
-                                  () {
-                                    if (!(likedUsers.contains(user))) {
-                                      likeColor = Colors.blue;
-                                      numLikes++;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update(
-                                        {'likes': numLikes},
-                                      );
-                                      clickedLike = !clickedLike;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update(
-                                        {
-                                          'likedUsers':
-                                              FieldValue.arrayUnion(list)
-                                        },
-                                      );
-                                    } else {
-                                      numLikes--;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update(
-                                        {'likes': numLikes},
-                                      );
-                                      clickedLike = !clickedLike;
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(width: 2),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 10, right: 10, bottom: 5),
+                          child: Row(
+                            children: [
+                              //Handles logic for liking comments
+                              IconButton(
+                                onPressed: () async {
+                                  setState(
+                                    () {
+                                      if (!(likedUsers.contains(user))) {
+                                        likeColor = Colors.blue;
+                                        numLikes++;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {'likes': numLikes},
+                                        );
+                                        clickedLike = !clickedLike;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {
+                                            'likedUsers':
+                                                FieldValue.arrayUnion(list)
+                                          },
+                                        );
+                                      } else {
+                                        numLikes--;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {'likes': numLikes},
+                                        );
+                                        clickedLike = !clickedLike;
 
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update(
-                                        {
-                                          'likedUsers':
-                                              FieldValue.arrayRemove(list)
-                                        },
-                                      );
-                                    }
-                                  },
-                                );
-                              },
-                              icon: Icon(Icons.thumb_up,
-                                  color: clickedLike
-                                      ? Color(0xFF009e5fb)
-                                      : Colors.black),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: 10, left: 1, right: 3, bottom: 10),
-                              child: Text(
-                                numLikes.toString(),
-                                style: const TextStyle(
-                                    fontSize: 17.0, color: Colors.black),
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {
+                                            'likedUsers':
+                                                FieldValue.arrayRemove(list)
+                                          },
+                                        );
+                                      }
+                                    },
+                                  );
+                                },
+                                icon: Icon(Icons.thumb_up,
+                                    color: clickedLike
+                                        ? Color(0xFF009e5fb)
+                                        : Colors.black),
                               ),
-                            ),
-                            //Create Delete or Report Button depending on current user
-                            _checkUser(docID, widget.index, user),
-                          ],
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 1, right: 3, bottom: 10),
+                                child: Text(
+                                  numLikes.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 17.0, color: Colors.black),
+                                ),
+                              ),
+                              //Create Delete or Report Button depending on current user
+                              _checkUser(docID, widget.index, user),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
+                    ],
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(

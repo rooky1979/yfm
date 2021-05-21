@@ -64,9 +64,10 @@ class _UserDataState extends State<UserData> {
               children: [
                 //tile contents
                 ListTile(
-                  title: Row(children: [
-                    //Future builder allows the app to get user data from db async
-                    FutureBuilder(
+                  title: Row(
+                    children: [
+                      //Future builder allows the app to get user data from db async
+                      FutureBuilder(
                         future: _getUserName(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
@@ -84,14 +85,19 @@ class _UserDataState extends State<UserData> {
                               child: Text('Incoming User Data'),
                             );
                           }
-                        }),
-                    Text(" - " + dateFormatted,
+                        },
+                      ),
+                      Text(
+                        " - " + dateFormatted,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12.0)),
-                  ]),
-                  subtitle: Text(snapshotData['description'],
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                            fontWeight: FontWeight.w400, fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(
+                    snapshotData['description'],
+                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
+                  ),
                   //Future builder allows the app to get user profile from db async
                   leading: FutureBuilder(
                     future: _getUserImage(),

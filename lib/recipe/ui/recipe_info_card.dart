@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 //card that displays the recipe information
 class RecipeInformationCard extends StatelessWidget {
@@ -17,7 +18,9 @@ class RecipeInformationCard extends StatelessWidget {
     //snaphot of the docs
     var snapshotData = snapshot.docs[index];
     //list that holds an array of the ingredients
-    List<String> ingredientsList = List.from(snapshotData['ingredients']);
+    List<String> ingredientsList = List.from(
+      snapshotData['ingredients'],
+    );
     return Column(
       children: [
         FittedBox(
@@ -25,9 +28,9 @@ class RecipeInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: new Color(0xFFf0f1eb),
+              color: linen,
               elevation: 1,
-              shadowColor: new Color(0xFFe62d11),
+              shadowColor: orangeRed,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -36,7 +39,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   //display the recipe title
                   Padding(
@@ -79,12 +82,12 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: new Color(0xFFf0f1eb),
+            color: linen,
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: new Color(0xFFf0f1eb),
+              color: linen,
               elevation: 1,
-              shadowColor: new Color(0xFFe62d11),
+              shadowColor: orangeRed,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -93,7 +96,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget for the recipe info subheading
@@ -143,7 +146,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget to show the serving size
@@ -177,7 +180,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget to display the prep time
@@ -239,7 +242,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget to show what allergies the recipes affects
@@ -275,7 +278,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
@@ -315,7 +318,7 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 2,
                     indent: 20,
                     endIndent: 20,
-                    color: new Color(0xFF7a243e),
+                    color: darkPurple,
                   ),
                   Padding(
                     //widget showing vege, non-vege or vegan
@@ -344,7 +347,7 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: new Color(0xFFf0f1eb),
+            color: linen,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -354,7 +357,7 @@ class RecipeInformationCard extends StatelessWidget {
                   thickness: 3,
                   indent: 10,
                   endIndent: 10,
-                  color: new Color(0xFF7a243e),
+                  color: darkPurple,
                 ),
                 Padding(
                   //widget for the recipe info title
@@ -382,7 +385,7 @@ class RecipeInformationCard extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: new Color(0xFF7a243e),
+                            backgroundColor: darkPurple,
                             radius: 10,
                           ),
                           title: Text(ingredientsList[index].toString(),
@@ -396,7 +399,7 @@ class RecipeInformationCard extends StatelessWidget {
                           thickness: 2,
                           indent: 40,
                           endIndent: 20,
-                          color: new Color(0xFF7a243e),
+                          color: darkPurple,
                         ),
                       ],
                     );

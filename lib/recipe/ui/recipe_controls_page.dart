@@ -1,3 +1,4 @@
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 import 'package:youth_food_movement/comments/recipe_page_comments.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: new Color(0xFFf0f1eb),
+      backgroundColor: linen,
       body: Padding(
         padding: const EdgeInsets.only(top: 25),
         child: Column(
@@ -41,7 +42,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: Color(0xFFf0f1eb),
+          color: linen,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -78,7 +79,7 @@ class RecipeThumbnail extends StatelessWidget {
                 );
               } else {
                 return Container(
-                  color: Color(0xFFf0f1eb),
+                  color: linen,
                   //while image is loading, display the circular indicator
                   child: Center(
                     child: CircularProgressIndicator(),
@@ -93,7 +94,7 @@ class RecipeThumbnail extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 30,
-              color: Color(0xFFe62d11),
+              color: orangeRed,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -130,19 +131,19 @@ class RecipeButtons extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color(0xFF7a243e),
+          color: darkPurple,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10), //ingredients button
-              fillColor: new Color(0xFFf0f1eb),
+              fillColor: linen,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.info,
                 size: 20,
-                color: Color(0xFF7a243e),
+                color: darkPurple,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -160,12 +161,12 @@ class RecipeButtons extends StatelessWidget {
             RawMaterialButton(
               // recipe method button
               padding: EdgeInsets.all(10),
-              fillColor: new Color(0xFFf0f1eb),
+              fillColor: linen,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.book,
                 size: 20,
-                color: Color(0xFF7a243e),
+                color: darkPurple,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -182,12 +183,12 @@ class RecipeButtons extends StatelessWidget {
             ),
             RawMaterialButton(
               padding: EdgeInsets.all(11),
-              fillColor: new Color(0xFFf0f1eb),
+              fillColor: linen,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.comments, //comments button
                 size: 20,
-                color: Color(0xFF7a243e),
+                color: darkPurple,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -226,7 +227,7 @@ class _FavouritesState extends State<Favourites> {
     return Column(
       children: [
         Container(
-          color: new Color(0xFFf0f1eb),
+          color: linen,
         ),
         FutureBuilder(
           future: _getLiked(),
@@ -236,8 +237,7 @@ class _FavouritesState extends State<Favourites> {
               return IconButton(
                 icon: Icon(Icons.favorite_rounded, //comments button
                     size: 50,
-                    color:
-                        widget.isLiked ? new Color(0xFFe62d11) : Colors.grey),
+                    color: widget.isLiked ? orangeRed : grey),
                 onPressed: () {
                   if (widget.isLiked) {
                     setState(
@@ -264,29 +264,6 @@ class _FavouritesState extends State<Favourites> {
                   }
                 },
               );
-              // } else if (widget.isLiked == false) {
-              //   return IconButton(
-              //       icon: Icon(
-              //         Icons.favorite_outline_rounded,
-              //         size: 50,
-              //         color: new Color(0xFFe62d11),
-              //       ),
-              //       onPressed: () {
-              //         setState(() {
-              //           //if array contains recipeID, remove
-              //           widget.isLiked = !widget.isLiked;
-              //           debugPrint(widget.isLiked.toString() +
-              //               "This has been Added to favourites: " +
-              //               HomepageTile.idNumber.toString(),
-              // );
-              //           _getUserDocIdForAdd(HomepageTile.idNumber);
-              //         },
-              // );
-              //         setState(() {},
-              // );
-              //       },
-              // );
-              // }
             } else {
               return CircularProgressIndicator();
             }
@@ -294,40 +271,6 @@ class _FavouritesState extends State<Favourites> {
         ),
       ],
     );
-
-    // if (!_isFavorite) {
-    //   return IconButton(
-    //       icon: Icon(
-    //         Icons.favorite_outline_rounded, //comments button
-    //         size: 50,
-    //         color: new Color(0xFFe62d11),
-    //       ),
-    //       onPressed: () {
-    //         setState(() {
-    //           _isFavorite = !_isFavorite;
-    //           //add recipe ID to favourites array
-    //           _getUserDocIdForAdd(HomepageTile.idNumber.toString(),
-    //           );
-    //         },
-    //         );
-    //       },
-    //       );
-    // } else {
-    //   return IconButton(
-    //       icon: Icon(
-    //         Icons.favorite_rounded,
-    //         size: 50,
-    //         color: new Color(0xFFe62d11),
-    //       ),
-    //       onPressed: () {
-    //         setState(() {
-    //           _isFavorite = !_isFavorite;
-    //           //if array contains recipeID, remove
-    //           _getUserDocIdForDelete(HomepageTile.idNumber);
-    //         },
-    //         );
-    //       },
-    //       );
   }
 }
 

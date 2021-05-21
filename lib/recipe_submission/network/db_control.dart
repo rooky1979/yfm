@@ -36,27 +36,35 @@ class DBControl {
   static void writeDB() async {
     //firebase instance declaration
     var recipeDocRef =
-        await FirebaseFirestore.instance.collection('recipe').add({});
+        await FirebaseFirestore.instance.collection('recipe').add(
+      {},
+    );
     //write to the recipe table ingredients subcollection instance
-    await recipeDocRef.collection("ingredients").add({
-      "difficulty": difficultyValue,
-      "allergies": allergies,
-      "category": categoryValue,
-      "description": descriptionController.text,
-      "image": recipeDocRef.id,
-      "ingredients": ingredients,
-      "prepTime": prepTime,
-      "protein": proteins,
-      "servings": servingsController.text,
-      "title": recipeNameController.text
-    });
+    await recipeDocRef.collection("ingredients").add(
+      {
+        "difficulty": difficultyValue,
+        "allergies": allergies,
+        "category": categoryValue,
+        "description": descriptionController.text,
+        "image": recipeDocRef.id,
+        "ingredients": ingredients,
+        "prepTime": prepTime,
+        "protein": proteins,
+        "servings": servingsController.text,
+        "title": recipeNameController.text
+      },
+    );
     //write the recipe table method subcollection instance
-    await recipeDocRef.collection("method").add({"method": methodSteps});
+    await recipeDocRef.collection("method").add(
+      {"method": methodSteps},
+    );
     //upload image to firebase storage
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
         .child('recipe_images/' + recipeDocRef.id);
-    print(recipeDocRef.id.toString());
+    print(
+      recipeDocRef.id.toString(),
+    );
     UploadTask uploadTask = firebaseStorageRef.putFile(image);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(

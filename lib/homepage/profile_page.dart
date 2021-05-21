@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'Profile Information',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: white),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class ProfilePage extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 25,
-              color: Colors.white,
+              color: white,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -143,8 +143,8 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
-                    primary: Color(0xFFe62d11), // background
-                    onPrimary: Colors.white, // foreground
+                    primary: orangeRed, // background
+                    onPrimary: white, // foreground
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -216,7 +216,7 @@ class ProfileButtons extends StatelessWidget {
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10),
-              fillColor: Colors.white,
+              fillColor: white,
               shape: CircleBorder(
                 side: BorderSide(color: darkPurple),
               ),
@@ -225,14 +225,14 @@ class ProfileButtons extends StatelessWidget {
             ),
             RawMaterialButton(
               padding: EdgeInsets.all(10),
-              fillColor: Colors.white,
+              fillColor: white,
               shape: CircleBorder(
                 side: BorderSide(color: darkPurple),
               ),
               child: Icon(
                 FontAwesomeIcons.solidBookmark,
                 size: 20,
-                color: Color(0xFF7a243e),
+                color: darkPurple,
               ),
               onPressed: () => {
                 Navigator.push(
@@ -265,7 +265,7 @@ _checkMod(BuildContext context) {
   //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   return RawMaterialButton(
     padding: EdgeInsets.all(11),
-    fillColor: Colors.white,
+    fillColor: white,
     shape: CircleBorder(
       side: BorderSide(color: darkPurple),
     ),
