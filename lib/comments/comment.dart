@@ -56,7 +56,6 @@ class _CommentState extends State<Comment> {
     return Column(
       children: [
         Container(
-          //height: 190,
           child: Card(
             elevation: 9,
             child: Column(
@@ -117,7 +116,6 @@ class _CommentState extends State<Comment> {
                   Center(
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                      //Future builder allows the app to get comment data from db async
                       child: FutureBuilder(
                         future: _getImageURL(),
                         builder: (context, snapshot) {
@@ -172,7 +170,7 @@ class _CommentState extends State<Comment> {
                             top: 5, left: 10, right: 10, bottom: 5),
                         child: Row(
                           children: [
-                            //Handles like comment logic
+                            //Handles logic for liking comments
                             IconButton(
                               onPressed: () async {
                                 setState(
@@ -241,7 +239,7 @@ class _CommentState extends State<Comment> {
                                     fontSize: 17.0, color: Colors.black),
                               ),
                             ),
-                            //Create Delete or Report Button
+                            //Create Delete or Report Button depending on current user
                             _checkUser(docID, widget.index, user),
                           ],
                         ),
@@ -273,16 +271,15 @@ class _CommentState extends State<Comment> {
 
   /*
    * This method pulls the user avatar from the database 
-   * (Needs to change to use the string stored in db)
+   * based on the image name saved
+   * 
    */
   Future _getUserImage() async {
     String imageName;
 
     await FirebaseFirestore.instance
-        .collection('users') // Users table in firestore
-        .where('uid',
-            isEqualTo: widget.snapshot.docs[widget.index][
-                'uid']) //first uid is the user ID of in the users table (not document id)
+        .collection('users')
+        .where('uid', isEqualTo: widget.snapshot.docs[widget.index]['uid'])
         .get()
         .then(
       (QuerySnapshot querySnapshot) {
@@ -301,6 +298,7 @@ class _CommentState extends State<Comment> {
 
   /*
    * This method pulls the username associated with the comment
+   * and returns it to the Future Builder
    */
   Future _getUserName() async {
     String username;
@@ -327,8 +325,8 @@ class _CommentState extends State<Comment> {
    * If the users match it creates the delete button. Otherwise it creates a report button.
    */
   _checkUser(String docId, int id, String user) {
-    if ((widget.snapshot.docs[widget.index]['uid'] ==
-        user)) //Add mod feature before handover?
+    if ((widget.snapshot.docs[widget.index]['uid'] == user ||
+        user == 'insert current UID Here')) //Add mod feature before handover?
     {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,

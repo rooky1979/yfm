@@ -206,7 +206,13 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                       if (!filter
                           .hasProfanity(descriptionInputController.text)) {
                         if (descriptionInputController.text.isNotEmpty) {
-                          print(imgAttached);
+                          final snackBar = SnackBar(
+                            content: Text('Comment Posted'),
+                            duration: Duration(milliseconds: 8000),
+                            backgroundColor: Colors.green,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                           FirebaseFirestore.instance
                               .collection('recipe')
                               .doc('$recipeID')

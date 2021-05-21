@@ -347,6 +347,10 @@ void _addFavouriteToDB(String recipeIdNumber, String id) async {
   recipes.clear();
 }
 
+/*
+    This method gets the current user and recipe ID and feeds it to
+    the method for adding a recipe to the database
+ */
 void _getUserDocIdForAdd(String recipeIdNumber) async {
   String id;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -369,14 +373,16 @@ void _getUserDocIdForAdd(String recipeIdNumber) async {
   );
 }
 
+/*
+    This method gets the current user and recipe ID and feeds it to
+    the method for removing a recipe from the database
+ */
 void _getUserDocIdForDelete(String recipeIdNumber) async {
   String id;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   await FirebaseFirestore.instance
       .collection('users') // Users table in firestore
-      .where('uid',
-          isEqualTo: _firebaseAuth.currentUser
-              .uid) //first uid is the user ID of in the users table (not document id)
+      .where('uid', isEqualTo: _firebaseAuth.currentUser.uid)
       .get()
       .then(
     (QuerySnapshot querySnapshot) {
@@ -391,7 +397,7 @@ void _getUserDocIdForDelete(String recipeIdNumber) async {
   );
 }
 
-//helper method to add the recipe ID to the firestore favourites array
+//helper method to remove the recipe ID from the firestore favourites array
 void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   //instantiate a local list to hold temp ID
   List recipes = [recipeIdNumber];
@@ -407,6 +413,10 @@ void _removeFavouriteFromDB(String recipeIdNumber, String id) async {
   recipes.clear();
 }
 
+/*
+ * This method checks if the open recipe has been liked by the user
+ * and returns true or false.
+ */
 Future _getLiked() async {
   bool liked = false;
   List recipes = [];
@@ -432,5 +442,3 @@ Future _getLiked() async {
 
   return liked;
 }
-
-//method to check if the recipe ID is in the users array

@@ -146,6 +146,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         height: MediaQuery.of(context).size.height,
         child: ListView(
           children: [
+            //allows this page to be scrollable
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -179,6 +180,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        //1st image of avatar images
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                           child: Container(
@@ -350,8 +352,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ),
                     ],
                   ),
-                  //Textfield for name
-
+                  //Textfield for user's name
                   Container(
                     // width: 250,
                     padding: const EdgeInsets.only(
@@ -390,8 +391,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               controller: usernameInputController,
                               cursorColor: greenSheen,
                               decoration: InputDecoration(
-                                //prefixIcon:
-                                // Icon(Icons.mail_outline, color: Colors.black),
                                 labelText: 'Username',
                                 fillColor: turquoiseGreen,
                                 filled: true,
@@ -412,6 +411,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             height: 40,
+                            //call data controller to search for if entered username exists in database
                             child: GetBuilder<DataController>(
                               init: DataController(),
                               builder: (val) {
@@ -466,7 +466,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                               backgroundColor:
                                                   Color(0xFFe62d11),
                                             );
-
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
                                           }
@@ -500,7 +499,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ),
                     ),
                   ),
-                  //label for enter birthday
+                  //label for entering birthday
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 13, right: 13, top: 7, bottom: 10),
@@ -714,7 +713,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                     builder: (context) => LoginPage(),
                                   ),
                                 );
-                              } else {
+                              } else { //snackbar for when birthday is set to today's date(default)
                                 final snackBar = SnackBar(
                                   content:
                                       Text('Birthday has not been selected'),
@@ -724,7 +723,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               }
-                            } else {
+                            } else { //snackbar for when region is not entered
                               final snackBar = SnackBar(
                                 content: Text('Region has not been selected'),
                                 duration: Duration(milliseconds: 1000),
@@ -733,7 +732,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                             }
-                          } else {
+                          } else { //snackbar for when avatar image is not selected
                             final snackBar = SnackBar(
                               content: Text('Image has not been selected'),
                               duration: Duration(milliseconds: 1000),
@@ -742,7 +741,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           }
-                        } else {
+                        } else { //snack for when username is not checked or it already exists
                           final snackBar = SnackBar(
                             content:
                                 Text('Username already exists or not checked'),
@@ -751,7 +750,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
-                      } else {
+                      } else { //snacbar for when username is not entered
                         final snackBar = SnackBar(
                           content: Text('Username is not entered'),
                           duration: Duration(milliseconds: 1000),
@@ -759,7 +758,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
-                    } else {
+                    } else { //snackbar for when name is not entered
                       final snackBar = SnackBar(
                         content: Text('Name is not entered'),
                         duration: Duration(milliseconds: 1000),

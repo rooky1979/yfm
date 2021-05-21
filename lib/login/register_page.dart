@@ -26,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: new Color(0xFFf0f1eb),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        //removes back button on appbar
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -33,9 +34,11 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         color: Color(0xFFf0f1eb),
         height: double.infinity,
+        //allows this page to be scrollable
         child: SingleChildScrollView(
           child: Stack(
             children: [
+              //curved widget used for design
               CurvedWidget(
                 child: Container(
                   padding: const EdgeInsets.only(top: 100, left: 50),
@@ -54,6 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Center(
+                //just cook logo used from asset
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width * 0.8,
@@ -73,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   margin: const EdgeInsets.only(top: 250),
                   child: Column(
                     children: [
+                      //textfield for email
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
@@ -99,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
+                      //textfield for password
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
@@ -134,6 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: 180,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12.0),
+                          //call data controller to search for existing email in database
                           child: GetBuilder<DataController>(
                             init: DataController(),
                             builder: (val) {
@@ -177,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     builder: (context) =>
                                                         UserDetailPage()),
                                               );
-                                            } else {
+                                            } else { //snackbar for when entered password is shorter than 6 letters
                                               final snackBar = SnackBar(
                                                 content: Text(
                                                     'Password is not 6 letters or longer'),
@@ -188,8 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
-                                            }
-                                            else {
+                                            } else { //snackbar for when invalid email is entered
                                               final snackBar = SnackBar(
                                                 content: Text(
                                                     'Please enter a valid email!'),
@@ -201,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
-                                          } else {
+                                          } else { //snackbar for when existing email in database has been entered for registration
                                             final snackBar = SnackBar(
                                               content:
                                                   Text('Email already exists'),
