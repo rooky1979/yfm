@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
@@ -37,14 +38,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: cream,
-
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[ceruleanCrayola, celadonBlue],
+              colors: <Color>[turquoiseGreen, greenSheen],
+            ),
+          ),
+        ),
+        title: TextFormField(
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Search",
+            hintStyle: TextStyle(
+              color: white,
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
             ),
           ),
         ),
@@ -88,29 +99,6 @@ class _HomePageState extends State<HomePage> {
             },
           )
         ],
-        //search bar textfield
-        title: Container(
-          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search",
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 0,
-                child: Row(),
-              ),
-            ],
-          ),
-        ),
       ),
 //creates the category name and list tiles
       body: SafeArea(

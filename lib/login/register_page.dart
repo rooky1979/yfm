@@ -243,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 style: ElevatedButton.styleFrom(
                                   elevation: 4,
                                   primary: cadetBlue, // background
-                                  onPrimary: Colors.white, // foreground
+                                  onPrimary: white, // foreground
                                 ),
                               );
                             },

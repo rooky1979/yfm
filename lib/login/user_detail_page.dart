@@ -659,7 +659,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     padding: const EdgeInsets.only(right: 120),
                     icon: Icon(
                       Icons.clear,
-                      color: white,
+                      color: cadetBlue,
                     ),
                     iconSize: 30),
                 IconButton(
@@ -765,7 +765,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
-                  icon: Icon(Icons.save, color: white),
+                  icon: Icon(Icons.save, color: cadetBlue),
                   iconSize: 30,
                 )
               ],
