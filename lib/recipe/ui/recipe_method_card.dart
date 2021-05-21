@@ -51,7 +51,7 @@ class MethodCard extends StatelessWidget {
                     child: Text(
                       (index + 1).toString(),
                       style:
-                          TextStyle(color: linen, fontWeight: FontWeight.bold),
+                          TextStyle(color: cream, fontWeight: FontWeight.bold),
                     ),
                   ),
                   //each tile prints each element of the array

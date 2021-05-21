@@ -249,7 +249,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                             child: Text(
                               'No Image Selected',
                               style: TextStyle(
-                                color: lightBlue,
+                                color: orangeRed,
                               ),
                               textAlign: TextAlign.center,
                             ),

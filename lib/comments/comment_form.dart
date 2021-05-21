@@ -183,7 +183,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final filter = ProfanityFilter();
     String recipeID = widget.recipeID;
     return Scaffold(
-      backgroundColor: linen,
+      backgroundColor: cream,
       body: Padding(
         padding:
             const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),

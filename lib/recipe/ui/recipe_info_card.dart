@@ -28,7 +28,7 @@ class RecipeInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: linen,
+              color: cream,
               elevation: 1,
               shadowColor: orangeRed,
               child: Column(
@@ -82,10 +82,10 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: linen,
+            color: cream,
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: linen,
+              color: cream,
               elevation: 1,
               shadowColor: orangeRed,
               child: Column(
@@ -347,7 +347,7 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: linen,
+            color: cream,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -42,7 +42,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: linen,
+          color: cream,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -79,7 +79,7 @@ class RecipeThumbnail extends StatelessWidget {
                 );
               } else {
                 return Container(
-                  color: linen,
+                  color: cream,
                   //while image is loading, display the circular indicator
                   child: Center(
                     child: CircularProgressIndicator(),
@@ -138,7 +138,7 @@ class RecipeButtons extends StatelessWidget {
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10), //ingredients button
-              fillColor: linen,
+              fillColor: cream,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.info,
@@ -161,7 +161,7 @@ class RecipeButtons extends StatelessWidget {
             RawMaterialButton(
               // recipe method button
               padding: EdgeInsets.all(10),
-              fillColor: linen,
+              fillColor: cream,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.book,
@@ -183,7 +183,7 @@ class RecipeButtons extends StatelessWidget {
             ),
             RawMaterialButton(
               padding: EdgeInsets.all(11),
-              fillColor: linen,
+              fillColor: cream,
               shape: CircleBorder(),
               child: Icon(
                 FontAwesomeIcons.comments, //comments button
@@ -227,7 +227,7 @@ class _FavouritesState extends State<Favourites> {
     return Column(
       children: [
         Container(
-          color: linen,
+          color: cream,
         ),
         FutureBuilder(
           future: _getLiked(),
