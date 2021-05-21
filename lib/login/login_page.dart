@@ -75,7 +75,7 @@ class _LogInState extends State<LogIn> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: lightPurple,
+        color: cream,
         height: double.infinity,
         //allows page to be scrollable
         child: SingleChildScrollView(

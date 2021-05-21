@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: orangeRed,
+      backgroundColor: cream,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         //removes back button on appbar
@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: orangeRed,
+        color: cream,
         height: double.infinity,
         //allows this page to be scrollable
         child: SingleChildScrollView(
@@ -83,8 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: emailInputController,
                           cursorColor: darkPurple,
                           decoration: InputDecoration(
-                            prefixIcon:
-                                Icon(Icons.mail_outline, color: Colors.black),
+                            prefixIcon: Icon(Icons.mail_outline, color: black),
                             labelText: 'Email',
                             fillColor: lightPurple,
                             filled: true,
@@ -111,8 +110,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           obscureText: true,
                           cursorColor: darkPurple,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
-                                color: Colors.black),
+                            prefixIcon:
+                                Icon(Icons.lock_outline_rounded, color: black),
                             focusColor: orangeRed,
                             labelText: 'Password',
                             fillColor: lightPurple,

@@ -112,20 +112,23 @@ class _UserDetailPageState extends State<UserDetailPage> {
         TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: white);
 
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: cream,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Account Setup',
-          style: TextStyle(color: white),
-        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[cream, radicalRed],
+              colors: <Color>[turquoiseGreen, greenSheen],
             ),
+          ),
+        ),
+        title: Text(
+          'Account Setup',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
           ),
         ),
       ),

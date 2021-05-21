@@ -18,7 +18,7 @@ class IngredientsPage extends StatelessWidget {
         .snapshots();
 
     return Scaffold(
-      backgroundColor: linen,
+      backgroundColor: cream,
       body: Padding(
         padding: const EdgeInsets.only(top: 25),
         child: Column(

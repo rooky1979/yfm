@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class Comment extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _CommentState extends State<Comment> {
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
     // ignore: unused_local_variable
-    Color likeColor = Colors.grey;
+    Color likeColor = grey;
 
     //This boolean is used to limit how many times a person can like a comment
     bool clickedLike = likedUsers.contains(user);
@@ -179,7 +180,7 @@ class _CommentState extends State<Comment> {
                                   setState(
                                     () {
                                       if (!(likedUsers.contains(user))) {
-                                        likeColor = Colors.blue;
+                                        likeColor = blue;
                                         numLikes++;
                                         FirebaseFirestore.instance
                                             .collection('recipe')
@@ -231,7 +232,7 @@ class _CommentState extends State<Comment> {
                                 icon: Icon(Icons.thumb_up,
                                     color: clickedLike
                                         ? Color(0xFF009e5fb)
-                                        : Colors.black),
+                                        : black),
                               ),
                               Container(
                                 padding: const EdgeInsets.only(
@@ -342,7 +343,7 @@ class _CommentState extends State<Comment> {
                   //delete the comment from the database
                   icon: Icon(
                     Icons.delete,
-                    color: Colors.black,
+                    color: black,
                   ),
                   onPressed: () async {
                     showDeleteAlert(context, docId);
@@ -364,7 +365,7 @@ class _CommentState extends State<Comment> {
                   //delete the comment from the database
                   icon: Icon(
                     Icons.flag,
-                    color: Colors.black,
+                    color: black,
                   ),
                   onPressed: () async {
                     showReportAlert(context, docId);
@@ -400,7 +401,7 @@ class _CommentState extends State<Comment> {
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: new Color(0xFFe62d11),
+                  backgroundColor: orangeRed,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
@@ -443,7 +444,7 @@ class _CommentState extends State<Comment> {
                 final snackBar = SnackBar(
                   content: Text('Comment Reported'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: new Color(0xFFe62d11),
+                  backgroundColor: orangeRed,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.of(context).pop();
