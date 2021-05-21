@@ -22,32 +22,36 @@ class HomepageTile extends StatelessWidget {
       height: 150, //MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
-          future: _getImageURL(docID),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              //return the image and make it cover the container
-              return GestureDetector(
-                child: Image.network(
-                  snapshot.data,
-                  fit: BoxFit.fill,
-                ),
-                onTap: () {
-                  idNumber = recipeID;
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              IngredientsPage(recipeID)));
-                },
-              );
-            } else {
-              //while loading display the progress indicator
-              return Container(
-                  child: Center(
+        future: _getImageURL(docID),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            //return the image and make it cover the container
+            return GestureDetector(
+              child: Image.network(
+                snapshot.data,
+                fit: BoxFit.fill,
+              ),
+              onTap: () {
+                idNumber = recipeID;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        IngredientsPage(recipeID),
+                  ),
+                );
+              },
+            );
+          } else {
+            //while loading display the progress indicator
+            return Container(
+              child: Center(
                 child: CircularProgressIndicator(),
-              ));
-            }
-          }),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 

@@ -16,9 +16,8 @@ class CommentBoard extends StatefulWidget {
   final int index;
 }
 
-/*
- * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
- */
+// This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
+
 class _CommentBoardState extends State<CommentBoard> {
   @override
   Widget build(BuildContext context) {
@@ -35,71 +34,77 @@ class _CommentBoardState extends State<CommentBoard> {
         .snapshots();
 
     return Scaffold(
-        backgroundColor: new Color(0xFFf0f1eb),
-        //the body has the whole screen being used
-        body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Column(
-            children: [
-              RecipeThumbnail(),
-              RecipeButtons(),
-              StreamBuilder(
-                  stream: firestoreDb,
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) return CircularProgressIndicator();
-                    return Expanded(
-                      child: SizedBox(
-                        //List view generates a list of comment widgets, of length determined by number of docs.
-                        child: ListView.builder(
-                            itemCount: snapshot.data.docs.length,
-                            itemBuilder: (context, int index) {
-                              return Comment(
-                                  snapshot: snapshot.data,
-                                  index: index,
-                                  recipeID: widget.recipeID);
-                            }),
-                      ),
-                    );
-                  }),
-              Container(
-                padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xFF4ca5b5),
-                      border: Border.all(width: 2),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          child: TextButton(
-                              onPressed: () async {
-                                await _dialogCall(context, widget.recipeID);
-                              },
-                              child: Text("COMMENT!",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white)))),
-                    ],
+      backgroundColor: new Color(0xFFf0f1eb),
+      //the body has the whole screen being used
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Column(
+          children: [
+            RecipeThumbnail(),
+            RecipeButtons(),
+            StreamBuilder(
+              stream: firestoreDb,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                return Expanded(
+                  child: SizedBox(
+                    //List view generates a list of comment widgets, of length determineed by number of docs.
+                    child: ListView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, int index) {
+                        return Comment(
+                            snapshot: snapshot.data,
+                            index: index,
+                            recipeID: widget.recipeID);
+                      },
+                    ),
                   ),
+                );
+              },
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF4ca5b5),
+                  border: Border.all(width: 2),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-              )
-            ],
-          ),
-        ));
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: TextButton(
+                        onPressed: () async {
+                          await _dialogCall(context, widget.recipeID);
+                        },
+                        child: Text(
+                          "COMMENT!",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  /*
-   * This Method creates the comment entry form
-   * It takes the recipeID so the Comment is saved to the correct recipe
-   */
+  // This Method creates the comment entry form
+  // It takes the recipeID so the Comment is saved to the correct recipe
 
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CommentEntryDialog(
-            recipeID: recipeId,
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return CommentEntryDialog(
+          recipeID: recipeId,
+        );
+      },
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 @override
 Widget build(BuildContext context) {
@@ -9,14 +10,25 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cream,
       appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text('Profile Information',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[turquoiseGreen, greenSheen],
+            ),
+          ),
+        ),
+        title: Text(
+          'Profile Information',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
+          ),
+        ),
       ),
     );
   }
