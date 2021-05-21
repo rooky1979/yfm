@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/login/login_page.dart';
 import 'package:youth_food_movement/login/user_detail_page.dart';
 import 'package:youth_food_movement/login/curved_widget.dart';
@@ -23,18 +24,22 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cream,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        //removes back button on appbar
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: Color(0xFFf0f1eb),
+        color: cream,
         height: double.infinity,
+        //allows this page to be scrollable
         child: SingleChildScrollView(
           child: Stack(
             children: [
+              //curved widget used for design
               CurvedWidget(
                 child: Container(
                   padding: const EdgeInsets.only(top: 100, left: 50),
@@ -42,25 +47,25 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 300,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.red[400],
-                          Colors.white.withOpacity(0.95)
-                        ]),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [cadetBlue, white.withOpacity(0.95)],
+                    ),
                   ),
                 ),
               ),
               Center(
+                //just cook logo used from asset
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.35,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    fit: BoxFit.scaleDown,
-                    image: AssetImage('lib/logo/just-cook-logo.png'),
-                  )),
+                    image: DecorationImage(
+                      fit: BoxFit.scaleDown,
+                      image: AssetImage('lib/logo/just-cook-logo.png'),
+                    ),
+                  ),
                 ),
               ),
               Center(
@@ -70,59 +75,60 @@ class _RegisterPageState extends State<RegisterPage> {
                   margin: const EdgeInsets.only(top: 250),
                   child: Column(
                     children: [
+                      //textfield for email
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: emailInputController,
-                          cursorColor: Color(0xFF7a243e),
+                          cursorColor: darkPurple,
                           decoration: InputDecoration(
-                            prefixIcon:
-                                Icon(Icons.mail_outline, color: Colors.black),
+                            prefixIcon: Icon(Icons.mail_outline, color: black),
                             labelText: 'Email',
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: lightPurple,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
+                              color: darkPurple,
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 3),
                             ),
                           ),
                         ),
                       ),
+                      //textfield for password
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: passwordInputController,
                           obscureText: true,
-                          cursorColor: Color(0xFF7a243e),
+                          cursorColor: darkPurple,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock_outline_rounded,
-                                color: Colors.black),
-                            focusColor: Color(0xFFe62d11),
+                            prefixIcon:
+                                Icon(Icons.lock_outline_rounded, color: black),
+                            focusColor: orangeRed,
                             labelText: 'Password',
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: lightPurple,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
+                              color: darkPurple,
                             ),
                             hintStyle: TextStyle(
                               color: Color(0xFE7a243e),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 3),
                             ),
                           ),
                         ),
@@ -131,20 +137,22 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: 180,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12.0),
+                          //call data controller to search for existing email in database
                           child: GetBuilder<DataController>(
-                              init: DataController(),
-                              builder: (val) {
-                                return ElevatedButton(
-                                  onPressed: () {
-                                    //check if email has been entered
-                                    if (emailInputController.text.isNotEmpty) {
-                                      //check if password has been entered
-                                      if (passwordInputController
-                                          .text.isNotEmpty) {
-                                        val
-                                            .emailQueryData(
-                                                emailInputController.text)
-                                            .then((value) {
+                            init: DataController(),
+                            builder: (val) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  //check if email has been entered
+                                  if (emailInputController.text.isNotEmpty) {
+                                    //check if password has been entered
+                                    if (passwordInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .emailQueryData(
+                                              emailInputController.text)
+                                          .then(
+                                        (value) {
                                           snapshotData = value;
                                           //check if email already exists
                                           if (snapshotData.docs.isEmpty) {
@@ -170,74 +178,76 @@ class _RegisterPageState extends State<RegisterPage> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UserDetailPage()),
+                                                  builder: (context) =>
+                                                      UserDetailPage(),
+                                                ),
                                               );
                                             } else {
+                                              //snackbar for when entered password is shorter than 6 letters
                                               final snackBar = SnackBar(
                                                 content: Text(
                                                     'Password is not 6 letters or longer'),
                                                 duration: Duration(
                                                     milliseconds: 1000),
-                                                backgroundColor:
-                                                    Color(0xFFe62d11),
+                                                backgroundColor: orangeRed,
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
                                             else {
+                                              //snackbar for when invalid email is entered
                                               final snackBar = SnackBar(
                                                 content: Text(
                                                     'Please enter a valid email!'),
                                                 duration: Duration(
                                                     milliseconds: 1000),
-                                                backgroundColor:
-                                                    Color(0xFFe62d11),
+                                                backgroundColor: orangeRed,
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);
                                             }
                                           } else {
+                                            //snackbar for when existing email in database has been entered for registration
                                             final snackBar = SnackBar(
                                               content:
                                                   Text('Email already exists'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor:
-                                                  Color(0xFFe62d11),
+                                              backgroundColor: orangeRed,
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
                                           }
-                                        });
-                                      } else {
-                                        final snackBar = SnackBar(
-                                          content: Text('Password not entered'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Color(0xFFe62d11),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
+                                        },
+                                      );
                                     } else {
                                       final snackBar = SnackBar(
-                                        content: Text('email not entered'),
+                                        content: Text('Password not entered'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Color(0xFFe62d11),
+                                        backgroundColor: orangeRed,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
-                                  },
-                                  child: Text("NEXT"),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 4,
-                                    primary: Color(0xFF4ca5b5), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                );
-                              }),
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: Text('email not entered'),
+                                      duration: Duration(milliseconds: 1000),
+                                      backgroundColor: orangeRed,
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                child: Text("NEXT"),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  primary: cadetBlue, // background
+                                  onPrimary: white, // foreground
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       //button to cancel registration and go back to login page
@@ -250,20 +260,20 @@ class _RegisterPageState extends State<RegisterPage> {
                               final snackBar = SnackBar(
                                 content: Text('Register Cancelled'),
                                 duration: Duration(milliseconds: 1000),
-                                backgroundColor: Color(0xFFe62d11),
+                                backgroundColor: orangeRed,
                               );
-
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LogIn()),
+                                  builder: (context) => LogIn(),
+                                ),
                               );
                             },
                             child: Text("BACK"),
                             style: OutlinedButton.styleFrom(
-                              primary: Color(0xFF4ca5b5),
+                              primary: cadetBlue,
                             ),
                           ),
                         ),

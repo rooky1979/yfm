@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:youth_food_movement/recipe/ui/ingredients_page.dart';
 
-//card that displays the recipe information
+//card that displays the recipe thumbnail
 class HomepageTile extends StatelessWidget {
   //snapshot of the database
   final QuerySnapshot snapshot;
@@ -14,8 +14,6 @@ class HomepageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //snaphot of the docs
-    // ignore: unused_local_variable
-    var snapshotData = snapshot.docs[index];
     var docID = snapshot.docs[index].id;
     String recipeID = docID.toString();
 
@@ -24,31 +22,36 @@ class HomepageTile extends StatelessWidget {
       height: 150, //MediaQuery.of(context).size.height * 0.25,
       //get the image URL
       child: FutureBuilder(
-          future: _getImageURL(docID),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              //return the image and make it cover the container
-              return GestureDetector(
-                child: Image.network(
-                  snapshot.data,
-                  fit: BoxFit.fill,
-                ),
-                onTap: () {
-                  idNumber = recipeID;
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              IngredientsPage(recipeID)));
-                },
-              );
-            } else {
-              return Container(
-                  child: Center(
+        future: _getImageURL(docID),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            //return the image and make it cover the container
+            return GestureDetector(
+              child: Image.network(
+                snapshot.data,
+                fit: BoxFit.fill,
+              ),
+              onTap: () {
+                idNumber = recipeID;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        IngredientsPage(recipeID),
+                  ),
+                );
+              },
+            );
+          } else {
+            //while loading display the progress indicator
+            return Container(
+              child: Center(
                 child: CircularProgressIndicator(),
-              ));
-            }
-          }),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/profile_page.dart';
 import 'package:youth_food_movement/recipe_submission/network/db_control.dart';
 import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_success.dart';
@@ -29,208 +30,238 @@ class _ImageSubmissionState extends State<ImageSubmission> {
       );
     }
 //set the state of the container
-    setState(() {
-      if (pickedFile != null) {
-        DBControl.image = File(pickedFile.path);
-        print(DBControl.image.path.toString());
-      } else {
-        print('No image selected.');
-      }
-    });
+    setState(
+      () {
+        if (pickedFile != null) {
+          DBControl.image = File(pickedFile.path);
+          print(
+            DBControl.image.path.toString(),
+          );
+        } else {
+          print('No image selected.');
+        }
+      },
+    );
   }
 
 //snackbar for if no image is selected
   var snackbar = SnackBar(
-      duration: Duration(seconds: 2),
-      backgroundColor: Colors.blue[600],
-      content: Text("Please select an image",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          )));
+    duration: Duration(seconds: 2),
+    backgroundColor: orangeRed,
+    content: Text(
+      "Please select an image",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: onyx,
       appBar: AppBar(
-        backgroundColor: Colors.red,
-        leading: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.arrowLeft,
-              size: 25,
-              color: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[turquoiseGreen, greenSheen],
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        title: Text('Upload an image!',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            )),
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            FontAwesomeIcons.arrowLeft,
+            size: 25,
+            color: white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          'Upload an image!',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
+          ),
+        ),
       ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    //button to pick image from gallery
-                    Column(
-                      children: [
-                        RawMaterialButton(
-                          fillColor: Color(0xFF7a243e),
-                          child: Icon(
-                            FontAwesomeIcons.solidImage,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          elevation: 8,
-                          onPressed: () {
-                            getImage(true);
-                          },
-                          padding: EdgeInsets.all(15),
-                          shape: CircleBorder(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Camera Roll',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
-                        ),
-                      ],
-                    ),
-                    //button to open and use the camera
-                    Column(
-                      children: [
-                        RawMaterialButton(
-                          fillColor: Color(0xFF7a243e),
-                          child: Icon(
-                            FontAwesomeIcons.camera,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          elevation: 8,
-                          onPressed: () {
-                            getImage(false);
-                          },
-                          padding: EdgeInsets.all(15),
-                          shape: CircleBorder(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Take photo',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              //buttons to cancel the submission and finish
-              Row(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: OutlinedButton(
-                        style:
-                        OutlinedButton.styleFrom(
-                          primary: Color(0xFF4ca5b5),
+                  //button to pick image from gallery
+                  Column(
+                    children: [
+                      RawMaterialButton(
+                        fillColor: celadonBlue,
+                        child: Icon(
+                          FontAwesomeIcons.solidImage,
+                          size: 40,
+                          color: white,
                         ),
-                        child: Text(
-                          'CANCEL',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold),
-                        ),
+                        elevation: 8,
                         onPressed: () {
-                          DBControl.clearDBVariables();
-                          DBControl.popPage(4, context);
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => ProfilePage());
+                          getImage(true);
                         },
+                        padding: EdgeInsets.all(15),
+                        shape: CircleBorder(),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Camera Roll',
+                            style: TextStyle(
+                                color: white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16)),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF4ca5b5)),
-                        child: Text(
-                          'FINISH',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold),
+                  //button to open and use the camera
+                  Column(
+                    children: [
+                      RawMaterialButton(
+                        fillColor: celadonBlue,
+                        child: Icon(
+                          FontAwesomeIcons.camera,
+                          size: 40,
+                          color: white,
                         ),
+                        elevation: 8,
                         onPressed: () {
-                          if (DBControl.image == null) {
-                            //snackbar shown if any of the fields are empty
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackbar);
-                          } else {
-                            DBControl.writeDB();
-                            //Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        SuccessSubmission()));
-                          }
+                          getImage(false);
                         },
+                        padding: EdgeInsets.all(15),
+                        shape: CircleBorder(),
                       ),
-                    ),
-                  )
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Take photo',
+                          style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Recipe image preview:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+            ),
+            //buttons to cancel the submission and finish
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: white,
                       ),
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: greenSheen),
+                      ),
+                      onPressed: () {
+                        DBControl.clearDBVariables();
+                        DBControl.popPage(4, context);
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => ProfilePage(),
+                        );
+                      },
                     ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 2.5,
-                    child: DBControl.image == null
-                        ? Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Center(
-                                child: Text(
-                              'No Image Selected',
-                              textAlign: TextAlign.center,
-                            )),
-                          )
-                        : Image.file(DBControl.image),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: greenSheen),
+                      child: Text(
+                        'FINISH',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        if (DBControl.image == null) {
+                          //snackbar shown if any of the fields are empty
+                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                        } else {
+                          DBControl.writeDB();
+                          //Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  SuccessSubmission(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'Recipe image preview:',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: white,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  child: DBControl.image == null
+                      ? Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                            child: Text(
+                              'No Image Selected',
+                              style: TextStyle(
+                                color: orangeRed,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      : Image.file(DBControl.image),
+                ),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

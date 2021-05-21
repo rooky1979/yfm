@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:youth_food_movement/bookmark/bookmark_page.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 import 'package:youth_food_movement/homepage/home_page.dart';
 import 'package:youth_food_movement/login/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,24 +59,29 @@ class _LogInState extends State<LogIn> {
   //Controllers for textfields
   final TextEditingController emailInputController = TextEditingController();
   final TextEditingController passwordInputController = TextEditingController();
+
   //used for searching if email already exist in login
   QuerySnapshot snapshotData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightPurple,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
+        //removes back button on appbar
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: Color(0xFFf0f1eb),
+        color: cream,
         height: double.infinity,
+        //allows page to be scrollable
         child: SingleChildScrollView(
           child: Stack(
             children: [
+              //curved widget made for design purpose
               CurvedWidget(
                 child: Container(
                   padding: const EdgeInsets.only(top: 100, left: 50),
@@ -84,20 +89,11 @@ class _LogInState extends State<LogIn> {
                   height: 300,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.red[400],
-                          Colors.white.withOpacity(0.95)
-                        ]),
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [cadetBlue, white.withOpacity(0.95)],
+                    ),
                   ),
-                  // Text(
-                  //   'Just Cook Login',
-                  //   style: TextStyle(
-                  //     fontSize: 40,
-                  //     color: Colors.black,
-                  //   ),
-                  // ),
                 ),
               ),
               Center(
@@ -106,10 +102,11 @@ class _LogInState extends State<LogIn> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.35,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    fit: BoxFit.scaleDown,
-                    image: AssetImage('lib/logo/just-cook-logo.png'),
-                  )),
+                    image: DecorationImage(
+                      fit: BoxFit.scaleDown,
+                      image: AssetImage('lib/logo/just-cook-logo.png'),
+                    ),
+                  ),
                 ),
               ),
               Center(
@@ -123,30 +120,25 @@ class _LogInState extends State<LogIn> {
                       Container(
                         width: 250,
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
-                        // child: TextField(
-                        //   decoration: InputDecoration(labelText: "Email"),
-
-                        //   controller: emailInputController,
-
                         child: TextField(
                           controller: emailInputController,
-                          cursorColor: Color(0xFF7a243e),
+                          cursorColor: darkPurple,
                           decoration: InputDecoration(
                             prefixIcon:
                                 Icon(Icons.mail_outline, color: Colors.black),
                             labelText: 'Email',
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: lightPurple,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
+                              color: darkPurple,
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 3),
                             ),
                           ),
                         ),
@@ -158,58 +150,57 @@ class _LogInState extends State<LogIn> {
                         child: TextField(
                           controller: passwordInputController,
                           obscureText: true,
-                          cursorColor: Color(0xFF7a243e),
+                          cursorColor: darkPurple,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline_rounded,
                                 color: Colors.black),
-                            focusColor: Color(0xFFe62d11),
+                            focusColor: orangeRed,
                             labelText: 'Password',
-
-                            fillColor: Color(0xFFe62d1),
+                            fillColor: lightPurple,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: Color(0xFF7a243e),
+                              color: darkPurple,
                             ),
                             hintStyle: TextStyle(
                               color: Color(0xFE7a243e),
                             ),
-                            //helperText: 'What yo',
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 2),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(0xFF7a243e), width: 3),
+                              borderSide:
+                                  BorderSide(color: darkPurple, width: 3),
                             ),
                           ),
                         ),
                       ),
-
                       //sign in button
                       Container(
                         width: 180,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 12.0),
+                          //call for data controller to search for email in database
                           child: GetBuilder<DataController>(
-                              init: DataController(),
-                              builder: (val) {
-                                return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 4,
-                                    primary: Color(0xFF4ca5b5), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                  onPressed: () {
-                                    //check if email has been entered
-                                    if (emailInputController.text.isNotEmpty) {
-                                      //check if password has been entered
-                                      if (passwordInputController
-                                          .text.isNotEmpty) {
-                                        val
-                                            .emailQueryData(
-                                                emailInputController.text)
-                                            .then((value) {
+                            init: DataController(),
+                            builder: (val) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 4,
+                                  primary: cadetBlue, // background
+                                  onPrimary: white, // foreground
+                                ),
+                                onPressed: () {
+                                  //check if email has been entered
+                                  if (emailInputController.text.isNotEmpty) {
+                                    //check if password has been entered
+                                    if (passwordInputController
+                                        .text.isNotEmpty) {
+                                      val
+                                          .emailQueryData(
+                                              emailInputController.text)
+                                          .then(
+                                        (value) {
                                           snapshotData = value;
                                           //check if email exist in database
                                           if (snapshotData.docs.isNotEmpty) {
@@ -225,60 +216,64 @@ class _LogInState extends State<LogIn> {
                                                           .trim(),
                                                 );
                                           } else {
+                                            //snackbar for when incorrect email or password is entered
                                             final snackBar = SnackBar(
                                               content: Text(
                                                   'Incorrect Email or Password!'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor:
-                                                  Color(0xFFe62d11),
+                                              backgroundColor: orangeRed,
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
                                           }
-                                        });
-                                      } else {
-                                        final snackBar = SnackBar(
-                                          content: Text('Password not entered'),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor: Color(0xFFe62d11),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
+                                        },
+                                      );
                                     } else {
+                                      //snackbar for when email is not entered
                                       final snackBar = SnackBar(
-                                        content: Text('Email not entered'),
+                                        content: Text('Password not entered'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: Color(0xFFe62d11),
+                                        backgroundColor: orangeRed,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
-                                  },
-                                  child: Text("LOGIN"),
-                                );
-                              }),
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: Text('Email not entered'),
+                                      duration: Duration(milliseconds: 1000),
+                                      backgroundColor: orangeRed,
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                child: Text("LOGIN"),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                      //register account button
+                      //register button
                       Container(
                         width: 180,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 6.0),
                           child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterPage()),
-                                );
-                              },
-                              child: Text("REGISTER"),
-                              style: OutlinedButton.styleFrom(
-                                primary: Color(0xFF4ca5b5),
-                              )),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ),
+                              );
+                            },
+                            child: Text("REGISTER"),
+                            style: OutlinedButton.styleFrom(
+                              primary: cadetBlue,
+                            ),
+                          ),
                         ),
                       ),
                     ],

@@ -16,17 +16,16 @@ class CommentBoard extends StatefulWidget {
   final int index;
 }
 
+// This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
+
 class _CommentBoardState extends State<CommentBoard> {
-/*
- * This Widget is the main body which encloses the scrollable list of comments, as well as the leave a comment button
- */
   @override
   Widget build(BuildContext context) {
     String recipeId = widget.recipeID;
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     debugPrint(_firebaseAuth.currentUser.uid);
 
-    //Creates the snapshot of all comments
+    //Creates the snapshot of all comments in descending
     var firestoreDb = FirebaseFirestore.instance
         .collection('recipe')
         .doc('$recipeId')
@@ -35,69 +34,77 @@ class _CommentBoardState extends State<CommentBoard> {
         .snapshots();
 
     return Scaffold(
-        backgroundColor: new Color(0xFFf0f1eb),
-        //the body has the whole screen being used
-        body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Column(
-            children: [
-              RecipeThumbnail(),
-              RecipeButtons(),
-              StreamBuilder(
-                  stream: firestoreDb,
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) return CircularProgressIndicator();
-                    return Expanded(
-                      child: SizedBox(
-                        //List view generates a list of comment widgets, of length determineed by number of docs.
-                        child: ListView.builder(
-                            itemCount: snapshot.data.docs.length,
-                            itemBuilder: (context, int index) {
-                              return Comment(
-                                  snapshot: snapshot.data,
-                                  index: index,
-                                  recipeID: widget.recipeID);
-                            }),
-                      ),
-                    );
-                  }),
-              Container(
-                padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1),
-                      borderRadius: BorderRadius.circular(2)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: TextButton(
-                            onPressed: () async {
-                              await _dialogCall(context, widget.recipeID);
-                            },
-                            child: Text("Leave a comment!",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.black87))),
-                      ),
-                    ],
+      backgroundColor: new Color(0xFFf0f1eb),
+      //the body has the whole screen being used
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Column(
+          children: [
+            RecipeThumbnail(),
+            RecipeButtons(),
+            StreamBuilder(
+              stream: firestoreDb,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                return Expanded(
+                  child: SizedBox(
+                    //List view generates a list of comment widgets, of length determineed by number of docs.
+                    child: ListView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, int index) {
+                        return Comment(
+                            snapshot: snapshot.data,
+                            index: index,
+                            recipeID: widget.recipeID);
+                      },
+                    ),
                   ),
+                );
+              },
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF4ca5b5),
+                  border: Border.all(width: 2),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-              )
-            ],
-          ),
-        ));
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: TextButton(
+                        onPressed: () async {
+                          await _dialogCall(context, widget.recipeID);
+                        },
+                        child: Text(
+                          "COMMENT!",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-/*
- * This dialogCall method produces the comment entry form
- */
+  // This Method creates the comment entry form
+  // It takes the recipeID so the Comment is saved to the correct recipe
+
   Future<void> _dialogCall(BuildContext context, String recipeId) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CommentEntryDialog(
-            recipeID: recipeId,
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return CommentEntryDialog(
+          recipeID: recipeId,
+        );
+      },
+    );
   }
 }
