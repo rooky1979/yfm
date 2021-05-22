@@ -94,7 +94,7 @@ class RecipeThumbnail extends StatelessWidget {
             icon: Icon(
               Icons.arrow_back_outlined,
               size: 45,
-              color: cadetBlue,
+              color: white,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -128,11 +128,11 @@ class RecipeButtons extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .95,
-        height: 55,
+        height: 65,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: gradientColourB,
-            border: Border.all(color: buttonPrimary, width: 2)),
+            color: barColor,
+            border: Border.all(color: black, width: 2)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -144,7 +144,7 @@ class RecipeButtons extends StatelessWidget {
               ),
               child: Icon(
                 FontAwesomeIcons.info,
-                size: 20,
+                size: 28,
                 color: buttonPrimary,
               ),
               onPressed: () => {
@@ -169,7 +169,7 @@ class RecipeButtons extends StatelessWidget {
               ),
               child: Icon(
                 FontAwesomeIcons.book,
-                size: 20,
+                size: 28,
                 color: buttonPrimary,
               ),
               onPressed: () => {
@@ -193,7 +193,7 @@ class RecipeButtons extends StatelessWidget {
               ),
               child: Icon(
                 FontAwesomeIcons.comments, //comments button
-                size: 20,
+                size: 28,
                 color: buttonPrimary,
               ),
               onPressed: () => {
@@ -241,7 +241,7 @@ class _FavouritesState extends State<Favourites> {
             widget.isLiked = snapshot.data;
             if (snapshot.hasData) {
               return IconButton(
-                icon: Icon(Icons.favorite_rounded, //comments button
+                icon: Icon(Icons.favorite_rounded, //favourite button
                     size: 50,
                     color: widget.isLiked ? orangeRed : unliked),
                 onPressed: () {

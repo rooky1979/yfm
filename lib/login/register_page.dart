@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [cadetBlue, white.withOpacity(0.95)],
+                      colors: [loginGradientColor, white.withOpacity(0.95)],
                     ),
                   ),
                 ),

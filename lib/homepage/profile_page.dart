@@ -209,10 +209,10 @@ class ProfileButtons extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .90,
-        height: 55,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: gradientColourB,
+          color: barColor,
           border: Border.all(color: buttonPrimary, width: 2),
         ),
         child: Row(
@@ -225,7 +225,7 @@ class ProfileButtons extends StatelessWidget {
                 side: BorderSide(color: buttonPrimary),
               ),
               child:
-                  Icon(FontAwesomeIcons.globe, size: 20, color: buttonPrimary),
+                  Icon(FontAwesomeIcons.globe, size: 28, color: buttonPrimary),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
@@ -236,7 +236,7 @@ class ProfileButtons extends StatelessWidget {
               ),
               child: Icon(
                 FontAwesomeIcons.solidBookmark,
-                size: 20,
+                size: 28,
                 color: buttonPrimary,
               ),
               onPressed: () => {
@@ -274,7 +274,7 @@ _checkMod(BuildContext context) {
     shape: CircleBorder(
       side: BorderSide(color: buttonPrimary),
     ),
-    child: Icon(FontAwesomeIcons.plusCircle, size: 20, color: buttonPrimary),
+    child: Icon(FontAwesomeIcons.plusCircle, size: 28, color: buttonPrimary),
     onPressed: () => {
       Navigator.push(
         context,

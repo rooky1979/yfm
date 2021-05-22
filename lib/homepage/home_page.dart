@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [gradientColourA, gradientColourB],
+                          colors: [categoryColourA, categoryColourB],
                         ),
                         border: Border.all(
                           color: Colors.green[50],

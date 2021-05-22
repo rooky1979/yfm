@@ -91,7 +91,7 @@ class _LogInState extends State<LogIn> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [cadetBlue, white.withOpacity(0.95)],
+                      colors: [loginGradientColor, white.withOpacity(0.95)],
                     ),
                   ),
                 ),

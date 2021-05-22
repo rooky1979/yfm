@@ -156,7 +156,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             colors: <Color>[gradientColourA, gradientColourB],
                           ),
                           borderRadius: BorderRadius.circular(15),
-                          color: celadonBlue,
+                          color: textLabelColor,
                         ),
                         alignment: Alignment.center,
                         child: Text(

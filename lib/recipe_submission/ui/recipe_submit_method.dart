@@ -229,7 +229,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: celadonBlue,
+                                    backgroundColor: textLabelColor,
                                     radius: 10,
                                   ),
                                   title: Text(

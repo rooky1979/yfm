@@ -180,7 +180,7 @@ class _CommentState extends State<Comment> {
                                   setState(
                                     () {
                                       if (!(likedUsers.contains(user))) {
-                                        likeColor = cadetBlue;
+                                        likeColor = liked;
                                         numLikes++;
                                         FirebaseFirestore.instance
                                             .collection('recipe')
@@ -230,7 +230,7 @@ class _CommentState extends State<Comment> {
                                   );
                                 },
                                 icon: Icon(Icons.thumb_up,
-                                    color: clickedLike ? cadetBlue : black),
+                                    color: clickedLike ? liked : black),
                               ),
                               Container(
                                 padding: const EdgeInsets.only(
