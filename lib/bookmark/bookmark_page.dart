@@ -17,58 +17,68 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       //app bar that contains the search bar and profile settings page
+
       appBar: AppBar(
-       flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[ceruleanCrayola, celadonBlue])),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[gradientColourA, gradientColourB],
+            ),
+          ),
         ),
+        title: Text(
+          'Favourite Recipes',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
+          ),
+        ),
+
         //backgroundColor: Color(0xFF7a243e),
         leading: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.arrowLeft,
-              size: 25,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        title: Text('Favourite Recipes',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 25,
-            )),
+          icon: Icon(
+            FontAwesomeIcons.arrowLeft,
+            size: 25,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: StreamBuilder(
-          stream: firestoreDb,
-          builder: (
-            context,
-            snapshot,
-          ) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
-            return GridView.builder(
-                itemCount: snapshot.data.docs.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, int index) {
-                  return GestureDetector(
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: BookmarkTile(
-                        snapshot: snapshot.data,
-                        index: index,
-                      ),
-                    ),
-                  );
-                });
-          }),
+        stream: firestoreDb,
+        builder: (
+          context,
+          snapshot,
+        ) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return GridView.builder(
+            itemCount: snapshot.data.docs.length,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (context, int index) {
+              return GestureDetector(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: BookmarkTile(
+                    snapshot: snapshot.data,
+                    index: index,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

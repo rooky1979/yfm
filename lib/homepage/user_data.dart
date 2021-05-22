@@ -64,45 +64,56 @@ class _UserDataState extends State<UserData> {
               children: [
                 //tile contents
                 ListTile(
-                  title: Row(children: [
-                    //Future builder allows the app to get user data from db async
-                    FutureBuilder(
+                  title: Row(
+                    children: [
+                      //Future builder allows the app to get user data from db async
+                      FutureBuilder(
                         future: _getUserName(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             //return the image and make it cover the container
                             return Container(
-                              child: Text(snapshot.data,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15.0)),
+                              child: Text(
+                                snapshot.data,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 15.0),
+                              ),
                             );
                           } else {
-                            return Container(child: Text('Incoming User Data'));
+                            return Container(
+                              child: Text('Incoming User Data'),
+                            );
                           }
-                        }),
-                    Text(" - " + dateFormatted,
+                        },
+                      ),
+                      Text(
+                        " - " + dateFormatted,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12.0)),
-                  ]),
-                  subtitle: Text(snapshotData['description'],
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                            fontWeight: FontWeight.w400, fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(
+                    snapshotData['description'],
+                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
+                  ),
                   //Future builder allows the app to get user profile from db async
                   leading: FutureBuilder(
-                      future: _getUserImage(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          //return the image and make it cover the container
-                          return CircleAvatar(
-                            radius: 30.0,
-                            backgroundImage: NetworkImage(snapshot.data),
-                            backgroundColor: Colors.transparent,
-                          );
-                        } else {
-                          return const Icon(Icons.verified_user_rounded);
-                        }
-                      }),
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(snapshot.data),
+                          backgroundColor: Colors.transparent,
+                        );
+                      } else {
+                        return const Icon(Icons.verified_user_rounded);
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -112,18 +123,16 @@ class _UserDataState extends State<UserData> {
     );
   }
 
-  /*
-   * This method pulls the user avatar from the database 
-   * (Needs to change to use the string stored in db)
-   */
+  // This method pulls the user avatar from the database
+  // (Needs to change to use the string stored in db)
+
   Future _getUserImage() async {
     String downloadURL = await storage.ref('avatar1.png').getDownloadURL();
     return downloadURL;
   }
 
-  /*
-   * This method pulls the username associated with the comment
-   */
+  // This method pulls the username associated with the comment
+
   Future _getUserName() async {
     String username;
     await FirebaseFirestore.instance
@@ -132,11 +141,15 @@ class _UserDataState extends State<UserData> {
             isEqualTo: widget.snapshot.docs[widget.index][
                 'uid']) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        username = doc["username"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            username = doc["username"];
+          },
+        );
+      },
+    );
     return username;
   }
 }

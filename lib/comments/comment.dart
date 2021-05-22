@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 class Comment extends StatefulWidget {
   @override
@@ -46,8 +47,8 @@ class _CommentState extends State<Comment> {
     //This list is used to add and remove users from the list of users who have liked a comment
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
-    // ignore: unused_local_variable
-    Color likeColor = Colors.grey;
+
+    Color likeColor = unliked;
 
     //This boolean is used to limit how many times a person can like a comment
     bool clickedLike = likedUsers.contains(user);
@@ -56,168 +57,198 @@ class _CommentState extends State<Comment> {
     return Column(
       children: [
         Container(
-          //height: 190,
           child: Card(
             elevation: 9,
             child: Column(
               children: [
                 //tile contents
                 ListTile(
-                  title: Row(children: [
-                    //Future builder allows the app to get user data from db async
-                    FutureBuilder(
+                  title: Row(
+                    children: [
+                      //Future builder allows the app to get user data from db async
+                      FutureBuilder(
                         future: _getUserName(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             //return the image and make it cover the container
                             return Container(
-                              child: Text(snapshot.data,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15.0)),
+                              child: Text(
+                                snapshot.data,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 15.0),
+                              ),
                             );
                           } else {
-                            return Container(child: Text('Incoming User Data'));
+                            return Container(
+                              child: Text('Incoming User Data'),
+                            );
                           }
-                        }),
-                    Text(" - " + dateFormatted,
+                        },
+                      ),
+                      Text(
+                        " - " + dateFormatted,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 12.0)),
-                  ]),
-                  subtitle: Text(snapshotData['description'],
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.black)),
+                            fontWeight: FontWeight.w400, fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                  subtitle: Text(
+                    snapshotData['description'],
+                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
+                  ),
                   //Future builder allows the app to get user profile from db async
                   leading: FutureBuilder(
-                      future: _getUserImage(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          //return the image and make it cover the container
-                          return CircleAvatar(
-                            radius: 30.0,
-                            backgroundImage: NetworkImage(snapshot.data),
-                            backgroundColor: Colors.transparent,
-                          );
-                        } else {
-                          return const Icon(Icons.verified_user_rounded);
-                        }
-                      }),
+                    future: _getUserImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        //return the image and make it cover the container
+                        return CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(snapshot.data),
+                          backgroundColor: Colors.transparent,
+                        );
+                      } else {
+                        return const Icon(Icons.verified_user_rounded);
+                      }
+                    },
+                  ),
                 ),
                 //This center contains the comment image
                 if (snapshotData['imgAttached'] == true)
                   Center(
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                      //Future builder allows the app to get comment data from db async
                       child: FutureBuilder(
-                          future: _getImageURL(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return GestureDetector(
-                                child: Image.network(
-                                  snapshot.data,
-                                  fit: BoxFit.cover,
-                                ),
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                    return GestureDetector(
-                                      child: Center(
-                                        child: Image.network(
-                                          snapshot.data,
-                                          fit: BoxFit.cover,
+                        future: _getImageURL(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return GestureDetector(
+                              child: Image.network(
+                                snapshot.data,
+                                fit: BoxFit.cover,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return GestureDetector(
+                                        child: Center(
+                                          child: Image.network(
+                                            snapshot.data,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                      ),
-                                      onTap: () => Navigator.pop(context),
-                                    );
-                                  }));
-                                },
-                              );
-                            } else {
-                              return Container(
-                                  child: Center(
-                                      child: CircularProgressIndicator()));
-                            }
-                          }),
+                                        onTap: () => Navigator.pop(context),
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          } else {
+                            return Container(
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 Container(
                   padding: const EdgeInsets.only(
                       top: 5, left: 10, right: 15, bottom: 5),
-                  child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Container(
-                      decoration: BoxDecoration(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
-                          border: Border.all(width: 2)),
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                            top: 5, left: 10, right: 10, bottom: 5),
-                        child: Row(
-                          children: [
-                            //Handles like comment logic
-                            IconButton(
+                          border: Border.all(width: 2),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 10, right: 10, bottom: 5),
+                          child: Row(
+                            children: [
+                              //Handles logic for liking comments
+                              IconButton(
                                 onPressed: () async {
-                                  setState(() {
-                                    if (!(likedUsers.contains(user))) {
-                                      likeColor = Colors.blue;
-                                      numLikes++;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update({'likes': numLikes});
-                                      clickedLike = !clickedLike;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update({
-                                        'likedUsers':
-                                            FieldValue.arrayUnion(list)
-                                      });
-                                    } else {
-                                      numLikes--;
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update({'likes': numLikes});
-                                      clickedLike = !clickedLike;
+                                  setState(
+                                    () {
+                                      if (!(likedUsers.contains(user))) {
+                                        likeColor = liked;
+                                        numLikes++;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {'likes': numLikes},
+                                        );
+                                        clickedLike = !clickedLike;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {
+                                            'likedUsers':
+                                                FieldValue.arrayUnion(list)
+                                          },
+                                        );
+                                      } else {
+                                        numLikes--;
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {'likes': numLikes},
+                                        );
+                                        clickedLike = !clickedLike;
 
-                                      FirebaseFirestore.instance
-                                          .collection('recipe')
-                                          .doc(widget.recipeID)
-                                          .collection('comments')
-                                          .doc(docID)
-                                          .update({
-                                        'likedUsers':
-                                            FieldValue.arrayRemove(list)
-                                      });
-                                    }
-                                  });
+                                        FirebaseFirestore.instance
+                                            .collection('recipe')
+                                            .doc(widget.recipeID)
+                                            .collection('comments')
+                                            .doc(docID)
+                                            .update(
+                                          {
+                                            'likedUsers':
+                                                FieldValue.arrayRemove(list)
+                                          },
+                                        );
+                                      }
+                                    },
+                                  );
                                 },
                                 icon: Icon(Icons.thumb_up,
-                                    color: clickedLike
-                                        ? Color(0xFF009e5fb)
-                                        : Colors.black)),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: 10, left: 1, right: 3, bottom: 10),
-                              child: Text(numLikes.toString(),
+                                    color: clickedLike ? liked : black),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 1, right: 3, bottom: 10),
+                                child: Text(
+                                  numLikes.toString(),
                                   style: const TextStyle(
-                                      fontSize: 17.0, color: Colors.black)),
-                            ),
-                            //Create Delete or Report Button
-                            _checkUser(docID, widget.index, user),
-                          ],
+                                      fontSize: 17.0, color: Colors.black),
+                                ),
+                              ),
+                              //Create Delete or Report Button depending on current user
+                              _checkUser(docID, widget.index, user),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
+                    ],
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(
@@ -231,9 +262,8 @@ class _CommentState extends State<Comment> {
     );
   }
 
-  /*
-   * This method gets the image associated with a comment from the database
-   */
+  //This method gets the image associated with a comment from the database
+
   Future _getImageURL() async {
     String downloadURL = await storage
         .ref('comment_images/' + widget.snapshot.docs[widget.index].id)
@@ -241,33 +271,34 @@ class _CommentState extends State<Comment> {
     return downloadURL;
   }
 
-  /*
-   * This method pulls the user avatar from the database 
-   * (Needs to change to use the string stored in db)
-   */
+  // This method pulls the user avatar from the database
+  // based on the image name saved
+
   Future _getUserImage() async {
     String imageName;
 
     await FirebaseFirestore.instance
-        .collection('users') // Users table in firestore
-        .where('uid',
-            isEqualTo: widget.snapshot.docs[widget.index][
-                'uid']) //first uid is the user ID of in the users table (not document id)
+        .collection('users')
+        .where('uid', isEqualTo: widget.snapshot.docs[widget.index]['uid'])
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        imageName = doc["image"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            imageName = doc["image"];
+          },
+        );
+      },
+    );
 
     String downloadURL =
         await storage.ref('avatar_images/' + imageName).getDownloadURL();
     return downloadURL;
   }
 
-  /*
-   * This method pulls the username associated with the comment
-   */
+  // This method pulls the username associated with the comment
+  // and returns it to the Future Builder
+
   Future _getUserName() async {
     String username;
     await FirebaseFirestore.instance
@@ -276,21 +307,24 @@ class _CommentState extends State<Comment> {
             isEqualTo: widget.snapshot.docs[widget.index][
                 'uid']) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        username = doc["username"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            username = doc["username"];
+          },
+        );
+      },
+    );
     return username;
   }
 
-  /*
-   * This method compares the current active user to the user associated with the comment,
-   * If the users match it creates the delete button. Otherwise it creates a report button.
-   */
+  // This method compares the current active user to the user associated with the comment,
+  // If the users match it creates the delete button. Otherwise it creates a report button.
+
   _checkUser(String docId, int id, String user) {
-    if ((widget.snapshot.docs[widget.index]['uid'] ==
-        user)) //Add mod feature before handover?
+    if ((widget.snapshot.docs[widget.index]['uid'] == user ||
+        user == 'insert current UID Here')) //Add mod feature before handover?
     {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -299,14 +333,15 @@ class _CommentState extends State<Comment> {
             child: Row(
               children: [
                 IconButton(
-                    //delete the comment from the database
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      showDeleteAlert(context, docId);
-                    }),
+                  //delete the comment from the database
+                  icon: Icon(
+                    Icons.delete,
+                    color: buttonPrimary,
+                  ),
+                  onPressed: () async {
+                    showDeleteAlert(context, docId);
+                  },
+                ),
               ],
             ),
           ),
@@ -320,14 +355,15 @@ class _CommentState extends State<Comment> {
             child: Row(
               children: [
                 IconButton(
-                    //delete the comment from the database
-                    icon: Icon(
-                      Icons.flag,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      showReportAlert(context, docId);
-                    }),
+                  //delete the comment from the database
+                  icon: Icon(
+                    Icons.flag,
+                    color: buttonPrimary,
+                  ),
+                  onPressed: () async {
+                    showReportAlert(context, docId);
+                  },
+                ),
               ],
             ),
           ),
@@ -336,9 +372,8 @@ class _CommentState extends State<Comment> {
     }
   }
 
-/*
- * This method creates the sequence for comment delete confirmation.
- */
+  // This method creates the sequence for comment delete confirmation.
+
   showDeleteAlert(BuildContext context, var docId) {
     showDialog(
       context: context,
@@ -358,7 +393,7 @@ class _CommentState extends State<Comment> {
                 final snackBar = SnackBar(
                   content: Text('Comment Deleted'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: Colors.red,
+                  backgroundColor: orangeRed,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
@@ -377,9 +412,8 @@ class _CommentState extends State<Comment> {
     );
   }
 
-/*
- * This method creates the alert dialog sequence for confirming reporting of a comment.
- */
+  // This method creates the alert dialog sequence for confirming reporting of a comment.
+
   showReportAlert(BuildContext context, var docId) {
     showDialog(
       context: context,
@@ -395,11 +429,13 @@ class _CommentState extends State<Comment> {
                     .doc(widget.recipeID)
                     .collection('comments')
                     .doc(docId)
-                    .update({'reported': true});
+                    .update(
+                  {'reported': true},
+                );
                 final snackBar = SnackBar(
                   content: Text('Comment Reported'),
                   duration: Duration(milliseconds: 1000),
-                  backgroundColor: Colors.red,
+                  backgroundColor: orangeRed,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Navigator.of(context).pop();

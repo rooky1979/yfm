@@ -31,25 +31,30 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Profile Information',
-          style: TextStyle(color: Colors.white),
-        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[cream, radicalRed])),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[gradientColourA, gradientColourB],
+            ),
+          ),
+        ),
+        title: Text(
+          'Profile Information',
+          style: TextStyle(
+            color: white,
+            fontWeight: FontWeight.w500,
+            fontSize: 25,
+          ),
         ),
         leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
               size: 25,
-              color: Colors.white,
+              color: white,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -122,13 +127,14 @@ class ProfilePage extends StatelessWidget {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, int index) {
-                        return UserInformationCard(
-                          snapshot: snapshot.data,
-                          index: 1,
-                        );
-                      }),
+                    itemCount: 1,
+                    itemBuilder: (context, int index) {
+                      return UserInformationCard(
+                        snapshot: snapshot.data,
+                        index: 1,
+                      );
+                    },
+                  ),
                 );
               },
             ),
@@ -140,16 +146,18 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
-                    primary: Color(0xFFe62d11), // background
-                    onPrimary: Colors.white, // foreground
+                    primary: orangeRed, // background
+                    onPrimary: white, // foreground
                   ),
                   onPressed: () {
                     Navigator.pop(context);
                     context.read<AuthenticationService>().signOut();
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => LoginPage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPage(),
+                      ),
+                    );
                   },
                   child: Text("SIGN OUT"),
                 ),
@@ -172,11 +180,15 @@ class ProfilePage extends StatelessWidget {
             isEqualTo: _firebaseAuth.currentUser
                 .uid) //first uid is the user ID of in the users table (not document id)
         .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        imageName = doc["image"];
-      });
-    });
+        .then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            imageName = doc["image"];
+          },
+        );
+      },
+    );
 
     String downloadURL =
         await storage.ref('avatar_images/' + imageName).getDownloadURL();
@@ -192,42 +204,50 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
+      padding:
+          const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0, bottom: 2.0),
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .90,
-        height: 50,
+        height: 60,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: turquoiseGreen,
-            border: Border.all(color: darkPurple)),
+          borderRadius: BorderRadius.circular(10),
+          color: barColor,
+          border: Border.all(color: buttonPrimary, width: 2),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10),
-              fillColor: Colors.white,
-              shape: CircleBorder(side: BorderSide(color: darkPurple)),
-              child: Icon(FontAwesomeIcons.globe,
-                  size: 20, color: darkPurple),
+              fillColor: white,
+              shape: CircleBorder(
+                side: BorderSide(color: buttonPrimary),
+              ),
+              child:
+                  Icon(FontAwesomeIcons.globe, size: 28, color: buttonPrimary),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
-                padding: EdgeInsets.all(10),
-                fillColor: Colors.white,
-                shape: CircleBorder(side: BorderSide(color: darkPurple)),
-                child: Icon(
-                  FontAwesomeIcons.solidBookmark,
-                  size: 20,
-                  color: Color(0xFF7a243e),
-                ),
-                onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  BookmarkPage()))
-                    }),
+              padding: EdgeInsets.all(10),
+              fillColor: white,
+              shape: CircleBorder(
+                side: BorderSide(color: buttonPrimary),
+              ),
+              child: Icon(
+                FontAwesomeIcons.solidBookmark,
+                size: 28,
+                color: buttonPrimary,
+              ),
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => BookmarkPage(),
+                  ),
+                )
+              },
+            ),
             _checkMod(context)
           ],
         ),
@@ -249,15 +269,19 @@ _launchURL() async {
 _checkMod(BuildContext context) {
   //final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   return RawMaterialButton(
-      padding: EdgeInsets.all(11),
-      fillColor: Colors.white,
-      shape: CircleBorder(side: BorderSide(color: darkPurple)),
-      child:
-          Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
-      onPressed: () => {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => InformationSubmission()))
-          });
+    padding: EdgeInsets.all(11),
+    fillColor: white,
+    shape: CircleBorder(
+      side: BorderSide(color: buttonPrimary),
+    ),
+    child: Icon(FontAwesomeIcons.plusCircle, size: 28, color: buttonPrimary),
+    onPressed: () => {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => InformationSubmission(),
+        ),
+      ),
+    },
+  );
 }
