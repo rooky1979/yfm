@@ -355,7 +355,7 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                                 title: Text(
                                   DBControl.ingredients[index].toString(),
                                   style: TextStyle(
-                                    color: textfieldBackground,
+                                    color: textLabelColor,
                                   ),
                                 ),
                               ),
