@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 //card that displays the recipe information
 class RecipeInformationCard extends StatelessWidget {
@@ -17,7 +18,9 @@ class RecipeInformationCard extends StatelessWidget {
     //snaphot of the docs
     var snapshotData = snapshot.docs[index];
     //list that holds an array of the ingredients
-    List<String> ingredientsList = List.from(snapshotData['ingredients']);
+    List<String> ingredientsList = List.from(
+      snapshotData['ingredients'],
+    );
     return Column(
       children: [
         FittedBox(
@@ -25,65 +28,9 @@ class RecipeInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-                color: new Color(0xFFf0f1eb),
-                elevation: 1,
-                shadowColor: new Color(0xFFe62d11),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Divider(
-                      height: 10,
-                      thickness: 3,
-                      indent: 10,
-                      endIndent: 10,
-                      color: new Color(0xFF7a243e),
-                    ),
-                    //display the recipe title
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              '${snapshotData['title']}',
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //display the recipe description
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Flexible(
-                            child: Text(
-                              '${snapshotData['description']}',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )),
-          ),
-        ),
-        FittedBox(
-          fit: BoxFit.fill,
-          child: Container(
-            color: new Color(0xFFf0f1eb),
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              color: new Color(0xFFf0f1eb),
+              color: background,
               elevation: 1,
-              shadowColor: new Color(0xFFe62d11),
+              shadowColor: orangeRed,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -92,211 +39,36 @@ class RecipeInformationCard extends StatelessWidget {
                     thickness: 3,
                     indent: 10,
                     endIndent: 10,
-                    color: new Color(0xFF7a243e),
+                    color: dividerColor,
                   ),
+                  //display the recipe title
                   Padding(
-                    //widget for the recipe info subheading
-                    padding: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text('Information:',
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    //widget to show the recipe difficulty
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Difficulty: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: snapshotData['difficulty']),
-                              ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: new Color(0xFF7a243e),
-                  ),
-                  Padding(
-                    //widget to show the serving size
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Servings: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: snapshotData['servings']),
-                              ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: new Color(0xFF7a243e),
-                  ),
-                  Padding(
-                    //widget to display the prep time
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        snapshotData['prepTime'] < 60
-                            ? Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Text.rich(TextSpan(
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Prep Time: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text: _printPrepTimeMinutes(
-                                                  snapshotData)
-                                              .toString()),
-                                    ])),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Text.rich(TextSpan(
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Prep Time: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text:
-                                              _printPrepTimeHours(snapshotData)
-                                                      .toString() +
-                                                  ' ' +
-                                                  _printPrepTimeMinutes(
-                                                          snapshotData)
-                                                      .toString()),
-                                    ])),
-                              ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: new Color(0xFF7a243e),
-                  ),
-                  Padding(
-                    //widget to show what allergies the recipes affects
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text.rich(TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Allergies: ',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                    text:
-                                        _printArray(snapshotData['allergies'])),
-                              ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: new Color(0xFF7a243e),
-                  ),
-                  Padding(
-                    //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text.rich(TextSpan(
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: 'Recipe Tags: ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(
-                                      text:
-                                          _printArray(snapshotData['protein'])),
-                                ])),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['title']}',
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 20,
-                    endIndent: 20,
-                    color: new Color(0xFF7a243e),
-                  ),
+                  //display the recipe description
                   Padding(
-                    //widget showing vege, non-vege or vegan
-                    padding: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text('${snapshotData['category']}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                        Flexible(
+                          child: Text(
+                            '${snapshotData['description']}',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
                           ),
                         ),
                       ],
@@ -310,7 +82,272 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: new Color(0xFFf0f1eb),
+            color: background,
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: background,
+              elevation: 1,
+              shadowColor: orangeRed,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Divider(
+                    height: 10,
+                    thickness: 3,
+                    indent: 10,
+                    endIndent: 10,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget for the recipe info subheading
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'Information:',
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    //widget to show the recipe difficulty
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text.rich(
+                            TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Difficulty: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: snapshotData['difficulty'],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget to show the serving size
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text.rich(
+                            TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Servings: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: snapshotData['servings'],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget to display the prep time
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        snapshotData['prepTime'] < 60
+                            ? Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Text.rich(
+                                  TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'Prep Time: ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            _printPrepTimeMinutes(snapshotData)
+                                                .toString(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Text.rich(
+                                  TextSpan(
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'Prep Time: ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      TextSpan(
+                                        text: _printPrepTimeHours(snapshotData)
+                                                .toString() +
+                                            ' ' +
+                                            _printPrepTimeMinutes(snapshotData)
+                                                .toString(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget to show what allergies the recipes affects
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text.rich(
+                            TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Allergies: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: _printArray(
+                                    snapshotData['allergies'],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Text.rich(
+                              TextSpan(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Recipe Tags: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                    text: _printArray(
+                                      snapshotData['protein'],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: dividerColor,
+                  ),
+                  Padding(
+                    //widget showing vege, non-vege or vegan
+                    padding: const EdgeInsets.all(3.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Text(
+                              '${snapshotData['category']}',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        FittedBox(
+          fit: BoxFit.fill,
+          child: Container(
+            color: background,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -320,7 +357,7 @@ class RecipeInformationCard extends StatelessWidget {
                   thickness: 3,
                   indent: 10,
                   endIndent: 10,
-                  color: new Color(0xFF7a243e),
+                  color: dividerColor,
                 ),
                 Padding(
                   //widget for the recipe info title
@@ -329,9 +366,11 @@ class RecipeInformationCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Text('Ingredients:',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold)),
+                        child: Text(
+                          'Ingredients:',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
@@ -346,7 +385,7 @@ class RecipeInformationCard extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: new Color(0xFF7a243e),
+                            backgroundColor: dividerColor,
                             radius: 10,
                           ),
                           title: Text(ingredientsList[index].toString(),
@@ -360,7 +399,7 @@ class RecipeInformationCard extends StatelessWidget {
                           thickness: 2,
                           indent: 40,
                           endIndent: 20,
-                          color: new Color(0xFF7a243e),
+                          color: dividerColor,
                         ),
                       ],
                     );

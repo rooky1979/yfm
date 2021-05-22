@@ -22,7 +22,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
     thickness: 3,
     indent: 20,
     endIndent: 20,
-    color: ceruleanCrayola,
+    color: dividerColor,
   );
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -51,7 +51,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       resizeToAvoidBottomInset: false,
       //appbar with title and back arrow
       appBar: AppBar(
@@ -60,7 +60,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[turquoiseGreen, greenSheen])),
+                  colors: <Color>[gradientColourA, gradientColourB])),
         ),
         leading: IconButton(
             icon: Icon(
@@ -90,7 +90,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                     child: Text(
                       'Add method instructions:',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: textLabelColor,
                           fontWeight: FontWeight.w500,
                           fontSize: 20),
                     ),
@@ -103,31 +103,40 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                 //text field to enter the name of the recipe
                 child: Container(
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[ceruleanCrayola, celadonBlue]),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: celadonBlue)),
-                          
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: <Color>[
+                          textfieldBackground,
+                          textfieldBackground
+                        ]),
+                    //borderRadius: BorderRadius.circular(8),
+                    //border: Border.all(color: celadonBlue)
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: TextField(
                       textCapitalization: TextCapitalization.sentences,
                       controller: methodController,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                          color: Colors.white,
+                          color: textLabelColor,
                           fontSize: 20,
                           fontWeight: FontWeight.w500),
                       decoration: InputDecoration(
                         labelText: 'Enter step',
                         labelStyle: TextStyle(
-                            color: white,
+                            color: textLabelColor,
                             fontSize: 15,
                             fontWeight: FontWeight.w500),
-
-                        enabledBorder: InputBorder.none
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: textLabelColor, width: 2),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: textLabelColor, width: 3),
+                        ),
                       ),
                     ),
                   ),
@@ -148,7 +157,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         child: Text(
                           'PREVIOUS',
                           style: TextStyle(
-                              color: greenSheen,
+                              color: buttonPrimary,
                               fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
@@ -167,8 +176,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       width: 150,
                       height: 50,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: greenSheen),
+                        style: ElevatedButton.styleFrom(primary: buttonPrimary),
                         child: Text(
                           'NEXT',
                           style: TextStyle(
@@ -205,7 +213,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                             'Added so far:',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: white,
+                              color: textLabelColor,
                               fontSize: 20,
                             ),
                           ),
@@ -221,7 +229,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
-                                    backgroundColor: celadonBlue,
+                                    backgroundColor: textLabelColor,
                                     radius: 10,
                                   ),
                                   title: Text(
@@ -229,14 +237,14 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
-                                          color: white)),
+                                          color: textLabelColor)),
                                 ),
                                 Divider(
                                   height: 10,
                                   thickness: 2,
                                   indent: 40,
                                   endIndent: 20,
-                                  color: ceruleanCrayola,
+                                  color: dividerColor,
                                 ),
                               ],
                             );
@@ -258,9 +266,8 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         width: 150,
                         height: 50,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: greenSheen,
-                          ),
+                          style:
+                              ElevatedButton.styleFrom(primary: buttonPrimary),
                           child: Text(
                             'DONE',
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -294,7 +301,7 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           child: Text(
                             'CANCEL',
                             style: TextStyle(
-                                color: greenSheen,
+                                color: buttonPrimary,
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () {

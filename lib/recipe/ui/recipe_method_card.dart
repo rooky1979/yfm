@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
@@ -25,11 +26,13 @@ class MethodCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text('Method:',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    )),
+                child: Text(
+                  'Method:',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -44,25 +47,25 @@ class MethodCard extends StatelessWidget {
               children: [
                 ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: new Color(0xFF7a243e),
+                    backgroundColor: dividerColor,
                     child: Text(
                       (index + 1).toString(),
                       style: TextStyle(
-                          color: new Color(0xFFf0f1eb),
-                          fontWeight: FontWeight.bold),
+                          color: background, fontWeight: FontWeight.bold),
                     ),
                   ),
                   //each tile prints each element of the array
-                  title: Text(methodList[index].toString(),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  title: Text(
+                    methodList[index].toString(),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Divider(
                   height: 10,
                   thickness: 2,
                   indent: 40,
                   endIndent: 20,
-                  color: new Color(0xFF7a243e),
+                  color: dividerColor,
                 ),
               ],
             );
