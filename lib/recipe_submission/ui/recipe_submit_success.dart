@@ -7,14 +7,14 @@ class SuccessSubmission extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[turquoiseGreen, greenSheen],
+              colors: <Color>[gradientColourA, gradientColourB],
             ),
           ),
         ),
@@ -46,7 +46,7 @@ class SuccessSubmission extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: white,
+                          color: textLabelColor,
                         ),
                       ),
                     ),
@@ -60,8 +60,8 @@ class SuccessSubmission extends StatelessWidget {
                           width: 200,
                           height: 50,
                           child: ElevatedButton(
-                            style:
-                                ElevatedButton.styleFrom(primary: greenSheen),
+                            style: ElevatedButton.styleFrom(
+                                primary: buttonPrimary),
                             child: Text(
                               'FINISHED',
                               style: TextStyle(

@@ -31,14 +31,14 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[turquoiseGreen, greenSheen],
+              colors: <Color>[gradientColourA, gradientColourB],
             ),
           ),
         ),
@@ -204,15 +204,16 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0),
+      padding:
+          const EdgeInsets.only(top: 2.0, left: 3.0, right: 3.0, bottom: 2.0),
       child: Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * .90,
-        height: 50,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: turquoiseGreen,
-          border: Border.all(color: darkPurple),
+          color: barColor,
+          border: Border.all(color: buttonPrimary, width: 2),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -221,21 +222,22 @@ class ProfileButtons extends StatelessWidget {
               padding: EdgeInsets.all(10),
               fillColor: white,
               shape: CircleBorder(
-                side: BorderSide(color: darkPurple),
+                side: BorderSide(color: buttonPrimary),
               ),
-              child: Icon(FontAwesomeIcons.globe, size: 20, color: darkPurple),
+              child:
+                  Icon(FontAwesomeIcons.globe, size: 28, color: buttonPrimary),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
               padding: EdgeInsets.all(10),
               fillColor: white,
               shape: CircleBorder(
-                side: BorderSide(color: darkPurple),
+                side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(
                 FontAwesomeIcons.solidBookmark,
-                size: 20,
-                color: darkPurple,
+                size: 28,
+                color: buttonPrimary,
               ),
               onPressed: () => {
                 Navigator.push(
@@ -270,9 +272,9 @@ _checkMod(BuildContext context) {
     padding: EdgeInsets.all(11),
     fillColor: white,
     shape: CircleBorder(
-      side: BorderSide(color: darkPurple),
+      side: BorderSide(color: buttonPrimary),
     ),
-    child: Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
+    child: Icon(FontAwesomeIcons.plusCircle, size: 28, color: buttonPrimary),
     onPressed: () => {
       Navigator.push(
         context,

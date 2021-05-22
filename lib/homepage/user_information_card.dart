@@ -44,7 +44,7 @@ class UserInformationCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: <Color>[ceruleanCrayola, celadonBlue],
+                      colors: <Color>[barColor, barColor],
                     ),
                     border: Border.all(color: Colors.blue[900], width: 1.5),
                     borderRadius: BorderRadius.circular(15),
@@ -93,7 +93,7 @@ class UserInformationCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: <Color>[ceruleanCrayola, celadonBlue],
+                      colors: <Color>[barColor, barColor],
                     ),
                     border: Border.all(color: Colors.blue[900], width: 1.5),
                     borderRadius: BorderRadius.circular(15),
@@ -142,7 +142,7 @@ class UserInformationCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: <Color>[ceruleanCrayola, celadonBlue],
+                      colors: <Color>[barColor, barColor],
                     ),
                     border: Border.all(color: Colors.blue[900], width: 1.5),
                     borderRadius: BorderRadius.circular(15),
@@ -191,7 +191,7 @@ class UserInformationCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: <Color>[ceruleanCrayola, celadonBlue],
+                      colors: <Color>[barColor, barColor],
                     ),
                     border: Border.all(color: Colors.blue[900], width: 1.5),
                     borderRadius: BorderRadius.circular(15),
@@ -240,7 +240,7 @@ class UserInformationCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: <Color>[ceruleanCrayola, celadonBlue],
+                      colors: <Color>[barColor, barColor],
                     ),
                     border: Border.all(color: Colors.blue[900], width: 1.5),
                     borderRadius: BorderRadius.circular(15),

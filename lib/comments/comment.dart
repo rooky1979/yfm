@@ -47,8 +47,8 @@ class _CommentState extends State<Comment> {
     //This list is used to add and remove users from the list of users who have liked a comment
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
-    // ignore: unused_local_variable
-    Color likeColor = grey;
+
+    Color likeColor = unliked;
 
     //This boolean is used to limit how many times a person can like a comment
     bool clickedLike = likedUsers.contains(user);
@@ -180,7 +180,7 @@ class _CommentState extends State<Comment> {
                                   setState(
                                     () {
                                       if (!(likedUsers.contains(user))) {
-                                        likeColor = blue;
+                                        likeColor = liked;
                                         numLikes++;
                                         FirebaseFirestore.instance
                                             .collection('recipe')
@@ -230,9 +230,7 @@ class _CommentState extends State<Comment> {
                                   );
                                 },
                                 icon: Icon(Icons.thumb_up,
-                                    color: clickedLike
-                                        ? Color(0xFF009e5fb)
-                                        : black),
+                                    color: clickedLike ? liked : black),
                               ),
                               Container(
                                 padding: const EdgeInsets.only(
@@ -338,7 +336,7 @@ class _CommentState extends State<Comment> {
                   //delete the comment from the database
                   icon: Icon(
                     Icons.delete,
-                    color: black,
+                    color: buttonPrimary,
                   ),
                   onPressed: () async {
                     showDeleteAlert(context, docId);
@@ -360,7 +358,7 @@ class _CommentState extends State<Comment> {
                   //delete the comment from the database
                   icon: Icon(
                     Icons.flag,
-                    color: black,
+                    color: buttonPrimary,
                   ),
                   onPressed: () async {
                     showReportAlert(context, docId);

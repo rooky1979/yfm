@@ -10,7 +10,7 @@ Future<void> main() async {
   runApp(
     new MaterialApp(
       theme: ThemeData(
-        primaryColor: cream,
+        primaryColor: background,
       ),
       home: LoginPage(),
     ),
