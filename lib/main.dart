@@ -21,9 +21,9 @@ Future<void> main() async {
       //theme: _appTheme,
       theme: ThemeData(
         //brightness: Brightness.light,
-        primaryColor: cream,
+        //primaryColor: cream,
       ),
-      home: LoginPage(),
+      home: HomePage(),
     ),
   );
 }

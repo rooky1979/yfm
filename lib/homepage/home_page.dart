@@ -36,14 +36,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: <Color>[ceruleanCrayola, celadonBlue])),
+                  colors: <Color>[mintGreen, emerald])),
         ),
         actions: [
           GetBuilder<DataController>(
@@ -115,12 +115,12 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    //height: MediaQuery.of(context).size.height,
+                    height: 45,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
-                            colors: [turquoiseGreen, greenSheen]),
+                            colors: [zomp, emerald]),
                         border: Border.all(color: Colors.green[50]),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
@@ -129,8 +129,8 @@ class _HomePageState extends State<HomePage> {
                         '${categories[index]}',
                         style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25.0),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20.0),
                         textAlign: TextAlign.center,
                       ),
                     ),
