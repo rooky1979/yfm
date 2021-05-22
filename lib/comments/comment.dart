@@ -47,8 +47,8 @@ class _CommentState extends State<Comment> {
     //This list is used to add and remove users from the list of users who have liked a comment
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
-    // ignore: unused_local_variable
-    Color likeColor = grey;
+
+    Color likeColor = unliked;
 
     //This boolean is used to limit how many times a person can like a comment
     bool clickedLike = likedUsers.contains(user);

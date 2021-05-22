@@ -183,7 +183,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
     final filter = ProfanityFilter();
     String recipeID = widget.recipeID;
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       body: Padding(
         padding:
             const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
@@ -247,7 +247,7 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                               final snackBar = SnackBar(
                                 content: Text('Comment Posted'),
                                 duration: Duration(milliseconds: 1000),
-                                backgroundColor: greenSheen,
+                                backgroundColor: green,
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);

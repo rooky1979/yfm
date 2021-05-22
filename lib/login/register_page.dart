@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         //removes back button on appbar
@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: cream,
+        color: background,
         height: double.infinity,
         //allows this page to be scrollable
         child: SingleChildScrollView(
@@ -81,22 +81,22 @@ class _RegisterPageState extends State<RegisterPage> {
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: emailInputController,
-                          cursorColor: gradientColourB,
+                          cursorColor: textLabelColor,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.mail_outline, color: black),
                             labelText: 'Email',
                             fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: darkPurple,
+                              color: textLabelColor,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 2),
+                                  BorderSide(color: textLabelColor, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 3),
+                                  BorderSide(color: textLabelColor, width: 3),
                             ),
                           ),
                         ),
@@ -117,18 +117,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: gradientColourB,
+                              color: textLabelColor,
                             ),
                             hintStyle: TextStyle(
-                              color: gradientColourB,
+                              color: textLabelColor,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 2),
+                                  BorderSide(color: textLabelColor, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 3),
+                                  BorderSide(color: textLabelColor, width: 3),
                             ),
                           ),
                         ),

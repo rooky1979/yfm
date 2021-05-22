@@ -28,7 +28,7 @@ class RecipeInformationCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: cream,
+              color: background,
               elevation: 1,
               shadowColor: orangeRed,
               child: Column(
@@ -82,10 +82,10 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: cream,
+            color: background,
             width: MediaQuery.of(context).size.width,
             child: Card(
-              color: cream,
+              color: background,
               elevation: 1,
               shadowColor: orangeRed,
               child: Column(
@@ -347,7 +347,7 @@ class RecipeInformationCard extends StatelessWidget {
         FittedBox(
           fit: BoxFit.fill,
           child: Container(
-            color: cream,
+            color: background,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -399,7 +399,7 @@ class RecipeInformationCard extends StatelessWidget {
                           thickness: 2,
                           indent: 40,
                           endIndent: 20,
-                          color: darkPurple,
+                          color: dividerColor,
                         ),
                       ],
                     );

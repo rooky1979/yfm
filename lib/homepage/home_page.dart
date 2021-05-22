@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(

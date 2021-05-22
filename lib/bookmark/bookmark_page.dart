@@ -17,7 +17,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: onyx,
+      backgroundColor: background,
       //app bar that contains the search bar and profile settings page
 
       appBar: AppBar(
@@ -26,7 +26,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[turquoiseGreen, greenSheen],
+              colors: <Color>[gradientColourA, gradientColourB],
             ),
           ),
         ),

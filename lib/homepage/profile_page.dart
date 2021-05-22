@@ -31,14 +31,14 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[turquoiseGreen, greenSheen],
+              colors: <Color>[gradientColourA, gradientColourB],
             ),
           ),
         ),
@@ -212,7 +212,7 @@ class ProfileButtons extends StatelessWidget {
         height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: turquoiseGreen,
+          color: gradientColourB,
           border: Border.all(color: buttonPrimary, width: 2),
         ),
         child: Row(
@@ -224,7 +224,8 @@ class ProfileButtons extends StatelessWidget {
               shape: CircleBorder(
                 side: BorderSide(color: buttonPrimary),
               ),
-              child: Icon(FontAwesomeIcons.globe, size: 20, color: darkPurple),
+              child:
+                  Icon(FontAwesomeIcons.globe, size: 20, color: buttonPrimary),
               onPressed: _launchURL,
             ),
             RawMaterialButton(
@@ -271,9 +272,9 @@ _checkMod(BuildContext context) {
     padding: EdgeInsets.all(11),
     fillColor: white,
     shape: CircleBorder(
-      side: BorderSide(color: darkPurple),
+      side: BorderSide(color: buttonPrimary),
     ),
-    child: Icon(FontAwesomeIcons.plusCircle, size: 20, color: darkPurple),
+    child: Icon(FontAwesomeIcons.plusCircle, size: 20, color: buttonPrimary),
     onPressed: () => {
       Navigator.push(
         context,

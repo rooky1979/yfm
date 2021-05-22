@@ -66,7 +66,7 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightPurple,
+      backgroundColor: background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
@@ -75,7 +75,7 @@ class _LogInState extends State<LogIn> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: cream,
+        color: background,
         height: double.infinity,
         //allows page to be scrollable
         child: SingleChildScrollView(
@@ -122,7 +122,7 @@ class _LogInState extends State<LogIn> {
                         padding: EdgeInsets.fromLTRB(5, 10, 5, 15),
                         child: TextField(
                           controller: emailInputController,
-                          cursorColor: gradientColourB,
+                          cursorColor: textLabelColor,
                           decoration: InputDecoration(
                             prefixIcon:
                                 Icon(Icons.mail_outline, color: Colors.black),
@@ -130,15 +130,15 @@ class _LogInState extends State<LogIn> {
                             fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: gradientColourB,
+                              color: textLabelColor,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 2),
+                                  BorderSide(color: textLabelColor, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 3),
+                                  BorderSide(color: textLabelColor, width: 3),
                             ),
                           ),
                         ),
@@ -150,7 +150,7 @@ class _LogInState extends State<LogIn> {
                         child: TextField(
                           controller: passwordInputController,
                           obscureText: true,
-                          cursorColor: gradientColourB,
+                          cursorColor: textLabelColor,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock_outline_rounded,
                                 color: Colors.black),
@@ -159,18 +159,18 @@ class _LogInState extends State<LogIn> {
                             fillColor: textfieldBackground,
                             filled: true,
                             labelStyle: TextStyle(
-                              color: gradientColourB,
+                              color: textLabelColor,
                             ),
                             hintStyle: TextStyle(
                               color: Color(0xFE7a243e),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 2),
+                                  BorderSide(color: textLabelColor, width: 2),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide:
-                                  BorderSide(color: gradientColourB, width: 3),
+                                  BorderSide(color: textLabelColor, width: 3),
                             ),
                           ),
                         ),

@@ -18,7 +18,7 @@ class _RecipeControlsPageState extends State<RecipeControlsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       body: Padding(
         padding: const EdgeInsets.only(top: 25),
         child: Column(
@@ -42,7 +42,7 @@ class RecipeThumbnail extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: cream,
+          color: background,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
           //get the image URL
@@ -79,7 +79,7 @@ class RecipeThumbnail extends StatelessWidget {
                 );
               } else {
                 return Container(
-                  color: cream,
+                  color: background,
                   //while image is loading, display the circular indicator
                   child: Center(
                     child: CircularProgressIndicator(),
@@ -131,21 +131,21 @@ class RecipeButtons extends StatelessWidget {
         height: 55,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: turquoiseGreen,
+            color: gradientColourB,
             border: Border.all(color: buttonPrimary, width: 2)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RawMaterialButton(
               padding: EdgeInsets.all(10), //ingredients button
-              fillColor: cream,
+              fillColor: background,
               shape: CircleBorder(
                 side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(
                 FontAwesomeIcons.info,
                 size: 20,
-                color: darkPurple,
+                color: buttonPrimary,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -163,14 +163,14 @@ class RecipeButtons extends StatelessWidget {
             RawMaterialButton(
               // recipe method button
               padding: EdgeInsets.all(10),
-              fillColor: cream,
+              fillColor: background,
               shape: CircleBorder(
                 side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(
                 FontAwesomeIcons.book,
                 size: 20,
-                color: darkPurple,
+                color: buttonPrimary,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -187,14 +187,14 @@ class RecipeButtons extends StatelessWidget {
             ),
             RawMaterialButton(
               padding: EdgeInsets.all(11),
-              fillColor: cream,
+              fillColor: background,
               shape: CircleBorder(
                 side: BorderSide(color: buttonPrimary),
               ),
               child: Icon(
                 FontAwesomeIcons.comments, //comments button
                 size: 20,
-                color: darkPurple,
+                color: buttonPrimary,
               ),
               onPressed: () => {
                 //pops any page currently loaded off the stack and pushes the required page onto the stack
@@ -233,7 +233,7 @@ class _FavouritesState extends State<Favourites> {
     return Column(
       children: [
         Container(
-          color: cream,
+          color: background,
         ),
         FutureBuilder(
           future: _getLiked(),
@@ -243,7 +243,7 @@ class _FavouritesState extends State<Favourites> {
               return IconButton(
                 icon: Icon(Icons.favorite_rounded, //comments button
                     size: 50,
-                    color: widget.isLiked ? orangeRed : grey),
+                    color: widget.isLiked ? orangeRed : unliked),
                 onPressed: () {
                   if (widget.isLiked) {
                     setState(

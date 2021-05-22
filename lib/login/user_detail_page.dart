@@ -112,7 +112,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: white);
 
     return Scaffold(
-      backgroundColor: cream,
+      backgroundColor: background,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -197,7 +197,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           content: Text('Avatar 1 selected'),
                                           duration:
                                               Duration(milliseconds: 1000),
-                                          backgroundColor: gradientColourB,
+                                          backgroundColor: green,
                                         );
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
@@ -239,7 +239,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                           content: Text('Avatar 2 selected'),
                                           duration:
                                               Duration(milliseconds: 1000),
-                                          backgroundColor: gradientColourB,
+                                          backgroundColor: green,
                                         );
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
@@ -287,7 +287,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       final snackBar = SnackBar(
                                         content: Text('Avatar 3 selected'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: gradientColourB,
+                                        backgroundColor: green,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -328,7 +328,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       final snackBar = SnackBar(
                                         content: Text('Avatar 4 selected'),
                                         duration: Duration(milliseconds: 1000),
-                                        backgroundColor: gradientColourB,
+                                        backgroundColor: green,
                                       );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
@@ -354,22 +354,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         left: 13, right: 13, top: 7, bottom: 10),
                     child: TextField(
                       controller: fullNameInputController,
-                      cursorColor: gradientColourB,
+                      cursorColor: textLabelColor,
                       decoration: InputDecoration(
                         //prefixIcon:
                         labelText: 'Full Name',
                         fillColor: textfieldBackground, //light purple
                         filled: true,
                         labelStyle: TextStyle(
-                          color: gradientColourB, //dark purple
+                          color: textLabelColor, //dark purple
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: gradientColourB, width: 2),
+                              BorderSide(color: textLabelColor, width: 2),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: gradientColourB, width: 3),
+                              BorderSide(color: textLabelColor, width: 3),
                         ),
                       ),
                     ),
@@ -385,21 +385,21 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             width: MediaQuery.of(context).size.width * 0.75,
                             child: TextField(
                               controller: usernameInputController,
-                              cursorColor: gradientColourB,
+                              cursorColor: textLabelColor,
                               decoration: InputDecoration(
                                 labelText: 'Username',
                                 fillColor: textfieldBackground,
                                 filled: true,
                                 labelStyle: TextStyle(
-                                  color: gradientColourB,
+                                  color: textLabelColor,
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: gradientColourB, width: 2),
+                                      color: textLabelColor, width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: gradientColourB, width: 3),
+                                      color: textLabelColor, width: 3),
                                 ),
                               ),
                             ),
@@ -442,7 +442,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                                   'Username does not exist'),
                                               duration:
                                                   Duration(milliseconds: 1000),
-                                              backgroundColor: gradientColourB,
+                                              backgroundColor: green,
                                             );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(snackBar);
@@ -517,10 +517,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       gradientColourB
                                     ]),
                                 border: Border.all(
-                                  color: lightPurple,
+                                  color: gradientColourB,
                                 ),
                                 borderRadius: BorderRadius.circular(15),
-                                color: darkPurple,
+                                color: buttonPrimary,
                               ),
                               alignment: Alignment.center,
                               child: Text(
@@ -552,7 +552,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                             label: Text(
                               formattedDate.format(today).toString(),
                               style: TextStyle(
-                                color: gradientColourB,
+                                color: textLabelColor,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -568,21 +568,21 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        border:
-                            Border.all(color: gradientColourB), //dark purple
+                        border: Border.all(
+                            color: textLabelColor, width: 1), //dark purple
                         borderRadius: BorderRadius.circular(15),
                         color: textfieldBackground, //light purple
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: DropdownButtonFormField(
-                          iconEnabledColor: gradientColourB, //dark purple
+                          iconEnabledColor: textLabelColor, //dark purple
                           isExpanded: true,
                           decoration: InputDecoration(
                             enabledBorder: InputBorder.none,
                             labelText: 'Select Your Region',
                             labelStyle: TextStyle(
-                                color: gradientColourB,
+                                color: textLabelColor,
                                 fontWeight: FontWeight.w500),
                           ),
                           dropdownColor: textfieldBackground,
@@ -612,7 +612,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                       label,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: gradientColourB,
+                                          color: textLabelColor,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
@@ -634,7 +634,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                     child: _allergiesCheckList(
                       'Allergies affected',
                       _allergiesList,
-                      TextStyle(color: gradientColourB),
+                      TextStyle(color: textLabelColor),
                     ),
                   ),
                 ],
@@ -699,7 +699,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 final snackBar = SnackBar(
                                   content: Text('Account Successfully Created'),
                                   duration: Duration(milliseconds: 1000),
-                                  backgroundColor: gradientColourB,
+                                  backgroundColor: green,
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
@@ -788,21 +788,21 @@ class _UserDetailPageState extends State<UserDetailPage> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: gradientColourB),
+        //border: Border.all(color: textLabelColor),
         borderRadius: BorderRadius.circular(11.0),
       ),
       child: MultiSelectFormField(
         autovalidate: false,
         fillColor: textfieldBackground,
-        chipBackGroundColor: gradientColourB,
+        chipBackGroundColor: textLabelColor,
         chipLabelStyle: TextStyle(color: white),
-        checkBoxActiveColor: gradientColourB,
+        checkBoxActiveColor: textLabelColor,
         checkBoxCheckColor: white,
-        border: InputBorder.none,
+        //border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: BorderSide(color: gradientColourB),
-        ),
+            //borderRadius: BorderRadius.circular(15),
+            //side: BorderSide(color: textLabelColor),
+            ),
         title: Text(
           title,
           style: textStyle,
@@ -815,7 +815,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         //clear checklist
         hintWidget: Text(
           'Select allergies',
-          style: TextStyle(fontWeight: FontWeight.w300, color: gradientColourB),
+          style: TextStyle(fontWeight: FontWeight.w300, color: textLabelColor),
         ),
         initialValue: _allergies,
         onSaved: (value) {
