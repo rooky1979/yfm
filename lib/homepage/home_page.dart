@@ -31,7 +31,8 @@ class _HomePageState extends State<HomePage> {
     'Eggs',
     'Dairy',
     'Pasta',
-    'Rice'
+    'Rice',
+    'Dessert'
   ];
   @override
   Widget build(BuildContext context) {

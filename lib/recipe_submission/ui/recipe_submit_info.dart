@@ -111,6 +111,10 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "display": "Rice",
       "value": "Rice",
     },
+        {
+      "display": "Dessert",
+      "value": "Dessert",
+    },
   ];
   //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
@@ -630,9 +634,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       child: MultiSelectFormField(
         autovalidate: false,
         fillColor: textfieldBackground,
-        chipBackGroundColor: buttonPrimary,
+        chipBackGroundColor: textLabelColor,
         chipLabelStyle: TextStyle(color: white),
-        checkBoxActiveColor: gradientColourA,
+        checkBoxActiveColor: textLabelColor,
         checkBoxCheckColor: white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
@@ -679,9 +683,9 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       child: MultiSelectFormField(
         autovalidate: false,
         fillColor: textfieldBackground,
-        chipBackGroundColor: buttonPrimary,
+        chipBackGroundColor: textLabelColor,
         chipLabelStyle: TextStyle(color: textfieldBackground),
-        checkBoxActiveColor: gradientColourA,
+        checkBoxActiveColor: textLabelColor,
         checkBoxCheckColor: white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
