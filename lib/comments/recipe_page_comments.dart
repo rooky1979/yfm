@@ -64,7 +64,7 @@ class _CommentBoardState extends State<CommentBoard> {
               },
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(5, 5, 5, 2),
+              padding: const EdgeInsets.fromLTRB(5, 5, 5, 20),
               child: Container(
                 decoration: BoxDecoration(
                   color: buttonPrimary,

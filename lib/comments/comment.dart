@@ -48,6 +48,7 @@ class _CommentState extends State<Comment> {
     var list = [user];
     List<String> likedUsers = List.from(snapshotData['likedUsers']);
 
+    // ignore: unused_local_variable
     Color likeColor = unliked;
 
     //This boolean is used to limit how many times a person can like a comment

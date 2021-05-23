@@ -632,7 +632,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         fillColor: textfieldBackground,
         chipBackGroundColor: buttonPrimary,
         chipLabelStyle: TextStyle(color: white),
-        checkBoxActiveColor: textfieldBackground,
+        checkBoxActiveColor: gradientColourA,
         checkBoxCheckColor: white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
@@ -681,7 +681,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
         fillColor: textfieldBackground,
         chipBackGroundColor: buttonPrimary,
         chipLabelStyle: TextStyle(color: textfieldBackground),
-        checkBoxActiveColor: textfieldBackground,
+        checkBoxActiveColor: gradientColourA,
         checkBoxCheckColor: white,
         border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
