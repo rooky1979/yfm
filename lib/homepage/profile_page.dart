@@ -197,10 +197,7 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class ProfileButtons extends StatelessWidget {
-  //colours for the fields
-
   @override
   Widget build(BuildContext context) {
     return Padding(
