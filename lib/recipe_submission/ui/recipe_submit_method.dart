@@ -27,14 +27,17 @@ class _MethodSubmissionState extends State<MethodSubmission> {
 //snackbar if any of the fields are empty and the user tries to add ingredients
 //or if the user tries to go to the next page with nothing submitted
   var snackbar = SnackBar(
-      duration: Duration(seconds: 2),
-      backgroundColor: Color(0xFFe62d11),
-      content: Text("Please fill out the field before proceeding",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          )));
+    duration: Duration(seconds: 2),
+    backgroundColor: Color(0xFFe62d11),
+    content: Text(
+      "Please fill out the field before proceeding",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
+    ),
+  );
   //text controller for the textfield
   TextEditingController methodController;
 
@@ -57,10 +60,12 @@ class _MethodSubmissionState extends State<MethodSubmission> {
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[gradientColourA, gradientColourB])),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[gradientColourA, gradientColourB],
+            ),
+          ),
         ),
         leading: IconButton(
             icon: Icon(
@@ -79,72 +84,214 @@ class _MethodSubmissionState extends State<MethodSubmission> {
             )),
       ),
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 13.0, left: 30, bottom: 8.0),
-                    child: Text(
-                      'Add method instructions:',
-                      style: TextStyle(
-                          color: textLabelColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20),
-                    ),
-                  )
-                ],
-              ),
-              //textfield for name of ingredient
-              Padding(
-                padding: const EdgeInsets.all(13.0),
-                //text field to enter the name of the recipe
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: <Color>[
-                          textfieldBackground,
-                          textfieldBackground
-                        ]),
-                    //borderRadius: BorderRadius.circular(8),
-                    //border: Border.all(color: celadonBlue)
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 13.0, left: 30, bottom: 8.0),
+                  child: Text(
+                    'Add method instructions:',
+                    style: TextStyle(
+                        color: textLabelColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: TextField(
-                      textCapitalization: TextCapitalization.sentences,
-                      controller: methodController,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
+                )
+              ],
+            ),
+            //textfield for name of ingredient
+            Padding(
+              padding: const EdgeInsets.all(13.0),
+              //text field to enter the name of the recipe
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[
+                        textfieldBackground,
+                        textfieldBackground
+                      ]),
+                  //borderRadius: BorderRadius.circular(8),
+                  //border: Border.all(color: celadonBlue)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.sentences,
+                    controller: methodController,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: textLabelColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                    decoration: InputDecoration(
+                      labelText: 'Enter step',
+                      labelStyle: TextStyle(
                           color: textLabelColor,
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500),
-                      decoration: InputDecoration(
-                        labelText: 'Enter step',
-                        labelStyle: TextStyle(
-                            color: textLabelColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: textLabelColor, width: 2),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: textLabelColor, width: 3),
-                        ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: textLabelColor, width: 2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: textLabelColor, width: 3),
                       ),
                     ),
                   ),
                 ),
               ),
-              Row(
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                      ),
+                      child: Text(
+                        'PREVIOUS',
+                        style: TextStyle(
+                            color: buttonPrimary, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        setState(() {});
+                        if (DBControl.methodSteps.isNotEmpty) {
+                          DBControl.methodSteps.removeLast();
+                        } else {} //remove last ingredient from the list
+                        //if list is empty, do nothing
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: buttonPrimary),
+                      child: Text(
+                        'NEXT',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        if (methodController.text.isEmpty) {
+                          //snackbar shown if any of the fields are empty
+                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                        } else {
+                          //if not empty, add to the list
+                          setState(() {});
+                          DBControl.methodSteps.add(methodController.text);
+                          methodController.clear();
+                        }
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+            divider,
+            //List to show added items so far
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8.0, left: 30, bottom: 8.0),
+                        child: Text(
+                          'Added so far:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: textLabelColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: DBControl.methodSteps.length,
+                      itemBuilder: (context, int index) {
+                        return Column(
+                          children: [
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: textLabelColor,
+                                radius: 10,
+                              ),
+                              title: Text(
+                                  DBControl.methodSteps[index].toString(),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: textLabelColor)),
+                            ),
+                            Divider(
+                              height: 10,
+                              thickness: 2,
+                              indent: 40,
+                              endIndent: 20,
+                              color: dividerColor,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+            divider,
+            //cancel and done buttons to move to next page or go to previous page
+            Padding(
+              padding: const EdgeInsets.only(bottom: 25.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: buttonPrimary),
+                        child: Text(
+                          'DONE',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          if (DBControl.methodSteps.isEmpty) {
+                            //snackbar shown if any of the fields are empty
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } else {
+                            //Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ImageSubmission(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: SizedBox(
@@ -155,171 +302,28 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                           primary: Colors.white,
                         ),
                         child: Text(
-                          'PREVIOUS',
+                          'CANCEL',
                           style: TextStyle(
                               color: buttonPrimary,
                               fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          setState(() {});
-                          if (DBControl.methodSteps.isNotEmpty) {
-                            DBControl.methodSteps.removeLast();
-                          } else {} //remove last ingredient from the list
-                          //if list is empty, do nothing
+                          DBControl.clearDBVariables();
+                          methodController.clear();
+                          DBControl.popPage(3, context);
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ProfilePage(),
+                          );
                         },
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(13.0),
-                    child: SizedBox(
-                      width: 150,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: buttonPrimary),
-                        child: Text(
-                          'NEXT',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          if (methodController.text.isEmpty) {
-                            //snackbar shown if any of the fields are empty
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackbar);
-                          } else {
-                            //if not empty, add to the list
-                            setState(() {});
-                            DBControl.methodSteps.add(methodController.text);
-                            methodController.clear();
-                          }
-                        },
-                      ),
-                    ),
-                  )
                 ],
               ),
-              divider,
-              //List to show added items so far
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8.0, left: 30, bottom: 8.0),
-                          child: Text(
-                            'Added so far:',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: textLabelColor,
-                              fontSize: 20,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: DBControl.methodSteps.length,
-                          itemBuilder: (context, int index) {
-                            return Column(
-                              children: [
-                                ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundColor: textLabelColor,
-                                    radius: 10,
-                                  ),
-                                  title: Text(
-                                      DBControl.methodSteps[index].toString(),
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          color: textLabelColor)),
-                                ),
-                                Divider(
-                                  height: 10,
-                                  thickness: 2,
-                                  indent: 40,
-                                  endIndent: 20,
-                                  color: dividerColor,
-                                ),
-                              ],
-                            );
-                          }),
-                    )
-                  ],
-                ),
-              ),
-              divider,
-              //cancel and done buttons to move to next page or go to previous page
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: buttonPrimary),
-                          child: Text(
-                            'DONE',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            if (DBControl.methodSteps.isEmpty) {
-                              //snackbar shown if any of the fields are empty
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            } else {
-                              //Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ImageSubmission()));
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(13.0),
-                      child: SizedBox(
-                        width: 150,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                          ),
-                          child: Text(
-                            'CANCEL',
-                            style: TextStyle(
-                                color: buttonPrimary,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            DBControl.clearDBVariables();
-                            methodController.clear();
-                            DBControl.popPage(3, context);
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ProfilePage());
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

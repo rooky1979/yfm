@@ -111,7 +111,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       "display": "Rice",
       "value": "Rice",
     },
-        {
+    {
       "display": "Dessert",
       "value": "Dessert",
     },

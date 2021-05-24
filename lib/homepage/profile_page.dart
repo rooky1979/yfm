@@ -13,7 +13,7 @@ import 'package:youth_food_movement/recipe_submission/ui/recipe_submit_info.dart
 import 'package:url_launcher/url_launcher.dart';
 
 //a profile page to hold the user information and to display all the information
-//related to the user that they may want to see/edit
+//related to the user that they may want to see
 
 @override
 Widget build(BuildContext context) {
@@ -146,8 +146,8 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 4,
-                    primary: orangeRed, // background
-                    onPrimary: white, // foreground
+                    primary: orangeRed,
+                    onPrimary: white,
                   ),
                   onPressed: () {
                     Navigator.pop(context);

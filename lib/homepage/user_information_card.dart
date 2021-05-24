@@ -17,9 +17,9 @@ class UserInformationCard extends StatelessWidget {
     //snaphot of the doc
     int userindex = 0;
     var snapshotData = snapshot.docs[userindex];
-    //snapshot document ID for use later
-    // ignore: unused_local_variable
-    String docID = snapshot.docs[userindex].id;
+
+    //used to ensure the right user information is being printed with a while
+    //loop
     String uid = firebaseAuth.currentUser.uid;
     String userID = snapshotData['uid'];
     while (userID != uid) {

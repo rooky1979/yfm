@@ -290,13 +290,14 @@ class _CommentEntryDialogState extends State<CommentEntryDialog> {
                 autofocus: true,
                 autocorrect: true,
                 decoration: InputDecoration(
-                    hintText: 'A Question, Comment, or Tip!',
-                    labelText: 'Type Here...',
-                    labelStyle: TextStyle(
-                      color: orangeRed,
-                      fontSize: 17,
-                    ),
-                    border: const OutlineInputBorder()),
+                  hintText: 'A Question, Comment, or Tip!',
+                  labelText: 'Type Here...',
+                  labelStyle: TextStyle(
+                    color: orangeRed,
+                    fontSize: 17,
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
                 controller: descriptionInputController,
               ),
             ),

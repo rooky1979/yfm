@@ -337,7 +337,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                                 } else {
                                   return Container(
                                     child: Center(
-                                        child: CircularProgressIndicator()),
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   );
                                 }
                               },
