@@ -1,3 +1,7 @@
+/****THIS FILE IS USED FOR SEARCHING, HOWEVER IN ITS CURRENT STATE IT IS NOT WORKING****/
+
+
+
 //import 'package:flutter/cupertino.dart';
 //import 'package:flutter/material.dart';
 //import 'package:get/get.dart';

@@ -18,8 +18,8 @@ class HomepageTile extends StatelessWidget {
     String recipeID = docID.toString();
 
     return Container(
-      width: 150, //MediaQuery.of(context).size.width,
-      height: 150, //MediaQuery.of(context).size.height * 0.25,
+      width: 150,
+      height: 150, 
       //get the image URL
       child: FutureBuilder(
         future: _getImageURL(docID),

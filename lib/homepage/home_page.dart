@@ -13,9 +13,12 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+//main homepage class displaying the recipe thumbnails in their categories
 class _HomePageState extends State<HomePage> {
+  //connection to image storage
   final FirebaseStorage storage = FirebaseStorage.instanceFor(
       bucket: 'gs://youth-food-movement.appspot.com');
+//input text controller
   final TextEditingController searchController = TextEditingController();
   QuerySnapshot snapshotData;
   var firestoreDb = FirebaseFirestore.instance.collection('recipe').snapshots();
@@ -55,7 +58,6 @@ class _HomePageState extends State<HomePage> {
             fillColor: textfieldBackground,
             hintStyle: TextStyle(
               color: white,
-              //fontWeight: FontWeight.w500,
               fontSize: 20,
             ),
           ),
@@ -118,7 +120,6 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      //height: MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
@@ -144,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                //creates the horizontal scrolling list of recipe tiles
                 Container(
                   height: 180.0,
                   child: StreamBuilder(

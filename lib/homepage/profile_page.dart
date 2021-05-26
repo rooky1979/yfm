@@ -101,7 +101,7 @@ class ProfilePage extends StatelessWidget {
                             );
                           },
                         );
-                      } else {
+                      } else {//else while loading show the progress indicator
                         return Container(
                           child: Center(
                             child: CircularProgressIndicator(),
@@ -113,7 +113,9 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
+            //call the icon bar
             ProfileButtons(),
+            //build the list of user information by calling the user card
             Padding(
               padding: const EdgeInsets.only(
                   left: 13.0, right: 13.0, top: 12.0, bottom: 1.0),
@@ -252,7 +254,7 @@ class ProfileButtons extends StatelessWidget {
     );
   }
 }
-
+// to go to the NZNF website
 _launchURL() async {
   const url = 'https://nutritionfoundation.org.nz/about-us';
   if (await canLaunch(url)) {

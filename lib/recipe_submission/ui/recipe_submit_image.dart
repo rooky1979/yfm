@@ -204,7 +204,6 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                           ScaffoldMessenger.of(context).showSnackBar(snackbar);
                         } else {
                           DBControl.writeDB();
-                          //Navigator.pop(context);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -219,6 +218,7 @@ class _ImageSubmissionState extends State<ImageSubmission> {
                 )
               ],
             ),
+            //image display area
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

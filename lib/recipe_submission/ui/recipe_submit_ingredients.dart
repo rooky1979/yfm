@@ -193,7 +193,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                         iconEnabledColor: textLabelColor,
                         isExpanded: true,
                         decoration: InputDecoration(
-                          //enabledBorder: InputBorder.none,
                           labelText: 'Unit',
                           labelStyle: TextStyle(
                               color: textLabelColor,
@@ -398,7 +397,6 @@ class _IngredientsSubmissionState extends State<IngredientsSubmission> {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackbar);
                             } else {
-                              //Navigator.pop(context);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

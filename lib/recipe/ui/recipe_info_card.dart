@@ -281,7 +281,7 @@ class RecipeInformationCard extends StatelessWidget {
                     color: dividerColor,
                   ),
                   Padding(
-                    //widget showing protein e.g. beef, pork, chicken, fish, shellfish, etc
+                    //widget showing recipe tags e.g. beef, pork, chicken, fish, shellfish, etc
                     padding: const EdgeInsets.all(3.0),
                     child: Row(
                       children: [

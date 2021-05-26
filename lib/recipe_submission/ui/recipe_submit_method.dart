@@ -115,8 +115,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                         textfieldBackground,
                         textfieldBackground
                       ]),
-                  //borderRadius: BorderRadius.circular(8),
-                  //border: Border.all(color: celadonBlue)
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -164,9 +162,10 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                       ),
                       onPressed: () {
                         setState(() {});
+                        //remove last ingredient from the list
                         if (DBControl.methodSteps.isNotEmpty) {
                           DBControl.methodSteps.removeLast();
-                        } else {} //remove last ingredient from the list
+                        } else {} 
                         //if list is empty, do nothing
                       },
                     ),
@@ -279,7 +278,6 @@ class _MethodSubmissionState extends State<MethodSubmission> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } else {
-                            //Navigator.pop(context);
                             Navigator.push(
                               context,
                               MaterialPageRoute(

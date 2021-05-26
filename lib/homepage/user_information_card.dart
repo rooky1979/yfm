@@ -18,8 +18,7 @@ class UserInformationCard extends StatelessWidget {
     int userindex = 0;
     var snapshotData = snapshot.docs[userindex];
 
-    //used to ensure the right user information is being printed with a while
-    //loop
+    //used to ensure the right user information is being printed with a while loop
     String uid = firebaseAuth.currentUser.uid;
     String userID = snapshotData['uid'];
     while (userID != uid) {
@@ -39,7 +38,6 @@ class UserInformationCard extends StatelessWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * .90,
-                  //height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,

@@ -38,7 +38,7 @@ class DataController extends GetxController {
 
   //search for whether certain food title exists in database in subcollection "ingredient"
   // inside document inside "recipe"
-  //Not working
+  //***THIS METHOD IS CURRENTLY NOT FUNCTIONING*** */
   Future foodTitleQueryData(String queryString) async {
     return FirebaseFirestore.instance
         .collection('recipe')

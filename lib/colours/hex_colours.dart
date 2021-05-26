@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//colour file that contains ALL colours in the project. To change all the colours for example a button, change it here
+//once and all will change in the code
+
 //Variant 1
 // Color celadonBlue = Color(0xFF247BA0);
 // Color ceruleanCrayola = Color(0xFF37A3D2);

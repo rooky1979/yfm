@@ -149,8 +149,8 @@ class _InformationSubmissionState extends State<InformationSubmission> {
       fontWeight: FontWeight.bold,
       color: textLabelColor,
     );
-    //refactored dividers for continual use
 
+//gesture detector so the user in iOS can tap anywhere on the screen to exit the keypad
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -175,6 +175,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
               ),
             ),
           ),
+          //back arrow clears any variables 
           leading: IconButton(
             icon: Icon(
               FontAwesomeIcons.arrowLeft,
@@ -279,27 +280,19 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                             textfieldBackground
                           ],
                         ),
-                        //border: Border.all(color: textLabelColor),
-                        //borderRadius: BorderRadius.circular(15),
                       ),
-                      //width: MediaQuery.of(context).size.width,
                       //create a drop down menu and remove the underline
                       child: DropdownButtonFormField(
                         iconEnabledColor: textLabelColor,
                         isExpanded: true,
                         decoration: InputDecoration(
-                          //enabledBorder: InputBorder.none,
+
                           labelText: 'Select recipe difficulty',
                           labelStyle: TextStyle(
                               color: textLabelColor,
                               fontWeight: FontWeight.w500),
                           fillColor: textfieldBackground,
                           filled: true,
-                          //enabledBorder: InputBorder.none,
-                          // focusedBorder: UnderlineInputBorder(
-                          //   borderSide:
-                          //       BorderSide(color: textLabelColor, width: 3),
-                          // ),
                         ),
                         //dropdown menu labels
                         dropdownColor: textfieldBackground,
@@ -379,7 +372,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                   //create a row to hold the hours and mins textfields
                   Row(
                     children: [
-                      //hours textfield
                       Container(
                         width: MediaQuery.of(context).size.width / 2,
                         child: Padding(
@@ -468,27 +460,17 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                     //create a container and decorate
                     child: Container(
                       decoration: BoxDecoration(
-                          // gradient: LinearGradient(
-                          //   begin: Alignment.topCenter,
-                          //   end: Alignment.bottomCenter,
-                          //   colors: <Color>[gradientColourA, gradientColourB],
-                          // ),
-                          // border: Border.all(color: gradientColourB),
-                          // borderRadius: BorderRadius.circular(15),+9
                           color: textfieldBackground),
-                      //width: MediaQuery.of(context).size.width,
                       //create a drop down menu and remove the underline
                       child: DropdownButtonFormField(
                         iconEnabledColor: textLabelColor,
                         isExpanded: true,
                         decoration: InputDecoration(
-                          //enabledBorder: InputBorder.none,
                           labelText: 'Recipe category:',
                           labelStyle: TextStyle(
                               color: textLabelColor,
                               fontWeight: FontWeight.w500),
                           filled: true,
-                          //enabledBorder: InputBorder.none,
                         ),
                         //dropdown menu labels
                         dropdownColor: textfieldBackground,
@@ -516,7 +498,7 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                       ),
                     ),
                   ),
-                  //proteins
+                  //recipe tags
                   Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: _recipeTagsCheckList(
@@ -562,7 +544,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                   //if not empty, add to the list
                                   _setPrepTime(DBControl.hoursController.text,
                                       DBControl.minutesController.text);
-                                  //Navigator.pop(context);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -599,7 +580,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
                                 }
                                 DBControl.clearDBVariables();
                                 DBControl.popPage(1, context);
-                                //Navigator.pop(context);
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       ProfilePage(),
@@ -628,7 +608,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        //border: Border.all(color: celadonBlue),
         borderRadius: BorderRadius.circular(11.0),
       ),
       child: MultiSelectFormField(
@@ -677,7 +656,6 @@ class _InformationSubmissionState extends State<InformationSubmission> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        //border: Border.all(color: gradientColourB),
         borderRadius: BorderRadius.circular(11.0),
       ),
       child: MultiSelectFormField(

@@ -33,7 +33,7 @@ class Method extends StatelessWidget {
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: 1, //snapshot.data.docs.length,
+                    itemCount: 1,
                     itemBuilder: (context, int index) {
                       return MethodCard(
                         snapshot: snapshot.data,

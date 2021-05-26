@@ -350,7 +350,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                   ),
                   //Textfield for user's name
                   Container(
-                    // width: 250,
                     padding: const EdgeInsets.only(
                         left: 13, right: 13, top: 7, bottom: 10),
                     child: TextField(
@@ -359,10 +358,10 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       decoration: InputDecoration(
                         //prefixIcon:
                         labelText: 'Full Name',
-                        fillColor: textfieldBackground, //light purple
+                        fillColor: textfieldBackground, 
                         filled: true,
                         labelStyle: TextStyle(
-                          color: textLabelColor, //dark purple
+                          color: textLabelColor,
                         ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
@@ -535,8 +534,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                              //borderRadius: BorderRadius.circular(15),
-
                               ),
                           child: OutlinedButton.icon(
                             icon: Icon(Icons.calendar_today, color: black),
@@ -570,14 +567,14 @@ class _UserDetailPageState extends State<UserDetailPage> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: textLabelColor, width: 1), //dark purple
+                            color: textLabelColor, width: 1),
                         borderRadius: BorderRadius.circular(15),
-                        color: textfieldBackground, //light purple
+                        color: textfieldBackground, 
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: DropdownButtonFormField(
-                          iconEnabledColor: textLabelColor, //dark purple
+                          iconEnabledColor: textLabelColor,
                           isExpanded: true,
                           decoration: InputDecoration(
                             enabledBorder: InputBorder.none,
@@ -789,7 +786,6 @@ class _UserDetailPageState extends State<UserDetailPage> {
   ) {
     return Container(
       decoration: BoxDecoration(
-        //border: Border.all(color: textLabelColor),
         borderRadius: BorderRadius.circular(11.0),
       ),
       child: MultiSelectFormField(
@@ -799,10 +795,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
         chipLabelStyle: TextStyle(color: white),
         checkBoxActiveColor: textLabelColor,
         checkBoxCheckColor: white,
-        //border: InputBorder.none,
         dialogShapeBorder: RoundedRectangleBorder(
-            //borderRadius: BorderRadius.circular(15),
-            //side: BorderSide(color: textLabelColor),
             ),
         title: Text(
           title,

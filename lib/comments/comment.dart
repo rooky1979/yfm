@@ -26,6 +26,7 @@ class _CommentState extends State<Comment> {
 //This gets the current user data
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+//connection to the db
   var userfirestoreDb =
       FirebaseFirestore.instance.collection('users').snapshots();
 
@@ -175,7 +176,7 @@ class _CommentState extends State<Comment> {
                               top: 5, left: 10, right: 10, bottom: 5),
                           child: Row(
                             children: [
-                              //Handles logic for liking comments
+                              //Handles logic for liking comments and unliking comments
                               IconButton(
                                 onPressed: () async {
                                   setState(
@@ -325,7 +326,7 @@ class _CommentState extends State<Comment> {
 
   _checkUser(String docId, int id, String user) {
     if ((widget.snapshot.docs[widget.index]['uid'] == user ||
-        user == 'insert current UID Here')) //Add mod feature before handover?
+        user == 'insert current UID Here'))
     {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,

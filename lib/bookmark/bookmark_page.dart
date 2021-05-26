@@ -18,8 +18,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
-      //app bar that contains the search bar and profile settings page
-
+      //app bar 
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -38,8 +37,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
             fontSize: 25,
           ),
         ),
-
-        //backgroundColor: Color(0xFF7a243e),
+        //arrow left for back button
         leading: IconButton(
           icon: Icon(
             FontAwesomeIcons.arrowLeft,
