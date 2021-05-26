@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:youth_food_movement/colours/hex_colours.dart';
 
-//test comment
 //card layout to display the recipe method
 class MethodCard extends StatelessWidget {
   //snapshot of the database
@@ -14,9 +14,7 @@ class MethodCard extends StatelessWidget {
   Widget build(BuildContext context) {
     //snaphot of the docs in firebase DB
     var snapshotData = snapshot.docs[index];
-    //snapshot document ID for use later
-    // ignore: unused_local_variable
-    var docID = snapshot.docs[index].id;
+    //list created from the method snapshot
     List<String> methodList = List.from(snapshotData['method']);
 
     return Column(
@@ -28,43 +26,51 @@ class MethodCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Text('Method:',
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                child: Text(
+                  'Method:',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
         ),
+        //list view to build the method
         ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: methodList.length,
-            itemBuilder: (context, int index) {
-              return Column(
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      child: Text(
-                        (index + 1).toString(),
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: methodList.length,
+          itemBuilder: (context, int index) {
+            return Column(
+              children: [
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: dividerColor,
+                    child: Text(
+                      (index + 1).toString(),
+                      style: TextStyle(
+                          color: background, fontWeight: FontWeight.bold),
                     ),
-                    title: Text(methodList[index].toString(),
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
                   ),
-                  Divider(
-                    height: 10,
-                    thickness: 2,
-                    indent: 40,
-                    endIndent: 20,
-                    color: Colors.red[200],
+                  //each tile prints each element of the array
+                  title: Text(
+                    methodList[index].toString(),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ],
-              );
-            })
+                ),
+                Divider(
+                  height: 10,
+                  thickness: 2,
+                  indent: 40,
+                  endIndent: 20,
+                  color: dividerColor,
+                ),
+              ],
+            );
+          },
+        )
       ],
     );
   }
